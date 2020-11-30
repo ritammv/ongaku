@@ -1,12 +1,8 @@
 import React from 'react';
-import './App.css';
+import './styles/App.scss';
 
 function App() {
-  return (
-    <div className="App">
-      Welcome to Ongaku!
-    </div>
-  );
+  return <div className="App">Bonjour to Ongaku!</div>;
 }
 
 export default App;
