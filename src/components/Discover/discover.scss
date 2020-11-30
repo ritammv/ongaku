@@ -8,6 +8,11 @@
   align-items: center;
 }
 
+.genre_container {
+  display: flex;
+  justify-content: center;
+}
+
 ul {
   columns: 2;
   list-style: none;

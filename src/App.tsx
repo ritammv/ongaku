@@ -1,11 +1,11 @@
 import React from 'react';
 import './styles/App.scss';
-import Discover from './components/Discover/Discover';
+import Dashboard from './components/Dashboard/Dashboard';
 
 function App() {
   return (
     <div className="App">
-      <Discover />
+      <Dashboard />
     </div>
   );
 }

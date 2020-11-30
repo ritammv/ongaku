@@ -4,7 +4,7 @@ import gsap from 'gsap';
 import GenreTags from './GenreTags/GenreTags';
 
 const Discover = () => {
-  const genres = [
+  const genres: string[] = [
     '#classical',
     '#country',
     '#electronic',
@@ -20,17 +20,16 @@ const Discover = () => {
   useEffect(() => {
     gsap
       .timeline()
-      .from('.li0', { opacity: 0, duration: 0.25 })
-      .from('.li1', { opacity: 0, duration: 0.25 })
-      .from('.li2', { opacity: 0, duration: 0.25 })
-      .from('.li3', { opacity: 0, duration: 0.25 })
-      .from('.li4', { opacity: 0, duration: 0.25 })
-      .from('.li5', { opacity: 0, duration: 0.25 })
-      .from('.li6', { opacity: 0, duration: 0.25 })
-      .from('.li7', { opacity: 0, duration: 0.25 })
-      .from('.li8', { opacity: 0, duration: 0.25 })
-      .from('.li9', { opacity: 0, duration: 0.25 })
-      .from('.li10', { opacity: 0, duration: 0.25 });
+      .from('.li0', { opacity: 0, duration: 0.2 })
+      .from('.li5', { opacity: 0, duration: 0.2 })
+      .from('.li1', { opacity: 0, duration: 0.2 })
+      .from('.li6', { opacity: 0, duration: 0.2 })
+      .from('.li2', { opacity: 0, duration: 0.2 })
+      .from('.li7', { opacity: 0, duration: 0.2 })
+      .from('.li3', { opacity: 0, duration: 0.2 })
+      .from('.li8', { opacity: 0, duration: 0.2 })
+      .from('.li4', { opacity: 0, duration: 0.2 })
+      .from('.li9', { opacity: 0, duration: 0.2 });
   }, []);
 
   return (
@@ -39,7 +38,7 @@ const Discover = () => {
         <h3>Welcome Ritam</h3>
       </div>
       <div className="discover_title">
-        <h4>Discover...</h4>
+        <h4>Discover your channels...</h4>
       </div>
 
       <div className="genre_container">
