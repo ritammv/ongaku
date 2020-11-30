@@ -1,0 +1,46 @@
+@import "../../../styles/variables.scss";
+.container_hero {
+  @include flex-center;
+  flex-direction: column;
+  justify-content: space-evenly;
+  opacity: 0;
+
+  .hero_subtitle {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    span {
+      font-size: 1.4rem;
+      padding: 0px 2%;
+    }
+  }
+
+  .hero_buttons {
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+    height: 5vh;
+    button {
+      width: 40%;
+      font-size: 1.2rem;
+      @include button-default;
+      color: $primary-color;
+      background: $secondary-color;
+    }
+  }
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 20vh;
+  width: 100%;
+  img {
+    height: 100%;
+    padding-bottom: 2%;
+  }
+  .logo_title {
+    font-size: 5rem;
+  }
+} 
