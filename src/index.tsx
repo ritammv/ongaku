@@ -1,11 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-<<<<<<< HEAD
-import './index.scss';
 import { Provider } from 'react-redux';
-=======
 import './styles/index.scss';
->>>>>>> f78bbc2e8b42161b4146d806624ff29250ebc62a
+import { ChakraProvider } from '@chakra-ui/react';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { store } from './redux/store/configStore';
@@ -13,7 +10,9 @@ import { store } from './redux/store/configStore';
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ChakraProvider>
+      <App />
+    </ChakraProvider>
   </Provider>,
   document.getElementById('root')
 );
