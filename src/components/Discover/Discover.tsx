@@ -3,7 +3,7 @@ import './discover.scss';
 import gsap from 'gsap';
 import GenreTags from './GenreTags/GenreTags';
 
-const Discover = () => {
+const Discover: React.FC = () => {
   const genres: string[] = [
     '#classical',
     '#country',
