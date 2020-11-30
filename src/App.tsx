@@ -1,13 +1,19 @@
 import React from 'react';
 import './styles/App.scss';
-import Dashboard from './components/Dashboard/Dashboard';
+import { Route, Switch } from 'react-router-dom';
+import Createpost from './components/CreatePost/createPost';
 
-function App() {
+const App: React.FC = () =>  {
   return (
-    <div className="App">
-      <Dashboard />
-    </div>
+
+    <Switch>
+      <Route
+        path='/create'
+        component={Createpost}
+      />
+    </Switch>
+
   );
-}
+};
 
 export default App;

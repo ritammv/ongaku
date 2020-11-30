@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< HEAD
 import './dashboard.scss';
 
 const Dashboard = () => {
@@ -10,3 +11,15 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+=======
+
+export default function Dashboard(props) {
+  
+
+  return (
+    <>
+      
+    </>
+  );
+}
+>>>>>>> development
