@@ -9,12 +9,8 @@ import {
   useDisclosure,
   Button,
   Text,
-  Tabs, 
-  TabList, 
-  TabPanels, 
-  Tab, 
-  TabPanel
 } from '@chakra-ui/react';
+import PostForm from './PostForm';
 
 interface Props {
 
@@ -34,38 +30,13 @@ const Createpost: React.FC<Props> = () => {
       >
         <ModalOverlay />
 
-
-
         <ModalContent 
           backgroundColor='#f0f1ef'
           h='90vh'
         >
           <ModalCloseButton />
 
-          <Tabs>
-            <TabList 
-              display='flex'
-              justifyContent='space-between'
-              mt='45px'
-              color='#d3d3d3'
-            >
-              <Tab _focus={{ outline: 0 }}>Search</Tab>
-              <Tab _focus={{ outline: 0 }}>Collection</Tab>
-              <Tab _focus={{ outline: 0 }}>Wantlist</Tab>
-            </TabList>
-
-            <TabPanels>
-              <TabPanel>
-                <p>one!</p>
-              </TabPanel>
-              <TabPanel>
-                <p>two!</p>
-              </TabPanel>
-              <TabPanel>
-                <p>three!</p>
-              </TabPanel>
-            </TabPanels>
-          </Tabs>
+          <PostForm />
 
           <ModalBody>
             <Text fontWeight="bold" mb="1rem">
