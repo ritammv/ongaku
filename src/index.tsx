@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import './styles/index.scss';
 import { ChakraProvider } from '@chakra-ui/react';
 import App from './App';
@@ -10,9 +11,11 @@ import { store } from './redux/store/configStore';
 
 ReactDOM.render(
   <Provider store={store}>
-    <ChakraProvider>
-      <App />
-    </ChakraProvider>
+    <BrowserRouter>
+      <ChakraProvider>
+        <App />
+      </ChakraProvider>
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root')
 );
