@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react';
 import React, { useRef } from 'react';
 import './dashboard.scss';
+import vinyl from '../../assets/vinyl.jpg';
 
 const Dashboard: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -18,7 +19,10 @@ const Dashboard: React.FC = () => {
   return (
     <div className="container">
       <div className="header">
-        <div className="user_info"> </div>
+        <div className="user_info">
+          {' '}
+          <img src={vinyl} alt="vinyl_image" />
+        </div>
         <div className="welcome_user">
           <h1> Welcome Ritam </h1>
 
@@ -28,7 +32,6 @@ const Dashboard: React.FC = () => {
             ref={btnRef}
             onClick={onOpen}
           >
-            {' '}
             +
           </button>
         </div>
@@ -74,21 +77,21 @@ const Dashboard: React.FC = () => {
       </div>
 
       <div className="dashboard_welcome">
-        <span>
-          <span className="welcome_title">Welcome to Ongaku!</span> <br />
+        <div>
+          <div className="welcome_title">Welcome to Ongaku!</div> <br />
           We are a music sharing <i>community</i> and we pride ourselves on our
           core values of creating a safe space for everyone to share, discover
           and enjoy music freely.
-        </span>
+        </div>
         <div className="ongaku_text">音楽</div>
-        <span className="welcome_instructions">
+        <div className="welcome_instructions">
           <br />
           On the left you will see the public channels you have already
           subscribed to, but feel free to use the search bar to discover other
           channels! You can also create private or public channels on demand,
           however we really encourage you to look for other like minded channels
           to connect with.
-        </span>
+        </div>
       </div>
     </div>
   );
