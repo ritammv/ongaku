@@ -3,7 +3,9 @@ import './styles/App.scss';
 import { Route, Switch } from 'react-router-dom';
 import Createpost from './components/CreatePost/createPost';
 
+
 const App: React.FC = () =>  {
+
   return (
 
     <Switch>
