@@ -6,7 +6,7 @@ type GenreTagsType = {
 };
 
 const GenreTags = ({ genre }: GenreTagsType) => {
-  return <button type="submit">{genre}</button>;
+  return <button type="button">{genre}</button>;
 };
 
 export default GenreTags;

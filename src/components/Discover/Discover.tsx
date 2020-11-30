@@ -1,54 +1,61 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './discover.scss';
+import gsap from 'gsap';
 import GenreTags from './GenreTags/GenreTags';
 
 const Discover = () => {
+  const genres = [
+    '#classical',
+    '#country',
+    '#electronic',
+    '#hip-hop',
+    '#indie',
+    '#jazz',
+    '#rock',
+    '#metal',
+    '#experimental',
+    '#pop',
+  ];
+
+  useEffect(() => {
+    gsap
+      .timeline()
+      .from('.li0', { opacity: 0, duration: 0.25 })
+      .from('.li1', { opacity: 0, duration: 0.25 })
+      .from('.li2', { opacity: 0, duration: 0.25 })
+      .from('.li3', { opacity: 0, duration: 0.25 })
+      .from('.li4', { opacity: 0, duration: 0.25 })
+      .from('.li5', { opacity: 0, duration: 0.25 })
+      .from('.li6', { opacity: 0, duration: 0.25 })
+      .from('.li7', { opacity: 0, duration: 0.25 })
+      .from('.li8', { opacity: 0, duration: 0.25 })
+      .from('.li9', { opacity: 0, duration: 0.25 })
+      .from('.li10', { opacity: 0, duration: 0.25 });
+  }, []);
+
   return (
     <div className="discover_container">
       <div className="discover_header">
-        <h1>Welcome Ritam</h1>
+        <h3>Welcome Ritam</h3>
       </div>
       <div className="discover_title">
-        <h2>What are you into?</h2>
+        <h4>Discover...</h4>
       </div>
-      <ul>
-        <li>
-          <GenreTags genre="#classical" />
-        </li>
-        <li>
-          <GenreTags genre="#country" />
-        </li>
-        <li>
-          <GenreTags genre="#electronic" />
-        </li>
-        <li>
-          <GenreTags genre="#hip-hop" />
-        </li>
-        <li>
-          <GenreTags genre="#indie" />
-        </li>
-        <li>
-          <GenreTags genre="#jazz" />
-        </li>
-        <li>
-          <GenreTags genre="#rock" />
-        </li>
-        <li>
-          <GenreTags genre="#metal" />
-        </li>
-        <li>
-          <GenreTags genre="#rap" />
-        </li>
-        <li>
-          <GenreTags genre="#experimental" />
-        </li>
-        <li>
-          <GenreTags genre="#pop" />
-        </li>
-        <li>
-          <GenreTags genre="#latin" />
-        </li>
-      </ul>
+
+      <div className="genre_container">
+        <ul>
+          {genres.map((genre, i) => (
+            <li className={`li${i}`} key={genre}>
+              <GenreTags genre={genre} />
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="discover_next">
+        <button className="next_button" type="button">
+          Next
+        </button>
+      </div>
     </div>
   );
 };

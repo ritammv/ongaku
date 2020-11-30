@@ -1,4 +1,23 @@
 .discover_container {
   background-color: #e2e4e4;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+ul {
+  columns: 2;
+  list-style: none;
+}
+
+li {
+  padding: 10%;
+}
+
+.next_button {
+  color: #0f0e0e;
+  background-color: white;
 }
