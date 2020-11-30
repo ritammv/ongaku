@@ -18,13 +18,23 @@ const Dashboard: React.FC = () => {
   return (
     <div className="container">
       <div className="header">
-        <h1>Welcome Ritam </h1>
-        <div className="dashboard_info">
-          <h3>Members</h3> <h3>Posts</h3>
+        <div className="user_info"> </div>
+        <div className="welcome_user">
+          <h1> Welcome Ritam </h1>
+
+          <button
+            className="button_emoji"
+            type="button"
+            ref={btnRef}
+            onClick={onOpen}
+          >
+            {' '}
+            +
+          </button>
         </div>
-        <button type="button" ref={btnRef} onClick={onOpen}>
-          Click here
-        </button>
+        <div className="dashboard_info">
+          <h3>2098 Members</h3> <h3>13209 Posts</h3>
+        </div>
         <Drawer
           isOpen={isOpen}
           placement="left"
@@ -65,11 +75,14 @@ const Dashboard: React.FC = () => {
 
       <div className="dashboard_welcome">
         <span>
-          Welcome to ongaku! We are a music sharing community and we pride
-          ourselves on our core values of creating a safe space for everyone to
-          share, discover and enjoy music freely.
+          <span className="welcome_title">Welcome to Ongaku!</span> <br />
+          We are a music sharing <i>community</i> and we pride ourselves on our
+          core values of creating a safe space for everyone to share, discover
+          and enjoy music freely.
         </span>
-        <span>
+        <div className="ongaku_text">音楽</div>
+        <span className="welcome_instructions">
+          <br />
           On the left you will see the public channels you have already
           subscribed to, but feel free to use the search bar to discover other
           channels! You can also create private or public channels on demand,
