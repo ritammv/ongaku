@@ -1,33 +1,47 @@
 import React from 'react';
-import { Box, Image, Badge } from '@chakra-ui/react';
+import { Box, Image, Text } from '@chakra-ui/react';
+import '../../styles/tile.scss';
 
 interface Props {
-  artist: string
-  title: string
-  image: string
-
+  artist?: string;
+  title: string;
+  image: string;
+  result: Release | Want | SearchData;
+  selected: Release | Want | SearchData;
+  setSelected: Function;
 }
 
-const Tile: React.FC<Props> = ({ artist, title, image }) => {
+const Tile: React.FC<Props> = ({
+  artist,
+  title,
+  image,
+  result,
+  selected,
+  setSelected,
+}) => {
+
 
   return (
-    <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
+    <Box
+      maxW="120px"
+      m="7px"
+      p="7px"
+      borderWidth="1px"
+      overflow="hidden"
+      onClick={() => {
+        console.log('result', result);
+        console.log('artist', artist);
+        setSelected(result);
+      }}
+      className={result.id === selected.id ? 'activeCard' : undefined}
+    >
       <Image src={image} alt={title} />
-      <Box
-        mt="1"
-        fontWeight="semibold"
-        as="h4"
-        lineHeight="tight"
-        isTruncated
-        border='1px solid #e2e4e4'
-      >
-        <Box
-          p='10px'
-        
-        >
-          <p>Title: {title}</p>
-          <p>Artist: {artist}</p>
-        </Box>
+      <Box isTruncated fontSize="12px">
+        <Text isTruncated>Title: {title}</Text>
+        {
+          artist &&
+          <Text isTruncated>Artist: {artist}</Text>
+        }
       </Box>
     </Box>
   );

@@ -3,7 +3,6 @@ import {
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
   useDisclosure,
@@ -13,53 +12,29 @@ import {
 import SearchPost from './SearchPost';
 
 
-interface Props {
-
-}
-
-const Createpost: React.FC<Props> = () => {
+const Createpost: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
       <Button onClick={onOpen}>Open Modal</Button>
-
       <Modal 
-        blockScrollOnMount={false} 
         isOpen={isOpen} 
         onClose={onClose}
       >
         <ModalOverlay />
-
         <ModalContent 
           backgroundColor='#f0f1ef'
-          h='90vh'
+          h='90%'
+          w='97%'
         >
           <ModalCloseButton />
-
-          <SearchPost />
-
-          <ModalBody>
-            <Text fontWeight="bold" mb="1rem">
-              You can scroll the content behind the modal
-            </Text>
+          <ModalBody
+            overflow='scroll'
+          >
+            <SearchPost />
             
           </ModalBody>
-
-          <ModalFooter>
-            <Button 
-              className='button-default' 
-              backgroundColor='#0f0e0e' 
-              color='white'
-              borderRadius='25px'
-              padding='2% 5%'
-              fontWeight='lighter'
-              mr={3} 
-              onClick={onClose}
-            >
-              NEXT
-            </Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
       

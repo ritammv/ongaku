@@ -18,6 +18,12 @@ export const getLists = (username: string, data: string) => {
   return fetchRequest(`https://api.discogs.com/users/${username}/${data}?token=${token}`, {});
 };
 
-export const getData = (query: string) => {
-  return fetchRequest(`https://api.discogs.com/database/search?q=${query}&key=${key}&secret=${secret}`, {});
+export const getData = (
+  query: string, 
+  artist: string, 
+  title:string, 
+  label:string,
+  year:string) => {
+  console.log('sending a request');
+  return fetchRequest(`https://api.discogs.com/database/search?q=${query}&title=${title}&artist=${artist}&label=${label}&year=${year}&key=${key}&secret=${secret}`, {});
 };
