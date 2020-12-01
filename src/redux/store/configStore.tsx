@@ -4,8 +4,7 @@ import { reducer } from '../reducer';
 import { AppActions } from '../types/actions';
 
 
-
-export type AppState = ReturnType<typeof rootReducer>;
+export type AppState = ReturnType<typeof reducer>;
 
 export const store = createStore(
   reducer,

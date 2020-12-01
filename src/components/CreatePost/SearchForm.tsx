@@ -1,21 +1,11 @@
 import React, { SyntheticEvent, useState } from 'react';
 import { Input, Stack } from '@chakra-ui/react';
+import _, { debounce } from 'lodash';
 import { getData } from '../../helpers/apiClient';
 import Tile from './Tile';
 
 // eslint-disable-next-line max-len
-const debounce = (func: { (e: React.SyntheticEvent<Element, Event>): void; }, delay = 1000) => {
-  let timeoutId: NodeJS.Timeout;
-  return (...args) => {
-    if (timeoutId) {
-      clearTimeout(timeoutId);
-    }
-    timeoutId = setTimeout(() => {
-      // eslint-disable-next-line prefer-spread
-      func.apply(null, args);
-    }, delay);
-  };
-};
+
 
 interface Data {
   title: string
@@ -27,14 +17,16 @@ const SearchForm: React.FC = () => {
 
   const [searchResults, setSearchResults] = useState<Data[]>([]);
   
-  function handleSubmit(e: SyntheticEvent) {
+  function handleSubmit(e: React.FormEvent<HTMLInputElement>) {
     e.preventDefault();
-    e.target.value = '';
+    const target = e.target as HTMLTextAreaElement;
+    target.value = '';
     console.log('submitted');
   }
 
-  async function handleChange(e: SyntheticEvent) {
-    const data = await getData(e.target.value);
+  async function handleChange(e: React.FormEvent<HTMLInputElement>) {
+    const target = e.target as HTMLTextAreaElement;
+    const data = await getData(target.value);
     setSearchResults(data.results);
     console.log(data);
   }
@@ -47,7 +39,7 @@ const SearchForm: React.FC = () => {
         variant="flushed" 
         placeholder="Search by /ARTIST/LABEL/RECORD/..." 
         _focus={{ outline: 'none' }}
-        onChange={debounce(handleChange)}
+        onChange={debounce(handleChange, 700)}
         onSubmit={handleSubmit}
         name='query'
       />

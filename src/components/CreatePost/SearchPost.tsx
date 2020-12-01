@@ -33,7 +33,9 @@ export interface Release {
 export interface Want {
   basic_information: {
     id: number
-    artists: string
+    artists: {
+      name: string
+    }[]
     year: number
     labels: string[]
     title: string
