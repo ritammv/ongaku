@@ -8,7 +8,7 @@ export const useIsInScroll =
       if (ref.current) {
         const topPos: number = ref.current.getBoundingClientRect().y;
         window.addEventListener('scroll', () => {
-          if (window.scrollY + window.innerHeight - 200 >= topPos) {
+          if (window.scrollY + window.innerHeight - 170 >= topPos) {
             setIsInScroll(true);
           } else setIsInScroll(false);
         });

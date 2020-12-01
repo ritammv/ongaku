@@ -7,7 +7,7 @@ type GenreTagsType = {
 
 const GenreTags: React.FC<GenreTagsType> = ({ genre }) => {
   return (
-    <button className="genre_tag_button" type="button">
+    <button type="button" className="genre_tag_button">
       {genre}
     </button>
   );

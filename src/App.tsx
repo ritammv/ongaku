@@ -6,6 +6,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import Discover from './components/Discover/Discover';
 import Home from './components/Home/Home';
 import Login from './components/Login/Login';
+import Redux from './components/Redux/Redux';
 
 const App: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const App: React.FC = () => {
       <Route exact path="/create" component={Createpost} />
       <Route exact path="/discover" component={Discover} />
       <Route exact path="/dashboard" component={Dashboard} />
+      <Route exact path="/redux" component={Redux} />
     </Switch>
   );
 };

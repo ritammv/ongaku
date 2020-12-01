@@ -1,0 +1,66 @@
+.container {
+  height: 100vh;
+  background-color: #e2e4e4;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  height: 22%;
+  border-bottom: 2px solid gray;
+  position: relative;
+  text-align: right;
+  display: flex;
+  flex-direction: row;
+}
+
+.user_info {
+  height: 140px;
+  width: 150px;
+}
+
+.welcome_user {
+  height: 40px;
+  position: absolute;
+  right: 0;
+}
+
+.dashboard_info {
+  flex-direction: flex-end;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-self: flex-end;
+  position: absolute;
+  bottom: 0;
+}
+
+.header h1 {
+  font-size: 25px;
+  padding-left: 8px;
+}
+
+.dashboard_welcome {
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  padding: 35px;
+}
+
+.welcome_title {
+  font-size: 30px;
+}
+
+.welcome_instructions {
+}
+
+.button_emoji {
+  font-size: 90px;
+}
+
+.ongaku_text {
+  padding: 20px;
+  font-size: 40px;
+}
