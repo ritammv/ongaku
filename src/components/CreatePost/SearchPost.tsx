@@ -87,7 +87,10 @@ const SearchPost: React.FC = () => {
           <TabPanel>
             <SearchForm />
           </TabPanel>
-          <TabPanel>
+          <TabPanel
+            maxHeight='70%'
+            overflow-y='hidden'
+          >
 
             {
               collection.map(release => {

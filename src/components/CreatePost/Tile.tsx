@@ -19,9 +19,15 @@ const Tile: React.FC<Props> = ({ artist, title, image }) => {
         as="h4"
         lineHeight="tight"
         isTruncated
+        border='1px solid #e2e4e4'
       >
-        <p>Title: {title}</p>
-        <p>Artist: {artist}</p>
+        <Box
+          p='10px'
+        
+        >
+          <p>Title: {title}</p>
+          <p>Artist: {artist}</p>
+        </Box>
       </Box>
     </Box>
   );
