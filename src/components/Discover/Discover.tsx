@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import './discover.scss';
 import gsap from 'gsap';
+import { Link } from 'react-router-dom';
 import GenreTags from './GenreTags/GenreTags';
 
 const Discover: React.FC = () => {
@@ -51,13 +52,15 @@ const Discover: React.FC = () => {
         </ul>
       </div>
       <div className="discover_next">
-        <button
-          className="genre_tag_button"
-          style={{ color: ' black', backgroundColor: 'white ' }}
-          type="button"
-        >
-          Next
-        </button>
+        <Link to="/dashboard">
+          <button
+            className="genre_tag_button"
+            style={{ color: ' black', backgroundColor: 'white ' }}
+            type="button"
+          >
+            Next
+          </button>
+        </Link>
       </div>
     </div>
   );

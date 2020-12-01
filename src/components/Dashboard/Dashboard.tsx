@@ -8,12 +8,17 @@ import {
   DrawerCloseButton,
   DrawerContent,
 } from '@chakra-ui/react';
-import React, { useRef } from 'react';
+
+import React, { useRef, useState } from 'react';
 import './dashboard.scss';
 import vinyl from '../../assets/vinyl.jpg';
+import CreateChannel from './CreateChannel/CreateChannel';
 
 const Dashboard: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const [showModal, setShowModal] = useState(false);
+
   const btnRef = useRef<HTMLButtonElement>(null);
 
   return (
@@ -43,6 +48,7 @@ const Dashboard: React.FC = () => {
           placement="left"
           onClose={onClose}
           finalFocusRef={btnRef}
+          size="full"
         >
           <DrawerOverlay>
             <DrawerContent>
@@ -69,7 +75,6 @@ const Dashboard: React.FC = () => {
                   <h3 className="public_title">Private</h3>
                   <ul className="private_channel_list">
                     <li className="channel_item">#codeworks</li>
-                    <li className="channel_item">#codeworks</li>
                     <li className="channel_item">#festivals</li>
                     <li className="channel_item">#bath</li>
                   </ul>
@@ -83,6 +88,9 @@ const Dashboard: React.FC = () => {
                   }}
                   className="genre_tag_button create_channel_button"
                   type="button"
+                  onClick={() => {
+                    setShowModal((state) => !state);
+                  }}
                 >
                   Create a channel +
                 </button>
@@ -90,6 +98,7 @@ const Dashboard: React.FC = () => {
             </DrawerContent>
           </DrawerOverlay>
         </Drawer>
+        <CreateChannel setShowModal={setShowModal} showModal={showModal} />
       </div>
 
       <div className="dashboard_welcome">
