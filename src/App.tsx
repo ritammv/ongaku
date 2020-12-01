@@ -17,6 +17,7 @@ const App: React.FC = () => {
       <Route exact path="/discover" component={Discover} />
       <Route exact path="/dashboard" component={Dashboard} />
       <Route exact path="/redux" component={Redux} />
+      {/* <Route exact path="/channels/:channelId" component={} /> */}
     </Switch>
   );
 };

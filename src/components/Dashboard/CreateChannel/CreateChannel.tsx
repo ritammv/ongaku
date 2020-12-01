@@ -58,11 +58,12 @@ const CreateChannel: React.FC<Props> = ({ showModal, setShowModal }) => {
               />
             </label>
             <label htmlFor="channel_category">
-              Categories
+              Genre
               <input
                 className="search_input"
                 id="channel_category"
                 type="text"
+                placeholder="Optional"
               />
             </label>
           </form>

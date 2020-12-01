@@ -21,3 +21,4 @@ export const getLists = (username: string, data: string) => {
 export const getData = (query: string) => {
   return fetchRequest(`https://api.discogs.com/database/search?q=${query}&key=${key}&secret=${secret}`, {});
 };
+

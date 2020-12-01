@@ -16,9 +16,7 @@ import CreateChannel from './CreateChannel/CreateChannel';
 
 const Dashboard: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
   const [showModal, setShowModal] = useState(false);
-
   const btnRef = useRef<HTMLButtonElement>(null);
 
   return (
@@ -29,8 +27,6 @@ const Dashboard: React.FC = () => {
           <img src={vinyl} alt="vinyl_image" />
         </div>
         <div className="welcome_user">
-          <h1> Welcome Ritam </h1>
-
           <button
             className="button_emoji"
             type="button"
