@@ -1,0 +1,32 @@
+.logo_outer_circle {
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.9;
+}
+.logo_inner_circle {
+  border-radius: 50%;
+  width: 38%;
+  height: 38%;
+}
+.logo_text_container {
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 160%;
+} 
+.logo_text_large {
+  background: transparent;
+  font-size: 70px;
+  font-weight: 500;
+}
+.logo_text_small {
+  background: transparent;
+  font-size: 36px;
+  font-weight: 500;
+  position: relative;
+  top: -12%;
+}
