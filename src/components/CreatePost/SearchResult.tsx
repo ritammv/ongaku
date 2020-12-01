@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { Button } from '@chakra-ui/react';
-import Tile from './Tile';
+import Tile from './Tile/Tile';
 import Createbutton from './CreateButton';
 
 
 interface Props {
-  search: SearchData[],
+  search: Release[],
   setSearch: Function
-  selected: Release | Want | SearchData
+  selected: Release
   setSelected: Function  
 }
 
@@ -24,14 +24,14 @@ const SearchResult: React.FC<Props> =
     });
   }, []);
 
+  
+
   return (
     <>
       {search.slice(0, 50).map(result => (
         <Tile 
           result={result}
           key={result.id}
-          title={result.title}
-          image={result.cover_image}
           selected={selected} 
           setSelected={setSelected}
         />

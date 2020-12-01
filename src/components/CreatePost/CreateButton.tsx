@@ -1,12 +1,20 @@
 import { Button } from '@chakra-ui/react';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setSelected } from '../../store/actionCreators';
 
 interface Props {
-  selected: Release | Want | SearchData
+  selected: Release
 }
 
 const Createbutton: React.FC<Props> = ({ selected }) => {
+
+  const dispatch = useDispatch();
+
+  function handleClick() {
+    dispatch(setSelected(selected));
+  }
 
   return (
     <>
@@ -22,6 +30,7 @@ const Createbutton: React.FC<Props> = ({ selected }) => {
                 padding="2% 5%"
                 fontWeight="lighter"
                 mr={3}
+                onClick={handleClick}
               >
                 CREATE
               </Button>

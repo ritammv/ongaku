@@ -2,7 +2,7 @@ import React from 'react';
 import './styles/App.scss';
 import { Route, Switch } from 'react-router-dom';
 import Createpost from './components/CreatePost/createPost';
-import Finalcreatepost from './components/CreatePost/FinalCreatePost';
+import Finalcreatepost from './components/CreatePost/FinalCreatePost/FinalCreatePost';
 
 import Dashboard from './components/Dashboard/Dashboard';
 import Discover from './components/Discover/Discover';
@@ -14,10 +14,12 @@ const App: React.FC = () => {
   return (
     <Switch>
       <Route
+        exact
         path='/search'
         component={Createpost}
       />
       <Route
+        exact
         path='/create'
         component={Finalcreatepost}
       />

@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
 import { Input, Stack, Button } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
 import { getData } from '../../helpers/apiClient';
 import SearchResult from './SearchResult';
 
 // eslint-disable-next-line max-len
 interface Props {
-  selected: Release | Want | SearchData
+  selected: Release
   setSelected: Function
 }
 
 const SearchDiscogs
 : React.FC<Props> = ({ selected, setSelected }) => {
   
-  const [searchResults, setSearchResults] = useState<SearchData[]>([]);
+  const [searchResults, setSearchResults] = useState<Release[]>([]);
   const [form, setForm] = useState<CreatePostForm>({
     query: '',
     artist: '',

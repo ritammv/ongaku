@@ -7,52 +7,85 @@ import {
   TabPanel,
 } from '@chakra-ui/react';
 import { useSelector, useDispatch } from 'react-redux';
-import Tile from './Tile';
-import { SystemState } from '../../redux/reducer';
-import { User } from '../../redux/types/User';
+import Tile from './Tile/Tile';
 import { getLists } from '../../helpers/apiClient';
-import * as actions from '../../redux/actions';
+import * as actions from '../../store/actionCreators';
 import SearchDiscogs from './SearchDiscogs';
 import Createbutton from './CreateButton';
 
 const SearchPost: React.FC = () => {
   const [collection, setCollection] = useState<Release[]>([]);
-  const [wantList, setWantList] = useState<Want[]>([]);
-  const [selected, setSelected] = useState<Release | Want | SearchData>({
+  const [wantList, setWantList] = useState<Release[]>([]);
+  const [selected, setSelected] = useState<Release>({
     id: 0,
+    artists: [],
+    year: 0,
+    labels: [],
     title: '',
-    artist: '',
-    cover_image: '',
+    genres: [],
+    styles: [],
+    url: '',
+    image: '',
   });
 
   const dispatch = useDispatch();
-  const user = useSelector<SystemState, User>((state) => state.user);
-  const isLoading = useSelector<SystemState, boolean>(
+  const user = useSelector<State, User>((state) => state.user);
+  const isLoading = useSelector<State, boolean>(
     (state) => state.isLoading
   );
 
   useEffect(() => {
-    dispatch(actions.SetLoading(true));
+    dispatch(actions.setIsLoading(true));
 
     getLists(user.username, 'collection')
       .then((data) =>
         setCollection(
-          [...data.releases].map((release) => release.basic_information)
+          [...data.releases]
+            .map((release) => release.basic_information)
+            .map((release) => ({
+              id: release.id,
+              artists: release.artists,
+              year: release.year,
+              labels: release.labels,
+              title: release.title,
+              genres: release.genres,
+              styles: release.styles,
+              url: release.resource_url,
+              image: release.huge_thumb 
+            }))
         )
       )
-      .then(() => dispatch(actions.SetLoading(false)));
+      .then(() => dispatch(actions.setIsLoading(false)));
 
     getLists(user.username, 'wants')
       .then((data) =>
-        setWantList([...data.wants].map((want) => want.basic_information))
-      )
-      .then(() => dispatch(actions.SetLoading(false)));
+        setWantList([...data.wants]
+          .map((want) => want.basic_information)
+          .map((want) => ({
+            id: want.id,
+            artists: want.artists,
+            year: want.year,
+            labels: want.labels,
+            title: want.title,
+            genres: want.genres,
+            styles: want.styles,
+            url: want.resource_url,
+            image: want.cover_image 
+          }))
+
+        ))
+      .then(() => dispatch(actions.setIsLoading(false)));
 
     setSelected({
       id: 0,
+      artists: [],
+      year: 0,
+      labels: [],
       title: '',
-      artist: '',
-      cover_image: '',
+      genres: [],
+      styles: [],
+      url: '',
+      image: '',
     });
   }, []);
 
@@ -88,9 +121,6 @@ const SearchPost: React.FC = () => {
               return (
                 <Tile
                   key={release.id}
-                  title={release.title}
-                  artist={release.artists_sort}
-                  image={release.huge_thumb}
                   result={release}
                   selected={selected}
                   setSelected={setSelected}
@@ -100,14 +130,17 @@ const SearchPost: React.FC = () => {
             <Createbutton selected={selected} />
           </TabPanel>
 
-          <TabPanel>
+          <TabPanel 
+            border='2px solid red'
+            display='flex'
+            flexWrap='wrap'
+            overflowX='scroll'
+
+          >
             {wantList.map((want) => {
               return (
                 <Tile
                   key={want.id}
-                  title={want.title}
-                  artist={want.artists[0].name}
-                  image={want.cover_image}
                   result={want}
                   selected={selected}
                   setSelected={setSelected}

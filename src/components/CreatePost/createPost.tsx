@@ -7,7 +7,7 @@ import {
   ModalCloseButton,
   useDisclosure,
   Button,
-  Text,
+
 } from '@chakra-ui/react';
 import SearchPost from './SearchPost';
 

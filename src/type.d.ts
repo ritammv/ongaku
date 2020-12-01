@@ -1,36 +1,17 @@
 interface Release {
   id: number;
-  artists_sort?: string;
-  year?: number;
-  labels?: string[];
-  title: string;
-  genres?: string[];
-  styles?: string[];
-  url?: string;
-  huge_thumb: string;
-  data?: object;
-}
-
-interface Want {
-  id: number;
   artists: {
-    name?: string;
+    name: string;
   }[];
-  year?: number;
-  labels?: string[];
+  year: number;
+  labels:  {
+    name: string;
+  }[];
   title: string;
-  genres?: string[];
-  styles?: string[];
-  resource_url?: string;
-  cover_image: string;
-  data?: object;
-}
-
-interface SearchData {
-  id?: number;
-  title: string;
-  artist: string;
-  cover_image: string;
+  genres: string[];
+  styles: string[];
+  url: string;
+  image: string;
 }
 
 interface CreatePostForm {
@@ -40,6 +21,14 @@ interface CreatePostForm {
   label: string;
   year: string;
 }
+
+interface FinalPost {
+  card: Release
+  message_title: string
+  message_body: string
+}
+
+
 interface User {
   id: number
   discogsId: number
@@ -54,6 +43,7 @@ type State = {
   isLoading: boolean
   channel: string
   authentication: boolean
+  selected: Release | Want | SearchData
 };
 
 type UserAction = {
@@ -78,8 +68,13 @@ type authenticationAction = {
   authenticated: boolean
 };
 
+type SelectAction = {
+  type: string
+  selected: Release | Want | SearchData
+};
+
 type OrActionTypes =
-UserAction | isLoadingAction | channelAction | authenticationAction;
+UserAction | isLoadingAction | channelAction | authenticationAction | SelectAction;
 
 type AllActionTypes = 
-  UserAction & isLoadingAction & channelAction & authenticationAction;
+  UserAction & isLoadingAction & channelAction & authenticationAction & SelectAction;

@@ -11,7 +11,18 @@ const initialState: State = {
   },
   isLoading: false,
   channel: 'techno',
-  authentication: false
+  authentication: false,
+  selected: {
+    id: 0,
+    artists: [],
+    year: 0,
+    labels: [],
+    title: '',
+    genres: [],
+    styles: [],
+    url: '',
+    image: '',
+  }
 };
 
 const reducer = (
@@ -27,6 +38,8 @@ const reducer = (
       return { ...state, channel: action.channel };
     case actionTypes.SET_AUTHENTICATION:
       return { ...state, authentication: action.authenticated };
+    case actionTypes.SET_SELECTED:
+      return { ...state, selected: action.selected };
   }
   return state;
 };

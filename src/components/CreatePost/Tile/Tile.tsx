@@ -1,20 +1,14 @@
 import React from 'react';
 import { Box, Image, Text } from '@chakra-ui/react';
-import '../../styles/tile.scss';
+import './tile.scss';
 
 interface Props {
-  artist?: string;
-  title: string;
-  image: string;
-  result: Release | Want | SearchData;
-  selected: Release | Want | SearchData;
+  result: Release;
+  selected: Release;
   setSelected: Function;
 }
 
 const Tile: React.FC<Props> = ({
-  artist,
-  title,
-  image,
   result,
   selected,
   setSelected,
@@ -29,18 +23,16 @@ const Tile: React.FC<Props> = ({
       borderWidth="1px"
       overflow="hidden"
       onClick={() => {
-        console.log('result', result);
-        console.log('artist', artist);
         setSelected(result);
       }}
       className={result.id === selected.id ? 'activeCard' : undefined}
     >
-      <Image src={image} alt={title} />
+      <Image src={result.image} alt={result.title} />
       <Box isTruncated fontSize="12px">
-        <Text isTruncated>Title: {title}</Text>
+        <Text isTruncated>Title: {result.title}</Text>
         {
-          artist &&
-          <Text isTruncated>Artist: {artist}</Text>
+          result.artists && result.artists.length &&
+          <Text isTruncated>Artist: {result.artists[0].name}</Text>
         }
       </Box>
     </Box>

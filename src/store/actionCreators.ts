@@ -31,3 +31,11 @@ export const setAuthentication = (authenticated: boolean) => {
   };
   return (dispatch: DispatchType) => dispatch(action);
 };
+
+export const setSelected = (selected: Release) => {
+  const action: SelectAction = {
+    type: actionTypes.SET_SELECTED,
+    selected
+  };
+  return (dispatch: DispatchType) => dispatch(action);
+};
