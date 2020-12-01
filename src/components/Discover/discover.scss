@@ -1,0 +1,23 @@
+@import '../../styles/variables.scss';
+
+.discover_container {
+  background-color: $primary-color;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.genre_container {
+  display: flex;
+  justify-content: center;
+}
+.genre_list {
+  columns: 2;
+  list-style: none;
+}
+.genre_list_item {
+  padding: 10%;
+}

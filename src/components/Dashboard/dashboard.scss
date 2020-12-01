@@ -1,0 +1,110 @@
+@import '../../styles/variables.scss';
+
+.container {
+  height: 100vh;
+  background-color: $primary-color;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  height: 22%;
+  border-bottom: 2px solid gray;
+  position: relative;
+  text-align: right;
+  display: flex;
+  flex-direction: row;
+}
+
+.user_info {
+  height: 140px;
+  width: 150px;
+}
+
+.welcome_user {
+  height: 40px;
+  position: absolute;
+  right: 0;
+}
+
+.dashboard_info {
+  flex-direction: flex-end;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-self: flex-end;
+  position: absolute;
+  bottom: 0;
+}
+
+.header h1 {
+  font-size: 25px;
+  padding-left: 8px;
+}
+
+.dashboard_welcome {
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  padding: 35px;
+}
+
+.welcome_title {
+  font-size: 30px;
+}
+
+.button_emoji {
+  font-size: 90px;
+}
+
+.ongaku_text {
+  padding: 20px;
+  font-size: 40px;
+}
+
+.drawer_channel {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 10%;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.drawer_public {
+  padding: 10%;
+}
+
+.drawer_private {
+  padding: 10%;
+}
+
+.public_channel_list {
+  list-style: none;
+}
+
+.private_channel_list {
+  list-style: none;
+}
+
+.public_title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.channel_item {
+  padding: 10px;
+  border-bottom: 0.5px solid gray;
+  width: 100%;
+}
+
+.search_input {
+  background-color: $accent-one;
+  border-radius: 12px;
+  height: 35px;
+  width: 100%;
+  padding: 5%;
+}

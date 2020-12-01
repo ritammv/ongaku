@@ -9,6 +9,11 @@ $accent-three: #113b98;
   padding: 2% 5%;
   text-align: center;
   vertical-align: center;
+  border: none;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
+  &:focus {
+    outline: 0;
+  }
 }
 
 @mixin flex-center {
