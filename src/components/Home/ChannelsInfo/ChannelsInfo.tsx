@@ -9,20 +9,24 @@ const ChannelsInfo: React.FC = () => {
 
   const containerRef = useRef<HTMLDivElement | null>(null);
   const containerIsInScroll = useIsInScroll(containerRef);
-  const [infoContainerTimeline, setInfoContainerTimeline] = useState<GSAPTimeline | null>(null);
+  const [infoContainerTimeline, setInfoContainerTimeline]
+    = useState<GSAPTimeline | null>(null);
 
   const channelContentRef = useRef<HTMLDivElement>(null);
   const isInScrollInfo = useIsInScroll(channelContentRef);
-  const [channelContentTimeline, setChannelContentTimeline] = useState<GSAPTimeline | null>(null);
+  const [channelContentTimeline, setChannelContentTimeline]
+    = useState<GSAPTimeline | null>(null);
   
   useEffect(() => {
-    if (!infoContainerTimeline) setInfoContainerTimeline(infoContainerAnimation());
+    if (!infoContainerTimeline) {
+      setInfoContainerTimeline(infoContainerAnimation());
+    } 
     if (containerIsInScroll && infoContainerTimeline) {
       infoContainerTimeline.play();
     } else if (infoContainerTimeline) {
       infoContainerTimeline.reverse();
     }
-  }, [containerIsInScroll]);
+  }, [containerIsInScroll, infoContainerTimeline]);
 
   useEffect(() => {
     if (!channelContentTimeline) setChannelContentTimeline(fadeInAnimation('channels-info_content'));
@@ -31,7 +35,7 @@ const ChannelsInfo: React.FC = () => {
     } else if (channelContentTimeline) {
       channelContentTimeline.reverse();
     }
-  }, [isInScrollInfo]);
+  }, [isInScrollInfo, channelContentTimeline]);
 
   return (
     <>
@@ -41,12 +45,12 @@ const ChannelsInfo: React.FC = () => {
           <div className="content_title">Channels</div>
           <div className="content_body">
             <div className="body_first">
-              Find Channels For Music You Love Where You Can Chat With Other Like 
-              Minded Music Enthusiasts
+              Find Channels For Music You Love Where You Can Chat With Other
+              Like Minded Music Enthusiasts
             </div>
             <div className="body_second">
-              Share Music You Love, Ask Questions You've Always Had, Or Just See 
-              If You Can Find Some New Awesome Music
+              Share Music You Love, Ask Questions You've Always Had, Or 
+              Just See If You Can Find Some New Awesome Music
             </div>
           </div>
         </div>

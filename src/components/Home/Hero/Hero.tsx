@@ -2,12 +2,12 @@ import React, { useRef, useState, useEffect } from 'react';
 import './Hero.scss';
 import { useIsInScroll } from '../../../helpers/isInScroll';
 import { heroAnimation } from '../../../helpers/animation';
-import LogoLightMode from '../../../assets/light-mode-logo.png';
+import Logo from '../../Logo/Logo';
 
 const Home: React.FC = () => {
 
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const containerIsInScroll = useIsInScroll(containerRef);
+  const containerIsInScroll = useIsInScroll(containerRef, true);
   const [heroTimeline, setHeroTimeline] = useState<GSAPTimeline | null>(null);
   
   useEffect(() => {
@@ -19,19 +19,26 @@ const Home: React.FC = () => {
     } else if (heroTimeline) {
       heroTimeline.reverse();
     }
-  }, [containerIsInScroll]);
+  }, [containerIsInScroll, heroTimeline]);
 
   return (
     <>
       <div className="container_hero" ref={containerRef}>
         <div className="logo">
-          <img src={LogoLightMode} alt="logo" />
+          <div className="logo_img_container">
+            <Logo
+              widthPx={200} 
+              innerColor='#f0f1ef'
+              outerColor='#0f0e0e'
+              textColor='#D24848'
+            />
+          </div>
           <div className="logo_title logo-text"> Ongaku </div>
-        </div>
-        <div className="hero_subtitle">
-          <span id="music">Music</span>
-          <span id="sharing">Sharing</span>
-          <span id="community">Community</span>
+          <div className="hero_subtitle">
+            <span id="music">Music</span>
+            <span id="sharing">Sharing</span>
+            <span id="community">Community</span>
+          </div>
         </div>
         <div className="hero_buttons">
           <button type="button" className="buttons_join">Join</button>

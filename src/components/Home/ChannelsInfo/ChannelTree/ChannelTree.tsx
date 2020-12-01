@@ -37,7 +37,7 @@ const ChannelTree: React.FC = () => {
       <div className="tree_third branch">
         <div className="tree_third_one">
           <button type="button" className="tree_leaf">
-            Tech House
+            Minimal
           </button>
           <button type="button" className="tree_leaf">
             Detroit
@@ -48,7 +48,7 @@ const ChannelTree: React.FC = () => {
             Deep House
           </button>
           <button type="button" className="tree_leaf">
-            Pure House
+            Tech House
           </button>
         </div>
       </div>
