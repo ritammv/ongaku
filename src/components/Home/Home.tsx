@@ -1,16 +1,4 @@
 import React from 'react';
-<<<<<<< HEAD
-
-export default function Home() {
-  
-
-  return (
-    <>
-      
-    </>
-  );
-}
-=======
 import './Home.scss';
 import Hero from './Hero/Hero';
 import ChannelsInfo from './ChannelsInfo/ChannelsInfo';
@@ -33,4 +21,3 @@ const Home: React.FC = () => {
 };
 
 export default Home;
->>>>>>> feat/landing-page

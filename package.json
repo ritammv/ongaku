@@ -14,13 +14,10 @@
     "@types/node": "^12.19.7",
     "@types/react": "^16.14.2",
     "@types/react-dom": "^16.9.10",
-<<<<<<< HEAD
     "dotenv": "^8.2.0",
     "framer-motion": "^2.9.4",
     "lodash": "^4.17.20",
-=======
     "gsap": "^3.5.1",
->>>>>>> feat/landing-page
     "node-sass": "^4.14.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

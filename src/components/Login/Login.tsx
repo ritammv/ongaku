@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-import React from 'react';
-
-export default function Login() {
-  
-
-  return (
-    <>
-      
-    </>
-  );
-}
-=======
 import React, { useEffect } from 'react';
 import './Login.scss';
 import Logo from '../Logo/Logo';
@@ -42,4 +29,3 @@ const Login: React.FC = () => {
 };
 
 export default Login;
->>>>>>> feat/landing-page
