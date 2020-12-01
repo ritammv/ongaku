@@ -10,7 +10,8 @@ import {
   Button,
   Text,
 } from '@chakra-ui/react';
-import PostForm from './PostForm';
+import SearchPost from './SearchPost';
+
 
 interface Props {
 
@@ -36,7 +37,7 @@ const Createpost: React.FC<Props> = () => {
         >
           <ModalCloseButton />
 
-          <PostForm />
+          <SearchPost />
 
           <ModalBody>
             <Text fontWeight="bold" mb="1rem">
