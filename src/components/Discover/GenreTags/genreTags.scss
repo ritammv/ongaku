@@ -1,6 +1,6 @@
 @import '../../../styles/variables.scss';
 
-button {
+.genre_tag_button {
   @include button-default;
   width: 150px;
   border-radius: 12px;

@@ -50,26 +50,42 @@ const Dashboard: React.FC = () => {
               <DrawerHeader>Hello! Welcome back</DrawerHeader>
               <DrawerBody>
                 <div className="drawer_channel">Channels</div>
+                <ul>
+                  <input
+                    className="search_input"
+                    placeholder="Search a channel"
+                  />
+                </ul>
 
                 <div className="drawer_public">
-                  Public
-                  <ul>
-                    <li>#electronic</li>
-                    <li>#world</li>
-                    <li>#hip-hop</li>
+                  <h3 className="public_title">Public</h3>
+                  <ul className="public_channel_list">
+                    <li className="channel_item">#electronic</li>
+                    <li className="channel_item">#world</li>
+                    <li className="channel_item">#hip-hop</li>
                   </ul>
                 </div>
                 <div className="drawer_private">
-                  Private
-                  <ul>
-                    <li>#codeworks</li>
-                    <li>#festivals</li>
-                    <li>#bath</li>
+                  <h3 className="public_title">Private</h3>
+                  <ul className="private_channel_list">
+                    <li className="channel_item">#codeworks</li>
+                    <li className="channel_item">#codeworks</li>
+                    <li className="channel_item">#festivals</li>
+                    <li className="channel_item">#bath</li>
                   </ul>
                 </div>
               </DrawerBody>
               <DrawerFooter>
-                <button type="button"> Create a channel</button>
+                <button
+                  style={{
+                    height: '50px',
+                    width: '200px',
+                  }}
+                  className="genre_tag_button create_channel_button"
+                  type="button"
+                >
+                  Create a channel +
+                </button>
               </DrawerFooter>
             </DrawerContent>
           </DrawerOverlay>

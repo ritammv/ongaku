@@ -5,11 +5,10 @@ import { heroAnimation } from '../../../helpers/animation';
 import Logo from '../../Logo/Logo';
 
 const Home: React.FC = () => {
-
   const containerRef = useRef<HTMLDivElement | null>(null);
   const containerIsInScroll = useIsInScroll(containerRef, true);
   const [heroTimeline, setHeroTimeline] = useState<GSAPTimeline | null>(null);
-  
+
   useEffect(() => {
     if (!heroTimeline) {
       setHeroTimeline(heroAnimation());
@@ -27,10 +26,10 @@ const Home: React.FC = () => {
         <div className="logo">
           <div className="logo_img_container">
             <Logo
-              widthPx={200} 
-              innerColor='#f0f1ef'
-              outerColor='#0f0e0e'
-              textColor='#D24848'
+              widthPx={200}
+              innerColor="#f0f1ef"
+              outerColor="#0f0e0e"
+              textColor="#065dc2"
             />
           </div>
           <div className="logo_title logo-text"> Ongaku </div>
@@ -41,8 +40,12 @@ const Home: React.FC = () => {
           </div>
         </div>
         <div className="hero_buttons">
-          <button type="button" className="buttons_join">Join</button>
-          <button type="button" className="buttons_channels">Channels</button>
+          <button type="button" className="buttons_join">
+            Join
+          </button>
+          <button type="button" className="buttons_channels">
+            Channels
+          </button>
         </div>
       </div>
     </>

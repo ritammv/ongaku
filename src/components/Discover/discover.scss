@@ -1,5 +1,7 @@
+@import '../../styles/variables.scss';
+
 .discover_container {
-  background-color: #e2e4e4;
+  background-color: $primary-color;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -12,17 +14,10 @@
   display: flex;
   justify-content: center;
 }
-
-ul {
+.genre_list {
   columns: 2;
   list-style: none;
 }
-
-li {
+.genre_list_item {
   padding: 10%;
-}
-
-.next_button {
-  color: #0f0e0e;
-  background-color: white;
 }

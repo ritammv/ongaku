@@ -1,6 +1,8 @@
+@import '../../styles/variables.scss';
+
 .container {
   height: 100vh;
-  background-color: #e2e4e4;
+  background-color: $primary-color;
   display: flex;
   flex-direction: column;
 }
@@ -53,9 +55,6 @@
   font-size: 30px;
 }
 
-.welcome_instructions {
-}
-
 .button_emoji {
   font-size: 90px;
 }
@@ -63,4 +62,49 @@
 .ongaku_text {
   padding: 20px;
   font-size: 40px;
+}
+
+.drawer_channel {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 10%;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.drawer_public {
+  padding: 10%;
+}
+
+.drawer_private {
+  padding: 10%;
+}
+
+.public_channel_list {
+  list-style: none;
+}
+
+.private_channel_list {
+  list-style: none;
+}
+
+.public_title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.channel_item {
+  padding: 10px;
+  border-bottom: 0.5px solid gray;
+  width: 100%;
+}
+
+.search_input {
+  background-color: $accent-one;
+  border-radius: 12px;
+  height: 35px;
+  width: 100%;
+  padding: 5%;
 }

@@ -42,16 +42,20 @@ const Discover: React.FC = () => {
       </div>
 
       <div className="genre_container">
-        <ul>
+        <ul className="genre_list">
           {genres.map((genre, i) => (
-            <li className={`li${i}`} key={genre}>
+            <li className={`li${i} genre_list_item`} key={genre}>
               <GenreTags genre={genre} />
             </li>
           ))}
         </ul>
       </div>
       <div className="discover_next">
-        <button className="next_button" type="button">
+        <button
+          className="genre_tag_button"
+          style={{ color: ' black', backgroundColor: 'white ' }}
+          type="button"
+        >
           Next
         </button>
       </div>
