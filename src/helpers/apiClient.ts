@@ -44,3 +44,30 @@ export const savePost = (userId: string, postId: string) => {
 export const getUser = (userId: string) => {
   return fetchRequest(`${SERVER_URL}/users/${userId}/`);
 };
+
+export const createPost = (
+  channelId: string, 
+  release: Release, 
+  user: User, 
+  postForm: FinalPost) => {
+  const dbPost = {
+    userId: user.id,
+    channelId,
+    postTitle: postForm.message_title,
+    title: release.title,
+    artist: release.artists[0].name,
+    year: release.year,
+    label: release.labels[0].name,
+    body: postForm.message_body,
+    thumbnail: release.image,
+  };
+  console.log('from APIclient', dbPost);
+  return fetchRequest(`${SERVER_URL}/posts/${channelId}`, {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(dbPost)
+  });
+};

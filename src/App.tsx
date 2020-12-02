@@ -17,7 +17,7 @@ const App: React.FC = () => {
       <Route
         exact
         path='/search'
-        component={Postcard}
+        component={Createpost}
       />
       <Route
         exact

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Box, Button, Input, Textarea } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
+import * as apiclient from '../../../helpers/apiClient';
 import './FinalCreatePost.scss';
 import vinyl from '../../../assets/vinyl.jpg';
 
@@ -9,13 +10,16 @@ import vinyl from '../../../assets/vinyl.jpg';
 export default function Finalcreatepost() {
 
   const history = useHistory();
+
   const selected = useSelector<State, Release >(
     (state: State) => state.selected);
   const channel = useSelector<State, Channel >(
     (state: State) => state.channel);
+  const user = useSelector<State, User >(
+    (state: State) => state.user);
     
 
-  const [post, setPost] = useState<FinalPost>({
+  const [postForm, setPostForm] = useState<FinalPost>({
     card: selected,
     message_title: '',
     message_body: '',
@@ -25,16 +29,17 @@ export default function Finalcreatepost() {
     e: React.FormEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>, 
     name: string) {
     const target = e.target as HTMLTextAreaElement ;
-    const newPost: FinalPost = { ...post };
+    const newPost: FinalPost = { ...postForm };
     if (name === 'title') newPost.message_title = target.value;
     if (name === 'message') newPost.message_body = target.value;
-    setPost(newPost);
+    setPostForm(newPost);
   }
 
-  function handleSubmit() {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
     console.log('submitted new post');
-    // TODO push to db + reroute to correct channel
-    history.push('/channel/techno');
+    apiclient.createPost(channel.id, selected, user, postForm );
+    history.push(`/channel/${channel.id}`);
   }
 
   return (
@@ -43,14 +48,20 @@ export default function Finalcreatepost() {
         Review your post
         <Button
           className='FinalPost_close'
-          onClick={()=> (history.push('/channel/techno'))}
+          onClick={()=> (history.push(`/channel/${channel.name}`))}
         >
           X
         </Button>
       </div>
 
       <div className="FinalPost_Tile">
-        <img src={selected.image} alt='release foto' />
+        {
+          selected.image
+            ? 
+              <img src={selected.image} alt='release foto' />
+            :
+              <img src={vinyl} alt='release foto' />
+        }
         <div className='Tile_Content'>
           {selected.title && selected.title.length && 
           <Box isTruncated>Title: {selected.title}</Box>}
@@ -63,7 +74,10 @@ export default function Finalcreatepost() {
         </div>
       </div>
 
-      <form className='FinalPost_message'>
+      <form 
+        onSubmit={(e) => handleSubmit(e)} 
+        className='FinalPost_message'
+      >
         <Input 
           variant="flushed" 
           placeholder="Title" 
@@ -85,7 +99,8 @@ export default function Finalcreatepost() {
           padding="2% 5%"
           fontWeight="lighter"
           mr={3}
-          onSubmit={handleSubmit}
+          type='submit'
+          // onSubmit={handleSubmit}
         >
           POST
         </Button>
