@@ -42,9 +42,10 @@ interface FinalPost {
 
 interface Post {
   id: string
-  post_title: string
+  postTitle: string
   title: string
   artist: string
+  label: string
   year: number
   thumbnail: string
   body: string
@@ -53,14 +54,22 @@ interface Post {
   updatedAt: string
   channelId: string
   userId: string
-  comments: Comment[]
+  comments: PostComment[]
   tags: Tag[]
 }
 
-interface Comment {
+interface Channel {
+  id: string;
+  name: string;
+  ownerId: string | null;
+  parentId: string | null;
+  private: boolean;
+}
+
+interface PostComment {
   body: string
-  createdAt: string
-  updatedAt: string
+  createdAt?: string
+  updatedAt?: string
   userId: string
   postId: string
   id: string
@@ -78,14 +87,17 @@ interface User {
   avatarUrl: string
   wantsUrl: string
   collectionUrl: string
+  posts: Post[]
+  channels: Channel[]
+  comments: Comment[]
 }
 
 type State = {
   user: User
   isLoading: boolean
-  channel: string
+  channel: Channel
   authentication: boolean
-  selected: Release | Want | SearchData
+  selected: Release
 };
 
 type UserAction = {
@@ -102,7 +114,7 @@ type isLoadingAction = {
 
 type channelAction = {
   type: string
-  channel: string
+  channel:Channel
 };
 
 type authenticationAction = {

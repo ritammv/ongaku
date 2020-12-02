@@ -1,27 +1,52 @@
 import { Container, Box, IconButton } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BsFillBookmarksFill, BsChevronDown } from 'react-icons/bs';
 import { HiOutlinePlus } from 'react-icons/hi';
-import { useSelector } from 'react-redux';
-import { post } from './mockCard';
 import * as apiclient from '../../helpers/apiClient';
+import { mockPost } from './mockCard';
 import './Postcard.scss';
 
+// interface Props {
+//   post: Post
+// }
 
+const Postcard: React.FC= () => {
 
-const Postcard: React.FC = () => {
+  const post: Post = mockPost;
 
   const [savePost, setSavePost] = useState<boolean>(false);
-  const user = useSelector<State, User>((state) => state.user);
+  const [author, setAuthor] = useState<User>({
+    id: '',
+    discogsId: 0,
+    username: '',
+    avatarUrl: '',
+    wantsUrl: '',
+    collectionUrl: '',
+    posts: [],
+    channels: [],
+    comments: [],
+  });
   
+  useEffect(() => {
+    async function getAuthor() {
+      const result= apiclient.getUser(post.userId);
+      setAuthor(await result);
+    }
+    getAuthor();
+  }, [post.userId]);
+
   function handleComments() {
     console.log('toggle the comments');
   }
 
   function handleSave() {
     console.log('toggle saving post');
-    apiclient.savePost(user.id, post.id);
-    setSavePost(!savePost);
+    if (savePost) {
+      apiclient.savePost(author.id, post.id);
+      setSavePost(!savePost);
+    } else {
+      console.log('delete post from My List');
+    } 
   }
 
   return (
@@ -34,15 +59,15 @@ const Postcard: React.FC = () => {
     >
       <div className='message_tile'>
         <div className="tile_image">
-          <img src={post.image} alt='release' />
+          <img src={post.thumbnail} alt='release' />
         </div>
         <div className='tile_info'>
-          {post.title && post.title.length && 
+          {post.title && 
           <Box isTruncated>Title: {post.title}</Box>}
-          {post.artists && post.artists.length && 
-          <Box isTruncated>Artist: {post.artists[0].name} </Box>}
-          {post.labels && post.labels.length && 
-          <Box isTruncated>Label: {post.labels[0].name}</Box>}
+          {post.artist &&  
+          <Box isTruncated>Artist: {post.artist} </Box>}
+          {post.label &&
+          <Box isTruncated>Label: {post.label}</Box>}
           {post.year && 
           <Box isTruncated>Year: {post.year}</Box>}
         </div>
@@ -74,13 +99,13 @@ const Postcard: React.FC = () => {
 
       <div className='message_content'>
         <div className="message_title">
-          {post.message_title}
+          {post.title}
         </div>
         <Box 
           className="message_body"
           noOfLines={5}
         >
-          {post.message_body}
+          {post.body}
         </Box>
 
         <div className="message_stats">
@@ -94,7 +119,7 @@ const Postcard: React.FC = () => {
             {post.comments.length} comments
           </div>
           <div className="stats_author">
-            Posted by <b>{post.username}</b>
+            Posted by <b>{author.username}</b>
           </div>
 
         </div>

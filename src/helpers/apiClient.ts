@@ -40,3 +40,7 @@ export const savePost = (userId: string, postId: string) => {
     body: JSON.stringify(postId)
   });
 };
+
+export const getUser = (userId: string) => {
+  return fetchRequest(`${SERVER_URL}/users/${userId}/`);
+};

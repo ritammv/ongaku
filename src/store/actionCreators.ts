@@ -16,7 +16,7 @@ export const setIsLoading = (isLoading: boolean) => {
   return (dispatch: DispatchType) => dispatch(action);
 };
 
-export const setChannel = (channel: string) => {
+export const setChannel = (channel: Channel) => {
   const action: channelAction = {
     type: actionTypes.SET_CHANNEL,
     channel

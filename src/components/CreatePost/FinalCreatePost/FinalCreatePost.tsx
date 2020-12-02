@@ -11,6 +11,9 @@ export default function Finalcreatepost() {
   const history = useHistory();
   const selected = useSelector<State, Release >(
     (state: State) => state.selected);
+  const channel = useSelector<State, Channel >(
+    (state: State) => state.channel);
+    
 
   const [post, setPost] = useState<FinalPost>({
     card: selected,
