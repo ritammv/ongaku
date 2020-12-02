@@ -5,9 +5,11 @@
 import { accessToken, key, secret } from '../config';
 
 const token = accessToken || 'secret';
-const BASE_URL: string = 'https://api.discogs.com';
 
-export const fetchRequest = (url:string, options: object) => {
+const SERVER_URL = 'http://localhost:3001';
+const BASE_URL = 'https://api.discogs.com';
+
+export const fetchRequest = (url:string, options?: object) => {
   return fetch(url, options)
     .then(res => res.status <= 400 ? res : Promise.reject(res))
     .then(res => res.status !== 204 ? res.json() : res)
@@ -16,9 +18,29 @@ export const fetchRequest = (url:string, options: object) => {
 
 
 export const getLists = (username: string, data: string) => {
-  return fetchRequest(`${BASE_URL}/users/${username}/${data}?token=${token}`, {});
+  return fetchRequest(`${BASE_URL}/users/${username}/${data}?token=${token}`);
 };
 
-export const getData = (query: string) => {
-  return fetchRequest(`${BASE_URL}/database/search?q=${query}&key=${key}&secret=${secret}`, {});
+export const getData = (
+  query: string, 
+  artist: string, 
+  title:string, 
+  label:string,
+  year:string) => {
+  return fetchRequest(`https://api.discogs.com/database/search?q=${query}&title=${title}&artist=${artist}&label=${label}&year=${year}&key=${key}&secret=${secret}`, {});
+};
+
+export const savePost = (userId: string, postId: string) => {
+  return fetchRequest(`${SERVER_URL}/users/${userId}/saved`, {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(postId)
+  });
+};
+
+export const getUser = (userId: string) => {
+  return fetchRequest(`${SERVER_URL}/users/${userId}/`);
 };

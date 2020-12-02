@@ -16,7 +16,7 @@ export const setIsLoading = (isLoading: boolean) => {
   return (dispatch: DispatchType) => dispatch(action);
 };
 
-export const setChannel = (channel: string) => {
+export const setChannel = (channel: Channel) => {
   const action: channelAction = {
     type: actionTypes.SET_CHANNEL,
     channel
@@ -28,6 +28,14 @@ export const setAuthentication = (authenticated: boolean) => {
   const action: authenticationAction = {
     type: actionTypes.SET_AUTHENTICATION,
     authenticated
+  };
+  return (dispatch: DispatchType) => dispatch(action);
+};
+
+export const setSelected = (selected: Release) => {
+  const action: SelectAction = {
+    type: actionTypes.SET_SELECTED,
+    selected
   };
   return (dispatch: DispatchType) => dispatch(action);
 };

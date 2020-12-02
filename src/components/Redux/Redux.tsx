@@ -14,12 +14,15 @@ const Redux: React.FC = () => {
 
   const handleClick = () => {
     const user: User = {
-      id: 2,
+      id: '2',
       discogsId: 698523,
       username: 'ELIIIIIIIIIJENKINS',
       avatarUrl: 'newAvatar',
       wantsUrl: 'newWamts',
-      collectionUrl: 'anotherLink'
+      collectionUrl: 'anotherLink',
+      posts: [],
+      channels: [],
+      comments: [],
     };
     setUser(user)(dispatch);
   };
@@ -29,7 +32,13 @@ const Redux: React.FC = () => {
   };
 
   const handleClickChannel = () => {
-    const channel: string = 'HELLO';
+    const channel: Channel =     {
+      'id': 'ef420411-97de-4fc8-9cf7-cfd5e3effd5e',
+      'name': 'Electronic',
+      'ownerId': null,
+      'private': false,
+      'parentId': null
+    };
     setChannel(channel)(dispatch);
   };
   
