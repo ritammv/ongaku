@@ -22,7 +22,9 @@ const Login: React.FC = () => {
               textColor='#065dc2'
             />
           </div>
-          <button type="submit" className="login_button">Login With Discogs</button>
+          <a href="http://localhost:3001/auth/provider">
+            <button type="submit" className="login_button">Login With Discogs</button>
+          </a>
         </div>
       </div>
     </>

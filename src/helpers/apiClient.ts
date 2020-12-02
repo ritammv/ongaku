@@ -5,6 +5,7 @@
 import { accessToken, key, secret } from '../config';
 
 const token = accessToken || 'secret';
+const BASE_URL: string = 'https://api.discogs.com';
 
 export const fetchRequest = (url:string, options: object) => {
   return fetch(url, options)
@@ -15,9 +16,9 @@ export const fetchRequest = (url:string, options: object) => {
 
 
 export const getLists = (username: string, data: string) => {
-  return fetchRequest(`https://api.discogs.com/users/${username}/${data}?token=${token}`, {});
+  return fetchRequest(`${BASE_URL}/users/${username}/${data}?token=${token}`, {});
 };
 
 export const getData = (query: string) => {
-  return fetchRequest(`https://api.discogs.com/database/search?q=${query}&key=${key}&secret=${secret}`, {});
+  return fetchRequest(`${BASE_URL}/database/search?q=${query}&key=${key}&secret=${secret}`, {});
 };
