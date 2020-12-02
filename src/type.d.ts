@@ -14,6 +14,18 @@ interface Release {
   image: string;
 }
 
+interface SearchResult {
+  id: number
+  artist: {name: string},
+  year: number,
+  label: string,
+  title: string,
+  genre: string[],
+  styles: result.styles,
+  resource_url: string,
+  cover_image: string
+}
+
 interface CreatePostForm {
   query: string;
   artist: string;

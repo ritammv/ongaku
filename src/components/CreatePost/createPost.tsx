@@ -25,7 +25,7 @@ const Createpost: React.FC = () => {
         <ModalOverlay />
         <ModalContent 
           backgroundColor='#f0f1ef'
-          h='90%'
+          h='100%'
           w='97%'
         >
           <ModalCloseButton />

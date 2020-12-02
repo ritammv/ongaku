@@ -14,10 +14,10 @@ const Tile: React.FC<Props> = ({
   setSelected,
 }) => {
 
-
   return (
     <Box
-      maxW="120px"
+      w="150px"
+      h='170px'
       m="7px"
       p="7px"
       borderWidth="1px"
@@ -27,7 +27,13 @@ const Tile: React.FC<Props> = ({
       }}
       className={result.id === selected.id ? 'activeCard' : undefined}
     >
-      <Image src={result.image} alt={result.title} />
+      <Image 
+        src={result.image} 
+        alt='release'
+        h='120px'
+        w='150px'
+      />
+
       <Box isTruncated fontSize="12px">
         <Text isTruncated>Title: {result.title}</Text>
         {

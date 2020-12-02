@@ -1,4 +1,4 @@
-import { Button } from '@chakra-ui/react';
+import { Button, Flex } from '@chakra-ui/react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -22,6 +22,25 @@ const Createbutton: React.FC<Props> = ({ selected }) => {
         selected.id !== 0
           ?
             <Link to='/create'>
+              <Flex justifyContent='center'>
+                <Button
+                  className="button-default"
+                  backgroundColor="#0f0e0e"
+                  color="white"
+                  borderRadius="12px"
+                  padding="2% 5%"
+                  fontWeight="lighter"
+                  mr={3}
+                  onClick={handleClick}
+                  position='absolute'
+                >
+                  CREATE
+                </Button>
+              </Flex>
+            </Link>
+
+          :
+            <Flex justifyContent='center'>
               <Button
                 className="button-default"
                 backgroundColor="#0f0e0e"
@@ -30,25 +49,12 @@ const Createbutton: React.FC<Props> = ({ selected }) => {
                 padding="2% 5%"
                 fontWeight="lighter"
                 mr={3}
-                onClick={handleClick}
+                disabled={true}
+                position='absolute'
               >
                 CREATE
               </Button>
-            </Link>
-
-          :
-            <Button
-              className="button-default"
-              backgroundColor="#0f0e0e"
-              color="white"
-              borderRadius="12px"
-              padding="2% 5%"
-              fontWeight="lighter"
-              mr={3}
-              disabled={true}
-            >
-              CREATE
-            </Button>
+            </Flex>
       }
     </>
   );

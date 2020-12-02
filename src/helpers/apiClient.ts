@@ -24,6 +24,5 @@ export const getData = (
   title:string, 
   label:string,
   year:string) => {
-  console.log('sending a request');
   return fetchRequest(`https://api.discogs.com/database/search?q=${query}&title=${title}&artist=${artist}&label=${label}&year=${year}&key=${key}&secret=${secret}`, {});
 };

@@ -22,10 +22,22 @@ const SearchDiscogs
   });
   
   async function handleSubmit() {
-    // e.preventDefault();
-    const data = 
-    await getData(form.query, form.artist, form.title, form.label, form.year);
-    setSearchResults(data.results);
+    await getData(form.query, form.artist, form.title, form.label, form.year)
+      .then(data => 
+        setSearchResults((data.results)
+          .map((result: SearchResult) => ({
+            id: result.id,
+            artists: result.artist,
+            year: result.year,
+            labels: result.label,
+            title: result.title,
+            genres: result.genre,
+            styles: result.styles,
+            url: result.resource_url,
+            image: result.cover_image 
+          }))
+        )); 
+
     setForm({    
       query: '',
       artist: '',

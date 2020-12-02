@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Button, Input, Textarea } from '@chakra-ui/react';
+import { Box, Button, Input, Textarea } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
 import './FinalCreatePost.scss';
+import vinyl from '../../../assets/vinyl.jpg';
 
 
 export default function Finalcreatepost() {
@@ -46,12 +47,16 @@ export default function Finalcreatepost() {
       </div>
 
       <div className="FinalPost_Tile">
-        <img src={selected.image} alt='card foto' />
+        <img src={selected.image} alt='release foto' />
         <div className='Tile_Content'>
-          {selected.title.length && <p>Title: {selected.title}</p>}
-          {selected.artists.length && <p>Artist: {selected.artists[0].name} </p>}
-          {selected.labels.length && <p>Label: {selected.labels[0].name}</p>}
-          {selected.year && <p>Year: {selected.year}</p>}
+          {selected.title && selected.title.length && 
+          <Box isTruncated>Title: {selected.title}</Box>}
+          {selected.artists && selected.artists.length && 
+          <Box isTruncated>Artist: {selected.artists[0].name} </Box>}
+          {selected.labels && selected.labels.length && 
+          <Box isTruncated>Label: {selected.labels[0].name}</Box>}
+          {selected.year && 
+          <Box isTruncated>Year: {selected.year}</Box>}
         </div>
       </div>
 
