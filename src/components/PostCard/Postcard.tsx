@@ -1,12 +1,28 @@
 import { Container, Box, IconButton } from '@chakra-ui/react';
-import React from 'react';
-import { BsPlusSquareFill } from 'react-icons/bs';
+import React, { useState } from 'react';
+import { BsFillBookmarksFill, BsChevronDown } from 'react-icons/bs';
 import { HiOutlinePlus } from 'react-icons/hi';
+import { useSelector } from 'react-redux';
 import { post } from './mockCard';
+import * as apiclient from '../../helpers/apiClient';
 import './Postcard.scss';
 
+
+
 const Postcard: React.FC = () => {
+
+  const [savePost, setSavePost] = useState<boolean>(false);
+  const user = useSelector<State, User>((state) => state.user);
   
+  function handleComments() {
+    console.log('toggle the comments');
+  }
+
+  function handleSave() {
+    console.log('toggle saving post');
+    apiclient.savePost(user.id, post.id);
+    setSavePost(!savePost);
+  }
 
   return (
     <Container
@@ -14,6 +30,7 @@ const Postcard: React.FC = () => {
       w='90%'
       display='flex'
       flexDir='column'
+      marginY='1.5rem'
     >
       <div className='message_tile'>
         <div className="tile_image">
@@ -29,12 +46,30 @@ const Postcard: React.FC = () => {
           {post.year && 
           <Box isTruncated>Year: {post.year}</Box>}
         </div>
-        <div className='tile_button'>
-          <IconButton 
-            aria-label="Add to List" 
-            icon={<HiOutlinePlus />}
-          />
-        </div>
+        {
+            !savePost
+              ?
+                <IconButton 
+                  aria-label="Add to List"
+                  icon={<HiOutlinePlus />}
+                  position='relative'
+                  top='-10px'
+                  right='-15px'
+                  onClick={handleSave}
+                />
+
+              :
+                <IconButton 
+                  aria-label="Add to List"
+                  icon={<BsFillBookmarksFill />}
+                  position='relative'
+                  top='-10px'
+                  right='-15px'
+                  onClick={handleSave}
+                />
+
+          }
+
       </div>
 
       <div className='message_content'>
@@ -50,10 +85,16 @@ const Postcard: React.FC = () => {
 
         <div className="message_stats">
           <div className="stats_comments">
+            <IconButton 
+              size='sm'
+              aria-label="See comments" 
+              icon={<BsChevronDown />}
+              onClick={handleComments}
+            />
             {post.comments.length} comments
           </div>
           <div className="stats_author">
-            Posted by {post.username}
+            Posted by <b>{post.username}</b>
           </div>
 
         </div>

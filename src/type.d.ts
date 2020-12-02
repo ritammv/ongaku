@@ -40,9 +40,39 @@ interface FinalPost {
   message_body: string
 }
 
+interface Post {
+  id: string
+  post_title: string
+  title: string
+  artist: string
+  year: number
+  thumbnail: string
+  body: string
+  url: string
+  createdAt: string
+  updatedAt: string
+  channelId: string
+  userId: string
+  comments: Comment[]
+  tags: Tag[]
+}
+
+interface Comment {
+  body: string
+  createdAt: string
+  updatedAt: string
+  userId: string
+  postId: string
+  id: string
+}
+
+interface Tag {
+  id: string
+  name: string
+}
 
 interface User {
-  id: number
+  id: string
   discogsId: number
   username: string
   avatarUrl: string

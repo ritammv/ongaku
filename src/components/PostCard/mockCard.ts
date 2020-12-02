@@ -1,4 +1,4 @@
-interface Comment {
+interface MockComment {
   username: string
   comment_body: string
   timestamp: string
@@ -13,16 +13,16 @@ interface PostCard {
   message_title: string
   message_body: string
   username: string
-  comments: Comment[]
+  comments: MockComment[]
 }
 
-const comment1: Comment = {
+const comment1: MockComment = {
   username: 'Otoko',
   comment_body: 'Sick, I had no clue they were doing an Editors Remix! If it has the same feel as Warped it should be good 🤩',
   timestamp: 'Dec 2, 2020 12:57 AM'
 };
 
-const comment2: Comment =  {
+const comment2: MockComment =  {
   username: 'Laundry',
   comment_body: 'Have you heard their remix of Frankenstein by the Editors? I highly recommend to give it a listen',
   timestamp:'Dec 2, 2020 12:46 AM'
