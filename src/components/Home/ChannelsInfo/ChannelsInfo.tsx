@@ -5,6 +5,7 @@ import { infoContainerAnimation, fadeInAnimation } from '../../../helpers/animat
 import ChatIcon from '../../../assets/chat-icon.svg';
 import ChannelTree from './ChannelTree/ChannelTree';
 
+
 const ChannelsInfo: React.FC = () => {
 
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -20,7 +21,7 @@ const ChannelsInfo: React.FC = () => {
   useEffect(() => {
     if (!infoContainerTimeline) {
       setInfoContainerTimeline(infoContainerAnimation());
-    } 
+    }
     if (containerIsInScroll && infoContainerTimeline) {
       infoContainerTimeline.play();
     } else if (infoContainerTimeline) {

@@ -4,6 +4,9 @@ import reducer from './reducer';
 
 
 
-export const store: Store<State, UserAction | isLoadingAction | channelAction | authenticationAction> & {
+export const store:
+Store<
+State, UserAction | isLoadingAction | channelAction | authenticationAction
+> & {
   dispatch: DispatchType
 } = createStore(reducer, applyMiddleware(thunk));

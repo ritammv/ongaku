@@ -1,3 +1,4 @@
+@import '../../../styles/variables.scss';
 .container_about {
   display: flex;
   flex-direction: column;
@@ -5,9 +6,12 @@
   height: 100%;
   align-items: center;
   justify-content: center;
+  .space_creator {
+    height: 10vh;
+  }
 
   .about_title {
-    font-size: 2.6rem;
+    font-size: 2.4rem;
     transform: translate(50px, 0px);
     opacity: 0;
   }
@@ -36,7 +40,7 @@
   }
   .about_content_item {
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     padding: 5% 0;
   }
   .about_content_three {
@@ -45,7 +49,14 @@
     transform: translate(0px, 50px);
     opacity: 0;
     span {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
     }
+  }
+  .buttons_join_bottom {
+    @include button-default;
+    background: $secondary-color;
+    color: $primary-color;
+    transform: translate(0px, 50px);
+    opacity: 0;
   }
 }

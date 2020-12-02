@@ -1,0 +1,27 @@
+@import '../../../styles/variables.scss';
+
+.home_nav {
+  width: 100vw;
+  height: 8vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  opacity: 0;
+  transform: translateY(-10vh);
+  button {
+    @include button-default;
+    width: 30%;
+  }
+}
+.nav_login {
+  background: $primary-color;
+}
+
+.nav_channels {
+  background: $primary-color;
+  color: $secondary-color;
+}
