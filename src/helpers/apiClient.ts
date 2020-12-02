@@ -6,7 +6,7 @@ import { accessToken, key, secret } from '../config';
 
 const token = accessToken || 'secret';
 
-export const fetchRequest = (url:string, options: object) => {
+export const fetchRequest = (url:string, options?: object) => {
   return fetch(url, options)
     .then(res => res.status <= 400 ? res : Promise.reject(res))
     .then(res => res.status !== 204 ? res.json() : res)
@@ -15,7 +15,7 @@ export const fetchRequest = (url:string, options: object) => {
 
 
 export const getLists = (username: string, data: string) => {
-  return fetchRequest(`https://api.discogs.com/users/${username}/${data}?token=${token}`, {});
+  return fetchRequest(`https://api.discogs.com/users/${username}/${data}?token=${token}`);
 };
 
 export const getData = (

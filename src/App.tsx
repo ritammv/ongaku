@@ -9,6 +9,7 @@ import Discover from './components/Discover/Discover';
 import Home from './components/Home/Home';
 import Login from './components/Login/Login';
 import Redux from './components/Redux/Redux';
+import Postcard from './components/PostCard/Postcard';
 
 const App: React.FC = () => {
   return (
@@ -16,7 +17,7 @@ const App: React.FC = () => {
       <Route
         exact
         path='/search'
-        component={Createpost}
+        component={Postcard}
       />
       <Route
         exact
