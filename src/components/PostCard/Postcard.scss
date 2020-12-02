@@ -5,12 +5,16 @@
   align-items: space-between;
   margin-top: 1rem;
   margin-bottom: 1rem;
-  background-color: white;
 }
 
 .tile_image {
   width: 40%;
   margin-right: 15px;
+}
+
+.tile_button {
+  border: 2px solid red;
+  padding-top: 0;
 }
 
 .message_title {

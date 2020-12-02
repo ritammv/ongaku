@@ -11,7 +11,7 @@ const Postcard: React.FC = () => {
   return (
     <Container
       border='1px solid #d2d2d2'
-      w='80%'
+      w='90%'
       display='flex'
       flexDir='column'
     >
@@ -28,6 +28,12 @@ const Postcard: React.FC = () => {
           <Box isTruncated>Label: {post.labels[0].name}</Box>}
           {post.year && 
           <Box isTruncated>Year: {post.year}</Box>}
+        </div>
+        <div className='tile_button'>
+          <IconButton 
+            aria-label="Add to List" 
+            icon={<HiOutlinePlus />}
+          />
         </div>
       </div>
 
@@ -49,7 +55,6 @@ const Postcard: React.FC = () => {
           <div className="stats_author">
             Posted by {post.username}
           </div>
-          <IconButton aria-label="Add to List" icon={<HiOutlinePlus />} />
 
         </div>
 
