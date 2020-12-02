@@ -13,15 +13,14 @@ const getChannels = (): Promise<Channel[]> => {
   return fetchRequest('/channels/default');
 };
 
-// function createChannel(body) {
-//   return fetchRequest('/channels', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify(body)
+const createChannel = (body: Object) => {
+  return fetchRequest('/channels', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  });
+};
 
-//   });
-// }
-
-export { getChannels };
+export { getChannels, createChannel };

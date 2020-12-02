@@ -21,17 +21,17 @@ type UserAction = {
 
 type DispatchType = (args: OrActionTypes) => OrActionTypes;
 
-type isLoadingAction = {
+type IsLoadingAction = {
   type: string;
   isLoading: boolean;
 };
 
-type channelAction = {
+type ChannelAction = {
   type: string;
   channel: string;
 };
 
-type authenticationAction = {
+type AuthenticationAction = {
   type: string;
   authenticated: boolean;
 };

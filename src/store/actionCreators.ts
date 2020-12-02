@@ -3,31 +3,31 @@ import * as actionTypes from './actionTypes';
 export const setUser = (user: User) => {
   const action: UserAction = {
     type: actionTypes.SET_USER,
-    user
+    user,
   };
   return (dispatch: DispatchType) => dispatch(action);
 };
 
 export const setIsLoading = (isLoading: boolean) => {
-  const action: isLoadingAction = {
+  const action: IsLoadingAction = {
     type: actionTypes.SET_ISLOADING,
-    isLoading
+    isLoading,
   };
   return (dispatch: DispatchType) => dispatch(action);
 };
 
 export const setChannel = (channel: string) => {
-  const action: channelAction = {
+  const action: ChannelAction = {
     type: actionTypes.SET_CHANNEL,
-    channel
+    channel,
   };
   return (dispatch: DispatchType) => dispatch(action);
 };
 
 export const setAuthentication = (authenticated: boolean) => {
-  const action: authenticationAction = {
+  const action: AuthenticationAction = {
     type: actionTypes.SET_AUTHENTICATION,
-    authenticated
+    authenticated,
   };
   return (dispatch: DispatchType) => dispatch(action);
 };

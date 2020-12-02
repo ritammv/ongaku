@@ -1,0 +1,88 @@
+import React, { useEffect, useState } from 'react';
+import {
+  useDisclosure,
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerCloseButton,
+  DrawerContent,
+} from '@chakra-ui/react';
+import CreateChannel from '../CreateChannel/CreateChannel';
+
+interface Props {
+  showSideBar: boolean;
+  setShowSideBar: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [showModal, setShowModal] = useState(false);
+
+  const handleClose = () => {
+    onClose();
+    setShowSideBar(false);
+  };
+
+  useEffect(() => {
+    if (showSideBar) onOpen();
+  }, [showSideBar, onOpen]);
+
+  return (
+    <div>
+      <Drawer isOpen={isOpen} placement="left" onClose={onClose} size="full">
+        <DrawerOverlay>
+          <DrawerContent>
+            <DrawerCloseButton onClick={() => handleClose()} />
+            <DrawerHeader>Hello! Welcome back</DrawerHeader>
+            <DrawerBody>
+              <div className="drawer_channel">Channels</div>
+              <ul>
+                <input
+                  className="search_input"
+                  placeholder="Search a channel"
+                />
+              </ul>
+
+              <div className="drawer_public">
+                <h3 className="public_title">Public</h3>
+                <ul className="public_channel_list">
+                  <li className="channel_item">#electronic</li>
+                  <li className="channel_item">#world</li>
+                  <li className="channel_item">#hip-hop</li>
+                </ul>
+              </div>
+              <div className="drawer_private">
+                <h3 className="public_title">Private</h3>
+                <ul className="private_channel_list">
+                  <li className="channel_item">#codeworks</li>
+                  <li className="channel_item">#festivals</li>
+                  <li className="channel_item">#bath</li>
+                </ul>
+              </div>
+            </DrawerBody>
+            <DrawerFooter>
+              <button
+                style={{
+                  height: '50px',
+                  width: '200px',
+                }}
+                className="genre_tag_button create_channel_button"
+                type="button"
+                onClick={() => {
+                  setShowModal((state) => !state);
+                }}
+              >
+                Create a channel +
+              </button>
+            </DrawerFooter>
+          </DrawerContent>
+        </DrawerOverlay>
+      </Drawer>
+      <CreateChannel setShowModal={setShowModal} showModal={showModal} />
+    </div>
+  );
+};
+
+export default SideBar;
