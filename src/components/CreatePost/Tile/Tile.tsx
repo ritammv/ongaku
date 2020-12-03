@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Image, Text } from '@chakra-ui/react';
 import './tile.scss';
+import vinyl from '../../../assets/vinyl.jpg';
 
 interface Props {
   result: Release;
@@ -27,12 +28,23 @@ const Tile: React.FC<Props> = ({
       }}
       className={result.id === selected.id ? 'activeCard' : undefined}
     >
-      <Image 
-        src={result.image} 
-        alt='release'
-        h='120px'
-        w='150px'
-      />
+      {
+        result.image
+          ?
+            <Image 
+              src={result.image} 
+              alt='release'
+              h='120px'
+              w='150px'
+            />
+          :
+            <Image 
+              src={vinyl} 
+              alt='release'
+              h='120px'
+              w='150px'
+            />
+      }
 
       <Box isTruncated fontSize="12px">
         <Text isTruncated>Title: {result.title}</Text>

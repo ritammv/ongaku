@@ -15,8 +15,9 @@ const comment2: PostComment =  {
   createdAt :'2020-12-02 16:11:06.13+01'
 };
 
+
 export const mockPost: Post = {
-  id: '7',
+  id: 'ff1aa452-6bc5-41e8-ad10-edff8bbf7058',
   thumbnail: 'https://img.discogs.com/Asuey6O9_gzzOUxgWPAks7kpSsM=/fit-in/600x593/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-12795201-1542094352-6938.jpeg.jpg',
   title: 'C166 EP',
   artist: 'JoyHauser',

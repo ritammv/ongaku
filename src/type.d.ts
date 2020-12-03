@@ -68,7 +68,7 @@ interface Channel {
 
 interface PostComment {
   body: string;
-  createdAt?: string;
+  createdAt: string | number | Date;
   updatedAt?: string;
   userId: string;
   postId: string;
@@ -87,6 +87,9 @@ interface User {
   avatarUrl: string;
   wantsUrl: string;
   collectionUrl: string;
+  posts: Post[];
+  channels: Channel[];
+  comments: Comment[];
 }
 
 // type UserAction = {

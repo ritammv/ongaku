@@ -24,6 +24,9 @@ const Redux: React.FC = () => {
       avatarUrl: 'newAvatar',
       wantsUrl: 'newWamts',
       collectionUrl: 'anotherLink',
+      posts: [],
+      comments: [],
+      channels: [],
     };
     setUser(user)(dispatch);
   };
