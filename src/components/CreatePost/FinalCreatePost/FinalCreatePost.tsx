@@ -37,9 +37,8 @@ export default function Finalcreatepost() {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log('submitted new post');
     apiclient.createPost(channel.id, selected, user, postForm );
-    history.push(`/channel/${channel.name}`);
+    history.push(`/channels/${channel.name}`);
   }
 
   return (
@@ -48,7 +47,7 @@ export default function Finalcreatepost() {
         Review your post
         <Button
           className='FinalPost_close'
-          onClick={()=> (history.push(`/channel/${channel.name}`))}
+          onClick={()=> (history.goBack())}
         >
           X
         </Button>

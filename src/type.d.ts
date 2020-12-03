@@ -107,13 +107,13 @@ interface User {
 // }
 
 type UserForRitam = {
-  type: string;
+  // type: string;
   id: string;
-  discogsId: number;
-  username: string;
-  avatarUrl: string;
-  wantsUrl: string;
-  collectionUrl: string;
+  // discogsId: number;
+  // username: string;
+  // avatarUrl: string;
+  // wantsUrl: string;
+  // collectionUrl: string;
   posts: Post[];
   channels: Channel[];
   comments: Comment[];
@@ -158,9 +158,9 @@ type OrActionTypes =
   | authenticationAction;
 
 type AllActionTypes = UserAction &
-  isLoadingAction &
-  channelAction &
-  authenticationAction;
+isLoadingAction &
+channelAction &
+authenticationAction;
 
 interface Channel {
   id: string;

@@ -49,7 +49,7 @@ const CreateChannel: React.FC<Props> = ({ showModal, setShowModal }) => {
     // eslint-disable-next-line no-unused-vars
     const { name, isPrivate, parentId } = options;
 
-    createChannel('76146c9d-d4da-4ab2-bac7-6bbd94d08a43', options);
+    createChannel('7fbe4a6a-2973-4b7f-b20f-5ceeda9e3559', options);
     setOptions(initialState);
   };
 

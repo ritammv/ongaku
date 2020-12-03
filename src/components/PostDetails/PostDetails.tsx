@@ -63,6 +63,13 @@ const Postdetails: React.FC<Props> = ({ postId }) => {
   useEffect(() => {
     async function getCurrentPost() {
       const result = await apiclient.getPost(postId);
+      result.comments = result.comments
+        .sort((
+          a: { createdAt: string | number | Date; }, 
+          b: { createdAt: string | number | Date; }) =>
+          new Date(b.createdAt).valueOf() -
+          new Date(a.createdAt).valueOf()
+        );
       setPost(result);
     }
     getCurrentPost();
@@ -87,12 +94,9 @@ const Postdetails: React.FC<Props> = ({ postId }) => {
     apiclient
       .createComment(post.id, user.id, commentBody)
       .then((newComment) => {
-        console.log(newComment);
         setCommentBody('');
         setPost((prev) => {
-          // eslint-disable-next-line no-param-reassign
-          prev.comments = [...prev.comments, newComment];
-          return prev;
+          return { ...prev, comments: [newComment, ...prev.comments] };
         });
       });
   }
@@ -163,6 +167,7 @@ const Postdetails: React.FC<Props> = ({ postId }) => {
         <Textarea
           onChange={(e) => handleChange(e, 'comment')}
           name="comment"
+          value={commentBody}
           placeholder="Share your thoughts"
         />
         <Button type="submit" size="xs">
@@ -173,11 +178,6 @@ const Postdetails: React.FC<Props> = ({ postId }) => {
       {post.comments && post.comments.length ? (
         <>
           {post.comments
-            .sort(
-              (a, b) =>
-                new Date(b.createdAt).valueOf() -
-                new Date(a.createdAt).valueOf()
-            )
             .map((comment) => (
               <CommentCard key={comment.id} comment={comment} />
             ))}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   useDisclosure,
   Drawer,
@@ -13,28 +14,36 @@ import {
 import CreateChannel from '../CreateChannel/CreateChannel';
 import { getUser } from '../../../helpers/apiClient';
 
+
 interface Props {
   showSideBar: boolean;
   setShowSideBar: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
+  const history = useHistory();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [showModal, setShowModal] = useState(false);
   const [userDetails, setUserDetails] = useState<UserForRitam>({
-    type: '',
+    // type: '',
     id: 'string',
-    discogsId: 0,
-    username: '',
-    avatarUrl: '',
-    wantsUrl: '',
-    collectionUrl: '',
+    // discogsId: 0,
+    // username: '',
+    // avatarUrl: '',
+    // wantsUrl: '',
+    // collectionUrl: '',
     posts: [],
     channels: [],
     comments: [],
     token: '',
     tokenSecret: '',
   });
+
+  const changePage = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    channelName: string) => {
+    history.push(`/channels/${channelName}`);
+  };
 
   const handleClose = () => {
     onClose();
@@ -46,7 +55,8 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
   }, [showSideBar, onOpen]);
 
   useEffect(() => {
-    getUser('76146c9d-d4da-4ab2-bac7-6bbd94d08a43').then((user) => {
+    getUser('7fbe4a6a-2973-4b7f-b20f-5ceeda9e3559').then((user) => {
+      console.log(user);
       setUserDetails(user);
     });
   }, []);
@@ -80,6 +90,7 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                             type="button"
                             className="channel_item"
                             key={channel.id}
+                            onClick={(e) => changePage(e, channel.name)}
                           >
                             #{channel.name}
                           </button>
@@ -98,6 +109,7 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                             type="button"
                             key={channel.id}
                             className="channel_item"
+                            onClick={(e) => changePage(e, channel.name)}
                           >
                             #{channel.name}
                           </button>
