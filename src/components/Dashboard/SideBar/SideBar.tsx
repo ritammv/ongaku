@@ -58,7 +58,8 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
             <DrawerCloseButton onClick={() => handleClose()} />
             <DrawerHeader>Hello! Welcome back</DrawerHeader>
             <DrawerBody>
-              <div className="drawer_channel">Channels{userDetails.id}</div>
+              <div className="drawer_channel">Channels</div>
+
               <ul>
                 <input
                   className="search_input"
@@ -69,17 +70,29 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
               <div className="drawer_public">
                 <h3 className="public_title">Public</h3>
                 <ul className="public_channel_list">
-                  <li className="channel_item">#electronic</li>
-                  <li className="channel_item">#world</li>
-                  <li className="channel_item">#hip-hop</li>
+                  {userDetails.channels &&
+                    userDetails.channels.map(
+                      (channel) =>
+                        channel.private === false && (
+                          <li key={channel.id} className="channel_item">
+                            #{channel.name}
+                          </li>
+                        )
+                    )}
                 </ul>
               </div>
               <div className="drawer_private">
                 <h3 className="public_title">Private</h3>
                 <ul className="private_channel_list">
-                  <li className="channel_item">#codeworks</li>
-                  <li className="channel_item">#festivals</li>
-                  <li className="channel_item">#bath</li>
+                  {userDetails.channels &&
+                    userDetails.channels.map(
+                      (channel) =>
+                        channel.private === true && (
+                          <li key={channel.id} className="channel_item">
+                            #{channel.name}
+                          </li>
+                        )
+                    )}
                 </ul>
               </div>
             </DrawerBody>
