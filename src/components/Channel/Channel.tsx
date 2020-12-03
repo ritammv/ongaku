@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { useDisclosure, Button, Container, ModalOverlay, Modal, ModalContent, ModalBody, ModalCloseButton } from '@chakra-ui/react';
 import SideBar from '../Dashboard/SideBar/SideBar';
 import vinyl from '../../assets/vinyl.jpg';
-import SearchPost from '../CreatePost/CreatePost';
+import CreatePost from '../CreatePost/CreatePost';
 
 interface Props {
   name: string
@@ -59,7 +59,7 @@ const Channel: React.FC<Props> = ({ name }) => {
           <ModalContent backgroundColor="#f0f1ef" h="100%" w="97%">
             <ModalCloseButton />
             <ModalBody overflow="scroll">
-              <SearchPost />
+              <CreatePost />
             </ModalBody>
           </ModalContent>
         </Modal>
