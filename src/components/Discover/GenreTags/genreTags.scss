@@ -18,3 +18,8 @@
     background: gray;
   }
 }
+
+.selected_channel {
+  background-color: $accent-three;
+  transform: scale(1.1);
+}

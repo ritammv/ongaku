@@ -30,7 +30,7 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
   const [showModal, setShowModal] = useState(false);
   const [userDetails, setUserDetails] = useState<UserForRitam>({
     // type: '',
-    id: 'string',
+    id: '',
     // discogsId: 0,
     // username: '',
     // avatarUrl: '',
@@ -60,10 +60,12 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
   }, [showSideBar, onOpen]);
 
   useEffect(() => {
-    getUser('7fbe4a6a-2973-4b7f-b20f-5ceeda9e3559').then((user) => {
-      setUserDetails(user);
-    });
-  }, []);
+    getUser('8ebedf47-a74c-42ca-a31e-50f2d5a34703')
+      .then((user) => {
+        dispatch(actions.setUser);
+        setUserDetails(user);
+      });
+  }, [dispatch]);
 
   return (
     <div>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './discover.scss';
 import gsap from 'gsap';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import GenreTags from './GenreTags/GenreTags';
 import {
   getChannels,
@@ -14,11 +15,14 @@ interface ChannelForDb {
 }
 
 const Discover: React.FC = () => {
-  const [channels, setChannels] = useState<Channel[] | null>(null);
 
+  const [channels, setChannels] = useState<Channel[] | null>(null);
   const [subscribed, setSubscribed] = useState<ChannelForDb[]>([]);
+  const user = useSelector<State, User>((state) => state.user);
+
 
   const handleClick = (id: string, genre: string) => {
+
     setSubscribed((prevState) => {
       if (prevState.find((channel) => channel.id === id)) return prevState;
 
@@ -55,7 +59,15 @@ const Discover: React.FC = () => {
   return (
     <div className="discover_container">
       <div className="discover_header">
-        <h3>Welcome Ritam</h3>
+       
+        {
+            user.username 
+              ?   
+                <h3>Welcome {user.username}</h3> 
+              : 
+                <h3>Welcome</h3> 
+          }
+ 
       </div>
       <div className="discover_title">
         <h4>Discover your channels...</h4>
@@ -78,7 +90,7 @@ const Discover: React.FC = () => {
       <div className="discover_next">
         <Link to="/dashboard">
           <button
-            className="genre_tag_button"
+            className='genre_tag_button'
             style={{ color: ' black', backgroundColor: 'white ' }}
             type="submit"
             onClick={handleSubmit}

@@ -47,11 +47,9 @@ const Postdetails: React.FC<Props> = ({ postId }) => {
   const [commentBody, setCommentBody] = useState<string>('');
   const [author, setAuthor] = useState<User>({
     id: '7fbe4a6a-2973-4b7f-b20f-5ceeda9e3559',
-    discogsId: 0,
     username: 'Manji',
-    avatarUrl: '',
-    wantsUrl: '',
-    collectionUrl: '',
+    token:'',
+    tokenSecret: '',
     posts: [],
     channels: [],
     comments: [],
