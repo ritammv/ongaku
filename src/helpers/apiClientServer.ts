@@ -23,4 +23,15 @@ const createChannel = (body: Object) => {
   });
 };
 
-export { getChannels, createChannel };
+const subscribeToChannels = (userId: string, channels: ChannelForDb[]) => {
+  return fetchRequest(`/users/${userId}/channels`, {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(channels),
+  });
+};
+
+export { getChannels, createChannel, subscribeToChannels };

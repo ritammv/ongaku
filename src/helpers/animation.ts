@@ -8,8 +8,10 @@ export const heroAnimation = (): GSAPTimeline => {
     .from('#music', { opacity: 0, x: 10, duration: 0.4 })
     .from('#sharing', { opacity: 0, x: 10, duration: 0.4 })
     .from('#community', { opacity: 0, x: 10, duration: 0.4 })
-    .from('.buttons_join', { opacity: 0, x: -40, duration: 0.5 })
-    .from('.buttons_channels', { opacity: 0, x: 40, duration: 0.5 }, '-=0.5');
+    .from('.hero_subtext', { opacity: 0, duration: 0.5 })
+    .from('.buttons_join', { opacity: 0, x: -40, duration: 0.5 }, '-=0.5')
+    .from('.buttons_channels', { opacity: 0, x: 40, duration: 0.5 }, '-=0.5')
+    .from('.container_scrolldown', { opacity: 0, duration: 0.5 });
 };
 
 export const infoContainerAnimation = (): GSAPTimeline => {
@@ -79,4 +81,9 @@ export const randomCircles = (className: string) =>  {
       opacity: 0,
       onComplete: () => newCircle.remove()
     });
+};
+
+export const headerAnimation = ():GSAPTimeline => {
+  return gsap.timeline({ paused: true })
+    .to('.home_nav', { opacity: 1, transform: 'translate(0)', duration: 1 });
 };

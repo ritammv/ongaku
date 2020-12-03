@@ -9,6 +9,7 @@ const Login: React.FC = () => {
     const intervalId = setInterval(() => randomCircles('.container_animation_circles'), 600);
     return () => { clearInterval(intervalId); };
   }, []);
+
   return (
     <>
       <div className="container-full container_animation_circles">
@@ -16,12 +17,14 @@ const Login: React.FC = () => {
           <div className="login_container_logo">
             <Logo
               widthPx={180} 
-              innerColor='#f0f1ef'
+              innerColor='#fefefe'
               outerColor='#0f0e0e'
-              textColor='#D24848'
+              textColor='#065dc2'
             />
           </div>
-          <button type="submit" className="login_button">Login With Discogs</button>
+          <a href="http://localhost:3001/auth/provider">
+            <button type="submit" className="login_button">Login With Discogs</button>
+          </a>
         </div>
       </div>
     </>

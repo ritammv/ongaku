@@ -62,7 +62,7 @@ const CreateChannel: React.FC<Props> = ({ showModal, setShowModal }) => {
     getChannels().then((channelsReq) => {
       setChannels(channelsReq);
     });
-  });
+  }, []);
 
   return (
     <div className="create_channel">

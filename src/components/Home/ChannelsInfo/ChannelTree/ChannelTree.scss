@@ -1,14 +1,18 @@
 @import "../../../../styles/variables.scss";
 .channels-info_tree {
   display: flex;
-  width: 100%;
+  width: 80%;
   justify-content: space-around;
   height: 24vh;
+  transform: translateY(5vh);
+  background: $primary-color;
   .tree_first {
     opacity: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    background: $primary-color;
     .tree_leaf {
       background: $secondary-color;
     }
@@ -17,8 +21,9 @@
     opacity: 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
+    background: $primary-color;
     .tree_leaf {
       background: $secondary-color;
     }
@@ -27,8 +32,9 @@
     opacity: 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    background: $primary-color;
     .tree_leaf {
       background: $secondary-color;
     }
@@ -40,19 +46,23 @@
     max-width: 150px;
     color: $primary-color;
     @include button-default;
+    transform: rotate(45deg);
+    margin: 10px 0;
   }
   .tree_third_one,
   .tree_third_two {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
+    margin: 2vh 0vh;
     height: 40%;
+    background: $primary-color;
     .tree_leaf {
       width: 30vw;
     }
   }
   .tree_leaf:hover {
-    transform: scale(1.1);
+  //   transform: scale(1.1);
     background: lighten($secondary-color, 15%);
   }
 }

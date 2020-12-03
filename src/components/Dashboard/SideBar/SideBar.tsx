@@ -10,6 +10,7 @@ import {
   DrawerContent,
 } from '@chakra-ui/react';
 import CreateChannel from '../CreateChannel/CreateChannel';
+import { getUser } from '../../../helpers/apiClient';
 
 interface Props {
   showSideBar: boolean;
@@ -19,6 +20,20 @@ interface Props {
 const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [showModal, setShowModal] = useState(false);
+  const [userDetails, setUserDetails] = useState<UserForRitam>({
+    type: '',
+    id: 'string',
+    discogsId: 0,
+    username: '',
+    avatarUrl: '',
+    wantsUrl: '',
+    collectionUrl: '',
+    posts: [],
+    channels: [],
+    comments: [],
+    token: '',
+    tokenSecret: '',
+  });
 
   const handleClose = () => {
     onClose();
@@ -29,6 +44,12 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
     if (showSideBar) onOpen();
   }, [showSideBar, onOpen]);
 
+  useEffect(() => {
+    getUser('76146c9d-d4da-4ab2-bac7-6bbd94d08a43').then((user) => {
+      setUserDetails(user);
+    });
+  }, []);
+
   return (
     <div>
       <Drawer isOpen={isOpen} placement="left" onClose={onClose} size="full">
@@ -37,7 +58,7 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
             <DrawerCloseButton onClick={() => handleClose()} />
             <DrawerHeader>Hello! Welcome back</DrawerHeader>
             <DrawerBody>
-              <div className="drawer_channel">Channels</div>
+              <div className="drawer_channel">Channels{userDetails.id}</div>
               <ul>
                 <input
                   className="search_input"

@@ -3,10 +3,33 @@ import './discover.scss';
 import gsap from 'gsap';
 import { Link } from 'react-router-dom';
 import GenreTags from './GenreTags/GenreTags';
-import { getChannels } from '../../helpers/apiClientServer';
+import {
+  getChannels,
+  subscribeToChannels,
+} from '../../helpers/apiClientServer';
+
+interface ChannelForDb {
+  id: string;
+  name: string;
+}
 
 const Discover: React.FC = () => {
   const [channels, setChannels] = useState<Channel[] | null>(null);
+
+  const [subscribed, setSubscribed] = useState<ChannelForDb[]>([]);
+
+  const handleClick = (id: string, genre: string) => {
+    setSubscribed((prevState) => {
+      if (prevState.find((channel) => channel.id === id)) return prevState;
+
+      return [...prevState, { id, name: genre }];
+    });
+  };
+
+  const handleSubmit = () => {
+    subscribeToChannels('76146c9d-d4da-4ab2-bac7-6bbd94d08a43', subscribed);
+  };
+
   useEffect(() => {
     getChannels()
       .then((channelsReq) => {
@@ -43,7 +66,11 @@ const Discover: React.FC = () => {
           {channels &&
             channels.map((channel: Channel, i: number) => (
               <li className={`li${i} genre_list_item`} key={channel.id}>
-                <GenreTags genre={channel.name} />
+                <GenreTags
+                  handleClick={handleClick}
+                  genre={channel.name}
+                  id={channel.id}
+                />
               </li>
             ))}
         </ul>
@@ -53,7 +80,8 @@ const Discover: React.FC = () => {
           <button
             className="genre_tag_button"
             style={{ color: ' black', backgroundColor: 'white ' }}
-            type="button"
+            type="submit"
+            onClick={handleSubmit}
           >
             Next
           </button>
