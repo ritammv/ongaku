@@ -1,8 +1,9 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDisclosure, Button, Container, ModalOverlay, Modal, ModalContent, ModalBody, ModalCloseButton } from '@chakra-ui/react';
 import SideBar from '../Dashboard/SideBar/SideBar';
 import vinyl from '../../assets/vinyl.jpg';
 import CreatePost from '../CreatePost/CreatePost';
+import * as apiClientServer from '../../helpers/apiClientServer';
 
 interface Props {
   name: string
@@ -12,6 +13,7 @@ const Channel: React.FC<Props> = ({ name }) => {
   const [showSideBar, setShowSideBar] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
+
 
   return (
     <div className="container">

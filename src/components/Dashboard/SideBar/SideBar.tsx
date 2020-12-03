@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import {
   useDisclosure,
@@ -11,6 +12,7 @@ import {
   DrawerContent,
   Input,
 } from '@chakra-ui/react';
+import * as actions from '../../../store/actionCreators';
 import CreateChannel from '../CreateChannel/CreateChannel';
 import { getUser } from '../../../helpers/apiClient';
 
@@ -22,7 +24,11 @@ interface Props {
 
 const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
   const history = useHistory();
+  const dispatch = useDispatch();
+
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [currentChannel, setCurrentChannel] = useSelector<State, Channel>(
+    (state) => state.channel);
   const [showModal, setShowModal] = useState(false);
   const [userDetails, setUserDetails] = useState<UserForRitam>({
     // type: '',
@@ -42,6 +48,8 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
   const changePage = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     channelName: string) => {
+    
+    
     history.push(`/channels/${channelName}`);
   };
 
