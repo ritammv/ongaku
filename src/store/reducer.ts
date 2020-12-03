@@ -2,7 +2,7 @@ import * as actionTypes from './actionTypes';
 
 const initialState: State = {
   user: {
-    id: '3bcdd94b-d460-4d58-8050-c717005c025b',
+    id: 'c42a1eb1-129e-452e-9363-acea5f9b2d7c',
     discogsId: 8500180,
     username: 'nijssenmandy89',
     avatarUrl: 'https://secure.gravatar.com/avatar/329961882160df9228422bbdee121320?s=500&r=pg&d=mm',
@@ -14,7 +14,7 @@ const initialState: State = {
   },
   isLoading: false,
   channel: {
-    id: 'ef420411-97de-4fc8-9cf7-cfd5e3effd5e',
+    id: '35d729d5-b0dd-4c29-bd8f-09ce4a807fb3',
     name: 'Electronic',
     ownerId: null,
     private: false,

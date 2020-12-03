@@ -39,7 +39,7 @@ export default function Finalcreatepost() {
     e.preventDefault();
     console.log('submitted new post');
     apiclient.createPost(channel.id, selected, user, postForm );
-    history.push(`/channel/${channel.id}`);
+    history.push(`/channel/${channel.name}`);
   }
 
   return (
@@ -100,7 +100,6 @@ export default function Finalcreatepost() {
           fontWeight="lighter"
           mr={3}
           type='submit'
-          // onSubmit={handleSubmit}
         >
           POST
         </Button>

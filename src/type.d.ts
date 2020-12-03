@@ -68,7 +68,7 @@ interface Channel {
 
 interface PostComment {
   body: string
-  createdAt?: string
+  createdAt: string | number | Date;
   updatedAt?: string
   userId: string
   postId: string

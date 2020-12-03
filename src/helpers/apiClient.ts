@@ -31,18 +31,35 @@ export const getData = (
 };
 
 export const savePost = (userId: string, postId: string) => {
+  console.log('save', postId);
   return fetchRequest(`${SERVER_URL}/users/${userId}/saved`, {
     method: 'POST',
     mode: 'cors',
     headers: {
+      'Content-Type':'application/json'
+    },
+    body: JSON.stringify({ postId })
+  });
+};
+
+export const removeSavedPost = (userId: string, postId: string) => {
+  console.log('delete', postId);
+  return fetchRequest(`${SERVER_URL}/users/${userId}/saved`, {
+    method: 'DELETE',
+    mode: 'cors',
+    headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(postId)
+    body: JSON.stringify({ postId })
   });
 };
 
 export const getUser = (userId: string) => {
   return fetchRequest(`${SERVER_URL}/users/${userId}/`);
+};
+
+export const getPost = (postId: string) => {
+  return fetchRequest(`${SERVER_URL}/posts/${postId}/`);
 };
 
 export const createPost = (
@@ -53,6 +70,7 @@ export const createPost = (
   const dbPost = {
     userId: user.id,
     channelId,
+    url: release.url,
     postTitle: postForm.message_title,
     title: release.title,
     artist: release.artists[0].name,
@@ -61,7 +79,6 @@ export const createPost = (
     body: postForm.message_body,
     thumbnail: release.image,
   };
-  console.log('from APIclient', dbPost);
   return fetchRequest(`${SERVER_URL}/posts/${channelId}`, {
     method: 'POST',
     mode: 'cors',
@@ -69,5 +86,24 @@ export const createPost = (
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(dbPost)
+  });
+};
+
+export const createComment = (
+  postId: string, 
+  userId: string, 
+  body: string) => {
+  const dbComment = {
+    postId,
+    userId,
+    body,
+  };
+  return fetchRequest(`${SERVER_URL}/posts/${postId}/comment`, {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(dbComment)
   });
 };

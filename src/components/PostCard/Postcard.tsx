@@ -1,24 +1,30 @@
 import { Container, Box, IconButton } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import moment from 'moment';
 import { BsFillBookmarksFill, BsChevronDown } from 'react-icons/bs';
 import { HiOutlinePlus } from 'react-icons/hi';
 import * as apiclient from '../../helpers/apiClient';
 import { mockPost } from './mockCard';
 import './Postcard.scss';
 
+
 // interface Props {
-//   post: Post
+//   // post: Post
+
 // }
 
 const Postcard: React.FC= () => {
-
+  // TODO pass down post as prop and get username
+  // (state or getUser via userId saved on post?)
   const post: Post = mockPost;
 
+  // const [post, setPost] = useState<Post>({})
   const [savePost, setSavePost] = useState<boolean>(false);
   const [author, setAuthor] = useState<User>({
-    id: '',
+    id: 'c42a1eb1-129e-452e-9363-acea5f9b2d7c',
     discogsId: 0,
-    username: '',
+    username: 'Manji',
     avatarUrl: '',
     wantsUrl: '',
     collectionUrl: '',
@@ -27,12 +33,21 @@ const Postcard: React.FC= () => {
     comments: [],
   });
   
+  const history = useHistory();
+  const date = moment(post.createdAt).format('lll');
+  
   useEffect(() => {
-    async function getAuthor() {
-      const result= apiclient.getUser(post.userId);
-      setAuthor(await result);
-    }
-    getAuthor();
+    // async function getPost() {
+    //   const result= apiclient.getPost(postId);
+    //   setPost(await result);
+    // }
+    // getPost();
+    // async function getAuthor() {
+    //   const result= apiclient.getUser(post.userId);
+    //   setAuthor(await result);
+    // }
+    // getAuthor();
+    
   }, [post.userId]);
 
   function handleComments() {
@@ -41,12 +56,13 @@ const Postcard: React.FC= () => {
 
   function handleSave() {
     console.log('toggle saving post');
-    if (savePost) {
+    if (!savePost) {
       apiclient.savePost(author.id, post.id);
-      setSavePost(!savePost);
     } else {
       console.log('delete post from My List');
+      apiclient.removeSavedPost(author.id, post.id);
     } 
+    setSavePost(!savePost);
   }
 
   return (
@@ -57,8 +73,15 @@ const Postcard: React.FC= () => {
       flexDir='column'
       marginY='1.5rem'
     >
+      <div className="message_date">
+        {date}
+      </div>
       <div className='message_tile'>
-        <div className="tile_image">
+        <div 
+          className="tile_image"
+          onClick={() => history.push(`/post/${post.id}`)}
+          aria-hidden="true" 
+        >
           <img src={post.thumbnail} alt='release' />
         </div>
         <div className='tile_info'>
@@ -92,7 +115,6 @@ const Postcard: React.FC= () => {
                   right='-15px'
                   onClick={handleSave}
                 />
-
           }
 
       </div>
@@ -121,11 +143,8 @@ const Postcard: React.FC= () => {
           <div className="stats_author">
             Posted by <b>{author.username}</b>
           </div>
-
         </div>
-
       </div>
-     
     </Container>
   );
 };
