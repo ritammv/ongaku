@@ -8,6 +8,7 @@ import {
   DrawerOverlay,
   DrawerCloseButton,
   DrawerContent,
+  Input,
 } from '@chakra-ui/react';
 import CreateChannel from '../CreateChannel/CreateChannel';
 import { getUser } from '../../../helpers/apiClient';
@@ -60,12 +61,13 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
             <DrawerBody>
               <div className="drawer_channel">Channels</div>
 
-              <ul>
-                <input
+              <form>
+                <Input
                   className="search_input"
                   placeholder="Search a channel"
+                  variant="filled"
                 />
-              </ul>
+              </form>
 
               <div className="drawer_public">
                 <h3 className="public_title">Public</h3>
@@ -74,9 +76,13 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                     userDetails.channels.map(
                       (channel) =>
                         channel.private === false && (
-                          <li key={channel.id} className="channel_item">
+                          <button
+                            type="button"
+                            className="channel_item"
+                            key={channel.id}
+                          >
                             #{channel.name}
-                          </li>
+                          </button>
                         )
                     )}
                 </ul>
@@ -88,9 +94,13 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                     userDetails.channels.map(
                       (channel) =>
                         channel.private === true && (
-                          <li key={channel.id} className="channel_item">
+                          <button
+                            type="button"
+                            key={channel.id}
+                            className="channel_item"
+                          >
                             #{channel.name}
-                          </li>
+                          </button>
                         )
                     )}
                 </ul>
