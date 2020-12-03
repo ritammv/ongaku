@@ -1,11 +1,11 @@
-$primary-color: #f0f1ef;
+$primary-color: #fefefe;
 $secondary-color: #0f0e0e;
 $accent-one: #e2e4e4;
 $accent-two: #065dc2;
 $accent-three: #113b98;
 
 @mixin button-default {
-  border-radius: 25px;
+  border-radius: 12px;
   padding: 2% 5%;
   text-align: center;
   vertical-align: center;

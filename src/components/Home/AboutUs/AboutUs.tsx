@@ -2,8 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import './AboutUs.scss';
 import { useIsInScroll } from '../../../helpers/isInScroll';
 import { makeFadeInAndSlide } from '../../../helpers/animation';
+import { OnClickRoute } from '../../../helpers/onClickRoute';
 
 const AboutUs: React.FC = () => {
+  const handleClick = OnClickRoute();
   const aboutTitleRef = useRef<HTMLDivElement>(null);
   const isInScrollTitle = useIsInScroll(aboutTitleRef);
   const [titleTimeline, setTitleTimeline]
@@ -18,6 +20,7 @@ const AboutUs: React.FC = () => {
   const isInScrollEnd = useIsInScroll(aboutEndRef);
   const [endTimeline, setEndTimeline]
     = useState<GSAPTimeline | null>(null);
+    
 
   useEffect(() => {
     if (!titleTimeline) {
@@ -43,7 +46,7 @@ const AboutUs: React.FC = () => {
 
   useEffect(() => {
     if (!endTimeline) {
-      setEndTimeline(makeFadeInAndSlide(['.about_content_three']));
+      setEndTimeline(makeFadeInAndSlide(['.about_content_three', '.buttons_join_bottom'], '-=0.5'));
     }
     if (isInScrollEnd && endTimeline) {
       endTimeline.play();
@@ -55,6 +58,7 @@ const AboutUs: React.FC = () => {
 
   return (
     <div className="container_about">
+      <div className="space_creator" />
       <div className="about_title logo-text" ref={aboutTitleRef}>音楽 - ongaku</div>
       <div className="about_subtitle">
         noun - on-gaku
@@ -75,6 +79,9 @@ const AboutUs: React.FC = () => {
           <span>Arigatō </span>
           Rizumu, Carles, Laundry, Mandji, Ji
         </div>
+        <button type="button" className="buttons_join_bottom" onClick={() => handleClick('login')}>
+          Log In With Discogs
+        </button>
       </div>
     </div>
   );

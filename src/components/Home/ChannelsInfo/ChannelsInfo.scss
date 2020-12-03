@@ -5,11 +5,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   .channels-info_chat-icon {
-    width: 40%;
+    width: 30%;
     transform: translate(50px, 0px);
     opacity: 0;
+    padding: 2vh 0;
   }
   .channels-info_content {
     opacity: 0;
@@ -17,10 +18,10 @@
     height: 40%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     .content_title {
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       font-weight: 500;
     }
     .content_body {
@@ -28,12 +29,12 @@
       flex-direction: column;
       align-items: center;
       .body_first {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         text-align: center;
         padding-bottom: 4%;
       }
       .body_second {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         text-align: center;
       }
     }

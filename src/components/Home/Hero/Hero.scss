@@ -1,15 +1,20 @@
 @import "../../../styles/variables.scss";
 .container_hero {
   @include flex-center;
+  justify-self: flex-start;
   flex-direction: column;
   justify-content: space-evenly;
   opacity: 0;
+  height: 85%;
+  position: relative;
+  transform: translateY(-10vh);
 
   .logo {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 40vh;
+    justify-content: space-around;
+    height: 64%;
     width: 100%;
     .logo_title {
       font-size: 5rem;
@@ -26,17 +31,63 @@
     }
   }
 
+  .hero_subtext {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 70%;
+  }
+
   .hero_buttons {
     width: 80%;
     display: flex;
     justify-content: space-around;
-    height: 5vh;
+    align-items: center;
+    flex-direction: column;
+    height: 30%;
     button {
-      width: 40%;
-      font-size: 1.2rem;
       @include button-default;
       color: $primary-color;
-      background: $secondary-color;
+      margin: 1vh 0 3vh 0;
     }
+    .buttons_join {
+      width: 80%;
+      font-size: 1.4rem;
+      background: $secondary-color;
+      padding: 4% 5%;
+    }
+    .buttons_channels {
+      width: 40%;
+      font-size: 1.1rem;
+      background: lighten($secondary-color, 20%)
+    }
+  }
+  .container_scrolldown {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    background: transparent;
+    .svg-arrow {
+      width: 10%;
+      height: 10%;
+      margin: auto;
+      animation: scrollDown 2s infinite;
+      background: transparent;
+    }
+  }
+}
+
+@keyframes scrollDown {
+  0% {
+    transform: scale(0.92);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(0.92);
   }
 }
