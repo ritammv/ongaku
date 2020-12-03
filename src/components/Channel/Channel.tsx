@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useDisclosure, Button, Container, ModalOverlay, Modal, ModalContent, ModalBody, ModalCloseButton } from '@chakra-ui/react';
+import { useDisclosure, Button, Container, ModalOverlay, Modal, ModalContent, ModalBody, ModalCloseButton, Text } from '@chakra-ui/react';
 import SideBar from '../Dashboard/SideBar/SideBar';
 import vinyl from '../../assets/vinyl.jpg';
 import CreatePost from '../CreatePost/CreatePost';
-import * as apiClientServer from '../../helpers/apiClientServer';
+import Postcard from '../PostCard/Postcard';
+
 
 interface Props {
   name: string
@@ -17,12 +18,6 @@ const Channel: React.FC<Props> = ({ name }) => {
   const channel = useSelector<State, Channel>(
     (state) => state.channel
   );
-  // let channelDetails = '';
-
-  // useEffect(() => {
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  //   channelDetails = apiClientServer.getChannel(channel.id);
-  // }, [channel.id]);
 
   return (
     <div className="container">
@@ -77,7 +72,26 @@ const Channel: React.FC<Props> = ({ name }) => {
         </Modal>
       </Container>
              
-
+      {
+        !(channel.posts && channel.posts.length)
+          ?
+            <Text>
+              Be the first to post
+            </Text>
+          :
+            <>
+              {
+          channel.posts        
+            .sort((
+              a: { createdAt: string | number | Date; }, 
+              b: { createdAt: string | number | Date; }) =>
+              new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
+            .map((post) => (
+              <Postcard key={post.id} post={post} />
+            ))
+        }
+            </>
+      }
 
     </div>
   );
