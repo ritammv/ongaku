@@ -23,7 +23,7 @@ const CreateChannel: React.FC<Props> = ({ showModal, setShowModal }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [channels, setChannels] = useState<Channel[] | null>(null);
   const initialState = {
-    title: '',
+    name: '',
     parentId: '',
     isPrivate: false,
   };
@@ -36,7 +36,6 @@ const CreateChannel: React.FC<Props> = ({ showModal, setShowModal }) => {
     event: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
   ) => {
     const { name, value } = event.target;
-    console.log(name, value);
 
     setOptions((prevState) => ({
       ...prevState,
@@ -46,12 +45,12 @@ const CreateChannel: React.FC<Props> = ({ showModal, setShowModal }) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const { title, isPrivate, parentId } = options;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line no-unused-vars
+    const { name, isPrivate, parentId } = options;
 
-    if (title && isPrivate && parentId) {
-      createChannel(options);
-      setOptions(initialState);
-    }
+    createChannel('76146c9d-d4da-4ab2-bac7-6bbd94d08a43', options);
+    setOptions(initialState);
   };
 
   useEffect(() => {
@@ -79,14 +78,14 @@ const CreateChannel: React.FC<Props> = ({ showModal, setShowModal }) => {
                   id="channel_title"
                   type="text"
                   placeholder="#"
-                  name="title"
+                  name="name"
                   onChange={handleChange}
-                  value={options.title}
+                  value={options.name}
                 />
                 <Select
                   name="isPrivate"
                   onChange={handleChange}
-                  placeholder="Privacy"
+                  placeholder="Public"
                   value={options.isPrivate.toString()}
                 >
                   <option value="true">Private</option>

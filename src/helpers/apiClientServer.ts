@@ -13,9 +13,10 @@ const getChannels = (): Promise<Channel[]> => {
   return fetchRequest('/channels/default');
 };
 
-const createChannel = (body: Object) => {
-  return fetchRequest('/channels', {
+const createChannel = (userId: string, body: Object) => {
+  return fetchRequest(`/channels/${userId}`, {
     method: 'POST',
+    mode: 'cors',
     headers: {
       'Content-Type': 'application/json',
     },
