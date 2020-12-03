@@ -21,6 +21,7 @@ const initialState: State = {
     ownerId: null,
     private: false,
     parentId: null,
+    posts: []
   },
   authentication: false,
   selected: {

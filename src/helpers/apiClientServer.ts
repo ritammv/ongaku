@@ -13,6 +13,10 @@ const getChannels = (): Promise<Channel[]> => {
   return fetchRequest('/channels/default');
 };
 
+const getChannel = (channelId: string): Promise<Channel[]> => {
+  return fetchRequest(`/channels/${channelId}`);
+};
+
 const createChannel = (userId: string, body: Object) => {
   return fetchRequest(`/channels/${userId}`, {
     method: 'POST',
@@ -35,4 +39,4 @@ const subscribeToChannels = (userId: string, channels: ChannelForDb[]) => {
   });
 };
 
-export { getChannels, createChannel, subscribeToChannels };
+export { getChannels, getChannel, createChannel, subscribeToChannels };

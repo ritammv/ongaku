@@ -27,8 +27,6 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
   const dispatch = useDispatch();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [currentChannel, setCurrentChannel] = useSelector<State, Channel>(
-    (state) => state.channel);
   const [showModal, setShowModal] = useState(false);
   const [userDetails, setUserDetails] = useState<UserForRitam>({
     // type: '',
@@ -47,10 +45,9 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
 
   const changePage = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    channelName: string) => {
-    
-    
-    history.push(`/channels/${channelName}`);
+    channel: Channel) => {
+    dispatch(actions.setChannel(channel));
+    history.push(`/channels/${channel.name}`);
   };
 
   const handleClose = () => {
@@ -64,7 +61,6 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
 
   useEffect(() => {
     getUser('7fbe4a6a-2973-4b7f-b20f-5ceeda9e3559').then((user) => {
-      console.log(user);
       setUserDetails(user);
     });
   }, []);
@@ -98,7 +94,7 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                             type="button"
                             className="channel_item"
                             key={channel.id}
-                            onClick={(e) => changePage(e, channel.name)}
+                            onClick={(e) => changePage(e, channel)}
                           >
                             #{channel.name}
                           </button>
@@ -117,7 +113,7 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                             type="button"
                             key={channel.id}
                             className="channel_item"
-                            onClick={(e) => changePage(e, channel.name)}
+                            onClick={(e) => changePage(e, channel)}
                           >
                             #{channel.name}
                           </button>

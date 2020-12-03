@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useDisclosure, Button, Container, ModalOverlay, Modal, ModalContent, ModalBody, ModalCloseButton } from '@chakra-ui/react';
 import SideBar from '../Dashboard/SideBar/SideBar';
 import vinyl from '../../assets/vinyl.jpg';
@@ -13,7 +14,15 @@ const Channel: React.FC<Props> = ({ name }) => {
   const [showSideBar, setShowSideBar] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const channel = useSelector<State, Channel>(
+    (state) => state.channel
+  );
+  // let channelDetails = '';
 
+  // useEffect(() => {
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  //   channelDetails = apiClientServer.getChannel(channel.id);
+  // }, [channel.id]);
 
   return (
     <div className="container">
@@ -42,6 +51,7 @@ const Channel: React.FC<Props> = ({ name }) => {
         </div>
         <SideBar setShowSideBar={setShowSideBar} showSideBar={showSideBar} />
       </div>
+
       <Container
         display='flex'
         justifyContent='center'
@@ -66,6 +76,9 @@ const Channel: React.FC<Props> = ({ name }) => {
           </ModalContent>
         </Modal>
       </Container>
+             
+
+
     </div>
   );
 };

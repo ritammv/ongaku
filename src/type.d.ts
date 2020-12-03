@@ -64,6 +64,7 @@ interface Channel {
   ownerId: string | null;
   parentId: string | null;
   private: boolean;
+  posts: Post[]
 }
 
 interface PostComment {

@@ -42,6 +42,7 @@ const Redux: React.FC = () => {
       ownerId: null,
       private: false,
       parentId: null,
+      posts: []
     };
     setChannel(channel)(dispatch);
   };
