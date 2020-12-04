@@ -16,11 +16,10 @@ export const setIsLoading = (isLoading: boolean) => {
   return (dispatch: DispatchType) => dispatch(action);
 };
 
-export const setChannel = (channel: Channel) => {
-  console.log(' in set channel');
+export const addChannel = (channel: Channel) => {
   const action: ChannelAction = {
-    type: actionTypes.ADD_CHANNELS,
-    channel
+    type: actionTypes.ADD_USER_CHANNEL,
+    channel,
   };
   return (dispatch: DispatchType) => dispatch(action);
 };
@@ -37,6 +36,14 @@ export const setSelected = (selected: Release) => {
   const action: SelectAction = {
     type: actionTypes.SET_SELECTED,
     selected,
+  };
+  return (dispatch: DispatchType) => dispatch(action);
+};
+
+export const addCurrChannel = (channel: Channel) => {
+  const action: ChannelAction = {
+    type: actionTypes.ADD_CURR_CHANNEL,
+    channel,
   };
   return (dispatch: DispatchType) => dispatch(action);
 };

@@ -64,7 +64,7 @@ interface Channel {
   ownerId: string | null;
   parentId: string | null;
   private: boolean;
-  posts: Post[]
+  posts: Post[];
 }
 
 interface PostComment {
@@ -82,15 +82,15 @@ interface Tag {
 }
 
 interface User {
-  id: number
-  username: string
-  resourceUrl: string
-  token: string
-  tokenSecret: string
-  channels: Channel[] | []
-  createdAt: string
-  updatedAt: string
-  posts: Posts[] | []
+  id: number;
+  username: string;
+  resourceUrl: string;
+  token: string;
+  tokenSecret: string;
+  channels: Channel[] | [];
+  createdAt: string;
+  updatedAt: string;
+  posts: Posts[] | [];
 }
 
 // type UserAction = {
@@ -123,10 +123,11 @@ type UserForRitam = {
 };
 
 type State = {
-  user: User
-  isLoading: boolean
-  authentication: boolean
-  selected: Release
+  user: User;
+  isLoading: boolean;
+  currChannel: Channel | {};
+  authentication: boolean;
+  selected: Release | {};
 };
 
 type UserAction = {
@@ -158,9 +159,9 @@ type OrActionTypes =
   | authenticationAction;
 
 type AllActionTypes = UserAction &
-isLoadingAction &
-channelAction &
-authenticationAction;
+  isLoadingAction &
+  channelAction &
+  authenticationAction;
 
 interface Channel {
   id: string;

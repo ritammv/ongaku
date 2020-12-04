@@ -7,37 +7,40 @@ import GenreTags from './GenreTags/GenreTags';
 import {
   getChannels,
   subscribeToChannels,
+  getChannel,
 } from '../../helpers/apiClientServer';
-
-interface ChannelForDb {
-  id: string;
-  name: string;
-}
+import { addChannel } from '../../store/actionCreators';
 
 const Discover: React.FC = () => {
-
-  const [channels, setChannels] = useState<Channel[] | null>(null);
+  const [defaultChannels, setDefaultChannels] = useState<Channel[] | null>(
+    null
+  );
   const [subscribed, setSubscribed] = useState<ChannelForDb[]>([]);
-  const user = useSelector<State, User>((state) => state.user);
-
+  const user = useSelector<State, User>((state: State) => state.user);
 
   const handleClick = (id: string, genre: string) => {
-
     setSubscribed((prevState) => {
       if (prevState.find((channel) => channel.id === id)) return prevState;
-
       return [...prevState, { id, name: genre }];
     });
   };
 
   const handleSubmit = () => {
-    subscribeToChannels('8ebedf47-a74c-42ca-a31e-50f2d5a34703', subscribed);
+    if (user.id !== 0)
+      subscribeToChannels(user.id, subscribed).then((resp) =>
+        resp.forEach(async (channel: { ChannelId: string }) => {
+          console.log(channel.ChannelId);
+          getChannel(channel.ChannelId).then((fullChannel: Channel) =>
+            addChannel(fullChannel)
+          );
+        })
+      );
   };
 
   useEffect(() => {
     getChannels()
       .then((channelsReq) => {
-        setChannels(channelsReq);
+        setDefaultChannels(channelsReq);
       })
       .catch((err) => console.error(err))
       .finally(() => {
@@ -59,15 +62,7 @@ const Discover: React.FC = () => {
   return (
     <div className="discover_container">
       <div className="discover_header">
-       
-        {
-            user.username 
-              ?   
-                <h3>Welcome {user.username}</h3> 
-              : 
-                <h3>Welcome</h3> 
-          }
- 
+        {user.username ? <h3>Welcome {user.username}</h3> : <h3>Welcome</h3>}
       </div>
       <div className="discover_title">
         <h4>Discover your channels...</h4>
@@ -75,8 +70,8 @@ const Discover: React.FC = () => {
 
       <div className="genre_container">
         <ul className="genre_list">
-          {channels &&
-            channels.map((channel: Channel, i: number) => (
+          {defaultChannels &&
+            defaultChannels.map((channel: Channel, i: number) => (
               <li className={`li${i} genre_list_item`} key={channel.id}>
                 <GenreTags
                   handleClick={handleClick}
@@ -90,7 +85,7 @@ const Discover: React.FC = () => {
       <div className="discover_next">
         <Link to="/dashboard">
           <button
-            className='genre_tag_button'
+            className="genre_tag_button"
             style={{ color: ' black', backgroundColor: 'white ' }}
             type="submit"
             onClick={handleSubmit}
