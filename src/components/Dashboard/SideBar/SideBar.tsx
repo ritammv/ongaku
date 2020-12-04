@@ -59,6 +59,7 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
   ) => {
     unsubscribeFromChannel(userDetails.id, newChannel);
     dispatch(actions.unsubscribeChannel(newChannel));
+    console.log(userDetails);
   };
 
   useEffect(() => {
@@ -97,11 +98,10 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                     (userDetails.channels as Channel[]).map((chan: Channel) => {
                       return (
                         !chan.private && (
-                          <div>
+                          <div key={chan.id}>
                             <button
                               type="button"
                               className="channel_item"
-                              key={chan.id}
                               onClick={(e) => changePage(e, chan)}
                             >
                               #{chan.name}
@@ -109,7 +109,6 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                             <button
                               type="button"
                               className="unsubscribe_channel"
-                              key={chan.id}
                               onClick={(e) => unsubscribe(e, chan)}
                             >
                               x
@@ -127,14 +126,22 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                     (userDetails.channels as Channel[]).map(
                       (chan: Channel) =>
                         chan.private === true && (
-                          <button
-                            type="button"
-                            key={chan.id}
-                            className="channel_item"
-                            onClick={(e) => changePage(e, chan)}
-                          >
-                            #{chan.name}
-                          </button>
+                          <div key={chan.id}>
+                            <button
+                              type="button"
+                              className="channel_item"
+                              onClick={(e) => changePage(e, chan)}
+                            >
+                              #{chan.name}
+                            </button>
+                            <button
+                              type="button"
+                              className="unsubscribe_channel"
+                              onClick={(e) => unsubscribe(e, chan)}
+                            >
+                              x
+                            </button>
+                          </div>
                         )
                     )}
                 </ul>

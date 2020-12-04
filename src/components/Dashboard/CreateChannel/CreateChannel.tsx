@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   useDisclosure,
   Input,
@@ -12,6 +12,7 @@ import {
   DrawerCloseButton,
   Select,
 } from '@chakra-ui/react';
+import * as actions from '../../../store/actionCreators';
 
 import {
   createChannel,
@@ -33,6 +34,8 @@ const CreateChannel: React.FC<Props> = ({ showModal, setShowModal }) => {
     parentId: '',
     isPrivate: false,
   });
+
+  const dispatch = useDispatch();
 
   const handleClose = () => {
     onClose();
@@ -56,7 +59,13 @@ const CreateChannel: React.FC<Props> = ({ showModal, setShowModal }) => {
     // eslint-disable-next-line no-unused-vars
     const { name, isPrivate, parentId } = options;
 
-    createChannel(user.id, options);
+    // console.log(options);
+
+    createChannel(user.id, options).then((newChannel) => {
+      console.log(newChannel);
+
+      dispatch(actions.addChannel(newChannel));
+    });
     setOptions({
       name: '',
       parentId: '',

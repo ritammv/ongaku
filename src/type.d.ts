@@ -168,13 +168,13 @@ type AllActionTypes = UserAction &
   channelAction &
   authenticationAction;
 
-interface Channel {
-  id: string;
-  name: string;
-  ownerId: string;
-  parentId: string;
-  private: boolean;
-}
+// interface Channel {
+//   id: string;
+//   name: string;
+//   ownerId: string;
+//   parentId: string;
+//   private: boolean;
+// }
 
 interface SelectAction {
   type: string;
