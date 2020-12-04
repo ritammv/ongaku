@@ -12,7 +12,7 @@ import Authenticated from './components/Authenticated/Authenticated';
 // import Redux from './components/Redux/Redux';
 import Postcard from './components/PostCard/Postcard';
 import { CheckAuthenticateAndPopulate } from './helpers/checkAuthenticateAndPopulate';
-// import Postdetails from './components/PostDetails/PostDetails';
+import Postdetails from './components/PostDetails/PostDetails';
 
 const App: React.FC = () => {
   const isAuthenticated = CheckAuthenticateAndPopulate();
@@ -25,13 +25,13 @@ const App: React.FC = () => {
       <Route exact path="/dashboard" component={Dashboard} />
       <Route exact path="/post" component={Postcard} />
       <Route exact path="/create" component={Finalcreatepost} />
-      {/* <Route
+      <Route
         exact
         path="/post/:postId"
         render={(routeProps) => (
           <Postdetails postId={routeProps.match.params.postId} />
         )}
-      /> */}
+      />
 
       {/* <Route exact path="/redux" component={Redux} /> */}
       <Route
