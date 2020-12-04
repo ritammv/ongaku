@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import {
   useDisclosure,
   Input,
@@ -26,18 +27,18 @@ interface Props {
 const CreateChannel: React.FC<Props> = ({ showModal, setShowModal }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [channels, setChannels] = useState<Channel[]>([]);
-  // const [allChannels, setAllChannels] = useState<Channel[]>([]);
-
-  const initialState = {
+  const user = useSelector<State, User>((state: State) => state.user);
+  const [options, setOptions] = useState({
     name: '',
     parentId: '',
     isPrivate: false,
-  };
-  const [options, setOptions] = useState(initialState);
+  });
+
   const handleClose = () => {
     onClose();
     setShowModal(false);
   };
+
   const handleChange = (
     event: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
   ) => {
@@ -55,8 +56,12 @@ const CreateChannel: React.FC<Props> = ({ showModal, setShowModal }) => {
     // eslint-disable-next-line no-unused-vars
     const { name, isPrivate, parentId } = options;
 
-    createChannel('7fbe4a6a-2973-4b7f-b20f-5ceeda9e3559', options);
-    setOptions(initialState);
+    createChannel(user.id, options);
+    setOptions({
+      name: '',
+      parentId: '',
+      isPrivate: false,
+    });
   };
 
   useEffect(() => {

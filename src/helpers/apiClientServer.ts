@@ -22,7 +22,7 @@ const getChannel = (channelId: string): Promise<ChannelAndUsers> => {
   return fetchRequest(`/channels/${channelId}`);
 };
 
-const createChannel = (userId: string, body: Object) => {
+const createChannel = (userId: number, body: Object) => {
   return fetchRequest(`/channels/${userId}`, {
     method: 'POST',
     mode: 'cors',

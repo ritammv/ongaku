@@ -5,10 +5,12 @@
   align-items: space-between;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  width: 100%;
 }
 
 .tile_image {
-  width: 40%;
+  min-width: 30%;
+  max-width: 30%;
   margin-right: 15px;
 }
 
@@ -20,6 +22,7 @@
 }
 
 .tile_info {
+  width: 55%;
   font-size: 13px;
 }
 
@@ -34,9 +37,14 @@
   text-align: center;
 }
 
+img .vinyl_channel {
+  height: 60%;
+}
+
 .message_body {
   font-family: 'Montserrat', sans-serif;
   text-align: justify;
+  font-size: 14px;
   margin-bottom: 25px;
 }
 
@@ -45,11 +53,12 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+  font-size: 12px;
 }
 
 .message_date {
-  color: #d3d3d3;
-  font-size: 1rem;
+  color: rgba(6, 93, 194, 0.6);
+  font-size: 12px;
   margin-top: 5px;
   font-style: italic;
 }
@@ -75,7 +84,7 @@
   display: flex;
   justify-content: space-between;
   p {
-    color: #d3d3d3;
+    color: rgba(6, 93, 194, 0.6);
     margin-bottom: 5px;
   }
 }

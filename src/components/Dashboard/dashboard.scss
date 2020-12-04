@@ -8,19 +8,23 @@
 }
 
 .header {
-  height: 15%;
+  height: 90px;
   border-bottom: 2px solid gray;
-  position: relative;
+  position: fixed;
+  width: 100%;
   text-align: right;
   display: flex;
   flex-direction: row;
+  z-index: 3;
+  img {
+    width: 4.5rem;
+    height: 4.5rem;
+  }
 }
 
 .channel_title {
   font-size: 1.5rem;
   margin-top: 15px;
-  position: relative;
-  left: 35px;
 }
 
 .user_info {
@@ -36,6 +40,7 @@
 }
 
 .dashboard_info {
+  font-size: 1rem;
   flex-direction: flex-end;
   display: flex;
   width: 100%;

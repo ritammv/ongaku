@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import {
   useDisclosure,
   Drawer,
@@ -13,6 +15,7 @@ import {
   Input,
 } from '@chakra-ui/react';
 import * as actions from '../../../store/actionCreators';
+import * as apiClientServer from '../../../helpers/apiClientServer';
 import CreateChannel from '../CreateChannel/CreateChannel';
 import { getUser } from '../../../helpers/apiClient';
 
@@ -29,31 +32,21 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
   const dispatch = useDispatch();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [showModal, setShowModal] = useState(false);
-  // const [userDetails, setUserDetails] = useState<UserForRitam>({
-  //   // type: '',
-  //   id: '',
-  //   // discogsId: 0,
-  //   // username: '',
-  //   // avatarUrl: '',
-  //   // wantsUrl: '',
-  //   // collectionUrl: '',
-  //   posts: [],
-  //   channels: [],
-  //   comments: [],
-  //   token: '',
-  //   tokenSecret: '',
-  // });
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [allChannels, setAllChannels] = useState<Channel[]>();
 
   useEffect(() => {
     if (userDetails.id) {
       getUser(userDetails.id).then((user) => {
-        console.log(user);
         actions.setUser(user)(dispatch);
-        console.log(userDetails);
       });
-    }
-  }, [dispatch, userDetails.id]);
+    }  
+  }, []);
+
+  // useEffect(() => {
+  //   apiClientServer.getPublicChannels()
+  //     .then((result) => setAllChannels(result));
+  // }, []);
 
   const changePage = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -72,13 +65,6 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
     if (showSideBar) onOpen();
   }, [showSideBar, onOpen]);
 
-  // useEffect(() => {
-  //   getUser(3294829).then((user) => {
-  //     dispatch(actions.setUser);
-  //     setUserDetails(user);
-  //   });
-  // }, [dispatch]);
-
   return (
     <div>
       <Drawer isOpen={isOpen} placement="left" onClose={onClose} size="full">
@@ -89,13 +75,20 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
             <DrawerBody>
               <div className="drawer_channel">Channels</div>
 
-              <form>
+              {/* <form>
                 <Input
                   className="search_input"
                   placeholder="Search a channel"
                   variant="filled"
                 />
-              </form>
+              </form> */}
+              {/* <Autocomplete
+                id="search-channel"
+                options={allPublicChannels}
+                getOptionLabel={(option) => option.title}
+                style={{ width: 300 }}
+                renderInput={(params) => <TextField {...params} label="Search for a Channel" variant="outlined" />}
+              /> */}
 
               <div className="drawer_public">
                 <h3 className="public_title">Public</h3>
