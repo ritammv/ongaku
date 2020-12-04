@@ -12,10 +12,31 @@ const initialState: State = {
     createdAt: '',
     updatedAt: '',
   },
-  currChannel: {},
+  currChannel:  {
+    'id': 'd0ed9e2c-6b9f-4b34-9695-5d7cb007eee4',
+    'name': "Ambient 90's",
+    'ownerId': '247835',
+    'private': true,
+    'parentId': null,
+    'posts': [],
+  },
   isLoading: false,
   authentication: false,
-  selected: {},
+  selected: {
+    id: 1,
+    artists: [{
+      name: 'hello'
+    }],
+    year: 2014,
+    labels: [{
+      name: 'Terminal'
+    }],
+    title: 'pls work',
+    genres: ['Experimental'],
+    styles: [],
+    url: '',
+    image: '',
+  },
 };
 
 const reducer = (

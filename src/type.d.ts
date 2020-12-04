@@ -81,6 +81,11 @@ interface Tag {
   name: string;
 }
 
+interface ChannelAndUsers {
+  users: number
+  channel: Channel
+}
+
 interface User {
   id: number;
   username: string;
@@ -125,9 +130,9 @@ type UserForRitam = {
 type State = {
   user: User;
   isLoading: boolean;
-  currChannel: Channel | {};
+  currChannel: Channel;
   authentication: boolean;
-  selected: Release | {};
+  selected: Release;
 };
 
 type UserAction = {
@@ -159,9 +164,9 @@ type OrActionTypes =
   | authenticationAction;
 
 type AllActionTypes = UserAction &
-  isLoadingAction &
-  channelAction &
-  authenticationAction;
+isLoadingAction &
+channelAction &
+authenticationAction;
 
 interface Channel {
   id: string;

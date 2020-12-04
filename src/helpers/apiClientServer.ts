@@ -1,5 +1,6 @@
 const BASE_URL = 'http://localhost:3001';
 
+
 function fetchRequest(path: string, options?: Object) {
   return fetch(BASE_URL + path, options)
     .then((res) => (res.status < 400 ? res : Promise.reject()))
@@ -17,7 +18,7 @@ const getPublicChannels = (): Promise<Channel[]> => {
   return fetchRequest('/channels/public');
 };
 
-const getChannel = (channelId: string): Promise<Channel> => {
+const getChannel = (channelId: string): Promise<ChannelAndUsers> => {
   return fetchRequest(`/channels/${channelId}`);
 };
 
