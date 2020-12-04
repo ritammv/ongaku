@@ -51,7 +51,7 @@ const Channel: React.FC<Props> = ({ name }) => {
           </button>
         </div>
         <div className="dashboard_info">
-          <h3>2098 Members</h3> <h3>13209 Posts</h3>
+          <h3>2098 Members</h3> <h3>1320 Posts</h3>
         </div>
         <SideBar setShowSideBar={setShowSideBar} showSideBar={showSideBar} />
       </div>

@@ -30,27 +30,11 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [showModal, setShowModal] = useState(false);
-  // const [userDetails, setUserDetails] = useState<UserForRitam>({
-  //   // type: '',
-  //   id: '',
-  //   // discogsId: 0,
-  //   // username: '',
-  //   // avatarUrl: '',
-  //   // wantsUrl: '',
-  //   // collectionUrl: '',
-  //   posts: [],
-  //   channels: [],
-  //   comments: [],
-  //   token: '',
-  //   tokenSecret: '',
-  // });
 
   useEffect(() => {
     if (userDetails.id) {
       getUser(userDetails.id).then((user) => {
-        console.log(user);
         actions.setUser(user)(dispatch);
-        console.log(userDetails);
       });
     }
   }, [dispatch, userDetails.id]);
