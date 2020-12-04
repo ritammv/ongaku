@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './genreTags.scss';
 
 type GenreTagsType = {
@@ -7,12 +7,19 @@ type GenreTagsType = {
   handleClick: (id: string, genre: string) => void;
 };
 
-const GenreTags: React.FC<GenreTagsType> = ({ id, genre, handleClick }) => {
+const GenreTags: React.FC<GenreTagsType> = (
+  { id, genre, handleClick }) => {
+
+  const [isSelected, setIsSelected] = useState<Boolean>(false);
+
   return (
     <button
       type="button"
-      className="genre_tag_button"
-      onClick={() => handleClick(id, genre)}
+      className={`genre_tag_button ${isSelected && 'selected_channel'}`}
+      onClick={() => {
+        setIsSelected(!isSelected);
+        handleClick(id, genre);
+      }}
     >
       {genre}
     </button>

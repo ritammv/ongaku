@@ -2,14 +2,17 @@ import * as actionTypes from './actionTypes';
 
 const initialState: State = {
   user: {
-    id: 'c42a1eb1-129e-452e-9363-acea5f9b2d7c',
-    discogsId: 8500180,
+    id: '8ebedf47-a74c-42ca-a31e-50f2d5a34703',
     username: 'nijssenmandy89',
-    avatarUrl:
-      'https://secure.gravatar.com/avatar/329961882160df9228422bbdee121320?s=500&r=pg&d=mm',
-    wantsUrl: 'https://api.discogs.com/users/nijssenmandy89/wants',
-    collectionUrl:
-      'https://api.discogs.com/users/nijssenmandy89/collectionfields',
+    token: 'jqmlfkjdsflqjfl',
+    tokenSecret: 'qepfioameiopfsdo',
+    // discogsId: 8500180,
+    // username: 'nijssenmandy89',
+    // avatarUrl:
+    //   'https://secure.gravatar.com/avatar/329961882160df9228422bbdee121320?s=500&r=pg&d=mm',
+    // wantsUrl: 'https://api.discogs.com/users/nijssenmandy89/wants',
+    // collectionUrl:
+    //   'https://api.discogs.com/users/nijssenmandy89/collectionfields',
     posts: [],
     channels: [],
     comments: [],
@@ -21,6 +24,7 @@ const initialState: State = {
     ownerId: null,
     private: false,
     parentId: null,
+    posts: []
   },
   authentication: false,
   selected: {

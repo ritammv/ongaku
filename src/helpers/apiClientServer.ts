@@ -17,6 +17,10 @@ const getPublicChannels = (): Promise<Channel[]> => {
   return fetchRequest('/channels/public');
 };
 
+const getChannel = (channelId: string): Promise<Channel[]> => {
+  return fetchRequest(`/channels/${channelId}`);
+};
+
 const createChannel = (userId: string, body: Object) => {
   return fetchRequest(`/channels/${userId}`, {
     method: 'POST',

@@ -3,7 +3,6 @@ import './styles/App.scss';
 import { Route, Switch } from 'react-router-dom';
 import Finalcreatepost from './components/CreatePost/FinalCreatePost/FinalCreatePost';
 import Channel from './components/Channel/Channel';
-import Createpost from './components/CreatePost/createPost';
 
 import Dashboard from './components/Dashboard/Dashboard';
 import Discover from './components/Discover/Discover';
@@ -20,7 +19,6 @@ const App: React.FC = () => {
       <Route exact path="/login" component={Login} />
       <Route exact path="/discover" component={Discover} />
       <Route exact path="/dashboard" component={Dashboard} />
-      <Route exact path="/search" component={Createpost} />
       <Route exact path="/post" component={Postcard} />
       <Route exact path="/create" component={Finalcreatepost} />
       <Route
@@ -32,7 +30,11 @@ const App: React.FC = () => {
       />
 
       <Route exact path="/redux" component={Redux} />
-      <Route exact path="/channels/:name" component={Channel} />
+      <Route
+        exact
+        path="/channels/:name"
+        render={(routeProps) => <Channel name={routeProps.match.params.name} />}
+      />
     </Switch>
   );
 };

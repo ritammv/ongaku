@@ -19,11 +19,13 @@ const Redux: React.FC = () => {
   const handleClick = () => {
     const user: User = {
       id: '2',
-      discogsId: 698523,
+      token: '',
+      tokenSecret: '',
+      // discogsId: 698523,
       username: 'ELIIIIIIIIIJENKINS',
-      avatarUrl: 'newAvatar',
-      wantsUrl: 'newWamts',
-      collectionUrl: 'anotherLink',
+      // avatarUrl: 'newAvatar',
+      // wantsUrl: 'newWamts',
+      // collectionUrl: 'anotherLink',
       posts: [],
       comments: [],
       channels: [],
@@ -42,6 +44,7 @@ const Redux: React.FC = () => {
       ownerId: null,
       private: false,
       parentId: null,
+      posts: []
     };
     setChannel(channel)(dispatch);
   };
@@ -77,7 +80,7 @@ const Redux: React.FC = () => {
       >
         Set Channel
       </button>
-      <div className="render_state">{currStateChannel}</div>
+      <div className="render_state">{currStateChannel.name}</div>
       <button type="button" className="redux_button" onClick={handleClickAuth}>
         Set Auth
       </button>

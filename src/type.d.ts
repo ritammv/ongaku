@@ -64,6 +64,7 @@ interface Channel {
   ownerId: string | null;
   parentId: string | null;
   private: boolean;
+  posts: Post[]
 }
 
 interface PostComment {
@@ -82,11 +83,13 @@ interface Tag {
 
 interface User {
   id: string;
-  discogsId: number;
   username: string;
-  avatarUrl: string;
-  wantsUrl: string;
-  collectionUrl: string;
+  // discogsId: number;
+  // avatarUrl: string;
+  // wantsUrl: string;
+  // collectionUrl: string;
+  token: string;
+  tokenSecret: string;
   posts: Post[];
   channels: Channel[];
   comments: Comment[];
@@ -158,9 +161,9 @@ type OrActionTypes =
   | authenticationAction;
 
 type AllActionTypes = UserAction &
-  isLoadingAction &
-  channelAction &
-  authenticationAction;
+isLoadingAction &
+channelAction &
+authenticationAction;
 
 interface Channel {
   id: string;

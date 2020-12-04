@@ -13,8 +13,9 @@
   opacity: 0;
   transform: translateY(-10vh);
   button {
-    @include button-default;
+    // @include button-default;
     width: 30%;
+    border: none;
   }
 }
 .nav_login {

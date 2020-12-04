@@ -11,11 +11,9 @@ const CommentCard: React.FC<Props>= ({ comment }) => {
   
   const [author, setAuthor] = useState<User>({
     id: 'c42a1eb1-129e-452e-9363-acea5f9b2d7c',
-    discogsId: 0,
     username: 'nijssenmandy89',
-    avatarUrl: '',
-    wantsUrl: '',
-    collectionUrl: '',
+    token:'',
+    tokenSecret: '',
     posts: [],
     channels: [],
     comments: [],

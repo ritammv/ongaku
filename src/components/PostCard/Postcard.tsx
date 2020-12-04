@@ -8,25 +8,26 @@ import * as apiclient from '../../helpers/apiClient';
 import { mockPost } from './mockCard';
 import './Postcard.scss';
 
-// interface Props {
-//   // post: Post
+interface Props {
+  post: Post
+}
 
-// }
-
-const Postcard: React.FC = () => {
+const Postcard: React.FC<Props> = ({ post }) => {
   // TODO pass down post as prop and get username
   // (state or getUser via userId saved on post?)
-  const post: Post = mockPost;
+  // const post: Post = mockPost;
 
   // const [post, setPost] = useState<Post>({})
   const [savePost, setSavePost] = useState<boolean>(false);
   const [author, setAuthor] = useState<User>({
-    id: 'c42a1eb1-129e-452e-9363-acea5f9b2d7c',
-    discogsId: 0,
-    username: 'Manji',
-    avatarUrl: '',
-    wantsUrl: '',
-    collectionUrl: '',
+    id: '7287698b-e92a-4579-ad4d-c5690bc572a0',
+    // discogsId: 0,
+    username: 'Otoko',
+    // avatarUrl: '',
+    // wantsUrl: '',
+    // collectionUrl: '',
+    token:'',
+    tokenSecret: '',
     posts: [],
     channels: [],
     comments: [],
