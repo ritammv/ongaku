@@ -34,6 +34,7 @@ const Createbutton: React.FC<Props> = ({ selected }) => {
                   mr={3}
                   onClick={handleClick}
                   position='fixed'
+                  left='145px'
                 >
                   CREATE
                 </Button>
@@ -52,6 +53,7 @@ const Createbutton: React.FC<Props> = ({ selected }) => {
                 mr={3}
                 disabled={true}
                 position='fixed'
+                left='145px'
                 
               >
                 CREATE
