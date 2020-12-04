@@ -53,13 +53,15 @@ const SearchResult: React.FC<Props> =
           fontWeight='lighter'
           mr={3}
           onClick={() => setSearch([])}
-          position='absolute'
+          position='fixed'
           left='20px'
           
         >
           {'<'}
         </Button> 
-        <Createbutton selected={selected} />
+        <Createbutton
+          selected={selected}
+        />
       </Flex>
     </>
   );

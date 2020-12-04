@@ -63,9 +63,9 @@ const Channel: React.FC<Props> = ({ name }) => {
         </Button>
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
-          <ModalContent backgroundColor="#f0f1ef" h="100%" w="97%">
+          <ModalContent backgroundColor="#f0f1ef" w="97%">
             <ModalCloseButton />
-            <ModalBody overflow="scroll">
+            <ModalBody>
               <CreatePost />
             </ModalBody>
           </ModalContent>

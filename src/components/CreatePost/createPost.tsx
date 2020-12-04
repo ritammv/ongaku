@@ -99,7 +99,7 @@ const CreatePost: React.FC = () => {
         <TabList
           display="flex"
           justifyContent="space-between"
-          mt="45px"
+          mt="20px"
           color="#d3d3d3"
           maxWidth="90vw"
         >
@@ -118,13 +118,15 @@ const CreatePost: React.FC = () => {
 
           <TabPanel 
             overflowX='scroll'
-            minHeight='75vh'
+            minHeight='90vh'
             display='flex'
           >
             <SearchDiscogs selected={selected} setSelected={setSelected} />
           </TabPanel>
 
-          <TabPanel overflowX='scroll'>
+          <TabPanel 
+            overflowX='scroll'
+          >
             <SimpleGrid 
               columns={[collectionColums, null, 2]} 
               spacing='5px'

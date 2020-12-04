@@ -18,8 +18,6 @@ export const setIsLoading = (isLoading: boolean) => {
 
 export const setChannel = (channel: Channel) => {
   const action: ChannelAction = {
-    // export const setChannel = (channel: Channel) => {
-    // const action: channelAction = {
     type: actionTypes.SET_CHANNEL,
     channel,
   };

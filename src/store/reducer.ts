@@ -3,7 +3,7 @@ import * as actionTypes from './actionTypes';
 const initialState: State = {
   user: {
     id: '8ebedf47-a74c-42ca-a31e-50f2d5a34703',
-    username: 'Mandju',
+    username: 'nijssenmandy89',
     token: 'jqmlfkjdsflqjfl',
     tokenSecret: 'qepfioameiopfsdo',
     // discogsId: 8500180,

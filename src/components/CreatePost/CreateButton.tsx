@@ -6,6 +6,7 @@ import { setSelected } from '../../store/actionCreators';
 
 interface Props {
   selected: Release
+
 }
 
 const Createbutton: React.FC<Props> = ({ selected }) => {
@@ -32,8 +33,7 @@ const Createbutton: React.FC<Props> = ({ selected }) => {
                   fontWeight="lighter"
                   mr={3}
                   onClick={handleClick}
-                  position='absolute'
-                  bottom='-20px'
+                  position='fixed'
                 >
                   CREATE
                 </Button>
@@ -51,8 +51,8 @@ const Createbutton: React.FC<Props> = ({ selected }) => {
                 fontWeight="lighter"
                 mr={3}
                 disabled={true}
-                position='absolute'
-                bottom='-20px'
+                position='fixed'
+                
               >
                 CREATE
               </Button>

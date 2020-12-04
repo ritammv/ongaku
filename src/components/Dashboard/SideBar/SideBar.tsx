@@ -47,6 +47,7 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     channel: Channel) => {
     dispatch(actions.setChannel(channel));
+    console.log(dispatch(actions.setChannel(channel)));
     history.push(`/channels/${channel.name}`);
   };
 
