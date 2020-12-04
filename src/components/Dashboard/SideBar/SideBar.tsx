@@ -61,7 +61,7 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
   }, [showSideBar, onOpen]);
 
   useEffect(() => {
-    getUser('8ebedf47-a74c-42ca-a31e-50f2d5a34703').then((user) => {
+    getUser(3294829).then((user) => {
       dispatch(actions.setUser);
       setUserDetails(user);
     });

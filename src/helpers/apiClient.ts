@@ -4,6 +4,18 @@
 
 import { accessToken, key, secret } from '../config';
 
+const { OAuth } = require('oauth');
+
+const oauth = new OAuth(
+  'https://api.discogs.com/oauth/request_token',
+  'https://api.discogs.com/oauth/access_token',
+  'hOqgGkAKtjmfpFYvNhjb',
+  'vgbWmkBoIOkDSxQOeuJFCqIMOBPSuiUf',
+  '1.0A',
+  null,
+  'HMAC-SHA1'
+);
+
 const token = accessToken || 'secret';
 
 const SERVER_URL = 'http://localhost:3001';
@@ -11,9 +23,9 @@ const BASE_URL = 'https://api.discogs.com';
 
 export const fetchRequest = (url: string, options?: object) => {
   return fetch(url, options)
-    .then((res) => (res.status <= 400 ? res : Promise.reject(res)))
-    .then((res) => (res.status !== 204 ? res.json() : res))
-    .catch((err) => console.error(`${err.message} while fetching /${url}`));
+    .then(res => res.status <= 400 ? res : Promise.reject(res))
+    .then(res => res.status !== 204 ? res.json() : res)
+    .catch(err => console.error(`${err.message} while fetching ${url}`));
 };
 
 export const getLists = (username: string, data: string) => {
@@ -33,7 +45,7 @@ export const getData = (
   );
 };
 
-export const savePost = (userId: string, postId: string) => {
+export const savePost = (userId: number, postId: string) => {
   console.log('save', postId);
   return fetchRequest(`${SERVER_URL}/users/${userId}/saved`, {
     method: 'POST',
@@ -45,7 +57,7 @@ export const savePost = (userId: string, postId: string) => {
   });
 };
 
-export const removeSavedPost = (userId: string, postId: string) => {
+export const removeSavedPost = (userId: number, postId: string) => {
   console.log('delete', postId);
   return fetchRequest(`${SERVER_URL}/users/${userId}/saved`, {
     method: 'DELETE',
@@ -57,9 +69,34 @@ export const removeSavedPost = (userId: string, postId: string) => {
   });
 };
 
-export const getUser = (userId: string) => {
+export const getUser = (userId: number) => {
   return fetchRequest(`${SERVER_URL}/users/${userId}/`);
 };
+
+export const checkAuthGetUser = () => {
+  return fetchRequest(`${SERVER_URL}/auth/login/check`, {
+    method: 'GET',
+    credentials: 'include',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true'
+    }
+  });
+};
+
+// export const oauthGet = 
+//   (url: string, userToken: string, userSecret: string) => {
+//     return oauth.get(
+//       url,
+//       userToken,
+//       userSecret,
+//       (e: Error, data: JSON) => {
+//         if (e) console.error(e);
+//         console.log(JSON.parse(data));
+//       }
+//     );
+//   };
 
 export const getPost = (postId: string) => {
   return fetchRequest(`${SERVER_URL}/posts/${postId}/`);
@@ -93,7 +130,7 @@ export const createPost = (
   });
 };
 
-export const createComment = (postId: string, userId: string, body: string) => {
+export const createComment = (postId: string, userId: number, body: string) => {
   const dbComment = {
     postId,
     userId,

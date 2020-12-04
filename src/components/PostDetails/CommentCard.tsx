@@ -10,13 +10,15 @@ interface Props {
 const CommentCard: React.FC<Props>= ({ comment }) => {
   
   const [author, setAuthor] = useState<User>({
-    id: 'c42a1eb1-129e-452e-9363-acea5f9b2d7c',
+    id: 4920,
     username: 'nijssenmandy89',
+    resourceUrl: 'http: hello',
     token:'',
     tokenSecret: '',
     posts: [],
     channels: [],
-    comments: [],
+    createdAt: '42',
+    updatedAt: '3829'
   });
 
   useEffect(() => {

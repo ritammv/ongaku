@@ -1,0 +1,7 @@
+@import "../../../styles/variables.scss";
+.loginbutton {
+  @include button-default;
+  width: 100%;
+  background: $secondary-color;
+  padding: 4% 5%;
+}

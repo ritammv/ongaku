@@ -20,17 +20,15 @@ const Postcard: React.FC<Props> = ({ post }) => {
   // const [post, setPost] = useState<Post>({})
   const [savePost, setSavePost] = useState<boolean>(false);
   const [author, setAuthor] = useState<User>({
-    id: '7287698b-e92a-4579-ad4d-c5690bc572a0',
-    // discogsId: 0,
+    id: 59215829,
     username: 'Otoko',
-    // avatarUrl: '',
-    // wantsUrl: '',
-    // collectionUrl: '',
-    token:'',
+    resourceUrl: 'http:hello',
+    token: '',
     tokenSecret: '',
-    posts: [],
+    createdAt: '',
+    updatedAt: '',
     channels: [],
-    comments: [],
+    posts: [],
   });
 
   const history = useHistory();
@@ -54,14 +52,14 @@ const Postcard: React.FC<Props> = ({ post }) => {
   }
 
   function handleSave() {
-    console.log('toggle saving post');
-    if (!savePost) {
-      apiclient.savePost(author.id, post.id);
-    } else {
-      console.log('delete post from My List');
-      apiclient.removeSavedPost(author.id, post.id);
-    }
-    setSavePost(!savePost);
+    // console.log('toggle saving post');
+    // if (!savePost) {
+    //   apiclient.savePost(author.id, post.id);
+    // } else {
+    //   console.log('delete post from My List');
+    //   apiclient.removeSavedPost(author.id, post.id);
+    // }
+    // setSavePost(!savePost);
   }
 
   return (

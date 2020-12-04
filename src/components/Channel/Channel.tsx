@@ -24,7 +24,11 @@ const Channel: React.FC<Props> = ({ name }) => {
   const [showSideBar, setShowSideBar] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const channel = useSelector<State, Channel>((state) => state.channel);
+  const channels = useSelector<State, Channel[]>(
+    (state) => state.user.channels
+  );
+  // SET THIS TO CHANNEL WHERE STATE IS ACTIVE
+  const [channel, setChannel] = useState(channels[0]);
 
   return (
     <div className="container">

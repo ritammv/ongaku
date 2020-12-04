@@ -13,8 +13,8 @@ export default function Finalcreatepost() {
 
   const selected = useSelector<State, Release >(
     (state: State) => state.selected);
-  const channel = useSelector<State, Channel >(
-    (state: State) => state.channel);
+  const channel = useSelector<State, Channel[] >(
+    (state: State) => state.user.channels);
   const user = useSelector<State, User >(
     (state: State) => state.user);
     
@@ -36,9 +36,9 @@ export default function Finalcreatepost() {
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    apiclient.createPost(channel.id, selected, user, postForm );
-    history.push(`/channels/${channel.name}`);
+    // e.preventDefault();
+    // apiclient.createPost(channel.id, selected, user, postForm );
+    // history.push(`/channels/${channel.name}`);
   }
 
   return (

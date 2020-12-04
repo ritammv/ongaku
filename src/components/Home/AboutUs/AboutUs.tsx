@@ -2,10 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import './AboutUs.scss';
 import { useIsInScroll } from '../../../helpers/isInScroll';
 import { makeFadeInAndSlide } from '../../../helpers/animation';
-import { OnClickRoute } from '../../../helpers/onClickRoute';
+import LoginButton from '../LoginButton/LoginButton';
 
 const AboutUs: React.FC = () => {
-  const handleClick = OnClickRoute();
   const aboutTitleRef = useRef<HTMLDivElement>(null);
   const isInScrollTitle = useIsInScroll(aboutTitleRef);
   const [titleTimeline, setTitleTimeline]
@@ -79,9 +78,14 @@ const AboutUs: React.FC = () => {
           <span>Arigatō </span>
           Rizumu, Carles, Laundry, Mandji, Ji
         </div>
-        <button type="button" className="buttons_join_bottom" onClick={() => handleClick('login')}>
-          Log In With Discogs
-        </button>
+        <div className="buttons_join_bottom">
+          <LoginButton 
+            text="Login With Discogs" 
+            width="60%" 
+            fontSize="1.2rem"
+            styles={true}
+          />
+        </div>
       </div>
     </div>
   );

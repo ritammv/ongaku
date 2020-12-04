@@ -2,7 +2,7 @@
 const comment1: PostComment = {
   id:'2',
   postId: '7',
-  userId: '87b4421a-437e-4ae7-81d7-d8a6dd94dbae',
+  userId: 31421,
   body: 'Sick, I had no clue they were doing an Editors Remix! If it has the same feel as Warped it should be good 🤩',
   createdAt: '2020-12-02 16:11:06.13+01'
 };
@@ -10,7 +10,7 @@ const comment1: PostComment = {
 const comment2: PostComment =  {
   id: '1',
   postId: '7',
-  userId: 'a09364a3-d691-4435-a58b-d9d4b998e865',
+  userId: 525262,
   body: 'Have you heard their remix of Frankenstein by the Editors? I highly recommend to give it a listen',
   createdAt :'2020-12-02 16:11:06.13+01'
 };
@@ -26,7 +26,7 @@ export const mockPost: Post = {
   url: '',
   postTitle: 'Can\'t stop listening',
   body: 'I heard this song on the Monika Kruse Boiler Room Berlin 2016 set and after a little search I found out it was Joyhauser. It is no-nonsense techno and I can recommend to EP to everyone who loves Kruse or Amelie Lens',
-  userId: '3bcdd94b-d460-4d58-8050-c717005c025b',
+  userId: 623632,
   comments: [comment1, comment2],
   tags: [],
   createdAt: '2020-12-02 16:11:06.13+01',

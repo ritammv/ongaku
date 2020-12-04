@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Home.scss';
+import { useSelector } from 'react-redux';
 import Nav from './Nav/Nav';
 import Hero from './Hero/Hero';
 import ChannelsInfo from './ChannelsInfo/ChannelsInfo';
 import AboutUs from './AboutUs/AboutUs';
+import { OnClickRoute } from '../../helpers/onClickRoute';
 
 const Home: React.FC = () => {
+  const isAuthenticated = useSelector((state: State) => state.authentication);
+  const user = useSelector((state: State) => state.user);
+  const navigate = OnClickRoute();
+
+  useEffect(() => {
+    isAuthenticated && user.channels.length ? navigate('dashboard') : navigate('discover');
+  }, [isAuthenticated, navigate]);
   return (
     <>
       <Nav />

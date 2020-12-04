@@ -22,7 +22,10 @@ interface Props {
 
 const Postdetails: React.FC<Props> = ({ postId }) => {
   const user = useSelector<State, User>((state: State) => state.user);
-  const channel = useSelector<State, Channel>((state: State) => state.channel);
+  const channels = useSelector<State, Channel[]>((state: State) => state.user.channels);
+  // change to channel where state is active
+  const [channel, setChannel] = useState(channels[0]);
+
 
   const [post, setPost] = useState<Post>({
     id: 'ff1aa452-6bc5-41e8-ad10-edff8bbf7058',
@@ -36,7 +39,7 @@ const Postdetails: React.FC<Props> = ({ postId }) => {
     postTitle: "Can't stop listening",
     body:
       'I heard this song on the Monika Kruse Boiler Room Berlin 2016 set and after a little search I found out it was Joyhauser. It is no-nonsense techno and I can recommend to EP to everyone who loves Kruse or Amelie Lens',
-    userId: '3bcdd94b-d460-4d58-8050-c717005c025b',
+    userId: 245252,
     comments: [],
     tags: [],
     createdAt: '2020-12-02 16:11:06.13+01',
@@ -46,13 +49,15 @@ const Postdetails: React.FC<Props> = ({ postId }) => {
   const [savePost, setSavePost] = useState<boolean>(false);
   const [commentBody, setCommentBody] = useState<string>('');
   const [author, setAuthor] = useState<User>({
-    id: '7fbe4a6a-2973-4b7f-b20f-5ceeda9e3559',
-    username: 'Manji',
+    id: 4920,
+    username: 'nijssenmandy89',
+    resourceUrl: 'http: hello',
     token:'',
     tokenSecret: '',
     posts: [],
     channels: [],
-    comments: [],
+    createdAt: '42',
+    updatedAt: '3829'
   });
 
   const history = useHistory();

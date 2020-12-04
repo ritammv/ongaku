@@ -53,7 +53,7 @@ interface Post {
   createdAt: string;
   updatedAt: string;
   channelId: string;
-  userId: string;
+  userId: number;
   comments: PostComment[];
   tags: Tag[];
 }
@@ -71,7 +71,7 @@ interface PostComment {
   body: string;
   createdAt: string | number | Date;
   updatedAt?: string;
-  userId: string;
+  userId: number;
   postId: string;
   id: string;
 }
@@ -82,17 +82,15 @@ interface Tag {
 }
 
 interface User {
-  id: string;
-  username: string;
-  // discogsId: number;
-  // avatarUrl: string;
-  // wantsUrl: string;
-  // collectionUrl: string;
-  token: string;
-  tokenSecret: string;
-  posts: Post[];
-  channels: Channel[];
-  comments: Comment[];
+  id: number
+  username: string
+  resourceUrl: string
+  token: string
+  tokenSecret: string
+  channels: Channel[] | []
+  createdAt: string
+  updatedAt: string
+  posts: Posts[] | []
 }
 
 // type UserAction = {
@@ -125,11 +123,10 @@ type UserForRitam = {
 };
 
 type State = {
-  user: User;
-  isLoading: boolean;
-  channel: Channel;
-  authentication: boolean;
-  selected: Release;
+  user: User
+  isLoading: boolean
+  authentication: boolean
+  selected: Release
 };
 
 type UserAction = {

@@ -1,10 +1,14 @@
 import React, { useRef, useState } from 'react';
 import './dashboard.scss';
+// import { useSelector } from 'react-redux';
 import vinyl from '../../assets/vinyl.jpg';
 import SideBar from './SideBar/SideBar';
 import DashboardWelcome from './DashboardWelcome/DashboardWelcome';
 
 const Dashboard: React.FC = () => {
+  // const user = useSelector((state: State) => state.user);
+  const [showModal, setShowModal] = useState(false);
+
   const [showSideBar, setShowSideBar] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
 
