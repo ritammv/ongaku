@@ -30,8 +30,8 @@ const Discover: React.FC = () => {
       subscribeToChannels(user.id, subscribed).then((resp) =>
         resp.forEach(async (channel: { ChannelId: string }) => {
           console.log(channel.ChannelId);
-          getChannel(channel.ChannelId).then((fullChannel: Channel) =>
-            addChannel(fullChannel)
+          getChannel(channel.ChannelId).then((fullChannel: ChannelAndUsers) =>
+            addChannel(fullChannel.channel)
           );
         })
       );

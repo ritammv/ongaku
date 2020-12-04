@@ -17,7 +17,7 @@ const Postcard: React.FC<Props> = ({ post }) => {
   // (state or getUser via userId saved on post?)
   // const post: Post = mockPost;
 
-  // const [post, setPost] = useState<Post>({})
+  const [postComments, setPostComments] = useState<Comment[] | []>([]);
   const [savePost, setSavePost] = useState<boolean>(false);
   const [author, setAuthor] = useState<User>({
     id: 59215829,
@@ -35,31 +35,31 @@ const Postcard: React.FC<Props> = ({ post }) => {
   const date = moment(post.createdAt).format('lll');
 
   useEffect(() => {
-    // async function getPost() {
-    //   const result= apiclient.getPost(postId);
-    //   setPost(await result);
-    // }
-    // getPost();
-    // async function getAuthor() {
-    //   const result= apiclient.getUser(post.userId);
-    //   setAuthor(await result);
-    // }
-    // getAuthor();
-  }, [post.userId]);
+    async function getPost() {
+      const result= apiclient.getPost(post.id);
+      setPostComments(await result);
+    }
+    getPost();
+    async function getAuthor() {
+      const result= apiclient.getUser(post.userId);
+      setAuthor(await result);
+    }
+    getAuthor();
+  }, [post.id, post.userId]);
 
   function handleComments() {
     console.log('toggle the comments');
   }
 
   function handleSave() {
-    // console.log('toggle saving post');
-    // if (!savePost) {
-    //   apiclient.savePost(author.id, post.id);
-    // } else {
-    //   console.log('delete post from My List');
-    //   apiclient.removeSavedPost(author.id, post.id);
-    // }
-    // setSavePost(!savePost);
+    console.log('toggle saving post');
+    if (!savePost) {
+      apiclient.savePost(author.id, post.id);
+    } else {
+      console.log('delete post from My List');
+      apiclient.removeSavedPost(author.id, post.id);
+    }
+    setSavePost(!savePost);
   }
 
   return (
@@ -120,7 +120,13 @@ const Postcard: React.FC<Props> = ({ post }) => {
               icon={<BsChevronDown />}
               onClick={handleComments}
             />
-            {post.comments.length} comments
+            {
+            postComments.length
+              ?
+              `${postComments.length} comments`
+              :
+              '0 comments'
+            } 
           </div>
           <div className="stats_author">
             Posted by <b>{author.username}</b>

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
   useDisclosure,
@@ -13,22 +13,31 @@ import {
 } from '@chakra-ui/react';
 import SideBar from '../Dashboard/SideBar/SideBar';
 import vinyl from '../../assets/vinyl.jpg';
-import CreatePost from '../CreatePost/FinalCreatePost/FinalCreatePost';
+import CreatePost from '../CreatePost/createPost';
 import Postcard from '../PostCard/Postcard';
+import * as ApiClientServer from '../../helpers/apiClientServer';
 
 interface Props {
   name: string;
 }
 
+
 const Channel: React.FC<Props> = ({ name }) => {
   const [showSideBar, setShowSideBar] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const channels = useSelector<State, Channel[]>(
-    (state) => state.user.channels
+  const channel = useSelector<State, Channel>(
+    (state) => state.currChannel
   );
-  // SET THIS TO CHANNEL WHERE STATE IS ACTIVE
-  const [channel, setChannel] = useState(channels[0]);
+
+  const [posts, setPosts] = useState<Post[] | []>([]);
+
+  console.log('channel', channel);
+
+  useEffect(() => {
+    ApiClientServer.getChannel(channel.id)
+      .then((result: ChannelAndUsers) => setPosts(result.channel.posts));
+  }, [channel.id]);
 
   return (
     <div className="container">
@@ -78,11 +87,12 @@ const Channel: React.FC<Props> = ({ name }) => {
         </Modal>
       </Container>
 
-      {!(channel.posts && channel.posts.length) ? (
+      {!(posts && posts.length) ? (
         <Text>Be the first to post</Text>
       ) : (
         <>
-          {channel.posts
+          {
+          posts
             .sort(
               (
                 a: { createdAt: string | number | Date },
@@ -93,7 +103,8 @@ const Channel: React.FC<Props> = ({ name }) => {
             )
             .map((post) => (
               <Postcard key={post.id} post={post} />
-            ))}
+            ))
+}
         </>
       )}
     </div>
