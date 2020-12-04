@@ -16,8 +16,6 @@ import Postdetails from './components/PostDetails/PostDetails';
 const App: React.FC = () => {
   return (
     <Switch>
-      <Route exact path="/search" component={Postcard} />
-      <Route exact path="/create" component={Finalcreatepost} />
       <Route exact path="/" component={Home} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/discover" component={Discover} />

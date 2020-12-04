@@ -22,13 +22,12 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [showModal, setShowModal] = useState(false);
   const [userDetails, setUserDetails] = useState<UserForRitam>({
-    type: '',
     id: 'string',
-    discogsId: 0,
-    username: '',
-    avatarUrl: '',
-    wantsUrl: '',
-    collectionUrl: '',
+    // discogsId: 0,
+    // username: '',
+    // avatarUrl: '',
+    // wantsUrl: '',
+    // collectionUrl: '',
     posts: [],
     channels: [],
     comments: [],

@@ -12,7 +12,11 @@ import {
   Select,
 } from '@chakra-ui/react';
 
-import { createChannel, getChannels } from '../../../helpers/apiClientServer';
+import {
+  createChannel,
+  getPublicChannels,
+  getChannels,
+} from '../../../helpers/apiClientServer';
 
 interface Props {
   showModal: boolean;
@@ -21,7 +25,9 @@ interface Props {
 
 const CreateChannel: React.FC<Props> = ({ showModal, setShowModal }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [channels, setChannels] = useState<Channel[] | null>(null);
+  const [channels, setChannels] = useState<Channel[]>([]);
+  // const [allChannels, setAllChannels] = useState<Channel[]>([]);
+
   const initialState = {
     name: '',
     parentId: '',
@@ -49,6 +55,8 @@ const CreateChannel: React.FC<Props> = ({ showModal, setShowModal }) => {
     // eslint-disable-next-line no-unused-vars
     const { name, isPrivate, parentId } = options;
 
+    // const repeated = allChannels.find((channel) => channel.name === name);
+    // if (repeated) return;
     createChannel('76146c9d-d4da-4ab2-bac7-6bbd94d08a43', options);
     setOptions(initialState);
   };
@@ -62,6 +70,12 @@ const CreateChannel: React.FC<Props> = ({ showModal, setShowModal }) => {
       setChannels(channelsReq);
     });
   }, []);
+
+  // useEffect(() => {
+  //   getPublicChannels().then((publicChannels) => {
+  //     setAllChannels(publicChannels);
+  //   });
+  // }, []);
 
   return (
     <div className="create_channel">
