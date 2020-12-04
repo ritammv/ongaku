@@ -1,9 +1,11 @@
+/* eslint-disable import/no-named-as-default */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
 import './styles/index.scss';
+// eslint-disable-next-line import/no-named-as-default-member
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { store } from './store/store';

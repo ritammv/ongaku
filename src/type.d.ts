@@ -4,7 +4,7 @@ interface Release {
     name: string;
   }[];
   year: number;
-  labels:  {
+  labels: {
     name: string;
   }[];
   title: string;
@@ -15,15 +15,15 @@ interface Release {
 }
 
 interface SearchResult {
-  id: number
-  artist: {name: string},
-  year: number,
-  label: string,
-  title: string,
-  genre: string[],
-  styles: result.styles,
-  resource_url: string,
-  cover_image: string
+  id: number;
+  artist: { name: string };
+  year: number;
+  label: string;
+  title: string;
+  genre: string[];
+  styles: result.styles;
+  resource_url: string;
+  cover_image: string;
 }
 
 interface CreatePostForm {
@@ -35,27 +35,27 @@ interface CreatePostForm {
 }
 
 interface FinalPost {
-  card: Release
-  message_title: string
-  message_body: string
+  card: Release;
+  message_title: string;
+  message_body: string;
 }
 
 interface Post {
-  id: string
-  postTitle: string
-  title: string
-  artist: string
-  label: string
-  year: number
-  thumbnail: string
-  body: string
-  url: string
-  createdAt: string
-  updatedAt: string
-  channelId: string
-  userId: string
-  comments: PostComment[]
-  tags: Tag[]
+  id: string;
+  postTitle: string;
+  title: string;
+  artist: string;
+  label: string;
+  year: number;
+  thumbnail: string;
+  body: string;
+  url: string;
+  createdAt: string;
+  updatedAt: string;
+  channelId: string;
+  userId: number;
+  comments: PostComment[];
+  tags: Tag[];
 }
 
 interface Channel {
@@ -64,20 +64,21 @@ interface Channel {
   ownerId: string | null;
   parentId: string | null;
   private: boolean;
+  posts: Post[]
 }
 
 interface PostComment {
-  body: string
-  createdAt?: string
-  updatedAt?: string
-  userId: string
-  postId: string
-  id: string
+  body: string;
+  createdAt: string | number | Date;
+  updatedAt?: string;
+  userId: number;
+  postId: string;
+  id: string;
 }
 
 interface Tag {
-  id: string
-  name: string
+  id: string;
+  name: string;
 }
 
 interface User {
@@ -89,7 +90,37 @@ interface User {
   channels: Channel[] | []
   createdAt: string
   updatedAt: string
+  posts: Posts[] | []
 }
+
+// type UserAction = {
+//   type: string;
+//   user: User;
+//   id: string
+//   discogsId: number
+//   username: string
+//   avatarUrl: string
+//   wantsUrl: string
+//   collectionUrl: string
+//   posts: Post[]
+//   channels: Channel[]
+//   comments: Comment[]
+// }
+
+type UserForRitam = {
+  // type: string;
+  id: string;
+  // discogsId: number;
+  // username: string;
+  // avatarUrl: string;
+  // wantsUrl: string;
+  // collectionUrl: string;
+  posts: Post[];
+  channels: Channel[];
+  comments: Comment[];
+  token: string;
+  tokenSecret: string;
+};
 
 type State = {
   user: User
@@ -99,34 +130,52 @@ type State = {
 };
 
 type UserAction = {
-  type: string
-  user: User
+  type: string;
+  user: User;
 };
 
 type DispatchType = (args: OrActionTypes) => OrActionTypes;
 
-type isLoadingAction = {
-  type: string
-  isLoading: boolean
+type IsLoadingAction = {
+  type: string;
+  isLoading: boolean;
 };
 
-type channelAction = {
-  type: string
-  channel: Channel
+type ChannelAction = {
+  type: string;
+  channel: Channel;
 };
 
-type authenticationAction = {
-  type: string
-  authenticated: boolean
-};
-
-type SelectAction = {
-  type: string
-  selected: Release | Want | SearchData
+type AuthenticationAction = {
+  type: string;
+  authenticated: boolean;
 };
 
 type OrActionTypes =
-UserAction | isLoadingAction | channelAction | authenticationAction | SelectAction;
+  | UserAction
+  | isLoadingAction
+  | channelAction
+  | authenticationAction;
 
-type AllActionTypes = 
-  UserAction & isLoadingAction & channelAction & authenticationAction & SelectAction;
+type AllActionTypes = UserAction &
+isLoadingAction &
+channelAction &
+authenticationAction;
+
+interface Channel {
+  id: string;
+  name: string;
+  ownerId: string;
+  parentId: string;
+  private: boolean;
+}
+
+interface SelectAction {
+  type: string;
+  selected: Release;
+}
+
+interface ChannelForDb {
+  id: string;
+  name: string;
+}

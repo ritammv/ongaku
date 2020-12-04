@@ -8,7 +8,7 @@
 }
 
 .header {
-  height: 22%;
+  height: 15%;
   border-bottom: 2px solid gray;
   position: relative;
   text-align: right;
@@ -16,15 +16,23 @@
   flex-direction: row;
 }
 
+.channel_title {
+  font-size: 1.5rem;
+  margin-top: 15px;
+  position: relative;
+  left: 35px;
+}
+
 .user_info {
-  height: 140px;
-  width: 150px;
+  height: 110px;
+  width: 110px;
 }
 
 .welcome_user {
   height: 40px;
   position: absolute;
   right: 0;
+  top: 0;
 }
 
 .dashboard_info {
@@ -35,6 +43,10 @@
   align-self: flex-end;
   position: absolute;
   bottom: 0;
+  color: lightgray;
+}
+.dashboard_info h3 {
+  color: gray;
 }
 
 .header h1 {
@@ -49,14 +61,16 @@
   display: flex;
   flex-direction: column;
   padding: 35px;
+  text-align: center;
 }
 
 .welcome_title {
   font-size: 30px;
+  text-align: center;
 }
 
 .button_emoji {
-  font-size: 90px;
+  font-size: 60px;
 }
 
 .ongaku_text {
@@ -99,12 +113,13 @@
   padding: 10px;
   border-bottom: 0.5px solid gray;
   width: 100%;
+  text-align: left;
 }
 
 .search_input {
   background-color: $accent-one;
   border-radius: 12px;
   height: 35px;
-  width: 100%;
+  width: 261.63px;
   padding: 5%;
 }

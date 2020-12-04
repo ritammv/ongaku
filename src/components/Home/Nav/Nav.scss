@@ -12,9 +12,12 @@
   z-index: 3;
   opacity: 0;
   transform: translateY(-10vh);
-  .nav_buttons {
-    @include button-default;
+  // .nav_buttons {
+  //   @include button-default;
+  button {
+    // @include button-default;
     width: 30%;
+    border: none;
   }
 }
 .nav_login {

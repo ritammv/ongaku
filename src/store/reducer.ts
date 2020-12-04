@@ -10,6 +10,7 @@ const initialState: State = {
     createdAt: '2020',
     updatedAt: '1998',
     channels: [],
+    posts: [],
   },
   isLoading: false,
   authentication: false,
@@ -23,7 +24,7 @@ const initialState: State = {
     styles: [],
     url: '',
     image: '',
-  }
+  },
 };
 
 const reducer = (
