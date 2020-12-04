@@ -31,7 +31,7 @@ const Discover: React.FC = () => {
   };
 
   const handleSubmit = () => {
-    subscribeToChannels('76146c9d-d4da-4ab2-bac7-6bbd94d08a43', subscribed);
+    subscribeToChannels('8ebedf47-a74c-42ca-a31e-50f2d5a34703', subscribed);
   };
 
   useEffect(() => {

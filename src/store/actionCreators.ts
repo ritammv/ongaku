@@ -17,6 +17,7 @@ export const setIsLoading = (isLoading: boolean) => {
 };
 
 export const setChannel = (channel: Channel) => {
+  console.log(' in set channel');
   const action: ChannelAction = {
     type: actionTypes.ADD_CHANNELS,
     channel
