@@ -6,25 +6,24 @@ import { setAuthentication, setChannel, setIsLoading, setUser } from '../../stor
 
 const Redux: React.FC = () => {
 
-  const currStateUser = useSelector((state: State) => state.user);
+  // const currStateUser = useSelector((state: State) => state.user);
   const currStateLoading = useSelector((state: State) => state.isLoading);
-  const currStateChannel = useSelector((state: State) => state.channel);
+  // const currStateChannel = useSelector((state: State) => state.channel);
   const currStateAuth = useSelector((state: State) => state.authentication);
   const dispatch: Dispatch = useDispatch();
 
   const handleClick = () => {
-    const user: User = {
-      id: '2',
-      discogsId: 698523,
-      username: 'ELIIIIIIIIIJENKINS',
-      avatarUrl: 'newAvatar',
-      wantsUrl: 'newWamts',
-      collectionUrl: 'anotherLink',
-      posts: [],
-      channels: [],
-      comments: [],
-    };
-    setUser(user)(dispatch);
+    // const user: User = {
+    //   id: 3,
+    //   username: 'eliiiii',
+    //   resourceUrl: 'www.ongaku.com',
+    //   token: 'this is my token',
+    //   tokenSecret: 'secret',
+    //   createdAt: '1994',
+    //   updatedAt: '2020',
+    //   channels: ['techno']
+    // };
+    // setUser(user)(dispatch);
   };
 
   const handleClickLoading = () => {
@@ -51,12 +50,12 @@ const Redux: React.FC = () => {
       <button type="button" className="redux_button" onClick={handleClick}>
         Set User
       </button>
-      <div className="render_state">
+      {/* <div className="render_state">
         {
           Object.values(currStateUser)
             .map((value) => <h1 key={value}>{value}</h1>)
         }
-      </div>
+      </div> */}
       <button type="button" className="redux_button" onClick={handleClickLoading}>
         Set Loading
       </button>
@@ -66,9 +65,9 @@ const Redux: React.FC = () => {
       <button type="button" className="redux_button" onClick={handleClickChannel}>
         Set Channel
       </button>
-      <div className="render_state">
+      {/* <div className="render_state">
         {currStateChannel}
-      </div>
+      </div> */}
       <button type="button" className="redux_button" onClick={handleClickAuth}>
         Set Auth
       </button>

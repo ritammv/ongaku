@@ -12,7 +12,7 @@
   z-index: 3;
   opacity: 0;
   transform: translateY(-10vh);
-  button {
+  .nav_buttons {
     @include button-default;
     width: 30%;
   }

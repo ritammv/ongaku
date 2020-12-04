@@ -81,21 +81,19 @@ interface Tag {
 }
 
 interface User {
-  id: string
-  discogsId: number
+  id: number
   username: string
-  avatarUrl: string
-  wantsUrl: string
-  collectionUrl: string
-  posts: Post[]
-  channels: Channel[]
-  comments: Comment[]
+  resourceUrl: string
+  token: string
+  tokenSecret: string
+  channels: Channel[] | []
+  createdAt: string
+  updatedAt: string
 }
 
 type State = {
   user: User
   isLoading: boolean
-  channel: Channel
   authentication: boolean
   selected: Release
 };
@@ -114,7 +112,7 @@ type isLoadingAction = {
 
 type channelAction = {
   type: string
-  channel:Channel
+  channel: Channel
 };
 
 type authenticationAction = {

@@ -5,8 +5,9 @@ import { heroAnimation } from '../../../helpers/animation';
 import Logo from '../../Logo/Logo';
 import DownArrow from '../../../assets/arrow-down.svg';
 import { OnClickRoute } from '../../../helpers/onClickRoute';
+import LoginButton from '../LoginButton/LoginButton';
 
-const Home: React.FC = () => {
+const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const containerIsInScroll = useIsInScroll(containerRef, true);
   const [heroTimeline, setHeroTimeline] = useState<GSAPTimeline | null>(null);
@@ -48,9 +49,14 @@ const Home: React.FC = () => {
           </div>
         </div>
         <div className="hero_buttons">
-          <button type="button" className="buttons_join" onClick={() => handleClick('login')}>
-            Log In With Discogs
-          </button>
+          <div className="buttons_join">
+            <LoginButton 
+              text="Login With Discogs" 
+              width="80%" 
+              fontSize="1.4rem"
+              styles={true}
+            />
+          </div>
           <button type="button" className="buttons_channels" onClick={() => handleClick('dashboard')}>
             Channels
           </button>
@@ -63,4 +69,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default Hero;

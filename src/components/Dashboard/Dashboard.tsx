@@ -11,11 +11,13 @@ import {
 
 import React, { useRef, useState } from 'react';
 import './dashboard.scss';
+// import { useSelector } from 'react-redux';
 import vinyl from '../../assets/vinyl.jpg';
 import CreateChannel from './CreateChannel/CreateChannel';
 
 const Dashboard: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  // const user = useSelector((state: State) => state.user);
 
   const [showModal, setShowModal] = useState(false);
 

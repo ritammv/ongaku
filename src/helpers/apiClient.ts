@@ -4,16 +4,28 @@
 
 import { accessToken, key, secret } from '../config';
 
+const { OAuth } = require('oauth');
+
+const oauth = new OAuth(
+  'https://api.discogs.com/oauth/request_token',
+  'https://api.discogs.com/oauth/access_token',
+  'hOqgGkAKtjmfpFYvNhjb',
+  'vgbWmkBoIOkDSxQOeuJFCqIMOBPSuiUf',
+  '1.0A',
+  null,
+  'HMAC-SHA1'
+);
+
 const token = accessToken || 'secret';
 
 const SERVER_URL = 'http://localhost:3001';
 const BASE_URL = 'https://api.discogs.com';
 
-export const fetchRequest = (url:string, options?: object) => {
+export const fetchRequest = (url: string, options?: object) => {
   return fetch(url, options)
     .then(res => res.status <= 400 ? res : Promise.reject(res))
     .then(res => res.status !== 204 ? res.json() : res)
-    .catch(err => console.error(`${err.message} while fetching /${url}`));
+    .catch(err => console.error(`${err.message} while fetching ${url}`));
 };
 
 
@@ -22,11 +34,11 @@ export const getLists = (username: string, data: string) => {
 };
 
 export const getData = (
-  query: string, 
-  artist: string, 
-  title:string, 
-  label:string,
-  year:string) => {
+  query: string,
+  artist: string,
+  title: string,
+  label: string,
+  year: string) => {
   return fetchRequest(`https://api.discogs.com/database/search?q=${query}&title=${title}&artist=${artist}&label=${label}&year=${year}&key=${key}&secret=${secret}`, {});
 };
 
@@ -44,3 +56,28 @@ export const savePost = (userId: string, postId: string) => {
 export const getUser = (userId: string) => {
   return fetchRequest(`${SERVER_URL}/users/${userId}/`);
 };
+
+export const checkAuthGetUser = () => {
+  return fetchRequest(`${SERVER_URL}/auth/login/check`, {
+    method: 'GET',
+    credentials: 'include',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true'
+    }
+  });
+};
+
+// export const oauthGet = 
+//   (url: string, userToken: string, userSecret: string) => {
+//     return oauth.get(
+//       url,
+//       userToken,
+//       userSecret,
+//       (e: Error, data: JSON) => {
+//         if (e) console.error(e);
+//         console.log(JSON.parse(data));
+//       }
+//     );
+//   };
