@@ -13,8 +13,12 @@ const Home: React.FC = () => {
   const navigate = OnClickRoute();
 
   useEffect(() => {
-    isAuthenticated && user.channels.length ? navigate('dashboard') : navigate('discover');
-  }, [isAuthenticated, navigate]);
+    if (isAuthenticated && user.channels) {
+      console.log('check');
+      if (user.channels.length) navigate('dashboard');
+      else navigate('discover');
+    }
+  }, [isAuthenticated, navigate, user]);
   return (
     <>
       <Nav />

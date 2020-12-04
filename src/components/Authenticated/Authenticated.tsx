@@ -11,18 +11,25 @@ const Authenticated: React.FC = () => {
   const navigate = OnClickRoute();
 
   useEffect(() => {
-    const intervalId = setInterval(() => randomCircles('.container_animation_circles'), 600);
-    return () => { clearInterval(intervalId); };
+    const intervalId = setInterval(
+      () => randomCircles('.container_animation_circles'),
+      600
+    );
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
 
   useEffect(() => {
-    const toNavigate = user.channels.length ? 'dashboard' : 'discover';
-    isAuthenticated && slideInAndUp(
-      'login_container_logo',
-      'authenticated_welcome',
-      () => navigate(toNavigate)
-    );
-  }, [isAuthenticated, navigate]);
+    if (isAuthenticated && user.channels) {
+      console.log(user);
+      const toNavigate = user.channels.length ? 'dashboard' : 'discover';
+      isAuthenticated &&
+        slideInAndUp('login_container_logo', 'authenticated_welcome', () =>
+          navigate(toNavigate)
+        );
+    }
+  }, [isAuthenticated, navigate, user]);
 
   return (
     <>
@@ -31,13 +38,13 @@ const Authenticated: React.FC = () => {
           <div className="login_container_logo">
             <Logo
               widthPx={180}
-              innerColor='#fefefe'
-              outerColor='#0f0e0e'
-              textColor='#065dc2'
+              innerColor="#fefefe"
+              outerColor="#0f0e0e"
+              textColor="#065dc2"
             />
           </div>
         </div>
-        <div className="authenticated_welcome">  Welcome to Ongaku </div>
+        <div className="authenticated_welcome"> Welcome to Ongaku </div>
       </div>
     </>
   );
