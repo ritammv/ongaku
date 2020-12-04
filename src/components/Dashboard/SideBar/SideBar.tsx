@@ -22,33 +22,45 @@ interface Props {
 }
 
 const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
+  const channel = useSelector((state: State) => state.currChannel);
+  const userDetails = useSelector((state: State) => state.user);
+
   const history = useHistory();
   const dispatch = useDispatch();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [showModal, setShowModal] = useState(false);
-  const [userDetails, setUserDetails] = useState<UserForRitam>({
-    // type: '',
-    id: '',
-    // discogsId: 0,
-    // username: '',
-    // avatarUrl: '',
-    // wantsUrl: '',
-    // collectionUrl: '',
-    posts: [],
-    channels: [],
-    comments: [],
-    token: '',
-    tokenSecret: '',
-  });
+  // const [userDetails, setUserDetails] = useState<UserForRitam>({
+  //   // type: '',
+  //   id: '',
+  //   // discogsId: 0,
+  //   // username: '',
+  //   // avatarUrl: '',
+  //   // wantsUrl: '',
+  //   // collectionUrl: '',
+  //   posts: [],
+  //   channels: [],
+  //   comments: [],
+  //   token: '',
+  //   tokenSecret: '',
+  // });
+
+  useEffect(() => {
+    if (userDetails.id) {
+      getUser(userDetails.id).then((user) => {
+        console.log(user);
+        actions.setUser(user)(dispatch);
+        console.log(userDetails);
+      });
+    }
+  }, [dispatch, userDetails.id]);
 
   const changePage = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    channel: Channel
+    newChannel: Channel
   ) => {
-    dispatch(actions.setChannel(channel));
-    console.log(dispatch(actions.setChannel(channel)));
-    history.push(`/channels/${channel.name}`);
+    dispatch(actions.addCurrChannel(newChannel));
+    history.push(`/channels/${newChannel.name}`);
   };
 
   const handleClose = () => {
@@ -60,12 +72,12 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
     if (showSideBar) onOpen();
   }, [showSideBar, onOpen]);
 
-  useEffect(() => {
-    getUser(3294829).then((user) => {
-      dispatch(actions.setUser);
-      setUserDetails(user);
-    });
-  }, [dispatch]);
+  // useEffect(() => {
+  //   getUser(3294829).then((user) => {
+  //     dispatch(actions.setUser);
+  //     setUserDetails(user);
+  //   });
+  // }, [dispatch]);
 
   return (
     <div>
@@ -89,35 +101,36 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                 <h3 className="public_title">Public</h3>
                 <ul className="public_channel_list">
                   {userDetails.channels &&
-                    userDetails.channels.map(
-                      (channel) =>
-                        channel.private === false && (
+                    (userDetails.channels as Channel[]).map((chan: Channel) => {
+                      return (
+                        !chan.private && (
                           <button
                             type="button"
                             className="channel_item"
-                            key={channel.id}
-                            onClick={(e) => changePage(e, channel)}
+                            key={chan.id}
+                            onClick={(e) => changePage(e, chan)}
                           >
-                            #{channel.name}
+                            #{chan.name}
                           </button>
                         )
-                    )}
+                      );
+                    })}
                 </ul>
               </div>
               <div className="drawer_private">
                 <h3 className="public_title">Private</h3>
                 <ul className="private_channel_list">
                   {userDetails.channels &&
-                    userDetails.channels.map(
-                      (channel) =>
-                        channel.private === true && (
+                    (userDetails.channels as Channel[]).map(
+                      (chan: Channel) =>
+                        chan.private === true && (
                           <button
                             type="button"
-                            key={channel.id}
+                            key={chan.id}
                             className="channel_item"
-                            onClick={(e) => changePage(e, channel)}
+                            onClick={(e) => changePage(e, chan)}
                           >
-                            #{channel.name}
+                            #{chan.name}
                           </button>
                         )
                     )}

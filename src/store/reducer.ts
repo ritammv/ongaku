@@ -2,29 +2,20 @@ import * as actionTypes from './actionTypes';
 
 const initialState: State = {
   user: {
-    id: 12,
-    username: 'mandy',
-    resourceUrl: 'www.belgium.com',
-    token: 'this is mandys token',
-    tokenSecret: 'secret in belgian',
-    createdAt: '2020',
-    updatedAt: '1998',
-    channels: [],
+    username: '',
     posts: [],
+    channels: [],
+    token: '',
+    tokenSecret: '',
+    id: 0,
+    resourceUrl: '',
+    createdAt: '',
+    updatedAt: '',
   },
+  currChannel: {},
   isLoading: false,
   authentication: false,
-  selected: {
-    id: 0,
-    artists: [],
-    year: 0,
-    labels: [],
-    title: '',
-    genres: [],
-    styles: [],
-    url: '',
-    image: '',
-  },
+  selected: {},
 };
 
 const reducer = (
@@ -36,7 +27,7 @@ const reducer = (
       return { ...state, user: action.user };
     case actionTypes.SET_ISLOADING:
       return { ...state, isLoading: action.isLoading };
-    case actionTypes.ADD_CHANNELS: {
+    case actionTypes.ADD_USER_CHANNEL: {
       const channels = [...state.user.channels, action.channel];
       const updatedUser = { ...state.user };
       updatedUser.channels = channels;
@@ -46,6 +37,8 @@ const reducer = (
       return { ...state, authentication: action.authenticated };
     case actionTypes.SET_SELECTED:
       return { ...state, selected: action.selected };
+    case actionTypes.ADD_CURR_CHANNEL:
+      return { ...state, currChannel: action.channel };
   }
   return state;
 };

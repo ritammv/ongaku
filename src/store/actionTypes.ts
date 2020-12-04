@@ -1,5 +1,6 @@
 export const SET_USER = 'SET_USER';
 export const SET_ISLOADING = 'SET_ISLOADING';
-export const ADD_CHANNELS = 'SET_CHANNEL';
+export const ADD_USER_CHANNEL = 'ADD_USER_CHANNEL';
+export const ADD_CURR_CHANNEL = 'ADD_CURR_CHANNEL';
 export const SET_AUTHENTICATION = 'SET_AUTHENTICATION';
-export const SET_SELECTED= 'SET_SELECTED';
+export const SET_SELECTED = 'SET_SELECTED';
