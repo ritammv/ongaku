@@ -12,25 +12,29 @@ const initialState: State = {
     createdAt: '',
     updatedAt: '',
   },
-  currChannel:  {
-    'id': 'd0ed9e2c-6b9f-4b34-9695-5d7cb007eee4',
-    'name': "Ambient 90's",
-    'ownerId': '247835',
-    'private': true,
-    'parentId': null,
-    'posts': [],
+  currChannel: {
+    id: 'd0ed9e2c-6b9f-4b34-9695-5d7cb007eee4',
+    name: "Ambient 90's",
+    ownerId: '247835',
+    private: true,
+    parentId: null,
+    posts: [],
   },
   isLoading: false,
   authentication: false,
   selected: {
     id: 1,
-    artists: [{
-      name: 'hello'
-    }],
+    artists: [
+      {
+        name: 'hello',
+      },
+    ],
     year: 2014,
-    labels: [{
-      name: 'Terminal'
-    }],
+    labels: [
+      {
+        name: 'Terminal',
+      },
+    ],
     title: 'pls work',
     genres: ['Experimental'],
     styles: [],
@@ -60,6 +64,14 @@ const reducer = (
       return { ...state, selected: action.selected };
     case actionTypes.ADD_CURR_CHANNEL:
       return { ...state, currChannel: action.channel };
+    case actionTypes.USER_UNSUBSCRIBE_CHANNEL: {
+      const channels = [...state.user.channels].filter(
+        (channel) => channel.id !== action.channel.id
+      );
+      const updatedUser = { ...state.user };
+      updatedUser.channels = channels;
+      return { ...state, user: updatedUser };
+    }
   }
   return state;
 };

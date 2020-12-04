@@ -1,6 +1,5 @@
 const BASE_URL = 'http://localhost:3001';
 
-
 function fetchRequest(path: string, options?: Object) {
   return fetch(BASE_URL + path, options)
     .then((res) => (res.status < 400 ? res : Promise.reject()))
@@ -44,10 +43,22 @@ const subscribeToChannels = (userId: number, channels: ChannelForDb[]) => {
   });
 };
 
+const unsubscribeFromChannel = (userId: number, channel: Channel) => {
+  return fetchRequest(`/users/${userId}/channels`, {
+    method: 'DELETE',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(channel),
+  });
+};
+
 export {
   getChannels,
   getChannel,
   createChannel,
   subscribeToChannels,
   getPublicChannels,
+  unsubscribeFromChannel,
 };

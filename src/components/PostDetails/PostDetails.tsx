@@ -22,10 +22,11 @@ interface Props {
 
 const Postdetails: React.FC<Props> = ({ postId }) => {
   const user = useSelector<State, User>((state: State) => state.user);
-  const channels = useSelector<State, Channel[]>((state: State) => state.user.channels);
+  const channels = useSelector<State, Channel[]>(
+    (state: State) => state.user.channels
+  );
   // change to channel where state is active
   const [channel, setChannel] = useState(channels[0]);
-
 
   const [post, setPost] = useState<Post>({
     id: 'ff1aa452-6bc5-41e8-ad10-edff8bbf7058',
@@ -52,12 +53,12 @@ const Postdetails: React.FC<Props> = ({ postId }) => {
     id: 4920,
     username: 'nijssenmandy89',
     resourceUrl: 'http: hello',
-    token:'',
+    token: '',
     tokenSecret: '',
     posts: [],
     channels: [],
     createdAt: '42',
-    updatedAt: '3829'
+    updatedAt: '3829',
   });
 
   const history = useHistory();
@@ -66,13 +67,12 @@ const Postdetails: React.FC<Props> = ({ postId }) => {
   useEffect(() => {
     async function getCurrentPost() {
       const result = await apiclient.getPost(postId);
-      result.comments = result.comments
-        .sort((
-          a: { createdAt: string | number | Date; }, 
-          b: { createdAt: string | number | Date; }) =>
-          new Date(b.createdAt).valueOf() -
-          new Date(a.createdAt).valueOf()
-        );
+      result.comments = result.comments.sort(
+        (
+          a: { createdAt: string | number | Date },
+          b: { createdAt: string | number | Date }
+        ) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf()
+      );
       setPost(result);
     }
     getCurrentPost();
@@ -180,10 +180,9 @@ const Postdetails: React.FC<Props> = ({ postId }) => {
 
       {post.comments && post.comments.length ? (
         <>
-          {post.comments
-            .map((comment) => (
-              <CommentCard key={comment.id} comment={comment} />
-            ))}
+          {post.comments.map((comment) => (
+            <CommentCard key={comment.id} comment={comment} />
+          ))}
         </>
       ) : (
         <Text>Be the first to comment</Text>

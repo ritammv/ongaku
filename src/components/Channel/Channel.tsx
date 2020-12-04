@@ -21,22 +21,20 @@ interface Props {
   name: string;
 }
 
-
 const Channel: React.FC<Props> = ({ name }) => {
   const [showSideBar, setShowSideBar] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const channel = useSelector<State, Channel>(
-    (state) => state.currChannel
-  );
+  const channel = useSelector<State, Channel>((state) => state.currChannel);
 
   const [posts, setPosts] = useState<Post[] | []>([]);
 
   console.log('channel', channel);
 
   useEffect(() => {
-    ApiClientServer.getChannel(channel.id)
-      .then((result: ChannelAndUsers) => setPosts(result.channel.posts));
+    ApiClientServer.getChannel(channel.id).then((result: ChannelAndUsers) => {
+      setPosts(result.channel.posts);
+    });
   }, [channel.id]);
 
   return (
@@ -91,8 +89,7 @@ const Channel: React.FC<Props> = ({ name }) => {
         <Text>Be the first to post</Text>
       ) : (
         <>
-          {
-          posts
+          {posts
             .sort(
               (
                 a: { createdAt: string | number | Date },
@@ -103,8 +100,7 @@ const Channel: React.FC<Props> = ({ name }) => {
             )
             .map((post) => (
               <Postcard key={post.id} post={post} />
-            ))
-}
+            ))}
         </>
       )}
     </div>

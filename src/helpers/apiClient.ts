@@ -2,7 +2,7 @@
 // const BASE_URL: string = process.env.SERVER_PORT || 'http://localhost:4002';
 // require('dotenv').config();
 
-import { accessToken, key, secret } from '../config';
+// import { accessToken, key, secret } from '../config';
 
 const { OAuth } = require('oauth');
 
@@ -16,20 +16,33 @@ const oauth = new OAuth(
   'HMAC-SHA1'
 );
 
-const token = accessToken || 'secret';
+// const token = accessToken || 'secret';
 
 const SERVER_URL = 'http://localhost:3001';
 const BASE_URL = 'https://api.discogs.com';
 
 export const fetchRequest = (url: string, options?: object) => {
   return fetch(url, options)
-    .then(res => res.status <= 400 ? res : Promise.reject(res))
-    .then(res => res.status !== 204 ? res.json() : res)
-    .catch(err => console.error(`${err.message} while fetching ${url}`));
+    .then((res) => (res.status <= 400 ? res : Promise.reject(res)))
+    .then((res) => (res.status !== 204 ? res.json() : res))
+    .catch((err) => console.error(`${err.message} while fetching ${url}`));
 };
 
-export const getLists = (username: string, data: string) => {
-  return fetchRequest(`${BASE_URL}/users/${username}/${data}?token=${token}`);
+export const getLists = (
+  username: string,
+  data: string,
+  userToken: string,
+  userTokenSecret: string
+) => {
+  return fetchRequest(`${BASE_URL}/users/${username}/${data}`, {
+    method: 'GET',
+    mode: 'cors',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Discogs key=${userToken}, secret=${userTokenSecret}`,
+    },
+  });
 };
 
 export const getData = (
@@ -37,11 +50,21 @@ export const getData = (
   artist: string,
   title: string,
   label: string,
-  year: string
+  year: string,
+  userToken: string,
+  userTokenSecret: string
 ) => {
   return fetchRequest(
-    `https://api.discogs.com/database/search?q=${query}&title=${title}&artist=${artist}&label=${label}&year=${year}&key=${key}&secret=${secret}`,
-    {}
+    `https://api.discogs.com/database/search?q=${query}&title=${title}&artist=${artist}&label=${label}&year=${year}`,
+    {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Discogs key=${userToken}, secret=${userTokenSecret}`,
+      },
+    }
   );
 };
 
@@ -80,12 +103,12 @@ export const checkAuthGetUser = () => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Credentials': 'true'
-    }
+      'Access-Control-Allow-Credentials': 'true',
+    },
   });
 };
 
-// export const oauthGet = 
+// export const oauthGet =
 //   (url: string, userToken: string, userSecret: string) => {
 //     return oauth.get(
 //       url,

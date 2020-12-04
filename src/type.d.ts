@@ -82,8 +82,8 @@ interface Tag {
 }
 
 interface ChannelAndUsers {
-  users: number
-  channel: Channel
+  users: number;
+  channel: Channel;
 }
 
 interface User {
@@ -164,9 +164,9 @@ type OrActionTypes =
   | authenticationAction;
 
 type AllActionTypes = UserAction &
-isLoadingAction &
-channelAction &
-authenticationAction;
+  isLoadingAction &
+  channelAction &
+  authenticationAction;
 
 interface Channel {
   id: string;

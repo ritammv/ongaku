@@ -5,7 +5,7 @@ import {
   TabPanels,
   Tab,
   TabPanel,
-  SimpleGrid
+  SimpleGrid,
 } from '@chakra-ui/react';
 import { useSelector, useDispatch } from 'react-redux';
 import Tile from './Tile/Tile';
@@ -15,7 +15,6 @@ import SearchDiscogs from './SearchDiscogs';
 import Createbutton from './CreateButton';
 
 const CreatePost: React.FC = () => {
- 
   const [collection, setCollection] = useState<Release[]>([]);
   const [wantList, setWantList] = useState<Release[]>([]);
   const [selected, setSelected] = useState<Release>({
@@ -31,12 +30,10 @@ const CreatePost: React.FC = () => {
   });
   const dispatch = useDispatch();
   const user = useSelector<State, User>((state) => state.user);
-  const isLoading = useSelector<State, boolean>(
-    (state) => state.isLoading
-  );
+  const isLoading = useSelector<State, boolean>((state) => state.isLoading);
   useEffect(() => {
     dispatch(actions.setIsLoading(true));
-    getLists(user.username, 'collection')
+    getLists(user.username, 'collection', user.token, user.tokenSecret)
       .then((data) =>
         setCollection(
           [...data.releases]
@@ -50,27 +47,29 @@ const CreatePost: React.FC = () => {
               genres: release.genres,
               styles: release.styles,
               url: release.resource_url,
-              image: release.huge_thumb
+              image: release.huge_thumb,
             }))
         )
       )
       .then(() => dispatch(actions.setIsLoading(false)));
-    getLists(user.username, 'wants')
+    getLists(user.username, 'wants', user.token, user.tokenSecret)
       .then((data) =>
-        setWantList([...data.wants]
-          .map((want) => want.basic_information)
-          .map((want) => ({
-            id: want.id,
-            artists: want.artists,
-            year: want.year,
-            labels: want.labels,
-            title: want.title,
-            genres: want.genres,
-            styles: want.styles,
-            url: want.resource_url,
-            image: want.cover_image
-          }))
-        ))
+        setWantList(
+          [...data.wants]
+            .map((want) => want.basic_information)
+            .map((want) => ({
+              id: want.id,
+              artists: want.artists,
+              year: want.year,
+              labels: want.labels,
+              title: want.title,
+              genres: want.genres,
+              styles: want.styles,
+              url: want.resource_url,
+              image: want.cover_image,
+            }))
+        )
+      )
       .then(() => dispatch(actions.setIsLoading(false)));
     setSelected({
       id: 0,
@@ -83,9 +82,9 @@ const CreatePost: React.FC = () => {
       url: '',
       image: '',
     });
-  }, [dispatch, user.username]);
-  const collectionColums: number = Math.floor(collection.length/3 +1);
-  const wantColums: number = Math.floor(wantList.length/3 +1);
+  }, [dispatch, user.username, user.token, user.tokenSecret]);
+  const collectionColums: number = Math.floor(collection.length / 3 + 1);
+  const wantColums: number = Math.floor(wantList.length / 3 + 1);
   return (
     <>
       <Tabs>
@@ -107,20 +106,11 @@ const CreatePost: React.FC = () => {
           </Tab>
         </TabList>
         <TabPanels>
-          <TabPanel
-            overflowX='scroll'
-            minHeight='90vh'
-            display='flex'
-          >
+          <TabPanel overflowX="scroll" minHeight="90vh" display="flex">
             <SearchDiscogs selected={selected} setSelected={setSelected} />
           </TabPanel>
-          <TabPanel
-            overflowX='scroll'
-          >
-            <SimpleGrid
-              columns={[collectionColums, null, 2]}
-              spacing='5px'
-            >
+          <TabPanel overflowX="scroll">
+            <SimpleGrid columns={[collectionColums, null, 2]} spacing="5px">
               {collection.map((release) => {
                 return (
                   <Tile
@@ -134,11 +124,8 @@ const CreatePost: React.FC = () => {
             </SimpleGrid>
             <Createbutton selected={selected} />
           </TabPanel>
-          <TabPanel overflowX='scroll'>
-            <SimpleGrid
-              columns={[wantColums, null, 2]}
-              spacing='5px'
-            >
+          <TabPanel overflowX="scroll">
+            <SimpleGrid columns={[wantColums, null, 2]} spacing="5px">
               {wantList.map((want) => {
                 return (
                   <Tile
