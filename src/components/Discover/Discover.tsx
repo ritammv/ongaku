@@ -3,7 +3,6 @@ import './discover.scss';
 import gsap from 'gsap';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-
 import GenreTags from './GenreTags/GenreTags';
 import {
   getChannels,
