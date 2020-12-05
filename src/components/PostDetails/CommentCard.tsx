@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
+import { IconButton } from '@chakra-ui/react';
+import { MdDelete } from 'react-icons/md';
 import * as apiclient from '../../helpers/apiClient';
 import '../PostCard/Postcard.scss';
 
 interface Props {
-  comment: PostComment
+  comment: PostComment;
+  deleteComment: (commentId: string) => void;
 }
 
-const CommentCard: React.FC<Props>= ({ comment }) => {
+const CommentCard: React.FC<Props>= ({ comment, deleteComment }) => {
   
   const [author, setAuthor] = useState<User>({
     id: 4920,
@@ -36,9 +39,25 @@ const CommentCard: React.FC<Props>= ({ comment }) => {
       <div className='comment_body' key={comment.id}>
         <div className="comment_header">
           <p>{author.username}</p>
-          <p>{moment(comment.createdAt).format('lll')}</p>
+          <p>{moment(comment.createdAt).startOf('day').fromNow()}</p>
+          {
+            author.id === comment.userId
+              ?
+                <IconButton 
+                  m='0'
+                  size='sm' 
+                  aria-label="Search database" 
+                  icon={<MdDelete />}
+                  backgroundColor='inherit'
+                  onClick={() => deleteComment(comment.id)}
+                />
+              :
+              null 
+          }
         </div> 
-        {comment.body}
+        <div className="comment_body">
+          {comment.body}
+        </div>
       </div>
 
     

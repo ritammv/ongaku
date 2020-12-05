@@ -7,8 +7,8 @@ import { BsFillBookmarksFill, BsChevronDown } from 'react-icons/bs';
 import { HiOutlinePlus } from 'react-icons/hi';
 import * as apiclient from '../../helpers/apiClient';
 import CommentCard from '../PostDetails/CommentCard';
-import * as actions from '../../store/actionCreators';
-import { mockPost } from './mockCard';
+// import * as actions from '../../store/actionCreators';
+// import { mockPost } from './mockCard';
 import './Postcard.scss';
 
 interface Props {
@@ -18,8 +18,8 @@ interface Props {
 
 const Postcard: React.FC<Props> = ({ post }) => {
 
-  const dispatch = useDispatch();
-  const isLoading = useSelector<State, boolean>((state) => state.isLoading);
+  // const dispatch = useDispatch();
+  // const isLoading = useSelector<State, boolean>((state) => state.isLoading);
   const user = useSelector<State, User>((state) => state.user);
 
   const [postComments, setPostComments] = useState<PostComment[] | []>([]);
@@ -65,12 +65,21 @@ const Postcard: React.FC<Props> = ({ post }) => {
 
   function postComment(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log('commenting');
     apiclient
       .createComment(post.id, user.id, commentBody)
       .then((newComment) => {
         setCommentBody('');
-        setPostComments((prev) => {console.log('PREV', prev, 'New COMMENT', newComment); return [newComment, ...prev];});
+        setPostComments((prev) => {return [newComment, ...prev];});
+      });
+  }
+
+  function deleteComment(commentId: string) {
+    console.log('delete comment');
+    apiclient
+      .deleteComment(post.id, commentId)
+      .then(() => {
+        setPostComments((prev) => 
+          postComments.filter((com) => com.id !== commentId));
       });
   }
 
@@ -79,8 +88,7 @@ const Postcard: React.FC<Props> = ({ post }) => {
   }
 
   function handleChange(
-    e: React.ChangeEvent<HTMLTextAreaElement>,
-    name: string
+    e: React.ChangeEvent<HTMLTextAreaElement>
   ) {
     const target = e.target as HTMLTextAreaElement;
     setCommentBody(target.value);
@@ -94,6 +102,8 @@ const Postcard: React.FC<Props> = ({ post }) => {
     }
     setSavePost(!savePost);
   }
+
+  console.log(user);
 
   return (
     <Container
@@ -189,7 +199,7 @@ const Postcard: React.FC<Props> = ({ post }) => {
                   Comment as <span className="comment_username">{user.username}</span>
                 </Text>
                 <Textarea
-                  onChange={(e) => handleChange(e, 'comment')}
+                  onChange={(e) => handleChange(e)}
                   name="comment"
                   value={commentBody}
                   placeholder="Share your thoughts"
@@ -204,7 +214,11 @@ const Postcard: React.FC<Props> = ({ post }) => {
                   <>
                     {(postComments as PostComment[])
                       .map((comment) => (
-                        <CommentCard key={comment.id} comment={comment} />
+                        <CommentCard 
+                          key={comment.id} 
+                          comment={comment} 
+                          deleteComment={deleteComment}
+                        />
                       ))}
                   </>
                 : 

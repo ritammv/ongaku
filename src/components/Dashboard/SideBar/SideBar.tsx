@@ -123,11 +123,10 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                   onChange={(e, newValue: Channel | null) => {
                     setValue(newValue);
                   }}
-                  id="size-small-standard"
-                  size="small"
+                  id="size-small-standard"      
                   options={allChannels}
                   getOptionLabel={(option) => option.name}
-                  style={{ width: '81%', border: 'none' }}
+                  style={{ width: '100%', border: 'none', padding:'10%' }}
                   renderInput={(params) =>
                     <TextField
                       {...params}

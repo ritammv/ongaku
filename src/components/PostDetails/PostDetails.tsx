@@ -71,6 +71,16 @@ const Postdetails: React.FC<Props> = ({ postId }) => {
     getAuthor();
   }, [postId, post.userId]);
 
+  // function deleteComment(commentId: string) {
+  //   console.log('delete comment');
+  //   apiclient
+  //     .deleteComment(post.id, commentId)
+  //     .then(() => {
+  //       setPostComments((prev) => 
+  //         postComments.filter((com) => com.id !== commentId));
+  //     });
+  // }
+
   // useEffect(() => {
   //   function getCurrentPost() {
   //     apiclient.getPost(postId)
@@ -131,7 +141,8 @@ const Postdetails: React.FC<Props> = ({ postId }) => {
   return (
 
     <Container w="90%" display="flex" flexDir="column" marginY="1.5rem">
-      {
+      Post Detail page
+      {/* {
         !isLoading
           ?
             <div>LOADING</div>
@@ -205,14 +216,18 @@ const Postdetails: React.FC<Props> = ({ postId }) => {
                 <>
                   {post.comments
                     .map((comment) => (
-                      <CommentCard key={comment.id} comment={comment} />
+                      <CommentCard 
+                        key={comment.id} 
+                        comment={comment}
+                        deleteComment={deleteComment}
+                      />
                     ))}
                 </>
               ) : (
                 <Text>Be the first to comment</Text>
               )}
             </>
-    }
+    } */}
     </Container>
       
   );
