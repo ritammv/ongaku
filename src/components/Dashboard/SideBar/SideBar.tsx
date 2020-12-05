@@ -59,7 +59,6 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
   ) => {
     unsubscribeFromChannel(userDetails.id, newChannel);
     dispatch(actions.unsubscribeChannel(newChannel));
-    console.log(userDetails);
   };
 
   useEffect(() => {
@@ -101,7 +100,9 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                           <div key={chan.id}>
                             <button
                               type="button"
-                              className="channel_item"
+                              className={`channel_item ${
+                                chan.name === channel.name ? 'active' : ''
+                              }`}
                               onClick={(e) => changePage(e, chan)}
                             >
                               #{chan.name}
@@ -129,7 +130,9 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                           <div key={chan.id}>
                             <button
                               type="button"
-                              className="channel_item"
+                              className={`channel_item ${
+                                chan.name === channel.name ? 'active' : ''
+                              }`}
                               onClick={(e) => changePage(e, chan)}
                             >
                               #{chan.name}

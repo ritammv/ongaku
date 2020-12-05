@@ -116,6 +116,10 @@
   text-align: left;
 }
 
+.channel_item.active {
+  color: $accent-three;
+}
+
 .search_input {
   background-color: $accent-one;
   border-radius: 12px;
