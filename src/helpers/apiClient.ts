@@ -153,15 +153,15 @@ export const createPost = (
   });
 };
 
-export const deletePost = (postId: string, commentId: string) => {
+export const deletePost = (postId: string, userId: number) => {
   console.log('delete', postId);
-  return fetchRequest(`${SERVER_URL}/posts/${postId}/comment/${commentId}`, {
+  return fetchRequest(`${SERVER_URL}/posts/${postId}`, {
     method: 'DELETE',
     mode: 'cors',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ postId, commentId }),
+    body: JSON.stringify({ postId, userId }),
   });
 };
 
@@ -181,14 +181,15 @@ export const createComment = (postId: string, userId: number, body: string) => {
   });
 };
 
-export const deleteComment = (postId: string, commentId: string) => {
-  console.log('DEL POSTID', postId, 'DEL COMMENTID', commentId);
-  return fetchRequest(`${SERVER_URL}/posts/${postId}/comment/${commentId}`, {
+export const deleteComment = (postId: string, commentId: string, 
+  userId: number) => {
+  return fetchRequest(`${SERVER_URL}/posts/${postId}/comment`, {
     method: 'DELETE',
     mode: 'cors',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ postId, commentId }),
+    body: JSON.stringify({ userId, commentId }),
   });
 };
+

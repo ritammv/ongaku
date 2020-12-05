@@ -7,7 +7,7 @@ import '../PostCard/Postcard.scss';
 
 interface Props {
   comment: PostComment;
-  deleteComment: (commentId: string) => void;
+  deleteComment: (commentId: string, commentAuthor: number) => void;
 }
 
 const CommentCard: React.FC<Props>= ({ comment, deleteComment }) => {
@@ -39,7 +39,7 @@ const CommentCard: React.FC<Props>= ({ comment, deleteComment }) => {
       <div className='comment_body' key={comment.id}>
         <div className="comment_header">
           <p>{author.username}</p>
-          <p>{moment(comment.createdAt).startOf('day').fromNow()}</p>
+          <p>{moment(comment.createdAt).format('lll')}</p>
           {
             author.id === comment.userId
               ?
@@ -49,7 +49,7 @@ const CommentCard: React.FC<Props>= ({ comment, deleteComment }) => {
                   aria-label="Search database" 
                   icon={<MdDelete />}
                   backgroundColor='inherit'
-                  onClick={() => deleteComment(comment.id)}
+                  onClick={() => deleteComment(comment.id, comment.userId)}
                 />
               :
               null 

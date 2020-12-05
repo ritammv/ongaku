@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import { BsFillBookmarksFill, BsChevronDown } from 'react-icons/bs';
 import { HiOutlinePlus } from 'react-icons/hi';
+import { MdDelete } from 'react-icons/md';
 import * as apiclient from '../../helpers/apiClient';
 import CommentCard from '../PostDetails/CommentCard';
 // import * as actions from '../../store/actionCreators';
@@ -13,10 +14,11 @@ import './Postcard.scss';
 
 interface Props {
   post: Post
+  deletePost: (postId: string, commentAuthor: number) => void;
 }
 
 
-const Postcard: React.FC<Props> = ({ post }) => {
+const Postcard: React.FC<Props> = ({ post, deletePost }) => {
 
   // const dispatch = useDispatch();
   // const isLoading = useSelector<State, boolean>((state) => state.isLoading);
@@ -73,10 +75,10 @@ const Postcard: React.FC<Props> = ({ post }) => {
       });
   }
 
-  function deleteComment(commentId: string) {
-    console.log('delete comment');
+
+  function deleteComment(commentId: string, commentAuthor: number) {
     apiclient
-      .deleteComment(post.id, commentId)
+      .deleteComment(post.id, commentId, commentAuthor)
       .then(() => {
         setPostComments((prev) => 
           postComments.filter((com) => com.id !== commentId));
@@ -102,8 +104,6 @@ const Postcard: React.FC<Props> = ({ post }) => {
     }
     setSavePost(!savePost);
   }
-
-  console.log(user);
 
   return (
     <Container
@@ -152,7 +152,17 @@ const Postcard: React.FC<Props> = ({ post }) => {
         </div>
 
         <div className="message_content">
-          <div className="message_title">{post.postTitle}</div>
+          <div className="postcard-header">
+            <div className="message_title">{post.postTitle}</div>
+            <IconButton 
+              size="sm"
+              aria-label="delete post"
+              icon={<MdDelete />}
+              backgroundColor='inherit'
+              onClick={() => deletePost(post.id, post.userId)}
+            />
+
+          </div>
           {
             isShowingComments
               ?

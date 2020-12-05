@@ -28,6 +28,7 @@
 
 .message_title {
   font-weight: 600;
+  width: 70%;
   margin-bottom: 5px;
 }
 
@@ -87,4 +88,11 @@ img .vinyl_channel {
     color: rgba(6, 93, 194, 0.6);
     margin-bottom: 5px;
   }
+}
+
+.postcard_header {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  background-color: red;
 }

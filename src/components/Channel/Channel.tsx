@@ -18,6 +18,7 @@ import vinyl from '../../assets/vinyl.jpg';
 import CreatePost from '../CreatePost/createPost';
 import Postcard from '../PostCard/Postcard';
 import * as ApiClientServer from '../../helpers/apiClientServer';
+import * as apiclient from '../../helpers/apiClient';
 
 interface Props {
   name: string;
@@ -31,8 +32,6 @@ const Channel: React.FC<Props> = ({ name }) => {
 
   const [posts, setPosts] = useState<Post[] | []>([]);
 
-  // console.log('channel', channel);
-
   useEffect(() => {
     if (channel.id) {
       ApiClientServer.getChannel(channel.id).then((result: ChannelAndUsers) => {
@@ -41,6 +40,16 @@ const Channel: React.FC<Props> = ({ name }) => {
       });
     }
   }, [channel.id]);
+
+
+  function deletePost(postId: string, userId: number) {
+    console.log('deleting post');
+    apiclient.deletePost(postId, userId)
+      .then(() => {
+        setPosts((prev) => 
+          prev.filter((p) => p.id !== postId));
+      });
+  }
 
   return (
     <div className="container">
@@ -106,7 +115,7 @@ const Channel: React.FC<Props> = ({ name }) => {
                 new Date(a.createdAt).valueOf()
             )
             .map((post) => (
-              <Postcard key={post.id} post={post} />
+              <Postcard key={post.id} post={post} deletePost={deletePost} />
             ))
 }
         </Container>
