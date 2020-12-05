@@ -25,6 +25,11 @@ interface Props {
   setShowSideBar: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+type Event =
+  | React.MouseEvent<HTMLButtonElement, MouseEvent>
+  | React.MouseEvent<HTMLDivElement, MouseEvent>
+  | React.FormEvent<HTMLFormElement>;
+
 const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
   const channel = useSelector((state: State) => state.currChannel);
   const userDetails = useSelector((state: State) => state.user);
@@ -36,12 +41,12 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [allChannels, setAllChannels] = useState<Channel[]>([]);
   const [value, setValue] = useState<Channel | null>({
-    'id': 'f8d71201-8a5f-4cd5-9989-46242eb4b49c',
-    'name': 'Electronic',
-    'ownerId': null,
-    'private': false,
-    'parentId': null,
-    posts: []
+    id: 'f8d71201-8a5f-4cd5-9989-46242eb4b49c',
+    name: 'Electronic',
+    ownerId: null,
+    private: false,
+    parentId: null,
+    posts: [],
   });
   const [searchResult, setSearchResult] = useState<string>('');
 
@@ -50,25 +55,19 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
       getUser(userDetails.id).then((user) => {
         actions.setUser(user)(dispatch);
       });
-    }  
+    }
   }, []);
 
   useEffect(() => {
-    apiClientServer.getPublicChannels()
-      .then((result) => {
-        setAllChannels(result);
-      });
+    apiClientServer.getPublicChannels().then((result) => {
+      setAllChannels(result);
+    });
   }, []);
 
-  const changePage = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent> 
-    | React.MouseEvent<HTMLDivElement, MouseEvent>
-    | React.FormEvent<HTMLFormElement>,
-    newChannel: Channel
-  ) => {
+  const changePage = (e: Event, newChannel: Channel) => {
+    onClose();
     dispatch(actions.addCurrChannel(newChannel));
     history.push(`/channels/${newChannel.name}`);
-    onClose();
   };
 
   const handleClose = () => {
@@ -97,17 +96,16 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
   //   setSearchResult(newSearch);
   // };
 
-  const handleClickAutocomplete = (
-    e: React.FormEvent<HTMLFormElement>) => {
+  const handleClickAutocomplete = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const channelToChange= allChannels
-      .filter((chan) => chan.name.toLowerCase() === searchResult.toLowerCase());
+    const channelToChange = allChannels.filter(
+      (chan) => chan.name.toLowerCase() === searchResult.toLowerCase()
+    );
 
     if (channelToChange[0] !== undefined) {
       changePage(e, channelToChange[0]);
-    } 
+    }
   };
-
 
   return (
     <div>
@@ -119,30 +117,30 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
             <DrawerBody>
               <div className="drawer_channel">Channels</div>
 
-              <form 
+              <form
                 onSubmit={(e) => handleClickAutocomplete(e)}
                 className="drawer_search"
               >
                 <Autocomplete
                   inputValue={searchResult}
                   onInputChange={(e, newInput) => {
-                    console.log(newInput);
                     setSearchResult(newInput);
                   }}
                   value={value}
                   onChange={(e, newValue: Channel | null) => {
                     setValue(newValue);
                   }}
-                  id="size-small-standard"      
+                  id="size-small-standard"
                   options={allChannels}
                   getOptionLabel={(option) => option.name}
-                  style={{ width: '100%', border: 'none', padding:'10%' }}
-                  renderInput={(params) =>
+                  style={{ width: '100%', border: 'none', padding: '10%' }}
+                  renderInput={(params) => (
                     <TextField
                       {...params}
-                      placeholder='Search for a Channel'
+                      placeholder="Search for a Channel"
                       // onChange={(e) => handleChange(e)}
-                    />}
+                    />
+                  )}
                 />
               </form>
 

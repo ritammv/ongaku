@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import { IconButton,
+import {
+  IconButton,
   useDisclosure,
   Button,
   Container,
@@ -28,19 +29,24 @@ const Channel: React.FC<Props> = ({ name }) => {
   const btnRef = useRef<HTMLButtonElement>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const channel = useSelector<State, Channel>((state) => state.currChannel);
-
   const [posts, setPosts] = useState<Post[] | []>([]);
 
   // console.log('channel', channel);
 
   useEffect(() => {
+    console.log(channel);
+
     if (channel.id) {
       ApiClientServer.getChannel(channel.id).then((result: ChannelAndUsers) => {
+        console.log('allo');
+
+        console.log(result);
+
         setPosts(result.channel.posts);
         onClose();
       });
     }
-  }, [channel.id]);
+  }, []);
 
   return (
     <div className="container">
@@ -48,12 +54,12 @@ const Channel: React.FC<Props> = ({ name }) => {
         <img src={vinyl} alt="vinyl_image" />
         <div className="channel_title">@{name.toUpperCase()}</div>
         <div className="welcome_user">
-          <IconButton 
-            className='button_emoji'
-            aria-label="burger-icon" 
-            backgroundColor='inherit'
-            size='lg'
-            icon={<GiHamburgerMenu />} 
+          <IconButton
+            className="button_emoji"
+            aria-label="burger-icon"
+            backgroundColor="inherit"
+            size="lg"
+            icon={<GiHamburgerMenu />}
             type="button"
             ref={btnRef}
             onClick={() => {
@@ -74,8 +80,8 @@ const Channel: React.FC<Props> = ({ name }) => {
           marginY="1rem"
           textTransform="uppercase"
           className="genre_tag_button"
-          position='fixed'
-          top='90px'
+          position="fixed"
+          top="90px"
           onClick={onOpen}
         >
           + Create Post
@@ -94,9 +100,8 @@ const Channel: React.FC<Props> = ({ name }) => {
       {!(posts && posts.length) ? (
         <Text>Be the first to post</Text>
       ) : (
-        <Container position='relative' top='150px'>
-          {
-          posts
+        <Container position="relative" top="150px">
+          {posts
             .sort(
               (
                 a: { createdAt: string | number | Date },
@@ -107,8 +112,7 @@ const Channel: React.FC<Props> = ({ name }) => {
             )
             .map((post) => (
               <Postcard key={post.id} post={post} />
-            ))
-}
+            ))}
         </Container>
       )}
     </div>
