@@ -165,7 +165,11 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
           </DrawerContent>
         </DrawerOverlay>
       </Drawer>
-      <CreateChannel setShowModal={setShowModal} showModal={showModal} />
+      <CreateChannel
+        closeChannels={onClose}
+        setShowModal={setShowModal}
+        showModal={showModal}
+      />
     </div>
   );
 };

@@ -29,12 +29,15 @@ const Channel: React.FC<Props> = ({ name }) => {
 
   const [posts, setPosts] = useState<Post[] | []>([]);
 
-  console.log('channel', channel);
+  // console.log('channel', channel);
 
   useEffect(() => {
-    ApiClientServer.getChannel(channel.id).then((result: ChannelAndUsers) => {
-      setPosts(result.channel.posts);
-    });
+    if (channel.id) {
+      ApiClientServer.getChannel(channel.id).then((result: ChannelAndUsers) => {
+        setPosts(result.channel.posts);
+        onClose();
+      });
+    }
   }, [channel.id]);
 
   return (

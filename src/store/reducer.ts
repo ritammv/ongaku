@@ -13,9 +13,9 @@ const initialState: State = {
     updatedAt: '',
   },
   currChannel: {
-    id: 'd0ed9e2c-6b9f-4b34-9695-5d7cb007eee4',
-    name: "Ambient 90's",
-    ownerId: '247835',
+    id: '',
+    name: '',
+    ownerId: '',
     private: true,
     parentId: null,
     posts: [],
@@ -26,17 +26,17 @@ const initialState: State = {
     id: 1,
     artists: [
       {
-        name: 'hello',
+        name: '',
       },
     ],
     year: 2014,
     labels: [
       {
-        name: 'Terminal',
+        name: '',
       },
     ],
-    title: 'pls work',
-    genres: ['Experimental'],
+    title: '',
+    genres: [''],
     styles: [],
     url: '',
     image: '',
@@ -53,6 +53,13 @@ const reducer = (
     case actionTypes.SET_ISLOADING:
       return { ...state, isLoading: action.isLoading };
     case actionTypes.ADD_USER_CHANNEL: {
+      if (
+        state.user.channels.find(
+          (channel) => channel.name === action.channel.name
+        )
+      ) {
+        return state;
+      }
       const channels = [...state.user.channels, action.channel];
       const updatedUser = { ...state.user };
       updatedUser.channels = channels;
