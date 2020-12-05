@@ -153,6 +153,18 @@ export const createPost = (
   });
 };
 
+export const deletePost = (postId: string, commentId: string) => {
+  console.log('delete', postId);
+  return fetchRequest(`${SERVER_URL}/posts/${postId}/comment/${commentId}`, {
+    method: 'DELETE',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ postId, commentId }),
+  });
+};
+
 export const createComment = (postId: string, userId: number, body: string) => {
   const dbComment = {
     postId,
@@ -166,5 +178,17 @@ export const createComment = (postId: string, userId: number, body: string) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(dbComment),
+  });
+};
+
+export const deleteComment = (postId: string, commentId: string) => {
+  console.log('DEL POSTID', postId, 'DEL COMMENTID', commentId);
+  return fetchRequest(`${SERVER_URL}/posts/${postId}/comment/${commentId}`, {
+    method: 'DELETE',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ postId, commentId }),
   });
 };

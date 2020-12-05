@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import {
+import { GiHamburgerMenu } from 'react-icons/gi';
+import { IconButton,
   useDisclosure,
   Button,
   Container,
@@ -11,6 +12,7 @@ import {
   ModalCloseButton,
   Text,
 } from '@chakra-ui/react';
+
 import SideBar from '../Dashboard/SideBar/SideBar';
 import vinyl from '../../assets/vinyl.jpg';
 import CreatePost from '../CreatePost/createPost';
@@ -42,29 +44,28 @@ const Channel: React.FC<Props> = ({ name }) => {
 
   return (
     <div className="container">
-      <div className="header">
-        <div className="user_info">
-          {' '}
-          <img src={vinyl} alt="vinyl_image" />
-        </div>
-        <div className="channel_title">#{name.toUpperCase()}</div>
+      <nav className="header">
+        <img src={vinyl} alt="vinyl_image" />
+        <div className="channel_title">@{name.toUpperCase()}</div>
         <div className="welcome_user">
-          <button
-            className="button_emoji"
+          <IconButton 
+            className='button_emoji'
+            aria-label="burger-icon" 
+            backgroundColor='inherit'
+            size='lg'
+            icon={<GiHamburgerMenu />} 
             type="button"
             ref={btnRef}
             onClick={() => {
               setShowSideBar((state) => !state);
             }}
-          >
-            +
-          </button>
+          />
         </div>
         <div className="dashboard_info">
           <h3>2098 Members</h3> <h3>1320 Posts</h3>
         </div>
         <SideBar setShowSideBar={setShowSideBar} showSideBar={showSideBar} />
-      </div>
+      </nav>
 
       <Container display="flex" justifyContent="center">
         <Button
@@ -73,6 +74,8 @@ const Channel: React.FC<Props> = ({ name }) => {
           marginY="1rem"
           textTransform="uppercase"
           className="genre_tag_button"
+          position='fixed'
+          top='90px'
           onClick={onOpen}
         >
           + Create Post
@@ -91,8 +94,9 @@ const Channel: React.FC<Props> = ({ name }) => {
       {!(posts && posts.length) ? (
         <Text>Be the first to post</Text>
       ) : (
-        <>
-          {posts
+        <Container position='relative' top='150px'>
+          {
+          posts
             .sort(
               (
                 a: { createdAt: string | number | Date },
@@ -103,8 +107,9 @@ const Channel: React.FC<Props> = ({ name }) => {
             )
             .map((post) => (
               <Postcard key={post.id} post={post} />
-            ))}
-        </>
+            ))
+}
+        </Container>
       )}
     </div>
   );

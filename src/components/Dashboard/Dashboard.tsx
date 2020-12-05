@@ -1,4 +1,6 @@
 import React, { useRef, useState } from 'react';
+import { IconButton, Container } from '@chakra-ui/react';
+import { GiHamburgerMenu } from 'react-icons/gi';
 import './dashboard.scss';
 import { useSelector } from 'react-redux';
 import vinyl from '../../assets/vinyl.jpg';
@@ -46,30 +48,30 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="container">
-      <div className="header">
-        <div className="user_info">
-          {' '}
-          <img src={vinyl} alt="vinyl_image" />
-        </div>
+      <nav className="header">
+        <img src={vinyl} alt="vinyl_image" />
         <div className="welcome_user">
-          <button
+          <IconButton
             className="button_emoji"
+            aria-label="burger-icon"
+            backgroundColor="inherit"
+            size="lg"
+            icon={<GiHamburgerMenu />}
             type="button"
             ref={btnRef}
             onClick={() => {
               setShowSideBar((state) => !state);
             }}
-          >
-            +
-          </button>
+          />
         </div>
         <div className="dashboard_info">
           <h3>2098 Members</h3> <h3>13209 Posts</h3>
         </div>
         <SideBar setShowSideBar={setShowSideBar} showSideBar={showSideBar} />
-      </div>
-
-      <DashboardWelcome />
+      </nav>
+      <Container position="relative" top="110px">
+        <DashboardWelcome />
+      </Container>
     </div>
   );
 };

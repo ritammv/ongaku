@@ -20,7 +20,7 @@ const initialState: State = {
     parentId: null,
     posts: [],
   },
-  isLoading: false,
+  isLoading: true,
   authentication: false,
   selected: {
     id: 1,

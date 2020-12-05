@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import {
   useDisclosure,
   Drawer,
@@ -10,9 +12,10 @@ import {
   DrawerOverlay,
   DrawerCloseButton,
   DrawerContent,
-  Input,
+  Text,
 } from '@chakra-ui/react';
 import * as actions from '../../../store/actionCreators';
+import * as apiClientServer from '../../../helpers/apiClientServer';
 import CreateChannel from '../CreateChannel/CreateChannel';
 import { getUser } from '../../../helpers/apiClient';
 import { unsubscribeFromChannel } from '../../../helpers/apiClientServer';
@@ -30,18 +33,37 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
   const dispatch = useDispatch();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [allChannels, setAllChannels] = useState<Channel[]>([]);
+  const [value, setValue] = useState<Channel | null>({
+    'id': 'f8d71201-8a5f-4cd5-9989-46242eb4b49c',
+    'name': 'Electronic',
+    'ownerId': null,
+    'private': false,
+    'parentId': null,
+    posts: []
+  });
+  const [searchResult, setSearchResult] = useState<string>('');
 
   useEffect(() => {
     if (userDetails.id) {
       getUser(userDetails.id).then((user) => {
         actions.setUser(user)(dispatch);
       });
-    }
-  }, [dispatch, userDetails.id]);
+    }  
+  }, []);
+
+  useEffect(() => {
+    apiClientServer.getPublicChannels()
+      .then((result) => {
+        setAllChannels(result);
+      });
+  }, []);
 
   const changePage = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent> 
+    | React.MouseEvent<HTMLDivElement, MouseEvent>
+    | React.FormEvent<HTMLFormElement>,
     newChannel: Channel
   ) => {
     dispatch(actions.addCurrChannel(newChannel));
@@ -66,12 +88,26 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
     if (showSideBar) onOpen();
   }, [showSideBar, onOpen]);
 
-  // useEffect(() => {
-  //   getUser(3294829).then((user) => {
-  //     dispatch(actions.setUser);
-  //     setUserDetails(user);
-  //   });
-  // }, [dispatch]);
+  // const handleChange = (
+  //   e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  //   | React.ChangeEvent<{}>) => {
+  //   const target = e.target as HTMLTextAreaElement ;
+  //   const newSearch = target.value;
+  //   console.log('new search', newSearch);
+  //   setSearchResult(newSearch);
+  // };
+
+  const handleClickAutocomplete = (
+    e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const channelToChange= allChannels
+      .filter((chan) => chan.name.toLowerCase() === searchResult.toLowerCase());
+
+    if (channelToChange[0] !== undefined) {
+      changePage(e, channelToChange[0]);
+    } 
+  };
+
 
   return (
     <div>
@@ -83,11 +119,30 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
             <DrawerBody>
               <div className="drawer_channel">Channels</div>
 
-              <form>
-                <Input
-                  className="search_input"
-                  placeholder="Search a channel"
-                  variant="filled"
+              <form 
+                onSubmit={(e) => handleClickAutocomplete(e)}
+                className="drawer_search"
+              >
+                <Autocomplete
+                  inputValue={searchResult}
+                  onInputChange={(e, newInput) => {
+                    console.log(newInput);
+                    setSearchResult(newInput);
+                  }}
+                  value={value}
+                  onChange={(e, newValue: Channel | null) => {
+                    setValue(newValue);
+                  }}
+                  id="size-small-standard"      
+                  options={allChannels}
+                  getOptionLabel={(option) => option.name}
+                  style={{ width: '100%', border: 'none', padding:'10%' }}
+                  renderInput={(params) =>
+                    <TextField
+                      {...params}
+                      placeholder='Search for a Channel'
+                      // onChange={(e) => handleChange(e)}
+                    />}
                 />
               </form>
 
