@@ -1,7 +1,7 @@
 const BASE_URL = 'http://localhost:3001';
 
 function fetchRequest(path: string, options?: Object) {
-  return fetch(BASE_URL + path, options)
+  return fetch(path, options)
     .then((res) => (res.status < 400 ? res : Promise.reject()))
     .then((res) => (res.status !== 204 ? res.json() : res))
     .catch((err) => {
@@ -10,19 +10,19 @@ function fetchRequest(path: string, options?: Object) {
 }
 
 const getChannels = (): Promise<Channel[]> => {
-  return fetchRequest('/channels/default');
+  return fetchRequest(`${BASE_URL}/channels/default`);
 };
 
 const getPublicChannels = (): Promise<Channel[]> => {
-  return fetchRequest('/channels/public');
+  return fetchRequest(`${BASE_URL}/channels/public`);
 };
 
 const getChannel = (channelId: string): Promise<ChannelAndUsers> => {
-  return fetchRequest(`/channels/${channelId}`);
+  return fetchRequest(`${BASE_URL}/channels/${channelId}`);
 };
 
 const createChannel = (userId: number, body: Object) => {
-  return fetchRequest(`/channels/users/${userId}`, {
+  return fetchRequest(`${BASE_URL}/channels/users/${userId}`, {
     method: 'POST',
     mode: 'cors',
     headers: {
@@ -33,7 +33,7 @@ const createChannel = (userId: number, body: Object) => {
 };
 
 const subscribeToChannels = (userId: number, channels: ChannelForDb[]) => {
-  return fetchRequest(`/users/${userId}/channels`, {
+  return fetchRequest(`${BASE_URL}/users/${userId}/channels`, {
     method: 'POST',
     mode: 'cors',
     headers: {
@@ -44,7 +44,7 @@ const subscribeToChannels = (userId: number, channels: ChannelForDb[]) => {
 };
 
 const unsubscribeFromChannel = (userId: number, channel: Channel) => {
-  return fetchRequest(`/users/${userId}/channels`, {
+  return fetchRequest(`${BASE_URL}/users/${userId}/channels`, {
     method: 'DELETE',
     mode: 'cors',
     headers: {
@@ -55,7 +55,7 @@ const unsubscribeFromChannel = (userId: number, channel: Channel) => {
 };
 
 const getFromDiscogs = (url: string, token: string, tokenSecret: string) => {
-  return fetchRequest('/discogs/get', {
+  return fetchRequest(`${BASE_URL}/discogs/get`, {
     method: 'POST',
     mode: 'cors',
     headers: {
@@ -72,7 +72,7 @@ const postToDiscogs = (
   postBody: string,
   postContentType: string
 ) => {
-  return fetchRequest('/discogs/post', {
+  return fetchRequest(`${BASE_URL}/discogs/post`, {
     method: 'POST',
     mode: 'cors',
     headers: {
@@ -95,7 +95,7 @@ const putToDiscogs = (
   postBody: string,
   postContentType: string
 ) => {
-  return fetchRequest('/discogs/put', {
+  return fetchRequest(`${BASE_URL}/discogs/put`, {
     method: 'POST',
     mode: 'cors',
     headers: {
@@ -111,7 +111,7 @@ const putToDiscogs = (
   });
 };
 const deleteFromDiscogs = (url: string, token: string, tokenSecret: string) => {
-  return fetchRequest('/discogs/delete', {
+  return fetchRequest(`${BASE_URL}/discogs/delete`, {
     method: 'POST',
     mode: 'cors',
     headers: {
