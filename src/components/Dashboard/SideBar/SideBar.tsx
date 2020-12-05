@@ -46,6 +46,7 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
   ) => {
     dispatch(actions.addCurrChannel(newChannel));
     history.push(`/channels/${newChannel.name}`);
+    onClose();
   };
 
   const handleClose = () => {

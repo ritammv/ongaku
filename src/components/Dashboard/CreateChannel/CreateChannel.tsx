@@ -58,23 +58,19 @@ const CreateChannel: React.FC<Props> = ({
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    // eslint-disable-next-line no-unused-vars
-    // const { name, isPrivate, parentId } = options;
-
-    // console.log(options);
-
-    createChannel(user.id, options).then((newChannel) => {
-      dispatch(actions.addChannel(newChannel));
-      navigate(`channels/${newChannel.name}`);
-      onClose();
-      closeChannels();
-    });
-    setOptions({
-      name: '',
-      parentId: '',
-      isPrivate: false,
-    });
+    if (options) {
+      createChannel(user.id, options).then((newChannel) => {
+        dispatch(actions.addChannel(newChannel));
+        navigate(`channels/${newChannel.name}`);
+        onClose();
+        closeChannels();
+      });
+      setOptions({
+        name: '',
+        parentId: '',
+        isPrivate: false,
+      });
+    }
   };
 
   useEffect(() => {
