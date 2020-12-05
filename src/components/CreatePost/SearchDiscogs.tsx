@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Input, Stack, Button } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
-import { getData } from '../../helpers/apiClient';
+import { getData } from '../../helpers/apiClientServer';
 import SearchResult from './SearchResult';
 
 // eslint-disable-next-line max-len

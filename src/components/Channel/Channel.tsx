@@ -18,7 +18,7 @@ import SideBar from '../Dashboard/SideBar/SideBar';
 import vinyl from '../../assets/vinyl.jpg';
 import CreatePost from '../CreatePost/createPost';
 import Postcard from '../PostCard/Postcard';
-import * as ApiClientServer from '../../helpers/apiClientServer';
+import { getChannel } from '../../helpers/apiClientServer';
 
 interface Props {
   name: string;
@@ -34,14 +34,8 @@ const Channel: React.FC<Props> = ({ name }) => {
   // console.log('channel', channel);
 
   useEffect(() => {
-    console.log(channel);
-
     if (channel.id) {
-      ApiClientServer.getChannel(channel.id).then((result: ChannelAndUsers) => {
-        console.log('allo');
-
-        console.log(result);
-
+      getChannel(channel.id).then((result: ChannelAndUsers) => {
         setPosts(result.channel.posts);
         onClose();
       });
