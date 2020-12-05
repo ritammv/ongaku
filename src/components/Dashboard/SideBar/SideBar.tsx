@@ -12,7 +12,6 @@ import {
   DrawerOverlay,
   DrawerCloseButton,
   DrawerContent,
-  Text,
 } from '@chakra-ui/react';
 import * as actions from '../../../store/actionCreators';
 import * as apiClientServer from '../../../helpers/apiClientServer';
@@ -87,15 +86,6 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
     if (showSideBar) onOpen();
   }, [showSideBar, onOpen]);
 
-  // const handleChange = (
-  //   e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  //   | React.ChangeEvent<{}>) => {
-  //   const target = e.target as HTMLTextAreaElement ;
-  //   const newSearch = target.value;
-  //   console.log('new search', newSearch);
-  //   setSearchResult(newSearch);
-  // };
-
   const handleClickAutocomplete = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const channelToChange = allChannels.filter(
@@ -105,6 +95,8 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
     if (channelToChange[0] !== undefined) {
       changePage(e, channelToChange[0]);
     }
+    setValue(null);
+    setSearchResult('');
   };
 
   return (
@@ -137,8 +129,9 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                   renderInput={(params) => (
                     <TextField
                       {...params}
+                      variant="filled"
+                      style={{ opacity: '0.8', borderRadius: '12px' }}
                       placeholder="Search for a Channel"
-                      // onChange={(e) => handleChange(e)}
                     />
                   )}
                 />
