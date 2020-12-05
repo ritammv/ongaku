@@ -144,7 +144,7 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                     (userDetails.channels as Channel[]).map((chan: Channel) => {
                       return (
                         !chan.private && (
-                          <div key={chan.id}>
+                          <div className='channel_list_content' key={chan.id}>
                             <button
                               type="button"
                               className={`channel_item ${
@@ -174,7 +174,10 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                     (userDetails.channels as Channel[]).map(
                       (chan: Channel) =>
                         chan.private === true && (
-                          <div key={chan.id}>
+                          <div 
+                            className='channel_list_content'
+                            key={chan.id}
+                          >
                             <button
                               type="button"
                               className={`channel_item ${

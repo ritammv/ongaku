@@ -153,7 +153,7 @@ export const createPost = (
   });
 };
 
-export const deletePost = (postId: string, userId: number) => {
+export const removePost = (postId: string, userId: number) => {
   console.log('delete', postId);
   return fetchRequest(`${SERVER_URL}/posts/${postId}`, {
     method: 'DELETE',
@@ -181,7 +181,7 @@ export const createComment = (postId: string, userId: number, body: string) => {
   });
 };
 
-export const deleteComment = (postId: string, commentId: string, 
+export const removeComment = (postId: string, commentId: string, 
   userId: number) => {
   return fetchRequest(`${SERVER_URL}/posts/${postId}/comment`, {
     method: 'DELETE',

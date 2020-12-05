@@ -77,8 +77,9 @@ const Postcard: React.FC<Props> = ({ post, deletePost }) => {
 
 
   function deleteComment(commentId: string, commentAuthor: number) {
+    console.log('deleting a post');
     apiclient
-      .deleteComment(post.id, commentId, commentAuthor)
+      .removeComment(post.id, commentId, commentAuthor)
       .then(() => {
         setPostComments((prev) => 
           postComments.filter((com) => com.id !== commentId));
@@ -152,15 +153,18 @@ const Postcard: React.FC<Props> = ({ post, deletePost }) => {
         </div>
 
         <div className="message_content">
-          <div className="postcard-header">
+          <div className="postcard_header">
             <div className="message_title">{post.postTitle}</div>
-            <IconButton 
-              size="sm"
-              aria-label="delete post"
-              icon={<MdDelete />}
-              backgroundColor='inherit'
-              onClick={() => deletePost(post.id, post.userId)}
-            />
+            {
+              (user.id === post.userId) &&
+              <IconButton 
+                size="sm"
+                aria-label="delete post"
+                icon={<MdDelete />}
+                backgroundColor='inherit'
+                onClick={() => deletePost(post.id, post.userId)}
+              />
+            }
 
           </div>
           {

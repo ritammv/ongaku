@@ -41,18 +41,15 @@ const CommentCard: React.FC<Props>= ({ comment, deleteComment }) => {
           <p>{author.username}</p>
           <p>{moment(comment.createdAt).format('lll')}</p>
           {
-            author.id === comment.userId
-              ?
-                <IconButton 
-                  m='0'
-                  size='sm' 
-                  aria-label="Search database" 
-                  icon={<MdDelete />}
-                  backgroundColor='inherit'
-                  onClick={() => deleteComment(comment.id, comment.userId)}
-                />
-              :
-              null 
+            (author.id === comment.userId) &&        
+            <IconButton 
+              m='0'
+              size='sm' 
+              aria-label="Search database" 
+              icon={<MdDelete />}
+              backgroundColor='inherit'
+              onClick={() => deleteComment(comment.id, comment.userId)}
+            />
           }
         </div> 
         <div className="comment_body">

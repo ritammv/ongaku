@@ -33,14 +33,8 @@ const Channel: React.FC<Props> = ({ name }) => {
   const [posts, setPosts] = useState<Post[] | []>([]);
 
   useEffect(() => {
-    console.log(channel);
-
     if (channel.id) {
       ApiClientServer.getChannel(channel.id).then((result: ChannelAndUsers) => {
-        console.log('allo');
-
-        console.log(result);
-
         setPosts(result.channel.posts);
         onClose();
       });
@@ -49,8 +43,7 @@ const Channel: React.FC<Props> = ({ name }) => {
 
 
   function deletePost(postId: string, userId: number) {
-    console.log('deleting post');
-    apiclient.deletePost(postId, userId)
+    apiclient.removePost(postId, userId)
       .then(() => {
         setPosts((prev) => 
           prev.filter((p) => p.id !== postId));
