@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import { IconButton } from '@chakra-ui/react';
 import { MdDelete } from 'react-icons/md';
-import * as apiclient from '../../helpers/apiClientServer';
+import { getUser } from '../../helpers/apiClientServer';
 import '../PostCard/Postcard.scss';
 
 interface Props {
@@ -25,7 +25,7 @@ const CommentCard: React.FC<Props> = ({ comment, deleteComment }) => {
 
   useEffect(() => {
     async function getAuthor() {
-      const result = await apiclient.getUser(comment.userId);
+      const result = await getUser(comment.userId);
       setAuthor(result);
     }
     getAuthor();
