@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles/App.scss';
 import { Route, Switch } from 'react-router-dom';
-import Createpost from './components/CreatePost/createPost';
+// import Createpost from './components/CreatePost/createPost';
 import Finalcreatepost from './components/CreatePost/FinalCreatePost/FinalCreatePost';
 import Channel from './components/Channel/Channel';
 
@@ -15,7 +15,7 @@ import { CheckAuthenticateAndPopulate } from './helpers/checkAuthenticateAndPopu
 import Postdetails from './components/PostDetails/PostDetails';
 
 const App: React.FC = () => {
-  const isAuthenticated = CheckAuthenticateAndPopulate();
+  CheckAuthenticateAndPopulate();
 
   return (
     <Switch>

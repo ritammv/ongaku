@@ -18,6 +18,7 @@ import * as actions from '../../../store/actionCreators';
 import * as apiClientServer from '../../../helpers/apiClientServer';
 import CreateChannel from '../CreateChannel/CreateChannel';
 import { getUser } from '../../../helpers/apiClient';
+import { unsubscribeFromChannel } from '../../../helpers/apiClientServer';
 
 interface Props {
   showSideBar: boolean;
@@ -72,6 +73,14 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
   const handleClose = () => {
     onClose();
     setShowSideBar(false);
+  };
+
+  const unsubscribe = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    newChannel: Channel
+  ) => {
+    unsubscribeFromChannel(userDetails.id, newChannel);
+    dispatch(actions.unsubscribeChannel(newChannel));
   };
 
   useEffect(() => {
@@ -143,14 +152,24 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                     (userDetails.channels as Channel[]).map((chan: Channel) => {
                       return (
                         !chan.private && (
-                          <button
-                            type="button"
-                            className="channel_item"
-                            key={chan.id}
-                            onClick={(e) => changePage(e, chan)}
-                          >
-                            #{chan.name}
-                          </button>
+                          <div key={chan.id}>
+                            <button
+                              type="button"
+                              className={`channel_item ${
+                                chan.name === channel.name ? 'active' : ''
+                              }`}
+                              onClick={(e) => changePage(e, chan)}
+                            >
+                              #{chan.name}
+                            </button>
+                            <button
+                              type="button"
+                              className="unsubscribe_channel"
+                              onClick={(e) => unsubscribe(e, chan)}
+                            >
+                              x
+                            </button>
+                          </div>
                         )
                       );
                     })}
@@ -163,14 +182,24 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                     (userDetails.channels as Channel[]).map(
                       (chan: Channel) =>
                         chan.private === true && (
-                          <button
-                            type="button"
-                            key={chan.id}
-                            className="channel_item"
-                            onClick={(e) => changePage(e, chan)}
-                          >
-                            #{chan.name}
-                          </button>
+                          <div key={chan.id}>
+                            <button
+                              type="button"
+                              className={`channel_item ${
+                                chan.name === channel.name ? 'active' : ''
+                              }`}
+                              onClick={(e) => changePage(e, chan)}
+                            >
+                              #{chan.name}
+                            </button>
+                            <button
+                              type="button"
+                              className="unsubscribe_channel"
+                              onClick={(e) => unsubscribe(e, chan)}
+                            >
+                              x
+                            </button>
+                          </div>
                         )
                     )}
                 </ul>
@@ -194,7 +223,11 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
           </DrawerContent>
         </DrawerOverlay>
       </Drawer>
-      <CreateChannel setShowModal={setShowModal} showModal={showModal} />
+      <CreateChannel
+        closeChannels={onClose}
+        setShowModal={setShowModal}
+        showModal={showModal}
+      />
     </div>
   );
 };

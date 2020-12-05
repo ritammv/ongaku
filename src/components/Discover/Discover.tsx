@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import './discover.scss';
 import gsap from 'gsap';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+
 import GenreTags from './GenreTags/GenreTags';
 import {
   getChannels,
@@ -12,6 +13,7 @@ import {
 import { addChannel } from '../../store/actionCreators';
 
 const Discover: React.FC = () => {
+  const dispatch = useDispatch();
   const [defaultChannels, setDefaultChannels] = useState<Channel[] | null>(
     null
   );
@@ -27,14 +29,11 @@ const Discover: React.FC = () => {
 
   const handleSubmit = () => {
     if (user.id !== 0)
-      subscribeToChannels(user.id, subscribed).then((resp) =>
-        resp.forEach(async (channel: { ChannelId: string }) => {
-          console.log(channel.ChannelId);
-          getChannel(channel.ChannelId).then((fullChannel: ChannelAndUsers) =>
-            addChannel(fullChannel.channel)
-          );
-        })
-      );
+      subscribeToChannels(user.id, subscribed).then((resp) => {
+        resp.forEach(async (channel: Channel) => {
+          dispatch(addChannel(channel));
+        });
+      });
   };
 
   useEffect(() => {

@@ -23,22 +23,23 @@ interface Props {
   name: string;
 }
 
-
 const Channel: React.FC<Props> = ({ name }) => {
   const [showSideBar, setShowSideBar] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const channel = useSelector<State, Channel>(
-    (state) => state.currChannel
-  );
+  const channel = useSelector<State, Channel>((state) => state.currChannel);
 
   const [posts, setPosts] = useState<Post[] | []>([]);
 
-  console.log('channel', channel);
+  // console.log('channel', channel);
 
   useEffect(() => {
-    ApiClientServer.getChannel(channel.id)
-      .then((result: ChannelAndUsers) => setPosts(result.channel.posts));
+    if (channel.id) {
+      ApiClientServer.getChannel(channel.id).then((result: ChannelAndUsers) => {
+        setPosts(result.channel.posts);
+        onClose();
+      });
+    }
   }, [channel.id]);
 
   return (
@@ -61,7 +62,7 @@ const Channel: React.FC<Props> = ({ name }) => {
           />
         </div>
         <div className="dashboard_info">
-          <h3>2098 Members</h3> <h3>13209 Posts</h3>
+          <h3>2098 Members</h3> <h3>1320 Posts</h3>
         </div>
         <SideBar setShowSideBar={setShowSideBar} showSideBar={showSideBar} />
       </nav>

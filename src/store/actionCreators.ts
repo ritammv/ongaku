@@ -47,3 +47,11 @@ export const addCurrChannel = (channel: Channel) => {
   };
   return (dispatch: DispatchType) => dispatch(action);
 };
+
+export const unsubscribeChannel = (channel: Channel) => {
+  const action: ChannelAction = {
+    type: actionTypes.USER_UNSUBSCRIBE_CHANNEL,
+    channel,
+  };
+  return (dispatch: DispatchType) => dispatch(action);
+};

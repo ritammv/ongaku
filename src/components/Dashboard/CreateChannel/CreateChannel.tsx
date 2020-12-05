@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   useDisclosure,
   Input,
@@ -12,19 +12,23 @@ import {
   DrawerCloseButton,
   Select,
 } from '@chakra-ui/react';
+import * as actions from '../../../store/actionCreators';
+import { OnClickRoute } from '../../../helpers/onClickRoute';
 
-import {
-  createChannel,
-  getPublicChannels,
-  getChannels,
-} from '../../../helpers/apiClientServer';
+import { createChannel, getChannels } from '../../../helpers/apiClientServer';
 
 interface Props {
   showModal: boolean;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+  closeChannels: () => void;
 }
 
-const CreateChannel: React.FC<Props> = ({ showModal, setShowModal }) => {
+const CreateChannel: React.FC<Props> = ({
+  showModal,
+  setShowModal,
+  closeChannels,
+}) => {
+  const navigate = OnClickRoute();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [channels, setChannels] = useState<Channel[]>([]);
   const user = useSelector<State, User>((state: State) => state.user);
@@ -33,6 +37,8 @@ const CreateChannel: React.FC<Props> = ({ showModal, setShowModal }) => {
     parentId: '',
     isPrivate: false,
   });
+
+  const dispatch = useDispatch();
 
   const handleClose = () => {
     onClose();
@@ -54,9 +60,16 @@ const CreateChannel: React.FC<Props> = ({ showModal, setShowModal }) => {
     event.preventDefault();
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     // eslint-disable-next-line no-unused-vars
-    const { name, isPrivate, parentId } = options;
+    // const { name, isPrivate, parentId } = options;
 
-    createChannel(user.id, options);
+    // console.log(options);
+
+    createChannel(user.id, options).then((newChannel) => {
+      dispatch(actions.addChannel(newChannel));
+      navigate(`channels/${newChannel.name}`);
+      onClose();
+      closeChannels();
+    });
     setOptions({
       name: '',
       parentId: '',

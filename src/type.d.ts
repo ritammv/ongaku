@@ -82,8 +82,8 @@ interface Tag {
 }
 
 interface ChannelAndUsers {
-  users: number
-  channel: Channel
+  users: number;
+  channel: Channel;
 }
 
 interface User {
@@ -111,21 +111,6 @@ interface User {
 //   channels: Channel[]
 //   comments: Comment[]
 // }
-
-type UserForRitam = {
-  // type: string;
-  id: string;
-  // discogsId: number;
-  // username: string;
-  // avatarUrl: string;
-  // wantsUrl: string;
-  // collectionUrl: string;
-  posts: Post[];
-  channels: Channel[];
-  comments: Comment[];
-  token: string;
-  tokenSecret: string;
-};
 
 type State = {
   user: User;
@@ -164,17 +149,9 @@ type OrActionTypes =
   | authenticationAction;
 
 type AllActionTypes = UserAction &
-isLoadingAction &
-channelAction &
-authenticationAction;
-
-interface Channel {
-  id: string;
-  name: string;
-  ownerId: string;
-  parentId: string;
-  private: boolean;
-}
+  isLoadingAction &
+  channelAction &
+  authenticationAction;
 
 interface SelectAction {
   type: string;

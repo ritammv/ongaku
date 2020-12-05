@@ -12,27 +12,31 @@ const initialState: State = {
     createdAt: '',
     updatedAt: '',
   },
-  currChannel:  {
-    'id': 'd0ed9e2c-6b9f-4b34-9695-5d7cb007eee4',
-    'name': "Ambient 90's",
-    'ownerId': '247835',
-    'private': true,
-    'parentId': null,
-    'posts': [],
+  currChannel: {
+    id: '',
+    name: '',
+    ownerId: '',
+    private: true,
+    parentId: null,
+    posts: [],
   },
   isLoading: true,
   authentication: false,
   selected: {
     id: 1,
-    artists: [{
-      name: 'hello'
-    }],
+    artists: [
+      {
+        name: '',
+      },
+    ],
     year: 2014,
-    labels: [{
-      name: 'Terminal'
-    }],
-    title: 'pls work',
-    genres: ['Experimental'],
+    labels: [
+      {
+        name: '',
+      },
+    ],
+    title: '',
+    genres: [''],
     styles: [],
     url: '',
     image: '',
@@ -49,6 +53,13 @@ const reducer = (
     case actionTypes.SET_ISLOADING:
       return { ...state, isLoading: action.isLoading };
     case actionTypes.ADD_USER_CHANNEL: {
+      if (
+        state.user.channels.find(
+          (channel) => channel.name === action.channel.name
+        )
+      ) {
+        return state;
+      }
       const channels = [...state.user.channels, action.channel];
       const updatedUser = { ...state.user };
       updatedUser.channels = channels;
@@ -60,6 +71,14 @@ const reducer = (
       return { ...state, selected: action.selected };
     case actionTypes.ADD_CURR_CHANNEL:
       return { ...state, currChannel: action.channel };
+    case actionTypes.USER_UNSUBSCRIBE_CHANNEL: {
+      const channels = [...state.user.channels].filter(
+        (channel) => channel.id !== action.channel.id
+      );
+      const updatedUser = { ...state.user };
+      updatedUser.channels = channels;
+      return { ...state, user: updatedUser };
+    }
   }
   return state;
 };
