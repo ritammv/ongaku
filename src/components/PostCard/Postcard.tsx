@@ -1,4 +1,12 @@
-import { Container, Box, IconButton, Image, Text, Button, Textarea } from '@chakra-ui/react';
+import {
+  Container,
+  Box,
+  IconButton,
+  Image,
+  Text,
+  Button,
+  Textarea,
+} from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -6,20 +14,18 @@ import moment from 'moment';
 import { BsFillBookmarksFill, BsChevronDown } from 'react-icons/bs';
 import { HiOutlinePlus } from 'react-icons/hi';
 import { MdDelete } from 'react-icons/md';
-import * as apiclient from '../../helpers/apiClient';
+import * as apiclient from '../../helpers/apiClientServer';
 import CommentCard from '../PostDetails/CommentCard';
 // import * as actions from '../../store/actionCreators';
 // import { mockPost } from './mockCard';
 import './Postcard.scss';
 
 interface Props {
-  post: Post
+  post: Post;
   deletePost: (postId: string, commentAuthor: number) => void;
 }
 
-
 const Postcard: React.FC<Props> = ({ post, deletePost }) => {
-
   // const dispatch = useDispatch();
   // const isLoading = useSelector<State, boolean>((state) => state.isLoading);
   const user = useSelector<State, User>((state) => state.user);
@@ -31,7 +37,7 @@ const Postcard: React.FC<Props> = ({ post, deletePost }) => {
   const [savePost, setSavePost] = useState<boolean>(false);
   const history = useHistory();
   const date = moment(post.createdAt).format('lll');
- 
+
   const [author, setAuthor] = useState<User>({
     id: 59215829,
     username: 'Otoko',
@@ -44,25 +50,29 @@ const Postcard: React.FC<Props> = ({ post, deletePost }) => {
     posts: [],
   });
 
-
   useEffect(() => {
     function getPost() {
-      apiclient.getPost(post.id)
-        .then((result) => setPostComments(
-          result.comments.sort((
-            a: { createdAt: string | number | Date; }, 
-            b: { createdAt: string | number | Date; }) =>
-            new Date(b.createdAt).valueOf() -
-            new Date(a.createdAt).valueOf()))
+      apiclient
+        .getPost(post.id)
+        .then((result) =>
+          setPostComments(
+            result.comments.sort(
+              (
+                a: { createdAt: string | number | Date },
+                b: { createdAt: string | number | Date }
+              ) =>
+                new Date(b.createdAt).valueOf() -
+                new Date(a.createdAt).valueOf()
+            )
+          )
         );
     }
     getPost();
     async function getAuthor() {
-      const result= apiclient.getUser(post.userId);
+      const result = apiclient.getUser(post.userId);
       setAuthor(await result);
     }
     getAuthor();
-  
   }, [post.id, post.userId]);
 
   function postComment(e: React.FormEvent<HTMLFormElement>) {
@@ -71,28 +81,25 @@ const Postcard: React.FC<Props> = ({ post, deletePost }) => {
       .createComment(post.id, user.id, commentBody)
       .then((newComment) => {
         setCommentBody('');
-        setPostComments((prev) => {return [newComment, ...prev];});
+        setPostComments((prev) => {
+          return [newComment, ...prev];
+        });
       });
   }
-
 
   function deleteComment(commentId: string, commentAuthor: number) {
-    console.log('deleting a post');
-    apiclient
-      .removeComment(post.id, commentId, commentAuthor)
-      .then(() => {
-        setPostComments((prev) => 
-          postComments.filter((com) => com.id !== commentId));
-      });
+    apiclient.removeComment(post.id, commentId, commentAuthor).then(() => {
+      setPostComments((prev) =>
+        postComments.filter((com) => com.id !== commentId)
+      );
+    });
   }
 
-  function handleComments(){
+  function handleComments() {
     setIsShowingComments(!isShowingComments);
   }
 
-  function handleChange(
-    e: React.ChangeEvent<HTMLTextAreaElement>
-  ) {
+  function handleChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
     const target = e.target as HTMLTextAreaElement;
     setCommentBody(target.value);
   }
@@ -109,7 +116,7 @@ const Postcard: React.FC<Props> = ({ post, deletePost }) => {
   return (
     <Container
       border="1px solid #d2d2d2"
-      borderRadius='8px'
+      borderRadius="8px"
       w="95%"
       display="flex"
       flexDir="column"
@@ -135,7 +142,7 @@ const Postcard: React.FC<Props> = ({ post, deletePost }) => {
             <IconButton
               aria-label="Add to List"
               icon={<HiOutlinePlus />}
-              backgroundColor='inherit'
+              backgroundColor="inherit"
               position="relative"
               top="-20px"
               onClick={handleSave}
@@ -143,7 +150,7 @@ const Postcard: React.FC<Props> = ({ post, deletePost }) => {
           ) : (
             <IconButton
               aria-label="Add to List"
-              backgroundColor='inherit'
+              backgroundColor="inherit"
               icon={<BsFillBookmarksFill />}
               position="relative"
               top="-20px"
@@ -167,18 +174,13 @@ const Postcard: React.FC<Props> = ({ post, deletePost }) => {
             }
 
           </div>
-          {
-            isShowingComments
-              ?
-                <Box className="message_body">{post.body}</Box>
-              :
-                <Box 
-                  className="message_body" 
-                  noOfLines={5}
-                >
-                  {post.body}
-                </Box>
-          }
+          {isShowingComments ? (
+            <Box className="message_body">{post.body}</Box>
+          ) : (
+            <Box className="message_body" noOfLines={5}>
+              {post.body}
+            </Box>
+          )}
 
           <div className="message_stats">
             <div className="stats_comments">
@@ -186,16 +188,12 @@ const Postcard: React.FC<Props> = ({ post, deletePost }) => {
                 size="sm"
                 aria-label="See comments"
                 icon={<BsChevronDown />}
-                backgroundColor='inherit'
+                backgroundColor="inherit"
                 onClick={handleComments}
               />
-              {
-            postComments.length
-              ?
-              `${postComments.length} comments`
-              :
-              '0 comments'
-            } 
+              {postComments.length
+                ? `${postComments.length} comments`
+                : '0 comments'}
             </div>
             <div className="stats_author">
               Posted by <b>{author.username}</b>
@@ -204,46 +202,39 @@ const Postcard: React.FC<Props> = ({ post, deletePost }) => {
         </div>
       </>
 
-      {
-        isShowingComments
-          ?
+      {isShowingComments ? (
+        <>
+          <form className="comment_form" onSubmit={postComment}>
+            <Text fontSize="0.8rem" color="#d3d3d3">
+              Comment as{' '}
+              <span className="comment_username">{user.username}</span>
+            </Text>
+            <Textarea
+              onChange={(e) => handleChange(e)}
+              name="comment"
+              value={commentBody}
+              placeholder="Share your thoughts"
+            />
+            <Button type="submit" size="xs">
+              Comment
+            </Button>
+          </form>
+
+          {postComments && postComments.length ? (
             <>
-              <form className="comment_form" onSubmit={postComment}>
-                <Text fontSize="0.8rem" color="#d3d3d3">
-                  Comment as <span className="comment_username">{user.username}</span>
-                </Text>
-                <Textarea
-                  onChange={(e) => handleChange(e)}
-                  name="comment"
-                  value={commentBody}
-                  placeholder="Share your thoughts"
+              {(postComments as PostComment[]).map((comment) => (
+                <CommentCard
+                  key={comment.id}
+                  comment={comment}
+                  deleteComment={deleteComment}
                 />
-                <Button type="submit" size="xs">
-                  Comment
-                </Button>
-              </form>
-
-              {(postComments && postComments.length) 
-                ? 
-                  <>
-                    {(postComments as PostComment[])
-                      .map((comment) => (
-                        <CommentCard 
-                          key={comment.id} 
-                          comment={comment} 
-                          deleteComment={deleteComment}
-                        />
-                      ))}
-                  </>
-                : 
-                  <Text>Be the first to comment</Text>}
+              ))}
             </>
-          :
-          null
-
-    }
-
-
+          ) : (
+            <Text>Be the first to comment</Text>
+          )}
+        </>
+      ) : null}
     </Container>
   );
 };

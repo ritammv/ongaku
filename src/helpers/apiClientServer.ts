@@ -120,6 +120,131 @@ const deleteFromDiscogs = (url: string, token: string, tokenSecret: string) => {
     body: JSON.stringify({ url, token, tokenSecret }),
   });
 };
+
+const savePost = (userId: number, postId: string) => {
+  console.log('save', postId);
+  return fetchRequest(`${BASE_URL}/users/${userId}/saved`, {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ postId }),
+  });
+};
+
+const removeSavedPost = (userId: number, postId: string) => {
+  console.log('delete', postId);
+  return fetchRequest(`${BASE_URL}/users/${userId}/saved`, {
+    method: 'DELETE',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ postId }),
+  });
+};
+
+const getUser = (userId: number) => {
+  return fetchRequest(`${BASE_URL}/users/${userId}/`);
+};
+
+const checkAuthGetUser = () => {
+  return fetchRequest(`${BASE_URL}/auth/login/check`, {
+    method: 'GET',
+    credentials: 'include',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
+    },
+  });
+};
+
+//  const oauthGet =
+//   (url: string, userToken: string, userSecret: string) => {
+//     return oauth.get(
+//       url,
+//       userToken,
+//       userSecret,
+//       (e: Error, data: JSON) => {
+//         if (e) console.error(e);
+//         console.log(JSON.parse(data));
+//       }
+//     );
+//   };
+
+const getPost = (postId: string) => {
+  return fetchRequest(`${BASE_URL}/posts/${postId}/`);
+};
+
+const createPost = (
+  channelId: string,
+  release: Release,
+  user: User,
+  postForm: FinalPost
+) => {
+  const dbPost = {
+    userId: user.id,
+    channelId,
+    url: release.url,
+    postTitle: postForm.message_title,
+    title: release.title,
+    artist: release.artists[0].name,
+    year: release.year,
+    label: release.labels[0].name,
+    body: postForm.message_body,
+    thumbnail: release.image,
+  };
+  return fetchRequest(`${BASE_URL}/posts/${channelId}`, {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(dbPost),
+  });
+};
+
+const removePost = (postId: string, userId: number) => {
+  console.log('delete', postId);
+  return fetchRequest(`${BASE_URL}/posts/${postId}`, {
+    method: 'DELETE',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ postId, userId }),
+  });
+};
+
+const createComment = (postId: string, userId: number, body: string) => {
+  const dbComment = {
+    postId,
+    userId,
+    body,
+  };
+  return fetchRequest(`${BASE_URL}/posts/${postId}/comment`, {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(dbComment),
+  });
+};
+
+const removeComment = (postId: string, commentId: string, userId: number) => {
+  return fetchRequest(`${BASE_URL}/posts/${postId}/comment`, {
+    method: 'DELETE',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ userId, commentId }),
+  });
+};
+
 export {
   getChannels,
   getChannel,
@@ -131,4 +256,13 @@ export {
   postToDiscogs,
   putToDiscogs,
   deleteFromDiscogs,
+  removeComment,
+  createComment,
+  removePost,
+  createPost,
+  checkAuthGetUser,
+  getUser,
+  removeSavedPost,
+  getPost,
+  savePost,
 };

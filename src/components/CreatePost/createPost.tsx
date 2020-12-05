@@ -10,7 +10,7 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import Tile from './Tile/Tile';
 // import { getLists } from '../../helpers/apiClient';
-import * as apiClientServer from '../../helpers/apiClientServer';
+import { getFromDiscogs } from '../../helpers/apiClientServer';
 import * as actions from '../../store/actionCreators';
 import SearchDiscogs from './SearchDiscogs';
 import Createbutton from './CreateButton';
@@ -33,11 +33,15 @@ const CreatePost: React.FC = () => {
   const dispatch = useDispatch();
   const user = useSelector<State, User>((state) => state.user);
   const isLoading = useSelector<State, boolean>((state) => state.isLoading);
-  
+
   useEffect(() => {
     dispatch(actions.setIsLoading(true));
     // getLists(user.username, 'collection', user.token, user.tokenSecret)
-    apiClientServer.getFromDiscogs(`/users/${user.username}/collection`, user.token, user.tokenSecret)
+    getFromDiscogs(
+      `/users/${user.username}/collection`,
+      user.token,
+      user.tokenSecret
+    )
       .then((data) =>
         setCollection(
           [...data.releases]
@@ -58,7 +62,11 @@ const CreatePost: React.FC = () => {
       .then(() => dispatch(actions.setIsLoading(false)));
 
     // getLists(user.username, 'wants', user.token, user.tokenSecret)
-    apiClientServer.getFromDiscogs(`/users/${user.username}/wants`, user.token, user.tokenSecret)
+    getFromDiscogs(
+      `/users/${user.username}/wants`,
+      user.token,
+      user.tokenSecret
+    )
       .then((data) =>
         setWantList(
           [...data.wants]
