@@ -65,6 +65,61 @@ const getFromDiscogs = (url: string, token: string, tokenSecret: string) => {
   });
 };
 
+const postToDiscogs = (
+  url: string,
+  token: string,
+  tokenSecret: string,
+  postBody: string,
+  postContentType: string
+) => {
+  return fetchRequest('/discogs/post', {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      url,
+      token,
+      tokenSecret,
+      postBody,
+      postContentType,
+    }),
+  });
+};
+
+const putToDiscogs = (
+  url: string,
+  token: string,
+  tokenSecret: string,
+  postBody: string,
+  postContentType: string
+) => {
+  return fetchRequest('/discogs/put', {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      url,
+      token,
+      tokenSecret,
+      postBody,
+      postContentType,
+    }),
+  });
+};
+const deleteFromDiscogs = (url: string, token: string, tokenSecret: string) => {
+  return fetchRequest('/discogs/delete', {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ url, token, tokenSecret }),
+  });
+};
 export {
   getChannels,
   getChannel,
@@ -73,4 +128,7 @@ export {
   getPublicChannels,
   unsubscribeFromChannel,
   getFromDiscogs,
+  postToDiscogs,
+  putToDiscogs,
+  deleteFromDiscogs,
 };

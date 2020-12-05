@@ -112,21 +112,6 @@ interface User {
 //   comments: Comment[]
 // }
 
-type UserForRitam = {
-  // type: string;
-  id: string;
-  // discogsId: number;
-  // username: string;
-  // avatarUrl: string;
-  // wantsUrl: string;
-  // collectionUrl: string;
-  posts: Post[];
-  channels: Channel[];
-  comments: Comment[];
-  token: string;
-  tokenSecret: string;
-};
-
 type State = {
   user: User;
   isLoading: boolean;
@@ -167,14 +152,6 @@ type AllActionTypes = UserAction &
   isLoadingAction &
   channelAction &
   authenticationAction;
-
-// interface Channel {
-//   id: string;
-//   name: string;
-//   ownerId: string;
-//   parentId: string;
-//   private: boolean;
-// }
 
 interface SelectAction {
   type: string;

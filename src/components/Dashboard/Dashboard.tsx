@@ -1,13 +1,18 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import './dashboard.scss';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import vinyl from '../../assets/vinyl.jpg';
 import SideBar from './SideBar/SideBar';
 import DashboardWelcome from './DashboardWelcome/DashboardWelcome';
-// import { getFromDiscogs } from '../../helpers/apiClientServer';
+import {
+  getFromDiscogs,
+  postToDiscogs,
+  putToDiscogs,
+  deleteFromDiscogs,
+} from '../../helpers/apiClientServer';
 
 const Dashboard: React.FC = () => {
-  // const user = useSelector((state: State) => state.user);
+  const user = useSelector((state: State) => state.user);
   // const [showModal, setShowModal] = useState(false);
 
   const [showSideBar, setShowSideBar] = useState(false);
@@ -16,8 +21,8 @@ const Dashboard: React.FC = () => {
   // useEffect(() => {
   //   if (user.username) {
   //     console.log(user);
-  //     getFromDiscogs(
-  //       `/users/${user.username}/wants`,
+  //     deleteFromDiscogs(
+  //       `/users/${user.username}/wants/1`,
   //       user.token,
   //       user.tokenSecret
   //     ).then((wants) => {
@@ -25,6 +30,19 @@ const Dashboard: React.FC = () => {
   //     });
   //   }
   // }, [user]);
+
+  useEffect(() => {
+    if (user.username) {
+      console.log(user);
+      getFromDiscogs(
+        `/users/${user.username}/wants`,
+        user.token,
+        user.tokenSecret
+      ).then((wants) => {
+        console.log(wants);
+      });
+    }
+  }, [user]);
 
   return (
     <div className="container">
