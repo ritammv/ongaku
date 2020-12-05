@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Box, Button, Input, Textarea } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
-import * as apiclient from '../../../helpers/apiClient';
+import { createPost } from '../../../helpers/apiClientServer';
 import './FinalCreatePost.scss';
 import vinyl from '../../../assets/vinyl.jpg';
 
@@ -41,7 +41,7 @@ export default function Finalcreatepost() {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    apiclient.createPost(channel.id, selected, user, postForm);
+    createPost(channel.id, selected, user, postForm);
     history.push(`/channels/${channel.name}`);
   }
 

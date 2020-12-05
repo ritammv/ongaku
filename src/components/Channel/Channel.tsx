@@ -18,8 +18,7 @@ import SideBar from '../Dashboard/SideBar/SideBar';
 import vinyl from '../../assets/vinyl.jpg';
 import CreatePost from '../CreatePost/createPost';
 import Postcard from '../PostCard/Postcard';
-import * as ApiClientServer from '../../helpers/apiClientServer';
-import * as apiclient from '../../helpers/apiClient';
+import { getChannel, removePost } from '../../helpers/apiClientServer';
 
 interface Props {
   name: string;
@@ -33,28 +32,18 @@ const Channel: React.FC<Props> = ({ name }) => {
   const [posts, setPosts] = useState<Post[] | []>([]);
 
   useEffect(() => {
-    console.log(channel);
-
     if (channel.id) {
-      ApiClientServer.getChannel(channel.id).then((result: ChannelAndUsers) => {
-        console.log('allo');
-
-        console.log(result);
-
+      getChannel(channel.id).then((result: ChannelAndUsers) => {
         setPosts(result.channel.posts);
         onClose();
       });
     }
   }, []);
 
-
   function deletePost(postId: string, userId: number) {
-    console.log('deleting post');
-    apiclient.deletePost(postId, userId)
-      .then(() => {
-        setPosts((prev) => 
-          prev.filter((p) => p.id !== postId));
-      });
+    removePost(postId, userId).then(() => {
+      setPosts((prev) => prev.filter((p) => p.id !== postId));
+    });
   }
 
   return (

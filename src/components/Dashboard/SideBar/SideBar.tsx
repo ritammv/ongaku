@@ -14,10 +14,13 @@ import {
   DrawerContent,
 } from '@chakra-ui/react';
 import * as actions from '../../../store/actionCreators';
-import * as apiClientServer from '../../../helpers/apiClientServer';
+
 import CreateChannel from '../CreateChannel/CreateChannel';
-import { getUser } from '../../../helpers/apiClient';
-import { unsubscribeFromChannel } from '../../../helpers/apiClientServer';
+import {
+  getUser,
+  unsubscribeFromChannel,
+  getPublicChannels,
+} from '../../../helpers/apiClientServer';
 
 interface Props {
   showSideBar: boolean;
@@ -58,7 +61,7 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
   }, []);
 
   useEffect(() => {
-    apiClientServer.getPublicChannels().then((result) => {
+    getPublicChannels().then((result) => {
       setAllChannels(result);
     });
   }, []);

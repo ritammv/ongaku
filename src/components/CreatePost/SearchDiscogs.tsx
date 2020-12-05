@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Input, Stack, Button } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
-import { getData } from '../../helpers/apiClient';
-import * as apiClientServer from '../../helpers/apiClientServer';
+import { getFromDiscogs } from '../../helpers/apiClientServer';
 import SearchResult from './SearchResult';
 
 // eslint-disable-next-line max-len
@@ -24,25 +23,25 @@ const SearchDiscogs: React.FC<Props> = ({ selected, setSelected }) => {
   });
 
   function handleSubmit() {
-    apiClientServer.getFromDiscogs(`/database/search?q=${form.query}&title=${form.title}&artist=${form.artist}&label=${form.label}&year=${form.year}`, 
+    getFromDiscogs(
+      `/database/search?q=${form.query}&title=${form.title}&artist=${form.artist}&label=${form.label}&year=${form.year}`,
       user.token,
       user.tokenSecret
-    )
-      .then((data) =>
-        setSearchResults(
-          data.results.map((result: SearchResult) => ({
-            id: result.id,
-            artists: result.artist,
-            year: result.year,
-            labels: result.label,
-            title: result.title,
-            genres: result.genre,
-            styles: result.styles,
-            url: result.resource_url,
-            image: result.cover_image,
-          }))
-        )
-      );
+    ).then((data) =>
+      setSearchResults(
+        data.results.map((result: SearchResult) => ({
+          id: result.id,
+          artists: result.artist,
+          year: result.year,
+          labels: result.label,
+          title: result.title,
+          genres: result.genre,
+          styles: result.styles,
+          url: result.resource_url,
+          image: result.cover_image,
+        }))
+      )
+    );
 
     setForm({
       query: '',

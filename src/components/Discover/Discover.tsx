@@ -8,7 +8,6 @@ import GenreTags from './GenreTags/GenreTags';
 import {
   getChannels,
   subscribeToChannels,
-  getChannel,
 } from '../../helpers/apiClientServer';
 import { addChannel } from '../../store/actionCreators';
 

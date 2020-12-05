@@ -1,11 +1,18 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { Container, Box, IconButton, Textarea, Button, Text } from '@chakra-ui/react';
+import {
+  Container,
+  Box,
+  IconButton,
+  Textarea,
+  Button,
+  Text,
+} from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import { BsFillBookmarksFill } from 'react-icons/bs';
 import { HiOutlinePlus } from 'react-icons/hi';
-import * as apiclient from '../../helpers/apiClient';
+
 import * as actions from '../../store/actionCreators';
 import CommentCard from './CommentCard';
 import '../PostCard/Postcard.scss';
@@ -15,10 +22,9 @@ interface Props {
 }
 
 const Postdetails: React.FC<Props> = ({ postId }) => {
-
   // const history = useHistory();
   // const dispatch = useDispatch();
-  
+
   // const user = useSelector<State, User>((state: State) => state.user);
   // const channel = useSelector<State, Channel>(
   //   (state: State) => state.currChannel);
@@ -83,7 +89,7 @@ const Postdetails: React.FC<Props> = ({ postId }) => {
   //   apiclient
   //     .deleteComment(post.id, commentId)
   //     .then(() => {
-  //       setPostComments((prev) => 
+  //       setPostComments((prev) =>
   //         postComments.filter((com) => com.id !== commentId));
   //     });
   // }
@@ -91,16 +97,16 @@ const Postdetails: React.FC<Props> = ({ postId }) => {
   // useEffect(() => {
   //   function getCurrentPost() {
   //     apiclient.getPost(postId)
-  //       .then((result) => 
+  //       .then((result) =>
   //         result.comments.sort((
-  //           a: { createdAt: string | number | Date; }, 
+  //           a: { createdAt: string | number | Date; },
   //           b: { createdAt: string | number | Date; }) =>
   //           new Date(b.createdAt).valueOf() -
   //           new Date(a.createdAt).valueOf()))
   //       .then((result) => setPost(result))
   //       .then(() => getAuthor());
   //   }
-      
+
   //   function getAuthor() {
   //     apiclient.getUser(post.userId)
   //       .then((result) => {
@@ -113,7 +119,7 @@ const Postdetails: React.FC<Props> = ({ postId }) => {
   //   getCurrentPost();
 
   // }, [dispatch, isLoading, post.userId, postId]);
-  
+
   // const date = moment(post.createdAt).format('lll');
 
   // function handleSave() {
@@ -146,7 +152,6 @@ const Postdetails: React.FC<Props> = ({ postId }) => {
   // }
 
   return (
-
     <Container w="90%" display="flex" flexDir="column" marginY="1.5rem">
       POST DETAIL PAGE
       {/* <div className="message_channel">#{channel.name}</div>
@@ -223,7 +228,6 @@ const Postdetails: React.FC<Props> = ({ postId }) => {
         <Text>Be the first to comment</Text>
       )} */}
     </Container>
-      
   );
 };
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import { IconButton } from '@chakra-ui/react';
 import { MdDelete } from 'react-icons/md';
-import * as apiclient from '../../helpers/apiClient';
+import * as apiclient from '../../helpers/apiClientServer';
 import '../PostCard/Postcard.scss';
 
 interface Props {
@@ -10,18 +10,17 @@ interface Props {
   deleteComment: (commentId: string, commentAuthor: number) => void;
 }
 
-const CommentCard: React.FC<Props>= ({ comment, deleteComment }) => {
-  
+const CommentCard: React.FC<Props> = ({ comment, deleteComment }) => {
   const [author, setAuthor] = useState<User>({
     id: 4920,
     username: 'nijssenmandy89',
     resourceUrl: 'http: hello',
-    token:'',
+    token: '',
     tokenSecret: '',
     posts: [],
     channels: [],
     createdAt: '42',
-    updatedAt: '3829'
+    updatedAt: '3829',
   });
 
   useEffect(() => {
@@ -33,34 +32,24 @@ const CommentCard: React.FC<Props>= ({ comment, deleteComment }) => {
   }, [comment.userId]);
 
   return (
-    
     <>
-    
-      <div className='comment_body' key={comment.id}>
+      <div className="comment_body" key={comment.id}>
         <div className="comment_header">
           <p>{author.username}</p>
           <p>{moment(comment.createdAt).format('lll')}</p>
-          {
-            author.id === comment.userId
-              ?
-                <IconButton 
-                  m='0'
-                  size='sm' 
-                  aria-label="Search database" 
-                  icon={<MdDelete />}
-                  backgroundColor='inherit'
-                  onClick={() => deleteComment(comment.id, comment.userId)}
-                />
-              :
-              null 
-          }
-        </div> 
-        <div className="comment_body">
-          {comment.body}
+          {author.id === comment.userId ? (
+            <IconButton
+              m="0"
+              size="sm"
+              aria-label="Search database"
+              icon={<MdDelete />}
+              backgroundColor="inherit"
+              onClick={() => deleteComment(comment.id, comment.userId)}
+            />
+          ) : null}
         </div>
+        <div className="comment_body">{comment.body}</div>
       </div>
-
-    
     </>
   );
 };
