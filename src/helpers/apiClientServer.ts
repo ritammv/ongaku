@@ -161,6 +161,19 @@ const checkAuthGetUser = () => {
   });
 };
 
+//  const oauthGet =
+//   (url: string, userToken: string, userSecret: string) => {
+//     return oauth.get(
+//       url,
+//       userToken,
+//       userSecret,
+//       (e: Error, data: JSON) => {
+//         if (e) console.error(e);
+//         console.log(JSON.parse(data));
+//       }
+//     );
+//   };
+
 const getPost = (postId: string) => {
   return fetchRequest(`${BASE_URL}/posts/${postId}/`);
 };
@@ -193,15 +206,15 @@ const createPost = (
   });
 };
 
-const deletePost = (postId: string, commentId: string) => {
+const removePost = (postId: string, userId: number) => {
   console.log('delete', postId);
-  return fetchRequest(`${BASE_URL}/posts/${postId}/comment/${commentId}`, {
+  return fetchRequest(`${BASE_URL}/posts/${postId}`, {
     method: 'DELETE',
     mode: 'cors',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ postId, commentId }),
+    body: JSON.stringify({ postId, userId }),
   });
 };
 
@@ -221,15 +234,14 @@ const createComment = (postId: string, userId: number, body: string) => {
   });
 };
 
-const deleteComment = (postId: string, commentId: string) => {
-  console.log('DEL POSTID', postId, 'DEL COMMENTID', commentId);
-  return fetchRequest(`${BASE_URL}/posts/${postId}/comment/${commentId}`, {
+const removeComment = (postId: string, commentId: string, userId: number) => {
+  return fetchRequest(`${BASE_URL}/posts/${postId}/comment`, {
     method: 'DELETE',
     mode: 'cors',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ postId, commentId }),
+    body: JSON.stringify({ userId, commentId }),
   });
 };
 
@@ -244,13 +256,13 @@ export {
   postToDiscogs,
   putToDiscogs,
   deleteFromDiscogs,
-  deleteComment,
+  removeComment,
   createComment,
-  deletePost,
+  removePost,
   createPost,
-  savePost,
-  getPost,
   checkAuthGetUser,
   getUser,
   removeSavedPost,
+  getPost,
+  savePost,
 };

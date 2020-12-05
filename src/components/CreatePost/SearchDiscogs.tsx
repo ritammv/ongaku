@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Input, Stack, Button } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
-import { getData } from '../../helpers/apiClientServer';
+import { getFromDiscogs } from '../../helpers/apiClientServer';
 import SearchResult from './SearchResult';
 
 // eslint-disable-next-line max-len
@@ -22,13 +22,9 @@ const SearchDiscogs: React.FC<Props> = ({ selected, setSelected }) => {
     year: '',
   });
 
-  async function handleSubmit() {
-    await getData(
-      form.query,
-      form.artist,
-      form.title,
-      form.label,
-      form.year,
+  function handleSubmit() {
+    getFromDiscogs(
+      `/database/search?q=${form.query}&title=${form.title}&artist=${form.artist}&label=${form.label}&year=${form.year}`,
       user.token,
       user.tokenSecret
     ).then((data) =>

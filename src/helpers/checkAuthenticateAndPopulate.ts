@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkAuthGetUser } from './apiClient';
+import { checkAuthGetUser } from './apiClientServer';
 import { setAuthentication, setUser } from '../store/actionCreators';
 
 export const CheckAuthenticateAndPopulate = () => {
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
   const isAuthenticated = useSelector((state: State) => state.authentication);
 
   useEffect(() => {

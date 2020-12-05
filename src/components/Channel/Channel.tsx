@@ -18,7 +18,7 @@ import SideBar from '../Dashboard/SideBar/SideBar';
 import vinyl from '../../assets/vinyl.jpg';
 import CreatePost from '../CreatePost/createPost';
 import Postcard from '../PostCard/Postcard';
-import { getChannel } from '../../helpers/apiClientServer';
+import { getChannel, removePost } from '../../helpers/apiClientServer';
 
 interface Props {
   name: string;
@@ -31,8 +31,6 @@ const Channel: React.FC<Props> = ({ name }) => {
   const channel = useSelector<State, Channel>((state) => state.currChannel);
   const [posts, setPosts] = useState<Post[] | []>([]);
 
-  // console.log('channel', channel);
-
   useEffect(() => {
     if (channel.id) {
       getChannel(channel.id).then((result: ChannelAndUsers) => {
@@ -41,6 +39,12 @@ const Channel: React.FC<Props> = ({ name }) => {
       });
     }
   }, []);
+
+  function deletePost(postId: string, userId: number) {
+    removePost(postId, userId).then(() => {
+      setPosts((prev) => prev.filter((p) => p.id !== postId));
+    });
+  }
 
   return (
     <div className="container">
@@ -105,7 +109,7 @@ const Channel: React.FC<Props> = ({ name }) => {
                 new Date(a.createdAt).valueOf()
             )
             .map((post) => (
-              <Postcard key={post.id} post={post} />
+              <Postcard key={post.id} post={post} deletePost={deletePost} />
             ))}
         </Container>
       )}
