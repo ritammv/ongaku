@@ -54,6 +54,17 @@ const unsubscribeFromChannel = (userId: number, channel: Channel) => {
   });
 };
 
+const getFromDiscogs = (url: string, token: string, tokenSecret: string) => {
+  return fetchRequest('/discogs/get', {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ url, token, tokenSecret }),
+  });
+};
+
 export {
   getChannels,
   getChannel,
@@ -61,4 +72,5 @@ export {
   subscribeToChannels,
   getPublicChannels,
   unsubscribeFromChannel,
+  getFromDiscogs,
 };

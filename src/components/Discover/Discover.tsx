@@ -27,13 +27,11 @@ const Discover: React.FC = () => {
 
   const handleSubmit = () => {
     if (user.id !== 0)
-      subscribeToChannels(user.id, subscribed).then((resp) =>
-        resp.forEach(async (channel: { ChannelId: string }) => {
-          getChannel(channel.ChannelId).then((fullChannel: ChannelAndUsers) =>
-            addChannel(fullChannel.channel)
-          );
-        })
-      );
+      subscribeToChannels(user.id, subscribed).then((resp) => {
+        resp.forEach(async (channel: Channel) => {
+          addChannel(channel);
+        });
+      });
   };
 
   useEffect(() => {

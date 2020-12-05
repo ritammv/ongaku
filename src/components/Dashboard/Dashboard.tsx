@@ -1,9 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import './dashboard.scss';
 // import { useSelector } from 'react-redux';
 import vinyl from '../../assets/vinyl.jpg';
 import SideBar from './SideBar/SideBar';
 import DashboardWelcome from './DashboardWelcome/DashboardWelcome';
+// import { getFromDiscogs } from '../../helpers/apiClientServer';
 
 const Dashboard: React.FC = () => {
   // const user = useSelector((state: State) => state.user);
@@ -11,6 +12,19 @@ const Dashboard: React.FC = () => {
 
   const [showSideBar, setShowSideBar] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
+
+  // useEffect(() => {
+  //   if (user.username) {
+  //     console.log(user);
+  //     getFromDiscogs(
+  //       `/users/${user.username}/wants`,
+  //       user.token,
+  //       user.tokenSecret
+  //     ).then((wants) => {
+  //       console.log(wants);
+  //     });
+  //   }
+  // }, [user]);
 
   return (
     <div className="container">
