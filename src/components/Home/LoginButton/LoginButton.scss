@@ -1,7 +1,19 @@
-@import "../../../styles/variables.scss";
+@import '../../../styles/variables.scss';
 .loginbutton {
   @include button-default;
   width: 100%;
   background: $secondary-color;
-  padding: 4% 5%;
+  // padding: 2% 3%;
+}
+
+.discogs-logo {
+  background-color: $secondary-color;
+  height: 30px;
+  width: 100%;
+}
+
+.discogs-logo2 {
+  height: 20px;
+  width: 100%;
+  background-color: $primary-color;
 }
