@@ -171,25 +171,30 @@ const createPost = (
   user: User,
   postForm: FinalPost
 ) => {
-  const dbPost = {
-    userId: user.id,
-    channelId,
-    url: release.url,
-    postTitle: postForm.message_title,
-    title: release.title,
-    artist: release.artists[0].name,
-    year: release.year,
-    label: release.labels[0].name,
-    body: postForm.message_body,
-    thumbnail: release.image,
-  };
-  return fetchRequest(`${BASE_URL}/posts/${channelId}`, {
-    method: 'POST',
-    mode: 'cors',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(dbPost),
+  return fetchRequest(release.url).then((moreInfo) => {
+    console.log(moreInfo);
+    console.log(release);
+    const dbPost = {
+      userId: user.id,
+      channelId,
+      url: moreInfo.resource_url,
+      postTitle: postForm.message_title,
+      title: moreInfo.title ? moreInfo.title : null,
+      artist: moreInfo.artists ? moreInfo.artists[0].name : null,
+      year: moreInfo.year ? moreInfo.year : null,
+      label: release.labels ? release.labels[0] : null,
+      body: postForm.message_body,
+      thumbnail: release.image ? release.image : null,
+      // masterUrl: moreInfo.master_url
+    };
+    return fetchRequest(`${BASE_URL}/posts/${channelId}`, {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(dbPost),
+    });
   });
 };
 

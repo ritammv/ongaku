@@ -22,7 +22,6 @@ const Authenticated: React.FC = () => {
 
   useEffect(() => {
     if (isAuthenticated && user.channels) {
-      console.log(user);
       const toNavigate = user.channels.length ? 'dashboard' : 'discover';
       isAuthenticated &&
         slideInAndUp('login_container_logo', 'authenticated_welcome', () =>
