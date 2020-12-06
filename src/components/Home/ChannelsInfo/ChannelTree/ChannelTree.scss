@@ -1,15 +1,16 @@
-@import "../../../../styles/variables.scss";
+@import '../../../../styles/variables.scss';
 .channels-info_tree {
   display: flex;
   width: 80%;
   justify-content: space-around;
+  flex-direction: column;
   height: 24vh;
   transform: translateY(5vh);
   background: $primary-color;
   .tree_first {
     opacity: 0;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     background: $primary-color;
@@ -20,7 +21,7 @@
   .tree_second {
     opacity: 0;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     background: $primary-color;
@@ -31,7 +32,7 @@
   .tree_third {
     opacity: 0;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     background: $primary-color;
@@ -40,29 +41,33 @@
     }
   }
   .tree_leaf {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 1rem;
     width: 26vw;
-    height: 3.5vh;
+    height: 4vh;
     max-width: 150px;
     color: $primary-color;
     @include button-default;
-    transform: rotate(45deg);
-    margin: 10px 0;
+    transform: rotate(0deg);
+    margin: 10px 3px;
   }
   .tree_third_one,
   .tree_third_two {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     margin: 2vh 0vh;
     height: 40%;
     background: $primary-color;
     .tree_leaf {
-      width: 30vw;
+      width: 20vw;
+      height: 5vh;
     }
   }
   .tree_leaf:hover {
-  //   transform: scale(1.1);
+    //   transform: scale(1.1);
     background: lighten($secondary-color, 15%);
   }
 }

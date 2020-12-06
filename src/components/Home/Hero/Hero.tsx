@@ -3,7 +3,7 @@ import './Hero.scss';
 import { useIsInScroll } from '../../../helpers/isInScroll';
 import { heroAnimation } from '../../../helpers/animation';
 // import Logo from '../../Logo/Logo';
-import ongaku from '../../../assets/ongaku1.svg';
+import ongaku from '../../../assets/ongaku-logo.svg';
 import DownArrow from '../../../assets/arrow-down.svg';
 import { OnClickRoute } from '../../../helpers/onClickRoute';
 import LoginButton from '../LoginButton/LoginButton';
@@ -53,10 +53,11 @@ const Hero: React.FC = () => {
         <div className="hero_buttons">
           <div className="buttons_join">
             <LoginButton
-              text="Login With Discogs"
+              text="Login with"
               width="80%"
               fontSize="1.4rem"
               styles={true}
+              discogsLogo={1}
             />
           </div>
           {/* <button
