@@ -3,7 +3,7 @@ import moment from 'moment';
 import { IconButton } from '@chakra-ui/react';
 import { MdDelete } from 'react-icons/md';
 import { getUser } from '../../helpers/apiClientServer';
-import '../PostCard/Postcard.scss';
+import './Postcard.scss';
 
 interface Props {
   comment: PostComment;

@@ -2,7 +2,7 @@ const BASE_URL = 'http://localhost:3001';
 
 function fetchRequest(path: string, options?: Object) {
   return fetch(path, options)
-    .then((res) => (res.status < 400 ? res : Promise.reject()))
+    .then((res) => (res.status < 400 ? res : Promise.reject(new Error('fail'))))
     .then((res) => (res.status !== 204 ? res.json() : res))
     .catch((err) => {
       console.error('error', err);
@@ -13,6 +13,10 @@ const getChannels = (): Promise<Channel[]> => {
   return fetchRequest(`${BASE_URL}/channels/default`);
 };
 
+const getAllChannels = (): Promise<Channel[]> => {
+  return fetchRequest(`${BASE_URL}/channels/`);
+};
+
 const getPublicChannels = (): Promise<Channel[]> => {
   return fetchRequest(`${BASE_URL}/channels/public`);
 };
@@ -21,7 +25,8 @@ const getChannel = (channelId: string): Promise<ChannelAndUsers> => {
   return fetchRequest(`${BASE_URL}/channels/${channelId}`);
 };
 
-const createChannel = (userId: number, body: Object) => {
+const createChannel = (userId: number, body: Object): Promise<Channel> => {
+
   return fetchRequest(`${BASE_URL}/channels/users/${userId}`, {
     method: 'POST',
     mode: 'cors',
@@ -44,6 +49,7 @@ const subscribeToChannels = (userId: number, channels: ChannelForDb[]) => {
 };
 
 const unsubscribeFromChannel = (userId: number, channel: Channel) => {
+  console.log('in apiclient', userId, channel);
   return fetchRequest(`${BASE_URL}/users/${userId}/channels`, {
     method: 'DELETE',
     mode: 'cors',
@@ -134,7 +140,6 @@ const savePost = (userId: number, postId: string) => {
 };
 
 const removeSavedPost = (userId: number, postId: string) => {
-  console.log('delete', postId);
   return fetchRequest(`${BASE_URL}/users/${userId}/saved`, {
     method: 'DELETE',
     mode: 'cors',
@@ -172,8 +177,6 @@ const createPost = (
   postForm: FinalPost
 ) => {
   return fetchRequest(release.url).then((moreInfo) => {
-    console.log(moreInfo);
-    console.log(release);
     const dbPost = {
       userId: user.id,
       channelId,
@@ -182,7 +185,7 @@ const createPost = (
       title: moreInfo.title ? moreInfo.title : null,
       artist: moreInfo.artists ? moreInfo.artists[0].name : null,
       year: moreInfo.year ? moreInfo.year : null,
-      label: release.labels ? release.labels[0] : null,
+      label: release.labels ? release.labels[0].name : null,
       body: postForm.message_body,
       thumbnail: release.image ? release.image : null,
       // masterUrl: moreInfo.master_url
@@ -199,7 +202,6 @@ const createPost = (
 };
 
 const removePost = (postId: string, userId: number) => {
-  console.log('delete', postId);
   return fetchRequest(`${BASE_URL}/posts/${postId}`, {
     method: 'DELETE',
     mode: 'cors',
@@ -257,4 +259,5 @@ export {
   removeSavedPost,
   getPost,
   savePost,
+  getAllChannels
 };

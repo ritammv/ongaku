@@ -15,7 +15,7 @@ import { BsFillBookmarksFill, BsChevronDown } from 'react-icons/bs';
 import { HiOutlinePlus } from 'react-icons/hi';
 import { MdDelete } from 'react-icons/md';
 import * as apiclient from '../../helpers/apiClientServer';
-import CommentCard from '../PostDetails/CommentCard';
+import CommentCard from './CommentCard';
 import './Postcard.scss';
 
 interface Props {
