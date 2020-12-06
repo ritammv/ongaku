@@ -180,9 +180,7 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                 <ul className="private_channel_list">
                   <button
                     type="button"
-                    className={`channel_item ${
-                      channel.name === 'forLater' ? 'active' : ''
-                    }`}
+                    className="channel_item"
                     onClick={(e) => navigateToLater(e)}
                   >
                     #For Later
