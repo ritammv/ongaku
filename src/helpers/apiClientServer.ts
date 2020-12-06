@@ -133,7 +133,7 @@ const savePost = (userId: number, postId: string) => {
   });
 };
 
-const removeSavedPost = (userId: number, postId: string) => {
+const removeSavedPost = (postId: string, userId: number) => {
   console.log('delete', postId);
   return fetchRequest(`${BASE_URL}/users/${userId}/saved`, {
     method: 'DELETE',
@@ -165,38 +165,41 @@ const getPost = (postId: string) => {
   return fetchRequest(`${BASE_URL}/posts/${postId}/`);
 };
 
+const getForLater = (userId: number) => {
+  return fetchRequest(`${BASE_URL}/users/${userId}/saved`);
+};
+
 const createPost = (
   channelId: string,
   release: Release,
   user: User,
   postForm: FinalPost
 ) => {
-  return fetchRequest(release.url)
-    .then((moreInfo) => { 
-      console.log(moreInfo);
-      console.log(release);
-      const dbPost = {
-        userId: user.id,
-        channelId,
-        url: moreInfo.resource_url,
-        postTitle: postForm.message_title,
-        title: moreInfo.title,
-        artist: moreInfo.artists[0].name,
-        year: moreInfo.year,
-        label: release.labels[0],
-        body: postForm.message_body,
-        thumbnail: release.image,
-        // masterUrl: moreInfo.master_url
-      };
-      return fetchRequest(`${BASE_URL}/posts/${channelId}`, {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(dbPost),
-      });
+  return fetchRequest(release.url).then((moreInfo) => {
+    console.log(moreInfo);
+    console.log(release);
+    const dbPost = {
+      userId: user.id,
+      channelId,
+      url: moreInfo.resource_url,
+      postTitle: postForm.message_title,
+      title: moreInfo.title ? moreInfo.title : null,
+      artist: moreInfo.artists ? moreInfo.artists[0].name : null,
+      year: moreInfo.year ? moreInfo.year : null,
+      label: release.labels ? release.labels[0] : null,
+      body: postForm.message_body,
+      thumbnail: release.image ? release.image : null,
+      // masterUrl: moreInfo.master_url
+    };
+    return fetchRequest(`${BASE_URL}/posts/${channelId}`, {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(dbPost),
     });
+  });
 };
 
 const removePost = (postId: string, userId: number) => {
@@ -261,4 +264,5 @@ export {
   removeSavedPost,
   getPost,
   savePost,
+  getForLater,
 };

@@ -9,9 +9,11 @@ export const CheckAuthenticateAndPopulate = () => {
 
   useEffect(() => {
     checkAuthGetUser()
-      .then(({ success, user }) => {
-        setUser(user)(dispatch);
-        setAuthentication(success)(dispatch);
+      .then((resp) => {
+        console.log(resp);
+
+        setUser(resp.user)(dispatch);
+        setAuthentication(resp.success)(dispatch);
       })
       .catch((err) => console.error(err));
   }, [dispatch]);

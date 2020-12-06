@@ -1,4 +1,4 @@
-@import "../../../styles/variables.scss";
+@import '../../../styles/variables.scss';
 
 .container_hero {
   @include flex-center;
@@ -20,7 +20,7 @@
     .logo_title {
       font-size: 5rem;
     }
-  } 
+  }
 
   .hero_subtitle {
     width: 80%;
@@ -55,7 +55,7 @@
     .buttons_channels {
       width: 40%;
       font-size: 1.1rem;
-      background: lighten($secondary-color, 20%)
+      background: lighten($secondary-color, 20%);
     }
   }
   .container_scrolldown {
@@ -85,4 +85,9 @@
   100% {
     transform: scale(0.92);
   }
+}
+
+.ongaku_image {
+  height: 500px;
+  width: auto;
 }
