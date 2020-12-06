@@ -123,7 +123,7 @@ const deleteFromDiscogs = (url: string, token: string, tokenSecret: string) => {
 
 const savePost = (userId: number, postId: string) => {
   console.log('save', postId);
-  return fetchRequest(`/users/${userId}/saved`, {
+  return fetchRequest(`${BASE_URL}/users/${userId}/saved`, {
     method: 'POST',
     mode: 'cors',
     headers: {
@@ -133,9 +133,9 @@ const savePost = (userId: number, postId: string) => {
   });
 };
 
-const removeSavedPost = (userId: number, postId: string) => {
+const removeSavedPost = (postId: string, userId: number) => {
   console.log('delete', postId);
-  return fetchRequest(`/users/${userId}/saved`, {
+  return fetchRequest(`${BASE_URL}/users/${userId}/saved`, {
     method: 'DELETE',
     mode: 'cors',
     headers: {
@@ -146,11 +146,11 @@ const removeSavedPost = (userId: number, postId: string) => {
 };
 
 const getUser = (userId: number) => {
-  return fetchRequest(`/users/${userId}/`);
+  return fetchRequest(`${BASE_URL}/users/${userId}/`);
 };
 
 const checkAuthGetUser = () => {
-  return fetchRequest('/auth/login/check', {
+  return fetchRequest(`${BASE_URL}/auth/login/check`, {
     method: 'GET',
     credentials: 'include',
     headers: {
@@ -163,6 +163,10 @@ const checkAuthGetUser = () => {
 
 const getPost = (postId: string) => {
   return fetchRequest(`${BASE_URL}/posts/${postId}/`);
+};
+
+const getForLater = (userId: number) => {
+  return fetchRequest(`${BASE_URL}/users/${userId}/saved`);
 };
 
 const createPost = (
@@ -257,4 +261,5 @@ export {
   removeSavedPost,
   getPost,
   savePost,
+  getForLater,
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import './styles/App.scss';
 import { Route, Switch } from 'react-router-dom';
 // import Createpost from './components/CreatePost/createPost';
+import ForLater from './components/ForLater/ForLater';
 import Finalcreatepost from './components/CreatePost/FinalCreatePost/FinalCreatePost';
 import Channel from './components/Channel/Channel';
 
@@ -25,6 +26,7 @@ const App: React.FC = () => {
       <Route exact path="/dashboard" component={Dashboard} />
       <Route exact path="/post" component={Postcard} />
       <Route exact path="/create" component={Finalcreatepost} />
+      <Route exact path="/later" component={ForLater} />
       <Route
         exact
         path="/post/:postId"

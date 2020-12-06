@@ -1,8 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { GiHamburgerMenu } from 'react-icons/gi';
 import {
-  IconButton,
   useDisclosure,
   Button,
   Container,
@@ -13,35 +11,31 @@ import {
   ModalCloseButton,
   Text,
 } from '@chakra-ui/react';
-import SideBar from '../Dashboard/SideBar/SideBar';
-import vinyl from '../../assets/vinyl.jpg';
+
 import CreatePost from '../CreatePost/createPost';
 import Postcard from '../PostCard/Postcard';
 import { getChannel, removePost } from '../../helpers/apiClientServer';
+import ChannelNavBar from './ChannelNavBar/ChannelNavBar';
+// import ForLater from '../ForLater/ForLater';
 
 interface Props {
   name: string;
 }
 
 const Channel: React.FC<Props> = ({ name }) => {
-  const [showSideBar, setShowSideBar] = useState(false);
-  const btnRef = useRef<HTMLButtonElement>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const channel = useSelector<State, Channel>((state) => state.currChannel);
   const [posts, setPosts] = useState<Post[] | []>([]);
-  const [users, setUsers] = useState<number | null>(null);
 
   useEffect(() => {
     console.log(channel);
     if (channel.id) {
       getChannel(channel.id).then((result: ChannelAndUsers) => {
-        console.log(result.channel);
         setPosts(result.channel.posts);
-        setUsers(result.users);
         // onClose();
       });
     }
-  }, []);
+  }, [channel]);
 
   function deletePost(postId: string, userId: number) {
     removePost(postId, userId).then(() => {
@@ -51,29 +45,7 @@ const Channel: React.FC<Props> = ({ name }) => {
 
   return (
     <div className="container">
-      <nav className="header">
-        <img src={vinyl} alt="vinyl_image" />
-        <div className="channel_title">@{name.toUpperCase()}</div>
-        <div className="welcome_user">
-          <IconButton
-            className="button_emoji"
-            aria-label="burger-icon"
-            backgroundColor="inherit"
-            size="lg"
-            icon={<GiHamburgerMenu />}
-            type="button"
-            ref={btnRef}
-            onClick={() => {
-              setShowSideBar((state) => !state);
-            }}
-          />
-        </div>
-        <div className="dashboard_info">
-          <h3>{users && `${users} Members`}</h3> <h3>{posts.length} Posts</h3>
-        </div>
-        <SideBar setShowSideBar={setShowSideBar} showSideBar={showSideBar} />
-      </nav>
-
+      <ChannelNavBar name={name} />
       <Container display="flex" justifyContent="center">
         <Button
           backgroundColor="#0f0e0e"
@@ -87,6 +59,7 @@ const Channel: React.FC<Props> = ({ name }) => {
         >
           + Create Post
         </Button>
+
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent backgroundColor="#f0f1ef" w="97%">
@@ -97,25 +70,21 @@ const Channel: React.FC<Props> = ({ name }) => {
           </ModalContent>
         </Modal>
       </Container>
-
-      {!(posts && posts.length) ? (
-        <Text>Be the first to post</Text>
-      ) : (
-        <Container position="relative" top="150px">
-          {posts
-            .sort(
-              (
-                a: { createdAt: string | number | Date },
-                b: { createdAt: string | number | Date }
-              ) =>
-                new Date(b.createdAt).valueOf() -
-                new Date(a.createdAt).valueOf()
-            )
-            .map((post) => (
-              <Postcard key={post.id} post={post} deletePost={deletePost} />
-            ))}
-        </Container>
-      )}
+      !(posts && posts.length) ? (<Text>Be the first to post</Text>) : (
+      <Container position="relative" top="150px">
+        {posts
+          .sort(
+            (
+              a: { createdAt: string | number | Date },
+              b: { createdAt: string | number | Date }
+            ) =>
+              new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf()
+          )
+          .map((post) => (
+            <Postcard key={post.id} post={post} deletePost={deletePost} />
+          ))}
+      </Container>
+      ){}
     </div>
   );
 };
