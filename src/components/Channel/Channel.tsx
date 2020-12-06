@@ -32,16 +32,14 @@ const Channel: React.FC<Props> = ({ name }) => {
   const [users, setUsers] = useState<number | null>(null);
 
   useEffect(() => {
-    console.log(channel);
     if (channel.id) {
       getChannel(channel.id).then((result: ChannelAndUsers) => {
         console.log(result.channel);
         setPosts(result.channel.posts);
         setUsers(result.users);
-        // onClose();
       });
     }
-  }, []);
+  }, [channel]);
 
   function deletePost(postId: string, userId: number) {
     removePost(postId, userId).then(() => {

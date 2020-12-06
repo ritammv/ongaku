@@ -204,8 +204,11 @@ const removePost = (postId: string, userId: number) => {
   return fetchRequest(`${BASE_URL}/posts/${postId}`, {
     method: 'DELETE',
     mode: 'cors',
+    credentials: 'include',
     headers: {
+      Accept: 'application/json',
       'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
     },
     body: JSON.stringify({ postId, userId }),
   });
