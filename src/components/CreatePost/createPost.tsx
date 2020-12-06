@@ -5,15 +5,12 @@ import {
   TabPanels,
   Tab,
   TabPanel,
-  SimpleGrid,
 } from '@chakra-ui/react';
 import { useSelector, useDispatch } from 'react-redux';
-import Tile from './Tile/Tile';
-// import { getLists } from '../../helpers/apiClient';
 import { getFromDiscogs } from '../../helpers/apiClientServer';
 import * as actions from '../../store/actionCreators';
 import SearchDiscogs from './SearchDiscogs';
-import Createbutton from './CreateButton';
+import PanelListItem from './PanelListItem';
 
 const CreatePost: React.FC = () => {
   const [collection, setCollection] = useState<Release[]>([]);
@@ -95,8 +92,7 @@ const CreatePost: React.FC = () => {
       image: '',
     });
   }, [dispatch, user.username, user.token, user.tokenSecret]);
-  const collectionColums: number = Math.floor(collection.length / 3 + 1);
-  const wantColums: number = Math.floor(wantList.length / 3 + 1);
+
   return (
     <>
       <Tabs>
@@ -117,40 +113,28 @@ const CreatePost: React.FC = () => {
             Wantlist
           </Tab>
         </TabList>
+        
         <TabPanels>
           <TabPanel overflowX="scroll" minHeight="90vh" display="flex">
             <SearchDiscogs selected={selected} setSelected={setSelected} />
           </TabPanel>
           <TabPanel overflowX="scroll">
-            <SimpleGrid columns={[collectionColums, null, 2]} spacing="5px">
-              {collection.map((release) => {
-                return (
-                  <Tile
-                    key={release.id}
-                    result={release}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
-                );
-              })}
-            </SimpleGrid>
-            <Createbutton selected={selected} />
+  
+            <PanelListItem 
+              data={collection} 
+              selected={selected} 
+              setSelected={setSelected}
+            />
           </TabPanel>
+
           <TabPanel overflowX="scroll">
-            <SimpleGrid columns={[wantColums, null, 2]} spacing="5px">
-              {wantList.map((want) => {
-                return (
-                  <Tile
-                    key={want.id}
-                    result={want}
-                    selected={selected}
-                    setSelected={setSelected}
-                  />
-                );
-              })}
-            </SimpleGrid>
-            <Createbutton selected={selected} />
+            <PanelListItem 
+              data={wantList} 
+              selected={selected} 
+              setSelected={setSelected}
+            />
           </TabPanel>
+
         </TabPanels>
       </Tabs>
     </>
