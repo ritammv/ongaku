@@ -13,7 +13,6 @@ import {
   ModalCloseButton,
   Text,
 } from '@chakra-ui/react';
-
 import SideBar from '../Dashboard/SideBar/SideBar';
 import vinyl from '../../assets/vinyl.jpg';
 import CreatePost from '../CreatePost/createPost';
@@ -30,12 +29,16 @@ const Channel: React.FC<Props> = ({ name }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const channel = useSelector<State, Channel>((state) => state.currChannel);
   const [posts, setPosts] = useState<Post[] | []>([]);
+  const [users, setUsers] = useState<number | null>(null);
 
   useEffect(() => {
+    console.log(channel);
     if (channel.id) {
       getChannel(channel.id).then((result: ChannelAndUsers) => {
+        console.log(result.channel);
         setPosts(result.channel.posts);
-        onClose();
+        setUsers(result.users);
+        // onClose();
       });
     }
   }, []);
@@ -66,7 +69,7 @@ const Channel: React.FC<Props> = ({ name }) => {
           />
         </div>
         <div className="dashboard_info">
-          <h3>2098 Members</h3> <h3>1320 Posts</h3>
+          <h3>{users && `${users} Members`}</h3> <h3>{posts.length} Posts</h3>
         </div>
         <SideBar setShowSideBar={setShowSideBar} showSideBar={showSideBar} />
       </nav>

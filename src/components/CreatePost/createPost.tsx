@@ -36,7 +36,6 @@ const CreatePost: React.FC = () => {
 
   useEffect(() => {
     dispatch(actions.setIsLoading(true));
-    // getLists(user.username, 'collection', user.token, user.tokenSecret)
     getFromDiscogs(
       `/users/${user.username}/collection`,
       user.token,
@@ -61,7 +60,6 @@ const CreatePost: React.FC = () => {
       )
       .then(() => dispatch(actions.setIsLoading(false)));
 
-    // getLists(user.username, 'wants', user.token, user.tokenSecret)
     getFromDiscogs(
       `/users/${user.username}/wants`,
       user.token,

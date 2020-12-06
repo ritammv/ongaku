@@ -88,8 +88,9 @@ export const headerAnimation = ():GSAPTimeline => {
     .to('.home_nav', { opacity: 1, transform: 'translate(0)', duration: 1 });
 };
 
-export const slideInAndUp = (className1: string, className2: string, cb?: () => void):GSAPTimeline => {
-  return gsap.timeline()
-    .to(`.${className1}`, { transform: 'scale(1.4)', duration: 3})
-    .to(`.${className2}`, { opacity: 0, y: 120, duration: 1, onComplete: cb });
-};
+export const slideInAndUp = 
+  (className1: string, className2: string, cb?: () => void):GSAPTimeline => {
+    return gsap.timeline()
+      .to(`.${className1}`, { transform: 'scale(1.4)', duration: 3 })
+      .to(`.${className2}`, { opacity: 0, y: 120, duration: 1, onComplete: cb });
+  };

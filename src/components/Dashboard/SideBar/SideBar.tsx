@@ -53,8 +53,6 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
   const [searchResult, setSearchResult] = useState<string>('');
 
   useEffect(() => {
-    console.log(userDetails);
-
     if (userDetails.id) {
       getUser(userDetails.id).then((user) => {
         actions.setUser(user)(dispatch);
