@@ -142,3 +142,14 @@
 .MuiAutocomplete-endAdornment {
   visibility: hidden;
 }
+
+.channel_list_content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.unsubscribe_channel {
+  position: relative;
+  right: 7%;
+}

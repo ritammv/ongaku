@@ -84,6 +84,7 @@ img .vinyl_channel {
 .comment_header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   p {
     color: rgba(6, 93, 194, 0.6);
     margin-bottom: 5px;
@@ -93,6 +94,6 @@ img .vinyl_channel {
 .postcard_header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   flex-direction: row;
-  background-color: red;
 }
