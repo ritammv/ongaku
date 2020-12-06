@@ -8,8 +8,6 @@ import SideBar from './SideBar/SideBar';
 import DashboardWelcome from './DashboardWelcome/DashboardWelcome';
 
 const Dashboard: React.FC = () => {
-  const user = useSelector((state: State) => state.user);
-
   const [showSideBar, setShowSideBar] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
 

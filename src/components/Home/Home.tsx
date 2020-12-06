@@ -14,7 +14,6 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     if (isAuthenticated && user.channels) {
-      console.log('check');
       if (user.channels.length) navigate('dashboard');
       else navigate('discover');
     }
