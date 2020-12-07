@@ -1,18 +1,18 @@
 const BASE_URL = 'http://localhost:3001';
 
 function fetchRequest(path: string, options?: Object) {
-  const defaultOptions: RequestInit = {
-    credentials: 'include',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Credentials': 'true',
-    }
-  };
+  // const defaultOptions: RequestInit = {
+  //   credentials: 'include',
+  //   headers: {
+  //     Accept: 'application/json',
+  //     'Content-Type': 'application/json',
+  //     'Access-Control-Allow-Credentials': 'true',
+  //   },
+  // };
 
-  Object.assign(defaultOptions, options || {});
+  // Object.assign(defaultOptions, options || {});
 
-  return fetch(path, defaultOptions)
+  return fetch(path, options)
     .then((res) => (res.status < 400 ? res : Promise.reject()))
     .then((res) => (res.status !== 204 ? res.json() : res))
     .catch((err) => {
@@ -37,7 +37,6 @@ const getChannel = (channelId: string): Promise<ChannelAndUsers> => {
 };
 
 const createChannel = (userId: number, body: Object): Promise<Channel> => {
-
   return fetchRequest(`${BASE_URL}/channels/users/${userId}`, {
     method: 'POST',
     mode: 'cors',
@@ -60,7 +59,6 @@ const subscribeToChannels = (userId: number, channels: ChannelForDb[]) => {
 };
 
 const unsubscribeFromChannel = (userId: number, channel: Channel) => {
-  console.log('in apiclient', userId, channel);
   return fetchRequest(`${BASE_URL}/users/${userId}/channels`, {
     method: 'DELETE',
     mode: 'cors',
@@ -139,7 +137,6 @@ const deleteFromDiscogs = (url: string, token: string, tokenSecret: string) => {
 };
 
 const savePost = (userId: number, postId: string) => {
-  console.log('save', postId);
   return fetchRequest(`${BASE_URL}/users/${userId}/saved`, {
     method: 'POST',
     mode: 'cors',

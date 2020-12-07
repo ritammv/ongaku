@@ -19,7 +19,11 @@ import {
 import './createChannel.scss';
 import * as actions from '../../../store/actionCreators';
 import { OnClickRoute } from '../../../helpers/onClickRoute';
-import { createChannel, getChannels, getAllChannels } from '../../../helpers/apiClientServer';
+import {
+  createChannel,
+  getChannels,
+  getAllChannels,
+} from '../../../helpers/apiClientServer';
 
 interface Props {
   showModal: boolean;
@@ -32,7 +36,6 @@ const CreateChannel: React.FC<Props> = ({
   setShowModal,
   closeChannels,
 }) => {
-
   const navigate = OnClickRoute();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [channels, setChannels] = useState<Channel[]>([]);
@@ -65,21 +68,14 @@ const CreateChannel: React.FC<Props> = ({
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // const filteredResult = allChannels.filter((chan) => 
-    //   chan.name.toLowerCase() === options.name.toLowerCase());
-
-    // if (filteredResult.length) {
-    //   setError(!error);
-
     if (options) {
-      createChannel(user.id, options)
-        .then((newChannel) => {
-          dispatch(actions.addChannel(newChannel));
-          navigate(`channels/${newChannel.name}`);
-          onClose();
-          closeChannels();
-          // setError(false);
-        });
+      createChannel(user.id, options).then((newChannel) => {
+        dispatch(actions.addChannel(newChannel));
+        navigate(`channels/${newChannel.name}`);
+        onClose();
+        closeChannels();
+        // setError(false);
+      });
     }
     setOptions({
       name: '',
@@ -96,7 +92,7 @@ const CreateChannel: React.FC<Props> = ({
     getChannels().then((channelsReq) => {
       setChannels(channelsReq);
     });
-    
+
     getAllChannels().then((allChannelsReq) => {
       setAllChannels(allChannelsReq);
     });

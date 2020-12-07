@@ -21,6 +21,7 @@ import {
   unsubscribeFromChannel,
   getPublicChannels,
 } from '../../../helpers/apiClientServer';
+import SubscribePrivateChannel from '../SubscribePrivateChannel/SubscribePrivateChannel';
 
 interface Props {
   showSideBar: boolean;
@@ -38,7 +39,7 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
 
   const history = useHistory();
   const dispatch = useDispatch();
-
+  const [showSubscribe, setShowSubscribe] = useState<boolean>(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [showModal, setShowModal] = useState<boolean>(false);
   const [allChannels, setAllChannels] = useState<Channel[]>([]);
@@ -106,7 +107,9 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
         <DrawerOverlay>
           <DrawerContent>
             <DrawerCloseButton onClick={() => handleClose()} />
-            <DrawerHeader>Hello! Welcome back</DrawerHeader>
+            <DrawerHeader>
+              Hello! Welcome back {userDetails.username}
+            </DrawerHeader>
             <DrawerBody>
               <div className="drawer_channel">Channels</div>
 
@@ -219,6 +222,19 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
               >
                 Create a channel +
               </button>
+              <button
+                style={{
+                  height: '50px',
+                  width: '200px',
+                }}
+                className="genre_tag_button create_channel_button"
+                type="button"
+                onClick={() => {
+                  setShowSubscribe((state) => !state);
+                }}
+              >
+                Join Private Channel +
+              </button>
             </DrawerFooter>
           </DrawerContent>
         </DrawerOverlay>
@@ -227,6 +243,10 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
         closeChannels={onClose}
         setShowModal={setShowModal}
         showModal={showModal}
+      />
+      <SubscribePrivateChannel
+        setShowSubscribe={setShowSubscribe}
+        showSubscribe={showSubscribe}
       />
     </div>
   );

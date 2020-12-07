@@ -1,11 +1,9 @@
 import React from 'react';
 import './styles/App.scss';
 import { Route, Switch } from 'react-router-dom';
-// import Createpost from './components/CreatePost/createPost';
 import ForLater from './components/ForLater/ForLater';
 import Finalcreatepost from './components/CreatePost/FinalCreatePost/FinalCreatePost';
 import Channel from './components/Channel/Channel';
-
 import Dashboard from './components/Dashboard/Dashboard';
 import Discover from './components/Discover/Discover';
 import Home from './components/Home/Home';
