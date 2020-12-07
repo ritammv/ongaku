@@ -100,21 +100,23 @@ const Channel: React.FC<Props> = ({ name }) => {
           </ModalContent>
         </Modal>
       </Container>
-      !(posts && posts.length) ? (<Text>Be the first to post</Text>) : (
-      <Container position="relative" top="150px">
-        {posts
-          .sort(
-            (
-              a: { createdAt: string | number | Date },
-              b: { createdAt: string | number | Date }
-            ) =>
-              new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf()
-          )
-          .map((post) => (
-            <Postcard key={post.id} post={post} deletePost={deletePost} />
-          ))}
-      </Container>
-      )
+      {!(posts && posts.length) 
+        ? (<Text>Be the first to post</Text>) 
+        : (
+          <Container position="relative" top="150px">
+            {posts
+              .sort(
+                (
+                  a: { createdAt: string | number | Date },
+                  b: { createdAt: string | number | Date }
+                ) =>
+                  new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf()
+              )
+              .map((post) => (
+                <Postcard key={post.id} post={post} deletePost={deletePost} />
+              ))}
+          </Container>
+        )}
     </div>
   );
 };

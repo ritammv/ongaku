@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import './ShowDetails.scss';
 import { getFromDiscogs } from '../../helpers/apiClientServer';
-import ReleaseDetails from './ReleaseDetails/ReleaseDetails';
+// import ReleaseDetails from './ReleaseDetails/ReleaseDetails';
 
 // release, artist, label, track(?)
 
@@ -84,8 +84,9 @@ const ShowDetails: React.FC = () => {
 
   return (
     <>
-      { data &&
-      <ReleaseDetails post={result} release={data} />}
+      Release detail page
+      {/* { data &&
+      <ReleaseDetails post={result} release={data} />} */}
     </>
   );
 };

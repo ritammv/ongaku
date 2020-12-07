@@ -1,18 +1,18 @@
 const BASE_URL = 'http://localhost:3001';
 
 function fetchRequest(path: string, options?: Object) {
-  const defaultOptions: RequestInit = {
-    credentials: 'include',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Credentials': 'true',
-    }
-  };
+  // const defaultOptions: RequestInit = {
+  //   credentials: 'include',
+  //   headers: {
+  //     Accept: 'application/json',
+  //     'Content-Type': 'application/json',
+  //     'Access-Control-Allow-Credentials': 'true',
+  //   }
+  // };
 
-  Object.assign(defaultOptions, options || {});
+  // Object.assign(defaultOptions, options || {});
 
-  return fetch(path, defaultOptions)
+  return fetch(path, options)
     .then((res) => (res.status < 400 ? res : Promise.reject()))
     .then((res) => (res.status !== 204 ? res.json() : res))
     .catch((err) => {
