@@ -29,6 +29,17 @@ interface ReleaseDetails {
   url: string;
   image: string;
   type: string
+  resource_url: string;
+  country: string;
+  community: {
+    want: string;
+    have: string;
+  }
+  user_data: {
+    in_wantlist: boolean;
+    in_collection: boolean;
+  }
+  thumb: string;
 }
 
 interface SearchResult {

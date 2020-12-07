@@ -125,7 +125,7 @@ const Postcard: React.FC<Props> = ({ post, deletePost }) => {
         <div className="message_tile">
           <div
             className="tile_image"
-            onClick={() => history.push(`/post/${post.id}`)}
+            onClick={() => history.push(`/details/${post.url.split('com/')[1]}`)}
             aria-hidden="true"
           >
             <Image src={post.thumbnail} alt="release" />

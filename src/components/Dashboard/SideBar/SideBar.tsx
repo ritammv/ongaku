@@ -42,15 +42,8 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [showModal, setShowModal] = useState<boolean>(false);
   const [allChannels, setAllChannels] = useState<Channel[]>([]);
-  const [value, setValue] = useState<Channel | null>({
-    id: 'f8d71201-8a5f-4cd5-9989-46242eb4b49c',
-    name: 'Electronic',
-    ownerId: null,
-    private: false,
-    parentId: null,
-    posts: [],
-  });
-  const [searchResult, setSearchResult] = useState<string>('');
+  const [value, setValue] = useState<Channel | null>(null);
+  const [searchResult, setSearchResult] = useState<string>('Search for something...');
 
   useEffect(() => {
     if (userDetails.id) {
@@ -123,12 +116,12 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
               >
                 <Autocomplete
                   inputValue={searchResult}
-                  onInputChange={(e, newInput) => {
-                    setSearchResult(newInput);
-                  }}
                   value={value}
                   onChange={(e, newValue: Channel | null) => {
                     setValue(newValue);
+                  }}
+                  onInputChange={(e, newInput) => {
+                    setSearchResult(newInput);
                   }}
                   id="size-small-standard"
                   options={allChannels}

@@ -1,0 +1,48 @@
+@import '../../../styles/variables.scss';
+
+.img_buttons_container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  .content_thumb_container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    img {
+      width: 80%;
+    }
+  }
+
+  .content_body_buttons {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .button_wants,
+  .button_collection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    @include button-default;
+    height: 6vh;
+    border-radius: 0;
+  }
+  .button_wants.is_in,
+  .button_collection.is_in {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    @include button-default;
+  }
+}
+
+.button_inactive {
+  background: grey;
+}

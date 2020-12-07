@@ -1,7 +1,6 @@
 import React from 'react';
 import './styles/App.scss';
 import { Route, Switch } from 'react-router-dom';
-// import Createpost from './components/CreatePost/createPost';
 import ForLater from './components/ForLater/ForLater';
 import Finalcreatepost from './components/CreatePost/FinalCreatePost/FinalCreatePost';
 import Channel from './components/Channel/Channel';
@@ -12,8 +11,7 @@ import Home from './components/Home/Home';
 import Authenticated from './components/Authenticated/Authenticated';
 import Postcard from './components/PostCard/Postcard';
 import { CheckAuthenticateAndPopulate } from './helpers/checkAuthenticateAndPopulate';
-import Postdetails from './components/PostDetails/PostDetails';
-import ShowDetails from './components/ShowDetails/ShowDetails';
+import DetailsPage from './components/ShowDetails/DetailsPage';
 
 const App: React.FC = () => {
   CheckAuthenticateAndPopulate();
@@ -29,20 +27,15 @@ const App: React.FC = () => {
       <Route exact path="/later" component={ForLater} />
       <Route
         exact
-        path="/post/:postId"
+        path="/details/:type/:route"
         render={(routeProps) => (
-          <Postdetails postId={routeProps.match.params.postId} />
+          <DetailsPage type={routeProps.match.params.type} route={routeProps.match.params.route} />
         )}
       />
       <Route
         exact
         path="/channels/:name"
         render={(routeProps) => <Channel name={routeProps.match.params.name} />}
-      />
-      <Route
-        exact
-        path='/release'
-        component={ShowDetails}
       />
     </Switch>
   );

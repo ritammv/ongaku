@@ -176,8 +176,9 @@ const createPost = (
   postForm: FinalPost
 ) => {
   return fetchRequest(release.url).then((moreInfo) => {
-    console.log(moreInfo);
+    console.log('POSTFORM', postForm);
     console.log(release);
+    console.log(moreInfo);
     const dbPost = {
       userId: user.id,
       channelId,
@@ -191,6 +192,7 @@ const createPost = (
       thumbnail: release.image ? release.image : null,
       // masterUrl: moreInfo.master_url
     };
+    console.log(dbPost);
     return fetchRequest(`${BASE_URL}/posts/${channelId}`, {
       method: 'POST',
       mode: 'cors',
