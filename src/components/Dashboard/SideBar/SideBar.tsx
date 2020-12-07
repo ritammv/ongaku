@@ -52,7 +52,7 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
         dispatch(actions.setUser(user));
       });
     }
-  }, [userDetails.id]);
+  }, [userDetails.id, dispatch]);
 
   useEffect(() => {
     getPublicChannels().then((result) => {
@@ -107,9 +107,7 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
         <DrawerOverlay className="drawer">
           <DrawerContent>
             <DrawerCloseButton onClick={() => handleClose()} />
-            <DrawerHeader>
-              Hello! Welcome back HELP {userDetails.username}
-            </DrawerHeader>
+            <DrawerHeader>Hello! Welcome {userDetails.username}</DrawerHeader>
             <DrawerBody>
               <div className="drawer_channel">Channels</div>
 
@@ -134,8 +132,11 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                     <TextField
                       {...params}
                       variant="filled"
-                      style={{ opacity: '0.8', borderRadius: '0' }}
-                      placeholder="Search for a Channel"
+                      style={{
+                        opacity: '0.6',
+                        borderRadius: '0',
+                      }}
+                      placeholder="Search..."
                     />
                   )}
                 />
@@ -188,15 +189,14 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                 </ul>
               </div>
             </DrawerBody>
-            <DrawerFooter className="drawer">
+            <DrawerFooter className="drawer drawer_footer">
               <button
+                id="drawer_button"
                 style={{
                   height: '50px',
                   width: '130px',
-                  color: '#ffdbac',
-                  backgroundColor: '#101017',
                 }}
-                className=" two"
+                className=" genre_tag_button one"
                 type="button"
                 onClick={() => {
                   setShowModal((state) => !state);
@@ -205,17 +205,18 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                 + Create Channel
               </button>
               <button
+                id="drawer_button"
                 style={{
                   height: '50px',
-                  width: '200px',
+                  width: '130px',
                 }}
-                className="genre_tag_button create_channel_button"
+                className="genre_tag_button one"
                 type="button"
                 onClick={() => {
                   setShowSubscribe((state) => !state);
                 }}
               >
-                Join Private Channel +
+                + Join Private Channel
               </button>
             </DrawerFooter>
           </DrawerContent>

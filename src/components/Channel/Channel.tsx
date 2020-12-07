@@ -81,25 +81,30 @@ const Channel: React.FC<Props> = ({ name }) => {
       <ChannelNavBar name={name} />
       <Container display="flex" justifyContent="center">
         <Container className="channel_btn_container">
+          {!channel.private || channel.ownerId !== currUser.id ? (
+            <button
+              className="genre_tag_button one"
+              onClick={handleSubscribe}
+              type="button"
+            >
+              {currUser.channels.filter((chan) => chan.id === channel.id).length
+                ? 'unsubscribe'
+                : 'subscribe'}
+            </button>
+          ) : null}
+
+          {currUser.id === channel.ownerId && channel.private ? (
+            <button
+              className="genre_tag_button one "
+              onClick={() => setOpen(true)}
+              type="button"
+            >
+              + Invite
+            </button>
+          ) : null}
+
           <button
             className="genre_tag_button one"
-            onClick={handleSubscribe}
-            type="button"
-          >
-            {currUser.channels.filter((chan) => chan.id === channel.id).length
-              ? 'unsubscribe'
-              : 'subscribe'}
-          </button>
-          <Button
-            backgroundColor="black"
-            className="genre_tag_button channel_btn"
-            onClick={() => setOpen(true)}
-          >
-            {' '}
-            + Invite
-          </Button>
-          <button
-            className="genre_tag_button two"
             onClick={onOpen}
             type="button"
           >
@@ -134,15 +139,15 @@ const Channel: React.FC<Props> = ({ name }) => {
       </Container>
       {!(posts && posts.length) ? (
         <div className="channel_welcome">
-          <Text textAlign="center" fontSize="30px" width="80%">
+          {/* <Text textAlign="center" fontSize="30px" width="80%">
             This is the {name} channel !
-          </Text>
+          </Text> */}
           <Text textAlign="center" marginTop="2rem" fontSize="18px">
             Be the first to post
           </Text>
         </div>
       ) : (
-        <Container position="relative" top="150px">
+        <Container position="relative" top="20px">
           {posts
             .sort(
               (

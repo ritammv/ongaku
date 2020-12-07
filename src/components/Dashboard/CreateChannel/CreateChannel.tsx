@@ -158,7 +158,7 @@ const CreateChannel: React.FC<Props> = ({
                 </Select>
               </DrawerBody>
               <DrawerFooter>
-                <button className="genre_tag_button channel_btn" type="submit">
+                <button className="genre_tag_button one" type="submit">
                   Create
                 </button>
               </DrawerFooter>

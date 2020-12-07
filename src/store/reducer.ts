@@ -15,11 +15,11 @@ const initialState: State = {
   currChannel: {
     id: '',
     name: '',
-    ownerId: '',
+    ownerId: 0,
     private: true,
     parentId: null,
     posts: [],
-    subChannel: []
+    subChannel: [],
   },
   isLoading: true,
   authentication: false,
@@ -60,22 +60,22 @@ const reducer = (
       console.log('channels', channels);
       if (action.channel.parentId) {
         const parentIndex = channels.findIndex(
-          (chan) => chan.id === action.channel.parentId); 
+          (chan) => chan.id === action.channel.parentId
+        );
         console.log(parentIndex);
         if (parentIndex === -1) {
           channels = [...channels, action.channel];
         } else {
-          channels.splice(parentIndex+1, 0, action.channel);
+          channels.splice(parentIndex + 1, 0, action.channel);
         }
       } else {
-        channels =  [...channels, action.channel];
+        channels = [...channels, action.channel];
       }
-      
+
       const updatedUser = { ...state.user };
       updatedUser.channels = channels;
       console.log('update user', updatedUser);
       return { ...state, user: updatedUser };
-
     }
     case actionTypes.SET_AUTHENTICATION:
       return { ...state, authentication: action.authenticated };

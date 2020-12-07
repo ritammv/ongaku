@@ -89,7 +89,7 @@ const SubscribePrivateChannel = ({
             </ModalBody>
 
             <ModalFooter>
-              <button className="genre_tag_button channel_btn" type="submit">
+              <button className="genre_tag_button one" type="submit">
                 Subscribe
               </button>
             </ModalFooter>

@@ -78,7 +78,7 @@ interface Post {
 interface Channel {
   id: string;
   name: string;
-  ownerId: string | null;
+  ownerId: number | null;
   parentId: string | null;
   private: boolean;
   posts: Post[];
