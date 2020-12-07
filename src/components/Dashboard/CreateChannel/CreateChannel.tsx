@@ -66,22 +66,6 @@ const CreateChannel: React.FC<Props> = ({
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-<<<<<<< HEAD
-
-    // const filteredResult = allChannels.filter((chan) =>
-    //   chan.name.toLowerCase() === options.name.toLowerCase());
-
-    // if (filteredResult.length) {
-    //   setError(!error);
-
-    if (options) {
-      createChannel(user.id, options).then((newChannel) => {
-        dispatch(actions.addChannel(newChannel));
-        navigate(`channels/${newChannel.name}`);
-        onClose();
-        closeChannels();
-        // setError(false);
-=======
     if (options) {
       createChannel(user.id, options).then((newChannel) => {
         if (newChannel) {
@@ -99,7 +83,6 @@ const CreateChannel: React.FC<Props> = ({
             isClosable: true,
           });
         }
->>>>>>> main
       });
     }
 

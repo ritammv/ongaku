@@ -11,6 +11,7 @@ import {
   ModalCloseButton,
   Text,
   AlertDialog,
+  Button,
   AlertDialogHeader,
   AlertDialogContent,
 } from '@chakra-ui/react';
@@ -80,23 +81,15 @@ const Channel: React.FC<Props> = ({ name }) => {
       <ChannelNavBar name={name} />
       <Container display="flex" justifyContent="center">
         <Container className="channel_btn_container">
-<<<<<<< HEAD
-          <button
-            className="genre_tag_button one"
-=======
           <Button
             backgroundColor="#065dc2"
             className="genre_tag_button channel_btn"
->>>>>>> main
             onClick={handleSubscribe}
             type="button"
           >
             {currUser.channels.filter((chan) => chan.id === channel.id).length
               ? 'unsubscribe'
               : 'subscribe'}
-<<<<<<< HEAD
-          </button>
-=======
           </Button>
           <Button
             backgroundColor="black"
@@ -106,7 +99,6 @@ const Channel: React.FC<Props> = ({ name }) => {
             {' '}
             + Invite
           </Button>
->>>>>>> main
 
           <button
             className="genre_tag_button two"
@@ -143,18 +135,7 @@ const Channel: React.FC<Props> = ({ name }) => {
         </Modal>
       </Container>
       {!(posts && posts.length) ? (
-<<<<<<< HEAD
-        <div className="channel_welcome">
-          <Text textAlign="center" fontSize="30px" width="80%">
-            This is the {name} channel !
-          </Text>
-          <Text textAlign="center" marginTop="2rem" fontSize="18px">
-            Be the first to post
-          </Text>
-        </div>
-=======
         <Text>Be the first to post</Text>
->>>>>>> main
       ) : (
         <Container position="relative" top="150px">
           {posts
@@ -167,9 +148,6 @@ const Channel: React.FC<Props> = ({ name }) => {
                 new Date(a.createdAt).valueOf()
             )
             .map((post) => (
-<<<<<<< HEAD
-              <Postcard key={post.id} post={post} deletePost={deletePost} />
-=======
               <Postcard
                 key={post.id}
                 post={post}
@@ -177,7 +155,6 @@ const Channel: React.FC<Props> = ({ name }) => {
                 savePost={savePost}
                 setSavePost={setSavePost}
               />
->>>>>>> main
             ))}
         </Container>
       )}
