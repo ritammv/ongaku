@@ -11,7 +11,6 @@ import {
   ModalCloseButton,
   Text,
 } from '@chakra-ui/react';
-
 import CreatePost from '../CreatePost/createPost';
 import Postcard from '../PostCard/Postcard';
 import { getChannel, removePost } from '../../helpers/apiClientServer';
@@ -84,7 +83,7 @@ const Channel: React.FC<Props> = ({ name }) => {
             <Postcard key={post.id} post={post} deletePost={deletePost} />
           ))}
       </Container>
-      ){}
+      )
     </div>
   );
 };
