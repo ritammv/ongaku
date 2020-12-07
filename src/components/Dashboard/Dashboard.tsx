@@ -3,7 +3,7 @@ import { IconButton, Container } from '@chakra-ui/react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import './dashboard.scss';
 import { useSelector } from 'react-redux';
-import vinyl from '../../assets/vinyl.jpg';
+import ongaku from '../../assets/ongaku-2.svg';
 import SideBar from './SideBar/SideBar';
 import DashboardWelcome from './DashboardWelcome/DashboardWelcome';
 
@@ -14,7 +14,7 @@ const Dashboard: React.FC = () => {
   return (
     <div className="container">
       <nav className="header">
-        <img src={vinyl} alt="vinyl_image" />
+        <img className="header_log" src={ongaku} alt="vinyl_image" />
         <div className="welcome_user">
           <IconButton
             className="button_emoji"

@@ -83,7 +83,7 @@ const Discover: React.FC = () => {
         <Link to="/dashboard">
           <button
             className="genre_tag_button"
-            style={{ color: ' black', backgroundColor: 'white ' }}
+            style={{ color: '#ffdbac', backgroundColor: 'black' }}
             type="submit"
             onClick={handleSubmit}
           >
