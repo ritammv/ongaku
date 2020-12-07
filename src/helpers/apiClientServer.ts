@@ -1,7 +1,18 @@
 const BASE_URL = 'http://localhost:3001';
 
 function fetchRequest(path: string, options?: Object) {
-  return fetch(path, options)
+  const defaultOptions: RequestInit = {
+    credentials: 'include',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
+    }
+  };
+
+  Object.assign(defaultOptions, options || {});
+
+  return fetch(path, defaultOptions)
     .then((res) => (res.status < 400 ? res : Promise.reject()))
     .then((res) => (res.status !== 204 ? res.json() : res))
     .catch((err) => {
@@ -139,7 +150,8 @@ const savePost = (userId: number, postId: string) => {
   });
 };
 
-const removeSavedPost = (userId: number, postId: string) => {
+const removeSavedPost = (postId: string, userId: number) => {
+  console.log('delete', postId);
   return fetchRequest(`${BASE_URL}/users/${userId}/saved`, {
     method: 'DELETE',
     mode: 'cors',
@@ -168,6 +180,10 @@ const checkAuthGetUser = () => {
 
 const getPost = (postId: string) => {
   return fetchRequest(`${BASE_URL}/posts/${postId}/`);
+};
+
+const getForLater = (userId: number) => {
+  return fetchRequest(`${BASE_URL}/users/${userId}/saved`);
 };
 
 const createPost = (
@@ -205,8 +221,11 @@ const removePost = (postId: string, userId: number) => {
   return fetchRequest(`${BASE_URL}/posts/${postId}`, {
     method: 'DELETE',
     mode: 'cors',
+    credentials: 'include',
     headers: {
+      Accept: 'application/json',
       'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
     },
     body: JSON.stringify({ postId, userId }),
   });
@@ -259,5 +278,6 @@ export {
   removeSavedPost,
   getPost,
   savePost,
-  getAllChannels
+  getAllChannels,
+  getForLater,
 };

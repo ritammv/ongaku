@@ -3,7 +3,7 @@ import './Hero.scss';
 import { useIsInScroll } from '../../../helpers/isInScroll';
 import { heroAnimation } from '../../../helpers/animation';
 // import Logo from '../../Logo/Logo';
-import ongaku from '../../../assets/Ongaku.svg';
+import ongaku from '../../../assets/ongaku1.svg';
 import DownArrow from '../../../assets/arrow-down.svg';
 import { OnClickRoute } from '../../../helpers/onClickRoute';
 import LoginButton from '../LoginButton/LoginButton';
@@ -45,10 +45,10 @@ const Hero: React.FC = () => {
             <span id="sharing">Sharing</span>
             <span id="community">Community</span>
           </div>
-          <div className="hero_subtext">
+          {/* <div className="hero_subtext">
             The Platform That Allows You To Share Music You Love With The
             Community You Love
-          </div>
+          </div> */}
         </div>
         <div className="hero_buttons">
           <div className="buttons_join">
@@ -59,13 +59,13 @@ const Hero: React.FC = () => {
               styles={true}
             />
           </div>
-          <button
+          {/* <button
             type="button"
             className="buttons_channels"
             onClick={() => handleClick('dashboard')}
           >
             Channels
-          </button>
+          </button> */}
         </div>
         <div className="container_scrolldown">
           <img className="svg-arrow" src={DownArrow} alt="arrow_down" />

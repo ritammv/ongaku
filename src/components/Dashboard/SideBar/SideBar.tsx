@@ -65,6 +65,11 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
     history.push(`/channels/${newChannel.name}`);
   };
 
+  const navigateToLater = (e: Event) => {
+    onClose();
+    history.push('/later');
+  };
+
   const handleClose = () => {
     onClose();
     setShowSideBar(false);
@@ -140,24 +145,24 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                     (userDetails.channels as Channel[]).map((chan: Channel) => {
                       return (
                         !chan.private && (
-                        <div className='channel_list_content' key={chan.id}>
-                          <button
-                            type="button"
-                            className={`channel_item ${
-                              chan.name === channel.name ? 'active' : ''
-                            }`}
-                            onClick={(e) => changePage(e, chan)}
-                          >
-                            #{chan.name}
-                          </button>
-                          <button
-                            type="button"
-                            className="unsubscribe_channel"
-                            onClick={(e) => unsubscribe(e, chan)}
-                          >
-                            x
-                          </button>
-                        </div>
+                          <div className="channel_list_content" key={chan.id}>
+                            <button
+                              type="button"
+                              className={`channel_item ${
+                                chan.name === channel.name ? 'active' : ''
+                              }`}
+                              onClick={(e) => changePage(e, chan)}
+                            >
+                              #{chan.name}
+                            </button>
+                            <button
+                              type="button"
+                              className="unsubscribe_channel"
+                              onClick={(e) => unsubscribe(e, chan)}
+                            >
+                              x
+                            </button>
+                          </div>
                         )
                       );
                     })}
@@ -166,14 +171,18 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
               <div className="drawer_private">
                 <h3 className="public_title">Private</h3>
                 <ul className="private_channel_list">
+                  <button
+                    type="button"
+                    className="channel_item"
+                    onClick={(e) => navigateToLater(e)}
+                  >
+                    #For Later
+                  </button>
                   {userDetails.channels &&
                     (userDetails.channels as Channel[]).map(
                       (chan: Channel) =>
                         chan.private === true && (
-                          <div 
-                            className='channel_list_content'
-                            key={chan.id}
-                          >
+                          <div className="channel_list_content" key={chan.id}>
                             <button
                               type="button"
                               className={`channel_item ${
