@@ -104,7 +104,7 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
   return (
     <div>
       <Drawer isOpen={isOpen} placement="left" onClose={onClose} size="full">
-        <DrawerOverlay>
+        <DrawerOverlay className="drawer">
           <DrawerContent>
             <DrawerCloseButton onClick={() => handleClose()} />
             <DrawerHeader>
@@ -134,7 +134,7 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                     <TextField
                       {...params}
                       variant="filled"
-                      style={{ opacity: '0.8', borderRadius: '12px' }}
+                      style={{ opacity: '0.8', borderRadius: '0' }}
                       placeholder="Search for a Channel"
                     />
                   )}
@@ -148,11 +148,11 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                     (userDetails.channels as Channel[]).map((chan: Channel) => {
                       return (
                         !chan.private && (
-                          <SideBarItem 
+                          <SideBarItem
                             key={chan.id}
-                            channel={chan} 
-                            activeChannel={channel} 
-                            changePage={changePage} 
+                            channel={chan}
+                            activeChannel={channel}
+                            changePage={changePage}
                             unsubscribe={unsubscribe}
                             user={userDetails}
                           />
@@ -175,11 +175,11 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                     (userDetails.channels as Channel[]).map(
                       (chan: Channel) =>
                         chan.private === true && (
-                          <SideBarItem 
+                          <SideBarItem
                             key={chan.id}
-                            channel={chan} 
-                            activeChannel={channel} 
-                            changePage={changePage} 
+                            channel={chan}
+                            activeChannel={channel}
+                            changePage={changePage}
                             unsubscribe={unsubscribe}
                             user={userDetails}
                           />
@@ -188,13 +188,15 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                 </ul>
               </div>
             </DrawerBody>
-            <DrawerFooter>
+            <DrawerFooter className="drawer">
               <button
                 style={{
                   height: '50px',
-                  width: '200px',
+                  width: '130px',
+                  color: '#ffdbac',
+                  backgroundColor: '#101017',
                 }}
-                className="genre_tag_button create_channel_button"
+                className=" two"
                 type="button"
                 onClick={() => {
                   setShowModal((state) => !state);

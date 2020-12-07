@@ -3,7 +3,7 @@ import { Container } from '@chakra-ui/react';
 
 import './dashboard.scss';
 import { useSelector } from 'react-redux';
-import ongaku from '../../assets/ongaku-2.svg';
+import ongaku from '../../assets/ongaku-logo-4.svg';
 import SideBar from './SideBar/SideBar';
 import DashboardWelcome from './DashboardWelcome/DashboardWelcome';
 import ChannelNavBar from '../Channel/ChannelNavBar/ChannelNavBar';

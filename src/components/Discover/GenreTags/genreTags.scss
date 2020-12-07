@@ -3,7 +3,7 @@
 .genre_tag_button {
   @include button-default;
   width: 120px;
-  border-radius: 8px;
+  border-radius: 0px;
   height: 40px;
   color: $secondary-color;
   background-color: $primary-color;
@@ -18,6 +18,21 @@
     transition: 0.3s all;
     transform: translateY(3px);
     opacity: 0.8;
+  }
+  &.one {
+    background-color: inherit;
+    color: $secondary-color;
+    font-weight: bold;
+    border: 1px solid $secondary-color;
+    width: 130px;
+    margin-right: 15px;
+  }
+  &.two {
+    background-color: $secondary-color;
+    color: $accent-two;
+    font-weight: bold;
+    border: 1px solid $secondary-color;
+    width: 130px;
   }
 }
 

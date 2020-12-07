@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './Authenticated.scss';
 import { useSelector } from 'react-redux';
-import Logo from '../Logo/Logo';
+import ongaku from '../../assets/ongaku-logo.svg';
 import { randomCircles, slideInAndUp } from '../../helpers/animation';
 import { OnClickRoute } from '../../helpers/onClickRoute';
 
@@ -13,7 +13,7 @@ const Authenticated: React.FC = () => {
   useEffect(() => {
     const intervalId = setInterval(
       () => randomCircles('.container_animation_circles'),
-      600
+      700
     );
     return () => {
       clearInterval(intervalId);
@@ -35,12 +35,7 @@ const Authenticated: React.FC = () => {
       <div className="container-full container_animation_circles">
         <div className="container_login">
           <div className="login_container_logo">
-            <Logo
-              widthPx={180}
-              innerColor="#fefefe"
-              outerColor="#0f0e0e"
-              textColor="#065dc2"
-            />
+            <img src={ongaku} className="login_logo" alt="ongaku-logo" />
           </div>
         </div>
         <div className="authenticated_welcome"> Welcome to Ongaku </div>

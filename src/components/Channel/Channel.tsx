@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import {
   useDisclosure,
-  Button,
   Container,
   ModalOverlay,
+  Button,
   Modal,
   ModalContent,
   ModalBody,
@@ -25,6 +25,7 @@ import {
 } from '../../helpers/apiClientServer';
 import * as actions from '../../store/actionCreators';
 import ChannelNavBar from './ChannelNavBar/ChannelNavBar';
+import './Channel.scss';
 
 interface Props {
   name: string;
@@ -80,15 +81,15 @@ const Channel: React.FC<Props> = ({ name }) => {
       <ChannelNavBar name={name} />
       <Container display="flex" justifyContent="center">
         <Container className="channel_btn_container">
-          <Button
-            backgroundColor="#065dc2"
-            className="genre_tag_button channel_btn"
+          <button
+            className="genre_tag_button one"
             onClick={handleSubscribe}
+            type="button"
           >
             {currUser.channels.filter((chan) => chan.id === channel.id).length
               ? 'unsubscribe'
               : 'subscribe'}
-          </Button>
+          </button>
           <Button
             backgroundColor="black"
             className="genre_tag_button channel_btn"
@@ -97,14 +98,13 @@ const Channel: React.FC<Props> = ({ name }) => {
             {' '}
             + Invite
           </Button>
-
-          <Button
-            backgroundColor="#0f0e0e"
-            className="genre_tag_button channel_btn"
+          <button
+            className="genre_tag_button two"
             onClick={onOpen}
+            type="button"
           >
             + Create Post
-          </Button>
+          </button>
         </Container>
         <AlertDialog
           leastDestructiveRef={closeRef}
@@ -133,7 +133,14 @@ const Channel: React.FC<Props> = ({ name }) => {
         </Modal>
       </Container>
       {!(posts && posts.length) ? (
-        <Text>Be the first to post</Text>
+        <div className="channel_welcome">
+          <Text textAlign="center" fontSize="30px" width="80%">
+            This is the {name} channel !
+          </Text>
+          <Text textAlign="center" marginTop="2rem" fontSize="18px">
+            Be the first to post
+          </Text>
+        </div>
       ) : (
         <Container position="relative" top="150px">
           {posts
