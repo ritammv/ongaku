@@ -2,7 +2,7 @@ const BASE_URL = 'http://localhost:3001';
 
 function fetchRequest(path: string, options?: Object) {
   return fetch(path, options)
-    .then((res) => (res.status < 400 ? res : Promise.reject(new Error('fail'))))
+    .then((res) => (res.status < 400 ? res : Promise.reject()))
     .then((res) => (res.status !== 204 ? res.json() : res))
     .catch((err) => {
       console.error('error', err);

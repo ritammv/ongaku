@@ -38,7 +38,7 @@ const CreateChannel: React.FC<Props> = ({
   const [channels, setChannels] = useState<Channel[]>([]);
   const [allChannels, setAllChannels] = useState<Channel[]>([]);
   const user = useSelector<State, User>((state: State) => state.user);
-  const [error, setError] = useState<boolean>(false);
+  // const [error, setError] = useState<boolean>(false);
   const [options, setOptions] = useState({
     name: '',
     parentId: '',
@@ -65,29 +65,27 @@ const CreateChannel: React.FC<Props> = ({
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const filteredResult = allChannels.filter((chan) => 
-      chan.name.toLowerCase() === options.name.toLowerCase());
+    // const filteredResult = allChannels.filter((chan) => 
+    //   chan.name.toLowerCase() === options.name.toLowerCase());
 
-    if (filteredResult.length) {
-      console.log('channel already exists');
-      setError(!error);
+    // if (filteredResult.length) {
+    //   setError(!error);
 
-    } else if (options) {
+    if (options) {
       createChannel(user.id, options)
         .then((newChannel) => {
           dispatch(actions.addChannel(newChannel));
           navigate(`channels/${newChannel.name}`);
           onClose();
           closeChannels();
+          // setError(false);
         });
-            
-      setOptions({
-        name: '',
-        parentId: '',
-        isPrivate: false,
-      });
-      setError(!error);
     }
+    setOptions({
+      name: '',
+      parentId: '',
+      isPrivate: false,
+    });
   };
 
   useEffect(() => {
@@ -122,6 +120,7 @@ const CreateChannel: React.FC<Props> = ({
                   name="name"
                   onChange={handleChange}
                   value={options.name}
+                  required
                 />
                 <Select
                   className="create_channel_form"
@@ -138,6 +137,7 @@ const CreateChannel: React.FC<Props> = ({
                   onChange={handleChange}
                   placeholder="Genre"
                   value={options.parentId}
+                  required
                 >
                   {channels &&
                     channels.map((channel: Channel, i: number) => (
@@ -148,14 +148,14 @@ const CreateChannel: React.FC<Props> = ({
                 </Select>
               </DrawerBody>
 
-              {
+              {/* {
                 error &&
                 <Alert status="error">
                   <AlertIcon />
                   <AlertTitle mr={2}>This channel already exists!</AlertTitle>
                   <CloseButton position="absolute" right="8px" top="8px" />
                 </Alert>
-              }
+              } */}
 
               <DrawerFooter>
                 <button className="genre_tag_button channel_btn" type="submit">

@@ -140,24 +140,24 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                     (userDetails.channels as Channel[]).map((chan: Channel) => {
                       return (
                         !chan.private && (
-                          <div className='channel_list_content' key={chan.id}>
-                            <button
-                              type="button"
-                              className={`channel_item ${
-                                chan.name === channel.name ? 'active' : ''
-                              }`}
-                              onClick={(e) => changePage(e, chan)}
-                            >
-                              #{chan.name}
-                            </button>
-                            <button
-                              type="button"
-                              className="unsubscribe_channel"
-                              onClick={(e) => unsubscribe(e, chan)}
-                            >
-                              x
-                            </button>
-                          </div>
+                        <div className='channel_list_content' key={chan.id}>
+                          <button
+                            type="button"
+                            className={`channel_item ${
+                              chan.name === channel.name ? 'active' : ''
+                            }`}
+                            onClick={(e) => changePage(e, chan)}
+                          >
+                            #{chan.name}
+                          </button>
+                          <button
+                            type="button"
+                            className="unsubscribe_channel"
+                            onClick={(e) => unsubscribe(e, chan)}
+                          >
+                            x
+                          </button>
+                        </div>
                         )
                       );
                     })}
