@@ -1,0 +1,51 @@
+@import '../../../styles/variables.scss';
+.container_details {
+  width: 80%;
+  margin: auto;
+  .detail_item {
+    display: flex;
+    justify-content: space-between;
+    h1 {
+      font-size: 1.2rem;
+      box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);
+      flex: 1;
+      margin: 3px;
+      span {
+        color: rgb(80, 80, 80);
+      }
+    }
+  }
+  .details_notes,
+  .details_profile {
+    h1 {
+      font-size: 1rem;
+    }
+    margin-bottom: 5%;
+  }
+  .details_tracklist {
+    .tracklist_header {
+      font-size: 1.3rem;
+      box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      span {
+        color: grey;
+        background: transparent;
+        padding-right: 10px;
+      }
+    }
+    .tracklist_track {
+      display: flex;
+      margin: 1%;
+      box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);
+      .track_title {
+        flex: 1;
+        font-size: 1.1rem;
+      }
+      .track_duration {
+        color: rgb(80, 80, 80);
+      }
+    }
+  }
+}
+

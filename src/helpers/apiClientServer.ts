@@ -206,6 +206,7 @@ const createPost = (
       thumbnail: release.image ? release.image : null,
       // masterUrl: moreInfo.master_url
     };
+    console.log(dbPost);
     return fetchRequest(`${BASE_URL}/posts/${channelId}`, {
       method: 'POST',
       mode: 'cors',

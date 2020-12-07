@@ -44,7 +44,7 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [allChannels, setAllChannels] = useState<Channel[]>([]);
   const [value, setValue] = useState<Channel | null>(null);
-  const [searchResult, setSearchResult] = useState<string>('');
+  const [searchResult, setSearchResult] = useState<string>('Search for something...');
 
   useEffect(() => {
     if (userDetails.id) {
@@ -117,12 +117,12 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
               >
                 <Autocomplete
                   inputValue={searchResult}
-                  onInputChange={(e, newInput) => {
-                    setSearchResult(newInput);
-                  }}
                   value={value}
                   onChange={(e, newValue: Channel | null) => {
                     setValue(newValue);
+                  }}
+                  onInputChange={(e, newInput) => {
+                    setSearchResult(newInput);
                   }}
                   id="size-small-standard"
                   options={allChannels}

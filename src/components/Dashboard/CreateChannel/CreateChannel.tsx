@@ -67,6 +67,7 @@ const CreateChannel: React.FC<Props> = ({
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (options) {
+      console.log(user.id, options);
       createChannel(user.id, options).then((newChannel) => {
         if (newChannel) {
           dispatch(actions.addChannel(newChannel));
