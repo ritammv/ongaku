@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Input, Stack, Button } from '@chakra-ui/react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { getFromDiscogs } from '../../helpers/apiClientServer';
 import SearchResult from './SearchResult';
+import * as actions from '../../store/actionCreators';
 
 // eslint-disable-next-line max-len
 interface Props {
@@ -11,9 +12,12 @@ interface Props {
 }
 
 const SearchDiscogs: React.FC<Props> = ({ selected, setSelected }) => {
-  const user = useSelector<State, User>((state) => state.user);
 
+  const dispatch = useDispatch();
+  const user = useSelector<State, User>((state) => state.user);
   const [searchResults, setSearchResults] = useState<Release[]>([]);
+  const isLoading = useSelector<State, boolean>((state) => state.isLoading);
+
   const [form, setForm] = useState<CreatePostForm>({
     query: '',
     artist: '',
@@ -41,7 +45,7 @@ const SearchDiscogs: React.FC<Props> = ({ selected, setSelected }) => {
           image: result.cover_image,
         }))
       )
-    );
+    ).finally(() => dispatch(actions.setIsLoading(false)));
 
     setForm({
       query: '',

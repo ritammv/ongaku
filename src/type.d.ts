@@ -168,16 +168,18 @@ type SavedPostsAction = {
 
 type OrActionTypes =
   | UserAction
-  | isLoadingAction
-  | channelAction
+  | IsLoadingAction
+  | ChannelAction
   | SavedPostsAction
-  | authenticationAction;
+  | SelectAction
+  | AuthenticationAction;
 
 type AllActionTypes = UserAction &
-isLoadingAction &
-channelAction &
+IsLoadingAction &
+ChannelAction &
 SavedPostsAction &
-authenticationAction;
+SelectAction &
+AuthenticationAction;
 
 interface SelectAction {
   type: string;

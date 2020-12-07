@@ -11,6 +11,7 @@ interface Props {
 }
 
 const CommentCard: React.FC<Props> = ({ comment, deleteComment }) => {
+  
   const [author, setAuthor] = useState<User>({
     id: 4920,
     username: 'nijssenmandy89',

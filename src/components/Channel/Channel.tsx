@@ -17,6 +17,8 @@ import {
 } from '@chakra-ui/react';
 import CreatePost from '../CreatePost/createPost';
 import Postcard from '../PostCard/Postcard';
+import ChannelNavBar from './ChannelNavBar/ChannelNavBar';
+import Spinner from '../Spinner/Spinner';
 import {
   getChannel,
   removePost,
@@ -25,7 +27,6 @@ import {
   getForLater
 } from '../../helpers/apiClientServer';
 import * as actions from '../../store/actionCreators';
-import ChannelNavBar from './ChannelNavBar/ChannelNavBar';
 
 interface Props {
   name: string;
@@ -40,11 +41,13 @@ const Channel: React.FC<Props> = ({ name }) => {
   const closeRef = useRef<HTMLButtonElement | null>(null);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  // const [savePost, setSavePost] = useState<boolean>(false);
   const savedPosts = useSelector<State, Post[]>((state: State) => 
     state.savedPosts);
   const channel = useSelector<State, Channel>((state) => state.currChannel);
+  const isLoading = useSelector<State, boolean>((state) => state.isLoading);
   const [posts, setPosts] = useState<Post[] | []>([]);
+
+
 
   const close = () => {
     setOpen(false);
@@ -52,9 +55,13 @@ const Channel: React.FC<Props> = ({ name }) => {
 
   useEffect(() => {
     if (channel.id) {
-      getChannel(channel.id).then((result: ChannelAndUsers) => {
-        setPosts(result.channel.posts);
-      });
+      setTimeout(() => {
+        getChannel(channel.id)
+          .then((result: ChannelAndUsers) => {
+            setPosts(result.channel.posts);
+          })
+          .finally(() => dispatch(actions.setIsLoading(false)));
+      }, 2000);
     } else {
       history.push('/dashboard');
     }
@@ -65,13 +72,13 @@ const Channel: React.FC<Props> = ({ name }) => {
       .then((result) => dispatch(actions.savedPost(result)));
   }, [currUser.id, savedPosts]);
 
-  function deletePost(postId: string, userId: number) {
+  const deletePost = (postId: string, userId: number) => {
     removePost(postId, userId).then(() => {
       setPosts((prev) => prev.filter((p) => p.id !== postId));
     });
-  }
+  };
 
-  function handleSubscribe() {
+  const handleSubscribe = () => {
     const result = currUser.channels.filter((chan) => chan.id === channel.id)
       .length;
     if (result) {
@@ -81,88 +88,103 @@ const Channel: React.FC<Props> = ({ name }) => {
       subscribeToChannels(currUser.id, [channel]);
       dispatch(actions.addChannel(channel));
     }
-  }
+  };
 
+ 
   return (
     <div className="container">
       <ChannelNavBar name={name} />
-      <Container display="flex" justifyContent="center">
-        <Container className="channel_btn_container">
-          <Button
-            backgroundColor="#065dc2"
-            className="genre_tag_button channel_btn"
-            onClick={handleSubscribe}
-          >
-            {currUser.channels.filter((chan) => chan.id === channel.id).length
-              ? 'unsubscribe'
-              : 'subscribe'}
-          </Button>
-          <Button
-            backgroundColor="black"
-            className="genre_tag_button channel_btn"
-            onClick={() => setOpen(true)}
-          >
-            {' '}
-            + Invite
-          </Button>
+      <Container>
 
-          <Button
-            backgroundColor="#0f0e0e"
-            className="genre_tag_button channel_btn"
-            onClick={onOpen}
-          >
-            + Create Post
-          </Button>
-        </Container>
-        <AlertDialog
-          leastDestructiveRef={closeRef}
-          isOpen={open}
-          onClose={close}
-        >
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              Invite your friends to your private channel with this code!
-            </AlertDialogHeader>
-            <textarea>{channel.id}</textarea>
-            <Button ref={closeRef} onClick={close}>
-              Copy to clipboard
-            </Button>
-          </AlertDialogContent>
-        </AlertDialog>
-        ;
-        <Modal isOpen={isOpen} onClose={onClose}>
-          <ModalOverlay />
-          <ModalContent backgroundColor="#f0f1ef" w="97%">
-            <ModalCloseButton />
-            <ModalBody>
-              <CreatePost />
-            </ModalBody>
-          </ModalContent>
-        </Modal>
-      </Container>
-      {!(posts && posts.length) ? (
-        <Text>Be the first to post</Text>
-      ) : (
-        <Container position="relative" top="150px">
-          {posts
-            .sort(
-              (
-                a: { createdAt: string | number | Date },
-                b: { createdAt: string | number | Date }
-              ) =>
-                new Date(b.createdAt).valueOf() -
+        {
+        isLoading
+          ?
+            <Spinner />
+          :
+            <>
+              <Container
+                position='fixed'
+                top='100px'
+              >
+                <Button
+                  backgroundColor="#065dc2"
+                  className="genre_tag_button channel_btn"
+                  onClick={handleSubscribe}
+                >
+                  {currUser.channels.filter((chan) => 
+                    chan.id === channel.id).length
+                    ? 'unsubscribe'
+                    : 'subscribe'}
+                </Button>
+                <Button
+                  backgroundColor="black"
+                  className="genre_tag_button channel_btn"
+                  onClick={() => setOpen(true)}
+                >
+                  {' '}
+                  + Invite
+                </Button>
+
+                <Button
+                  backgroundColor="#0f0e0e"
+                  className="genre_tag_button channel_btn"
+                  onClick={onOpen}
+                >
+                  + Create Post
+                </Button>
+              </Container>
+              <AlertDialog
+                leastDestructiveRef={closeRef}
+                isOpen={open}
+                onClose={close}
+              >
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    Invite your friends to your private channel with this code!
+                  </AlertDialogHeader>
+                  <textarea>{channel.id}</textarea>
+                  <Button ref={closeRef} onClick={close}>
+                    Copy to clipboard
+                  </Button>
+                </AlertDialogContent>
+              </AlertDialog>
+              ;
+              <Modal isOpen={isOpen} onClose={onClose}>
+                <ModalOverlay />
+                <ModalContent backgroundColor="#f0f1ef" w="97%">
+                  <ModalCloseButton />
+                  <ModalBody>
+                    <CreatePost  />
+                  </ModalBody>
+                </ModalContent>
+              </Modal>
+              {!(posts && posts.length) 
+                ? 
+                  <Text>Be the first to post</Text>
+                : 
+                  <Container position="relative" top="130px">
+                    {posts
+                      .sort(
+                        (
+                          a: { createdAt: string | number | Date },
+                          b: { createdAt: string | number | Date }
+                        ) =>
+                          new Date(b.createdAt).valueOf() -
                 new Date(a.createdAt).valueOf()
-            )
-            .map((post) => (
-              <Postcard
-                key={post.id}
-                post={post}
-                deletePost={deletePost}
-                savedPosts={savedPosts}
-              />
-            ))}
-        </Container>
-      )}
+                      )
+                      .map((post) => (
+                        <Postcard
+                          key={post.id}
+                          post={post}
+                          deletePost={deletePost}
+                          savedPosts={savedPosts}
+                        />
+                      ))}
+                  </Container>}
+            </>
+        }
+        
+      </Container>
     </div>
   );
 };

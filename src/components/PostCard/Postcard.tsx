@@ -24,23 +24,17 @@ interface Props {
   savedPosts: Post[]
 }
 
-const Postcard: React.FC<Props> = ({
-  post,
-  deletePost,
-  savedPosts
-}) => {
-  // const dispatch = useDispatch();
-  // const isLoading = useSelector<State, boolean>((state) => state.isLoading);
+const Postcard: React.FC<Props> = ({ post, deletePost, savedPosts }) => {
+
+  const history = useHistory();
+
   const user = useSelector<State, User>((state) => state.user);
 
   const [postComments, setPostComments] = useState<PostComment[] | []>([]);
   const [commentBody, setCommentBody] = useState<string>('');
   const [isShowingComments, setIsShowingComments] = useState<boolean>(false);
-
   const [savePost, setSavePost] = useState<boolean>(false);
-  const history = useHistory();
   const date = moment(post.createdAt).format('lll');
-
   const [author, setAuthor] = useState<User>({
     id: 59215829,
     username: 'Otoko',
@@ -128,10 +122,10 @@ const Postcard: React.FC<Props> = ({
     <Container
       border="1px solid #d2d2d2"
       borderRadius="8px"
-      w="95%"
+      w="100%"
       display="flex"
       flexDir="column"
-      marginY="0.8rem"
+      marginY='0.7rem'
     >
       <>
         <div className="message_date">{date}</div>

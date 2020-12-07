@@ -8,7 +8,6 @@ import {
 } from '@chakra-ui/react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getFromDiscogs } from '../../helpers/apiClientServer';
-import * as actions from '../../store/actionCreators';
 import SearchDiscogs from './SearchDiscogs';
 import PanelListItem from './PanelListItem';
 
@@ -29,10 +28,8 @@ const CreatePost: React.FC = () => {
 
   const dispatch = useDispatch();
   const user = useSelector<State, User>((state) => state.user);
-  const isLoading = useSelector<State, boolean>((state) => state.isLoading);
 
   useEffect(() => {
-    dispatch(actions.setIsLoading(true));
     getFromDiscogs(
       `/users/${user.username}/collection`,
       user.token,
@@ -54,8 +51,8 @@ const CreatePost: React.FC = () => {
               image: release.huge_thumb,
             }))
         )
-      )
-      .then(() => dispatch(actions.setIsLoading(false)));
+      );
+
 
     getFromDiscogs(
       `/users/${user.username}/wants`,
@@ -78,8 +75,8 @@ const CreatePost: React.FC = () => {
               image: want.cover_image,
             }))
         )
-      )
-      .then(() => dispatch(actions.setIsLoading(false)));
+      );
+  
     setSelected({
       id: 0,
       artists: [],
