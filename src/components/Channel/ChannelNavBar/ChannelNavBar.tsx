@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { IconButton } from '@chakra-ui/react';
 import SideBar from '../../Dashboard/SideBar/SideBar';
-import vinyl from '../../../assets/vinyl.jpg';
+import vinyl from '../../../assets/ongaku1.svg';
 import { getChannel } from '../../../helpers/apiClientServer';
 
 interface Props {
@@ -28,7 +28,8 @@ const ChannelNavBar = ({ name }: Props) => {
   return (
     <nav className="header">
       <img src={vinyl} alt="vinyl_image" />
-      <div className="channel_title">@{name.toUpperCase()}</div>
+
+      <div className="channel_title">{name && name.toUpperCase()}</div>
       <div className="welcome_user">
         <IconButton
           className="button_emoji"

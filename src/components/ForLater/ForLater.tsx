@@ -23,34 +23,34 @@ const ForLater: React.FC = () => {
   return (
     <div className="container">
       <ChannelNavBar name="forLater" />
-      {
-
-      !(savedPosts && savedPosts.length) 
-        ? (<Text>Be the first to post</Text>) 
-        :
-      
+      {!(savedPosts && savedPosts.length) ? (
+        <Container position="relative" top="100px">
+          <Text>This is your personal space to save posts for later</Text>
+        </Container>
+      ) : (
         <Container position="relative" top="80px">
           {savedPosts &&
-          savedPosts
-            .sort(
-              (
-                a: { createdAt: string | number | Date },
-                b: { createdAt: string | number | Date }
-              ) =>
-                new Date(b.createdAt).valueOf() -
-                new Date(a.createdAt).valueOf()
-            )
-            .map((savedPost) => (
-              <Postcard
-                key={savedPost.id}
-                post={savedPost}
-                deletePost={deletePost}
-                savePost={savePost}
-                setSavePost={setSavePost} 
-              />
-            ))}
+            savedPosts
+              .sort(
+                (
+                  a: { createdAt: string | number | Date },
+                  b: { createdAt: string | number | Date }
+                ) =>
+                  new Date(b.createdAt).valueOf() -
+                  new Date(a.createdAt).valueOf()
+              )
+              .map((savedPost) => (
+                <Postcard
+                  key={savedPost.id}
+                  post={savedPost}
+                  deletePost={deletePost}
+                  setSavePost={setSavePost}
+                  savePost={savePost}
+                />
+              ))}
         </Container>
-      }
+      )}
+      ;
     </div>
   );
 };

@@ -12,12 +12,16 @@ import {
   DrawerCloseButton,
   Select,
   useToast,
-  Button
+  Button,
 } from '@chakra-ui/react';
 import './createChannel.scss';
 import * as actions from '../../../store/actionCreators';
 import { OnClickRoute } from '../../../helpers/onClickRoute';
-import { createChannel, getChannels, getAllChannels } from '../../../helpers/apiClientServer';
+import {
+  createChannel,
+  getChannels,
+  getAllChannels,
+} from '../../../helpers/apiClientServer';
 
 interface Props {
   showModal: boolean;
@@ -30,7 +34,6 @@ const CreateChannel: React.FC<Props> = ({
   setShowModal,
   closeChannels,
 }) => {
-
   const toast = useToast();
   const navigate = OnClickRoute();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -64,26 +67,25 @@ const CreateChannel: React.FC<Props> = ({
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (options) {
-      createChannel(user.id, options)
-        .then((newChannel) => {
-          if (newChannel) {
-            dispatch(actions.addChannel(newChannel));
-            navigate(`channels/${newChannel.name}`);
-            onClose();
-            closeChannels();
-          } else {
-            setDuplicate(true);
-            toast({
-              title: 'Channel already exists',
-              description: 'Go join the conversation',
-              status: 'warning',
-              duration: 6000,
-              isClosable: true,
-            });
-          }
-        });
+      createChannel(user.id, options).then((newChannel) => {
+        if (newChannel) {
+          dispatch(actions.addChannel(newChannel));
+          navigate(`channels/${newChannel.name}`);
+          onClose();
+          closeChannels();
+        } else {
+          setDuplicate(true);
+          toast({
+            title: 'Channel already exists',
+            description: 'Go join the conversation',
+            status: 'warning',
+            duration: 6000,
+            isClosable: true,
+          });
+        }
+      });
     }
-  
+
     setOptions({
       name: '',
       parentId: '',
@@ -99,7 +101,7 @@ const CreateChannel: React.FC<Props> = ({
     getChannels().then((channelsReq) => {
       setChannels(channelsReq);
     });
-    
+
     getAllChannels().then((allChannelsReq) => {
       setAllChannels(allChannelsReq);
     });
@@ -112,11 +114,11 @@ const CreateChannel: React.FC<Props> = ({
           <DrawerContent>
             <DrawerHeader>Create a channel</DrawerHeader>
             <DrawerCloseButton onClick={() => handleClose()} />
-            <form onSubmit={(e) => {
-              handleSubmit(e);
-              setDuplicate(false);
-            }}
-            
+            <form
+              onSubmit={(e) => {
+                handleSubmit(e);
+                setDuplicate(false);
+              }}
             >
               <DrawerBody>
                 Channel Title
@@ -156,10 +158,7 @@ const CreateChannel: React.FC<Props> = ({
                 </Select>
               </DrawerBody>
               <DrawerFooter>
-                <button 
-                  className="genre_tag_button channel_btn" 
-                  type="submit"
-                >
+                <button className="genre_tag_button channel_btn" type="submit">
                   Create
                 </button>
               </DrawerFooter>

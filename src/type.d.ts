@@ -28,7 +28,7 @@ interface ReleaseDetails {
   styles: string[];
   url: string;
   image: string;
-  type: string
+  type: string;
 }
 
 interface SearchResult {
@@ -167,9 +167,9 @@ type OrActionTypes =
   | authenticationAction;
 
 type AllActionTypes = UserAction &
-isLoadingAction &
-channelAction &
-authenticationAction;
+  isLoadingAction &
+  channelAction &
+  authenticationAction;
 
 interface SelectAction {
   type: string;
@@ -206,5 +206,5 @@ interface Result {
   community: {
     want: number;
     have: number;
-  }
+  };
 }

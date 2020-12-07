@@ -7,7 +7,7 @@ function fetchRequest(path: string, options?: Object) {
   //     Accept: 'application/json',
   //     'Content-Type': 'application/json',
   //     'Access-Control-Allow-Credentials': 'true',
-  //   }
+  //   },
   // };
 
   // Object.assign(defaultOptions, options || {});
@@ -37,7 +37,6 @@ const getChannel = (channelId: string): Promise<ChannelAndUsers> => {
 };
 
 const createChannel = (userId: number, body: Object): Promise<Channel> => {
-
   return fetchRequest(`${BASE_URL}/channels/users/${userId}`, {
     method: 'POST',
     mode: 'cors',
@@ -48,7 +47,10 @@ const createChannel = (userId: number, body: Object): Promise<Channel> => {
   });
 };
 
-const subscribeToChannels = (userId: number, channels: ChannelForDb[]) => {
+const subscribeToChannels = (
+  userId: number,
+  channels: ChannelForDb[] | { id: string }
+) => {
   return fetchRequest(`${BASE_URL}/users/${userId}/channels`, {
     method: 'POST',
     mode: 'cors',
@@ -60,7 +62,6 @@ const subscribeToChannels = (userId: number, channels: ChannelForDb[]) => {
 };
 
 const unsubscribeFromChannel = (userId: number, channel: Channel) => {
-  console.log('in apiclient', userId, channel);
   return fetchRequest(`${BASE_URL}/users/${userId}/channels`, {
     method: 'DELETE',
     mode: 'cors',
@@ -139,7 +140,6 @@ const deleteFromDiscogs = (url: string, token: string, tokenSecret: string) => {
 };
 
 const savePost = (userId: number, postId: string) => {
-  console.log('save', postId);
   return fetchRequest(`${BASE_URL}/users/${userId}/savedPosts`, {
     method: 'POST',
     mode: 'cors',

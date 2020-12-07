@@ -21,11 +21,16 @@ import './Postcard.scss';
 interface Props {
   post: Post;
   deletePost: (postId: string, commentAuthor: number) => void;
-  savePost: boolean
-  setSavePost: React.Dispatch<React.SetStateAction<boolean>>
+  savePost: boolean;
+  setSavePost: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Postcard: React.FC<Props> = ({ post, deletePost, savePost, setSavePost }) => {
+const Postcard: React.FC<Props> = ({
+  post,
+  deletePost,
+  savePost,
+  setSavePost,
+}) => {
   // const dispatch = useDispatch();
   // const isLoading = useSelector<State, boolean>((state) => state.isLoading);
   const user = useSelector<State, User>((state) => state.user);
@@ -106,7 +111,7 @@ const Postcard: React.FC<Props> = ({ post, deletePost, savePost, setSavePost }) 
 
   function handleSave() {
     if (!savePost) {
-      apiclient.savePost(author.id, post.id);
+      apiclient.savePost(user.id, post.id);
     } else {
       apiclient.removeSavedPost(post.id, user.id);
     }
