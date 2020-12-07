@@ -45,10 +45,10 @@ const Hero: React.FC = () => {
             <span id="sharing">Sharing</span>
             <span id="community">Community</span>
           </div>
-          <div className="hero_subtext">
+          {/* <div className="hero_subtext">
             The Platform That Allows You To Share Music You Love With The
             Community You Love
-          </div>
+          </div> */}
         </div>
         <div className="hero_buttons">
           <div className="buttons_join">

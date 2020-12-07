@@ -11,10 +11,15 @@ import {
   DrawerContent,
   DrawerCloseButton,
   Select,
+  Alert,
+  AlertTitle,
+  AlertIcon,
+  CloseButton,
 } from '@chakra-ui/react';
+import './createChannel.scss';
 import * as actions from '../../../store/actionCreators';
 import { OnClickRoute } from '../../../helpers/onClickRoute';
-import { createChannel, getChannels } from '../../../helpers/apiClientServer';
+import { createChannel, getChannels, getAllChannels } from '../../../helpers/apiClientServer';
 
 interface Props {
   showModal: boolean;
@@ -27,10 +32,13 @@ const CreateChannel: React.FC<Props> = ({
   setShowModal,
   closeChannels,
 }) => {
+
   const navigate = OnClickRoute();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [channels, setChannels] = useState<Channel[]>([]);
+  const [allChannels, setAllChannels] = useState<Channel[]>([]);
   const user = useSelector<State, User>((state: State) => state.user);
+  // const [error, setError] = useState<boolean>(false);
   const [options, setOptions] = useState({
     name: '',
     parentId: '',
@@ -48,7 +56,6 @@ const CreateChannel: React.FC<Props> = ({
     event: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
   ) => {
     const { name, value } = event.target;
-
     setOptions((prevState) => ({
       ...prevState,
       [name]: value,
@@ -57,19 +64,28 @@ const CreateChannel: React.FC<Props> = ({
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    // const filteredResult = allChannels.filter((chan) => 
+    //   chan.name.toLowerCase() === options.name.toLowerCase());
+
+    // if (filteredResult.length) {
+    //   setError(!error);
+
     if (options) {
-      createChannel(user.id, options).then((newChannel) => {
-        dispatch(actions.addChannel(newChannel));
-        navigate(`channels/${newChannel.name}`);
-        onClose();
-        closeChannels();
-      });
-      setOptions({
-        name: '',
-        parentId: '',
-        isPrivate: false,
-      });
+      createChannel(user.id, options)
+        .then((newChannel) => {
+          dispatch(actions.addChannel(newChannel));
+          navigate(`channels/${newChannel.name}`);
+          onClose();
+          closeChannels();
+          // setError(false);
+        });
     }
+    setOptions({
+      name: '',
+      parentId: '',
+      isPrivate: false,
+    });
   };
 
   useEffect(() => {
@@ -80,13 +96,11 @@ const CreateChannel: React.FC<Props> = ({
     getChannels().then((channelsReq) => {
       setChannels(channelsReq);
     });
+    
+    getAllChannels().then((allChannelsReq) => {
+      setAllChannels(allChannelsReq);
+    });
   }, []);
-
-  // useEffect(() => {
-  //   getPublicChannels().then((publicChannels) => {
-  //     setAllChannels(publicChannels);
-  //   });
-  // }, []);
 
   return (
     <div className="create_channel">
@@ -99,15 +113,17 @@ const CreateChannel: React.FC<Props> = ({
               <DrawerBody>
                 Channel Title
                 <Input
-                  className="search_input"
+                  className="search_input create_channel_form"
                   id="channel_title"
                   type="text"
                   placeholder="#"
                   name="name"
                   onChange={handleChange}
                   value={options.name}
+                  required
                 />
                 <Select
+                  className="create_channel_form"
                   name="isPrivate"
                   onChange={handleChange}
                   placeholder="Public"
@@ -116,10 +132,12 @@ const CreateChannel: React.FC<Props> = ({
                   <option value="true">Private</option>
                 </Select>
                 <Select
+                  className="create_channel_form"
                   name="parentId"
                   onChange={handleChange}
                   placeholder="Genre"
                   value={options.parentId}
+                  required
                 >
                   {channels &&
                     channels.map((channel: Channel, i: number) => (
@@ -130,9 +148,18 @@ const CreateChannel: React.FC<Props> = ({
                 </Select>
               </DrawerBody>
 
+              {/* {
+                error &&
+                <Alert status="error">
+                  <AlertIcon />
+                  <AlertTitle mr={2}>This channel already exists!</AlertTitle>
+                  <CloseButton position="absolute" right="8px" top="8px" />
+                </Alert>
+              } */}
+
               <DrawerFooter>
-                <button className="genre_tag_button" type="submit">
-                  Create!
+                <button className="genre_tag_button channel_btn" type="submit">
+                  Create
                 </button>
               </DrawerFooter>
             </form>

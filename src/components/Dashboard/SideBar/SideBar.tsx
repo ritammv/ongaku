@@ -42,23 +42,16 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [showModal, setShowModal] = useState<boolean>(false);
   const [allChannels, setAllChannels] = useState<Channel[]>([]);
-  const [value, setValue] = useState<Channel | null>({
-    id: 'f8d71201-8a5f-4cd5-9989-46242eb4b49c',
-    name: 'Electronic',
-    ownerId: null,
-    private: false,
-    parentId: null,
-    posts: [],
-  });
+  const [value, setValue] = useState<Channel | null>(null);
   const [searchResult, setSearchResult] = useState<string>('');
 
   useEffect(() => {
     if (userDetails.id) {
       getUser(userDetails.id).then((user) => {
-        actions.setUser(user)(dispatch);
+        dispatch(actions.setUser(user));
       });
     }
-  }, []);
+  }, [userDetails.id]);
 
   useEffect(() => {
     getPublicChannels().then((result) => {
@@ -70,6 +63,11 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
     onClose();
     dispatch(actions.addCurrChannel(newChannel));
     history.push(`/channels/${newChannel.name}`);
+  };
+
+  const navigateToLater = (e: Event) => {
+    onClose();
+    history.push('/later');
   };
 
   const handleClose = () => {
@@ -147,7 +145,7 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                     (userDetails.channels as Channel[]).map((chan: Channel) => {
                       return (
                         !chan.private && (
-                          <div className='channel_list_content' key={chan.id}>
+                          <div className="channel_list_content" key={chan.id}>
                             <button
                               type="button"
                               className={`channel_item ${
@@ -173,14 +171,18 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
               <div className="drawer_private">
                 <h3 className="public_title">Private</h3>
                 <ul className="private_channel_list">
+                  <button
+                    type="button"
+                    className="channel_item"
+                    onClick={(e) => navigateToLater(e)}
+                  >
+                    #For Later
+                  </button>
                   {userDetails.channels &&
                     (userDetails.channels as Channel[]).map(
                       (chan: Channel) =>
                         chan.private === true && (
-                          <div 
-                            className='channel_list_content'
-                            key={chan.id}
-                          >
+                          <div className="channel_list_content" key={chan.id}>
                             <button
                               type="button"
                               className={`channel_item ${
