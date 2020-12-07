@@ -5,12 +5,10 @@ import { useDispatch } from 'react-redux';
 import { setSelected } from '../../store/actionCreators';
 
 interface Props {
-  selected: Release
-
+  selected: Release;
 }
 
 const Createbutton: React.FC<Props> = ({ selected }) => {
-
   const dispatch = useDispatch();
 
   function handleClick() {
@@ -19,51 +17,45 @@ const Createbutton: React.FC<Props> = ({ selected }) => {
 
   return (
     <>
-      {
-        selected.id !== 0
-          ?
-            <Link to='/create'>
-              <Flex justifyContent='center'>
-                <Button
-                  className="button-default"
-                  backgroundColor="#0f0e0e"
-                  color="white"
-                  borderRadius="12px"
-                  padding="2% 5%"
-                  fontWeight="lighter"
-                  mr={3}
-                  onClick={handleClick}
-                  position='fixed'
-                  left='145px'
-                >
-                  CREATE
-                </Button>
-              </Flex>
-            </Link>
-
-          :
-            <Flex justifyContent='center'>
-              <Button
-                className="button-default"
-                backgroundColor="#0f0e0e"
-                color="white"
-                borderRadius="12px"
-                padding="2% 5%"
-                fontWeight="lighter"
-                mr={3}
-                disabled={true}
-                position='fixed'
-                left='145px'
-                
-              >
-                CREATE
-              </Button>
-            </Flex>
-      }
+      {selected.id !== 0 ? (
+        <Link to="/create">
+          <Flex justifyContent="center">
+            <Button
+              className="button-default"
+              backgroundColor="blue"
+              color="white"
+              borderRadius="12px"
+              padding="2% 5%"
+              fontWeight="lighter"
+              mr={3}
+              onClick={handleClick}
+              position="fixed"
+              left="145px"
+            >
+              CREATE
+            </Button>
+          </Flex>
+        </Link>
+      ) : (
+        <Flex justifyContent="center">
+          <Button
+            className="button-default"
+            backgroundColor="#0f0e0e"
+            color="white"
+            borderRadius="12px"
+            padding="2% 5%"
+            fontWeight="lighter"
+            mr={3}
+            disabled={true}
+            position="fixed"
+            left="145px"
+          >
+            CREATE
+          </Button>
+        </Flex>
+      )}
     </>
   );
 };
 
 export default Createbutton;
-
-

@@ -51,14 +51,13 @@
     color: $primary-color;
     @include button-default;
     transform: rotate(0deg);
-    margin: 10px 3px;
+    margin: 0px 3px;
   }
   .tree_third_one,
   .tree_third_two {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin: 2vh 0vh;
     height: 40%;
     background: $primary-color;
     .tree_leaf {
