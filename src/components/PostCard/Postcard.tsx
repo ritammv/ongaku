@@ -106,7 +106,7 @@ const Postcard: React.FC<Props> = ({ post, deletePost }) => {
     if (!savePost) {
       apiclient.savePost(author.id, post.id);
     } else {
-      apiclient.removeSavedPost(author.id, post.id);
+      apiclient.removeSavedPost(post.id, user.id);
     }
     setSavePost(!savePost);
   }
@@ -160,17 +160,15 @@ const Postcard: React.FC<Props> = ({ post, deletePost }) => {
         <div className="message_content">
           <div className="postcard_header">
             <div className="message_title">{post.postTitle}</div>
-            {
-              (user.id === post.userId) &&
-              <IconButton 
+            {user.id === post.userId && (
+              <IconButton
                 size="sm"
                 aria-label="delete post"
                 icon={<MdDelete />}
-                backgroundColor='inherit'
+                backgroundColor="inherit"
                 onClick={() => deletePost(post.id, post.userId)}
               />
-            }
-
+            )}
           </div>
           {isShowingComments ? (
             <Box className="message_body">{post.body}</Box>

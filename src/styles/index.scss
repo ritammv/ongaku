@@ -1,13 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;1,200&display=swap');
+
 @import './variables.scss';
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 200;
   color: $secondary-color;
-  background: $primary-color;
+  background: #bcdbbb;
 }
 
 .container-full {
