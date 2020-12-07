@@ -36,7 +36,6 @@ type Event =
 const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
   const channel = useSelector((state: State) => state.currChannel);
   const userDetails = useSelector((state: State) => state.user);
-
   const history = useHistory();
   const dispatch = useDispatch();
   const [showSubscribe, setShowSubscribe] = useState<boolean>(false);
@@ -245,6 +244,7 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
         showModal={showModal}
       />
       <SubscribePrivateChannel
+        closePrivateChannels={onClose}
         setShowSubscribe={setShowSubscribe}
         showSubscribe={showSubscribe}
       />

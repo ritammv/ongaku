@@ -104,7 +104,7 @@ const Postcard: React.FC<Props> = ({ post, deletePost }) => {
 
   function handleSave() {
     if (!savePost) {
-      apiclient.savePost(author.id, post.id);
+      apiclient.savePost(user.id, post.id);
     } else {
       apiclient.removeSavedPost(post.id, user.id);
     }

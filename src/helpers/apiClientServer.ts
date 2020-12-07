@@ -47,7 +47,10 @@ const createChannel = (userId: number, body: Object): Promise<Channel> => {
   });
 };
 
-const subscribeToChannels = (userId: number, channels: ChannelForDb[]) => {
+const subscribeToChannels = (
+  userId: number,
+  channels: ChannelForDb[] | { id: string }
+) => {
   return fetchRequest(`${BASE_URL}/users/${userId}/channels`, {
     method: 'POST',
     mode: 'cors',
@@ -137,7 +140,7 @@ const deleteFromDiscogs = (url: string, token: string, tokenSecret: string) => {
 };
 
 const savePost = (userId: number, postId: string) => {
-  return fetchRequest(`${BASE_URL}/users/${userId}/saved`, {
+  return fetchRequest(`${BASE_URL}/users/${userId}/savedPosts`, {
     method: 'POST',
     mode: 'cors',
     headers: {
@@ -149,7 +152,7 @@ const savePost = (userId: number, postId: string) => {
 
 const removeSavedPost = (postId: string, userId: number) => {
   console.log('delete', postId);
-  return fetchRequest(`${BASE_URL}/users/${userId}/saved`, {
+  return fetchRequest(`${BASE_URL}/users/${userId}/savedPosts`, {
     method: 'DELETE',
     mode: 'cors',
     headers: {
@@ -180,7 +183,7 @@ const getPost = (postId: string) => {
 };
 
 const getForLater = (userId: number) => {
-  return fetchRequest(`${BASE_URL}/users/${userId}/saved`);
+  return fetchRequest(`${BASE_URL}/users/${userId}/savedPosts`);
 };
 
 const createPost = (
