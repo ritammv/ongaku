@@ -84,7 +84,7 @@ const Postcard: React.FC<Props> = ({
     if (result) {
       setSavePost(true);
     }
-  }, []);
+  }, [post.id, savedPosts]);
 
   function postComment(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
