@@ -3,7 +3,7 @@ import { IconButton, Container } from '@chakra-ui/react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import './dashboard.scss';
 import { useSelector } from 'react-redux';
-import ongaku from '../../assets/ongaku-2.svg';
+import ongaku from '../../assets/ongaku-logo-4.svg';
 import SideBar from './SideBar/SideBar';
 import DashboardWelcome from './DashboardWelcome/DashboardWelcome';
 
@@ -20,6 +20,7 @@ const Dashboard: React.FC = () => {
             className="button_emoji"
             aria-label="burger-icon"
             backgroundColor="inherit"
+            outline="none"
             size="lg"
             icon={<GiHamburgerMenu />}
             type="button"

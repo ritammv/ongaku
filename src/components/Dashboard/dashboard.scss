@@ -2,7 +2,7 @@
 
 .container {
   height: 100vh;
-  background-color: $primary-color;
+  background-color: #ffff;
   display: flex;
   flex-direction: column;
 }
@@ -10,6 +10,7 @@
 .header {
   height: 90px;
   border-bottom: 2px solid $secondary-color;
+  background-color: #fff;
   position: fixed;
   width: 100%;
   text-align: right;
@@ -17,15 +18,18 @@
   flex-direction: row;
   z-index: 3;
   img {
-    height: 3.7rem;
-    margin-left: 0.4rem;
+    height: 3rem;
+    margin: 0.5rem;
     width: auto;
   }
 }
 
 .channel_title {
+  margin-top: 1.5rem;
   font-size: 1.5rem;
-  margin-top: 15px;
+  font-family: 'Nunito', sans-serif;
+  width: 70%;
+  text-align: center;
 }
 
 .user_info {
@@ -84,6 +88,10 @@
   font-size: 40px;
 }
 
+.drawer {
+  background-color: $accent-one;
+}
+
 .drawer_channel {
   display: flex;
   flex-direction: column;
@@ -123,21 +131,21 @@
 
 .channel_item {
   padding: 10px;
-  border-bottom: 0.5px solid gray;
+  border-bottom: 0.5px solid $secondary-color;
   width: 100%;
   text-align: left;
 }
 
 .channel_item.active {
-  color: $accent-three;
+  color: $accent-two;
 }
 
 .search_input {
-  background-color: $accent-one;
-  border-radius: 12px;
-  height: 35px;
+  // background-color: $accent-one;
+  border-radius: 0px;
+  height: 30px;
   width: 261.63px;
-  padding: 5%;
+  padding: 0%;
 }
 
 .MuiAutocomplete-endAdornment {

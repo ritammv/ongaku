@@ -103,11 +103,11 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
   return (
     <div>
       <Drawer isOpen={isOpen} placement="left" onClose={onClose} size="full">
-        <DrawerOverlay>
+        <DrawerOverlay className="drawer">
           <DrawerContent>
             <DrawerCloseButton onClick={() => handleClose()} />
-            <DrawerHeader>Hello! Welcome back</DrawerHeader>
-            <DrawerBody>
+            <DrawerHeader className="drawer">Hello! Welcome back</DrawerHeader>
+            <DrawerBody className="drawer">
               <div className="drawer_channel">Channels</div>
 
               <form
@@ -131,7 +131,7 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                     <TextField
                       {...params}
                       variant="filled"
-                      style={{ opacity: '0.8', borderRadius: '12px' }}
+                      style={{ opacity: '0.8', borderRadius: '0' }}
                       placeholder="Search for a Channel"
                     />
                   )}
@@ -205,13 +205,15 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                 </ul>
               </div>
             </DrawerBody>
-            <DrawerFooter>
+            <DrawerFooter className="drawer">
               <button
                 style={{
                   height: '50px',
-                  width: '200px',
+                  width: '130px',
+                  color: '#ffdbac',
+                  backgroundColor: '#101017',
                 }}
-                className="genre_tag_button create_channel_button"
+                className=" two"
                 type="button"
                 onClick={() => {
                   setShowModal((state) => !state);
