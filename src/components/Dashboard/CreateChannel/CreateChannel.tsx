@@ -61,17 +61,6 @@ const CreateChannel: React.FC<Props> = ({
     }));
   };
 
-
-
-  // onClick={() =>
-  //   toast({
-  //     title: 'Channel already exists',
-  //     description: 'Go join the conversation',
-  //     status: 'warning',
-  //     duration: 4000,
-  //     isClosable: true,
-  //   })}
-
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (options) {
@@ -84,9 +73,17 @@ const CreateChannel: React.FC<Props> = ({
             closeChannels();
           } else {
             setDuplicate(true);
+            toast({
+              title: 'Channel already exists',
+              description: 'Go join the conversation',
+              status: 'warning',
+              duration: 6000,
+              isClosable: true,
+            });
           }
         });
     }
+  
     setOptions({
       name: '',
       parentId: '',
@@ -115,7 +112,12 @@ const CreateChannel: React.FC<Props> = ({
           <DrawerContent>
             <DrawerHeader>Create a channel</DrawerHeader>
             <DrawerCloseButton onClick={() => handleClose()} />
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={(e) => {
+              handleSubmit(e);
+              setDuplicate(false);
+            }}
+            
+            >
               <DrawerBody>
                 Channel Title
                 <Input
@@ -157,16 +159,6 @@ const CreateChannel: React.FC<Props> = ({
                 <button 
                   className="genre_tag_button channel_btn" 
                   type="submit"
-                  onClick={() => {
-                    toast({
-                      title: 'Channel already exists',
-                      description: 'Go join the conversation',
-                      status: 'warning',
-                      duration: 6000,
-                      isClosable: true,
-                    });
-                    setDuplicate(false);
-                  }}
                 >
                   Create
                 </button>

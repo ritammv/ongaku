@@ -183,7 +183,7 @@ const getPost = (postId: string) => {
 };
 
 const getForLater = (userId: number) => {
-  return fetchRequest(`${BASE_URL}/users/${userId}/saved`);
+  return fetchRequest(`${BASE_URL}/users/${userId}/savedPosts`);
 };
 
 const createPost = (
@@ -248,13 +248,13 @@ const createComment = (postId: string, userId: number, body: string) => {
 };
 
 const removeComment = (postId: string, commentId: string, userId: number) => {
-  return fetchRequest(`${BASE_URL}/posts/${postId}/comment`, {
+  return fetchRequest(`${BASE_URL}/posts/${postId}/comment/${commentId}`, {
     method: 'DELETE',
     mode: 'cors',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ userId, commentId }),
+    body: JSON.stringify({ userId }),
   });
 };
 

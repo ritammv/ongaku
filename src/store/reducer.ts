@@ -19,6 +19,7 @@ const initialState: State = {
     private: true,
     parentId: null,
     posts: [],
+    subChannel: []
   },
   isLoading: true,
   authentication: false,
