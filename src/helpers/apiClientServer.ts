@@ -1,18 +1,18 @@
 const BASE_URL = 'http://localhost:3001';
 
 function fetchRequest(path: string, options?: Object) {
-  const defaultOptions: RequestInit = {
-    credentials: 'include',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Credentials': 'true',
-    }
-  };
+  // const defaultOptions: RequestInit = {
+  //   credentials: 'include',
+  //   headers: {
+  //     Accept: 'application/json',
+  //     'Content-Type': 'application/json',
+  //     'Access-Control-Allow-Credentials': 'true',
+  //   },
+  // };
 
-  Object.assign(defaultOptions, options || {});
+  // Object.assign(defaultOptions, options || {});
 
-  return fetch(path, defaultOptions)
+  return fetch(path, options)
     .then((res) => (res.status < 400 ? res : Promise.reject()))
     .then((res) => (res.status !== 204 ? res.json() : res))
     .catch((err) => {
@@ -37,7 +37,6 @@ const getChannel = (channelId: string): Promise<ChannelAndUsers> => {
 };
 
 const createChannel = (userId: number, body: Object): Promise<Channel> => {
-
   return fetchRequest(`${BASE_URL}/channels/users/${userId}`, {
     method: 'POST',
     mode: 'cors',
@@ -48,7 +47,10 @@ const createChannel = (userId: number, body: Object): Promise<Channel> => {
   });
 };
 
-const subscribeToChannels = (userId: number, channels: ChannelForDb[]) => {
+const subscribeToChannels = (
+  userId: number,
+  channels: ChannelForDb[] | { id: string }
+) => {
   return fetchRequest(`${BASE_URL}/users/${userId}/channels`, {
     method: 'POST',
     mode: 'cors',
@@ -60,7 +62,6 @@ const subscribeToChannels = (userId: number, channels: ChannelForDb[]) => {
 };
 
 const unsubscribeFromChannel = (userId: number, channel: Channel) => {
-  console.log('in apiclient', userId, channel);
   return fetchRequest(`${BASE_URL}/users/${userId}/channels`, {
     method: 'DELETE',
     mode: 'cors',
@@ -139,8 +140,7 @@ const deleteFromDiscogs = (url: string, token: string, tokenSecret: string) => {
 };
 
 const savePost = (userId: number, postId: string) => {
-  console.log('save', postId);
-  return fetchRequest(`${BASE_URL}/users/${userId}/saved`, {
+  return fetchRequest(`${BASE_URL}/users/${userId}/savedPosts`, {
     method: 'POST',
     mode: 'cors',
     headers: {
@@ -152,7 +152,7 @@ const savePost = (userId: number, postId: string) => {
 
 const removeSavedPost = (postId: string, userId: number) => {
   console.log('delete', postId);
-  return fetchRequest(`${BASE_URL}/users/${userId}/saved`, {
+  return fetchRequest(`${BASE_URL}/users/${userId}/savedPosts`, {
     method: 'DELETE',
     mode: 'cors',
     headers: {
@@ -183,7 +183,7 @@ const getPost = (postId: string) => {
 };
 
 const getForLater = (userId: number) => {
-  return fetchRequest(`${BASE_URL}/users/${userId}/saved`);
+  return fetchRequest(`${BASE_URL}/users/${userId}/savedPosts`);
 };
 
 const createPost = (
@@ -248,13 +248,13 @@ const createComment = (postId: string, userId: number, body: string) => {
 };
 
 const removeComment = (postId: string, commentId: string, userId: number) => {
-  return fetchRequest(`${BASE_URL}/posts/${postId}/comment`, {
+  return fetchRequest(`${BASE_URL}/posts/${postId}/comment/${commentId}`, {
     method: 'DELETE',
     mode: 'cors',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ userId, commentId }),
+    body: JSON.stringify({ userId }),
   });
 };
 

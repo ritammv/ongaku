@@ -28,7 +28,7 @@ interface ReleaseDetails {
   styles: string[];
   url: string;
   image: string;
-  type: string
+  type: string;
 }
 
 interface SearchResult {
@@ -82,6 +82,7 @@ interface Channel {
   parentId: string | null;
   private: boolean;
   posts: Post[];
+  subChannel: Channel[];
 }
 
 interface PostComment {
@@ -166,9 +167,9 @@ type OrActionTypes =
   | authenticationAction;
 
 type AllActionTypes = UserAction &
-isLoadingAction &
-channelAction &
-authenticationAction;
+  isLoadingAction &
+  channelAction &
+  authenticationAction;
 
 interface SelectAction {
   type: string;
@@ -205,5 +206,5 @@ interface Result {
   community: {
     want: number;
     have: number;
-  }
+  };
 }

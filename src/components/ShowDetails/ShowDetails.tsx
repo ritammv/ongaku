@@ -79,7 +79,7 @@ const ShowDetails: React.FC = () => {
 
   return (
     <>
-      {/* Relase page */}
+      Release detail page
       {/* { data &&
       <ReleaseDetails post={result} release={data} />} */}
     </>

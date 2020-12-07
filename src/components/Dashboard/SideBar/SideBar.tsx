@@ -213,7 +213,7 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                   color: '#ffdbac',
                   backgroundColor: '#101017',
                 }}
-                className=" two"
+                className="genre_tag_button two"
                 type="button"
                 onClick={() => {
                   setShowModal((state) => !state);
