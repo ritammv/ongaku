@@ -82,6 +82,7 @@ interface Channel {
   parentId: string | null;
   private: boolean;
   posts: Post[];
+  subChannel: Channel[];
 }
 
 interface PostComment {

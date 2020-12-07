@@ -11,10 +11,8 @@ import {
   DrawerContent,
   DrawerCloseButton,
   Select,
-  Alert,
-  AlertTitle,
-  AlertIcon,
-  CloseButton,
+  useToast,
+  Button
 } from '@chakra-ui/react';
 import './createChannel.scss';
 import * as actions from '../../../store/actionCreators';
@@ -33,12 +31,13 @@ const CreateChannel: React.FC<Props> = ({
   closeChannels,
 }) => {
 
+  const toast = useToast();
   const navigate = OnClickRoute();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [channels, setChannels] = useState<Channel[]>([]);
   const [allChannels, setAllChannels] = useState<Channel[]>([]);
   const user = useSelector<State, User>((state: State) => state.user);
-  // const [error, setError] = useState<boolean>(false);
+  const [duplicate, setDuplicate] = useState<boolean>(false);
   const [options, setOptions] = useState({
     name: '',
     parentId: '',
@@ -64,23 +63,27 @@ const CreateChannel: React.FC<Props> = ({
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    // const filteredResult = allChannels.filter((chan) => 
-    //   chan.name.toLowerCase() === options.name.toLowerCase());
-
-    // if (filteredResult.length) {
-    //   setError(!error);
-
     if (options) {
       createChannel(user.id, options)
         .then((newChannel) => {
-          dispatch(actions.addChannel(newChannel));
-          navigate(`channels/${newChannel.name}`);
-          onClose();
-          closeChannels();
-          // setError(false);
+          if (newChannel) {
+            dispatch(actions.addChannel(newChannel));
+            navigate(`channels/${newChannel.name}`);
+            onClose();
+            closeChannels();
+          } else {
+            setDuplicate(true);
+            toast({
+              title: 'Channel already exists',
+              description: 'Go join the conversation',
+              status: 'warning',
+              duration: 6000,
+              isClosable: true,
+            });
+          }
         });
     }
+  
     setOptions({
       name: '',
       parentId: '',
@@ -109,7 +112,12 @@ const CreateChannel: React.FC<Props> = ({
           <DrawerContent>
             <DrawerHeader>Create a channel</DrawerHeader>
             <DrawerCloseButton onClick={() => handleClose()} />
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={(e) => {
+              handleSubmit(e);
+              setDuplicate(false);
+            }}
+            
+            >
               <DrawerBody>
                 Channel Title
                 <Input
@@ -147,18 +155,11 @@ const CreateChannel: React.FC<Props> = ({
                     ))}
                 </Select>
               </DrawerBody>
-
-              {/* {
-                error &&
-                <Alert status="error">
-                  <AlertIcon />
-                  <AlertTitle mr={2}>This channel already exists!</AlertTitle>
-                  <CloseButton position="absolute" right="8px" top="8px" />
-                </Alert>
-              } */}
-
               <DrawerFooter>
-                <button className="genre_tag_button channel_btn" type="submit">
+                <button 
+                  className="genre_tag_button channel_btn" 
+                  type="submit"
+                >
                   Create
                 </button>
               </DrawerFooter>
