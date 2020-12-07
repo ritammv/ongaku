@@ -30,6 +30,7 @@ const Channel: React.FC<Props> = ({ name }) => {
   const currUser = useSelector<State, User>((state) => state.user);
   
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [savePost, setSavePost] = useState<boolean>(false);
   const channel = useSelector<State, Channel>((state) => state.currChannel);
   const [posts, setPosts] = useState<Post[] | []>([]);
 
@@ -113,7 +114,13 @@ const Channel: React.FC<Props> = ({ name }) => {
                   new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf()
               )
               .map((post) => (
-                <Postcard key={post.id} post={post} deletePost={deletePost} />
+                <Postcard 
+                  key={post.id} 
+                  post={post} 
+                  deletePost={deletePost}
+                  savePost={savePost}
+                  setSavePost={setSavePost} 
+                />
               ))}
           </Container>
         )}

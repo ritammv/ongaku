@@ -21,17 +21,12 @@ const SideBarItem: React.FC<Props> = (
     channel
   });
 
-  
-
   // const filteredSubChannels = currChannel.channel.subChannel.filter(
-  //   (subChan) => user.channels.id === subChan.id);
-  
-  console.log(user.channels);
+  //   (subChan) => user.channels.id === subChan.id)
 
   useEffect(() => {
     getChannel(channel.id)
       .then((result: ChannelAndUsers) => {
-        console.log(result);
         setCurrChannel(result);
       });
   }, []);
@@ -41,7 +36,7 @@ const SideBarItem: React.FC<Props> = (
   return (
     <>
       
-   
+ 
       <div className='channel_list_content'>
         <button
           type="button"
@@ -61,6 +56,8 @@ const SideBarItem: React.FC<Props> = (
         </button>
       </div>
 
+
+          
 
     </>
   );

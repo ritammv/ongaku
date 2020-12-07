@@ -8,10 +8,11 @@ import Postcard from '../PostCard/Postcard';
 const ForLater: React.FC = () => {
   const user = useSelector<State, User>((state: State) => state.user);
   const [savedPosts, setSavedPosts] = useState<Post[]>([]);
+  const [savePost, setSavePost] = useState<boolean>(true);
 
   useEffect(() => {
     getForLater(user.id).then((posts: Post[]) => setSavedPosts(posts));
-  }, [user.id]);
+  }, [user.id, savePost]);
 
   function deletePost(postId: string, userId: number) {
     removeSavedPost(postId, userId).then(() => {
@@ -22,10 +23,14 @@ const ForLater: React.FC = () => {
   return (
     <div className="container">
       <ChannelNavBar name="forLater" />
-      !(savedPosts && savedPosts.length) ? (<Text>Be the first to post</Text>) :
-      (
-      <Container position="relative" top="80px">
-        {savedPosts &&
+      {
+
+      !(savedPosts && savedPosts.length) 
+        ? (<Text>Be the first to post</Text>) 
+        :
+      
+        <Container position="relative" top="80px">
+          {savedPosts &&
           savedPosts
             .sort(
               (
@@ -40,9 +45,12 @@ const ForLater: React.FC = () => {
                 key={savedPost.id}
                 post={savedPost}
                 deletePost={deletePost}
+                savePost={savePost}
+                setSavePost={setSavePost} 
               />
             ))}
-      </Container>
+        </Container>
+      }
     </div>
   );
 };
