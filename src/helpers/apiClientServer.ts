@@ -1,7 +1,18 @@
 const BASE_URL = 'http://localhost:3001';
 
 function fetchRequest(path: string, options?: Object) {
-  return fetch(path, options)
+  const defaultOptions: RequestInit = {
+    credentials: 'include',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
+    }
+  };
+
+  Object.assign(defaultOptions, options || {});
+
+  return fetch(path, defaultOptions)
     .then((res) => (res.status < 400 ? res : Promise.reject()))
     .then((res) => (res.status !== 204 ? res.json() : res))
     .catch((err) => {
@@ -13,6 +24,10 @@ const getChannels = (): Promise<Channel[]> => {
   return fetchRequest(`${BASE_URL}/channels/default`);
 };
 
+const getAllChannels = (): Promise<Channel[]> => {
+  return fetchRequest(`${BASE_URL}/channels/`);
+};
+
 const getPublicChannels = (): Promise<Channel[]> => {
   return fetchRequest(`${BASE_URL}/channels/public`);
 };
@@ -21,7 +36,8 @@ const getChannel = (channelId: string): Promise<ChannelAndUsers> => {
   return fetchRequest(`${BASE_URL}/channels/${channelId}`);
 };
 
-const createChannel = (userId: number, body: Object) => {
+const createChannel = (userId: number, body: Object): Promise<Channel> => {
+
   return fetchRequest(`${BASE_URL}/channels/users/${userId}`, {
     method: 'POST',
     mode: 'cors',
@@ -44,6 +60,7 @@ const subscribeToChannels = (userId: number, channels: ChannelForDb[]) => {
 };
 
 const unsubscribeFromChannel = (userId: number, channel: Channel) => {
+  console.log('in apiclient', userId, channel);
   return fetchRequest(`${BASE_URL}/users/${userId}/channels`, {
     method: 'DELETE',
     mode: 'cors',
@@ -176,8 +193,6 @@ const createPost = (
   postForm: FinalPost
 ) => {
   return fetchRequest(release.url).then((moreInfo) => {
-    console.log(moreInfo);
-    console.log(release);
     const dbPost = {
       userId: user.id,
       channelId,
@@ -186,7 +201,7 @@ const createPost = (
       title: moreInfo.title ? moreInfo.title : null,
       artist: moreInfo.artists ? moreInfo.artists[0].name : null,
       year: moreInfo.year ? moreInfo.year : null,
-      label: release.labels ? release.labels[0] : null,
+      label: release.labels ? release.labels[0].name : null,
       body: postForm.message_body,
       thumbnail: release.image ? release.image : null,
       // masterUrl: moreInfo.master_url
@@ -203,12 +218,14 @@ const createPost = (
 };
 
 const removePost = (postId: string, userId: number) => {
-  console.log('delete', postId);
   return fetchRequest(`${BASE_URL}/posts/${postId}`, {
     method: 'DELETE',
     mode: 'cors',
+    credentials: 'include',
     headers: {
+      Accept: 'application/json',
       'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
     },
     body: JSON.stringify({ postId, userId }),
   });
@@ -261,5 +278,6 @@ export {
   removeSavedPost,
   getPost,
   savePost,
+  getAllChannels,
   getForLater,
 };

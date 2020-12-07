@@ -14,6 +14,23 @@ interface Release {
   image: string;
 }
 
+interface ReleaseDetails {
+  id: number;
+  artists: {
+    name: string;
+  }[];
+  year: number;
+  labels: {
+    name: string;
+  }[];
+  title: string;
+  genres: string[];
+  styles: string[];
+  url: string;
+  image: string;
+  type: string
+}
+
 interface SearchResult {
   id: number;
   artist: { name: string };
@@ -149,9 +166,9 @@ type OrActionTypes =
   | authenticationAction;
 
 type AllActionTypes = UserAction &
-  isLoadingAction &
-  channelAction &
-  authenticationAction;
+isLoadingAction &
+channelAction &
+authenticationAction;
 
 interface SelectAction {
   type: string;
@@ -161,4 +178,32 @@ interface SelectAction {
 interface ChannelForDb {
   id: string;
   name: string;
+}
+
+interface Result {
+  country: string;
+  year: string;
+  format: string[];
+  label: string[];
+  type: string;
+  genre: string[];
+  style: string[];
+  id: number;
+  barcode: string[];
+  user_data: {
+    in_wantlist: boolean;
+    in_collection: boolean;
+  };
+  master_id: number;
+  master_url: string;
+  uri: string;
+  catno: string;
+  title: string;
+  thumb: string;
+  cover_image: string;
+  resource_url: string;
+  community: {
+    want: number;
+    have: number;
+  }
 }

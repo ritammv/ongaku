@@ -42,23 +42,16 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [showModal, setShowModal] = useState<boolean>(false);
   const [allChannels, setAllChannels] = useState<Channel[]>([]);
-  const [value, setValue] = useState<Channel | null>({
-    id: 'f8d71201-8a5f-4cd5-9989-46242eb4b49c',
-    name: 'Electronic',
-    ownerId: null,
-    private: false,
-    parentId: null,
-    posts: [],
-  });
+  const [value, setValue] = useState<Channel | null>(null);
   const [searchResult, setSearchResult] = useState<string>('');
 
   useEffect(() => {
     if (userDetails.id) {
       getUser(userDetails.id).then((user) => {
-        actions.setUser(user)(dispatch);
+        dispatch(actions.setUser(user));
       });
     }
-  }, []);
+  }, [userDetails.id]);
 
   useEffect(() => {
     getPublicChannels().then((result) => {

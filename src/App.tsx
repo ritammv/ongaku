@@ -10,10 +10,9 @@ import Dashboard from './components/Dashboard/Dashboard';
 import Discover from './components/Discover/Discover';
 import Home from './components/Home/Home';
 import Authenticated from './components/Authenticated/Authenticated';
-// import Redux from './components/Redux/Redux';
 import Postcard from './components/PostCard/Postcard';
 import { CheckAuthenticateAndPopulate } from './helpers/checkAuthenticateAndPopulate';
-import Postdetails from './components/PostDetails/PostDetails';
+import ShowDetails from './components/ShowDetails/ShowDetails';
 
 const App: React.FC = () => {
   CheckAuthenticateAndPopulate();
@@ -29,17 +28,13 @@ const App: React.FC = () => {
       <Route exact path="/later" component={ForLater} />
       <Route
         exact
-        path="/post/:postId"
-        render={(routeProps) => (
-          <Postdetails postId={routeProps.match.params.postId} />
-        )}
-      />
-
-      {/* <Route exact path="/redux" component={Redux} /> */}
-      <Route
-        exact
         path="/channels/:name"
         render={(routeProps) => <Channel name={routeProps.match.params.name} />}
+      />
+      <Route
+        exact
+        path='/release'
+        component={ShowDetails}
       />
     </Switch>
   );
