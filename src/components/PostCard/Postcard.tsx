@@ -21,15 +21,13 @@ import './Postcard.scss';
 interface Props {
   post: Post;
   deletePost: (postId: string, commentAuthor: number) => void;
-  savePost: boolean;
-  setSavePost: React.Dispatch<React.SetStateAction<boolean>>;
+  savedPosts: Post[]
 }
 
 const Postcard: React.FC<Props> = ({
   post,
   deletePost,
-  savePost,
-  setSavePost,
+  savedPosts
 }) => {
   // const dispatch = useDispatch();
   // const isLoading = useSelector<State, boolean>((state) => state.isLoading);
@@ -39,7 +37,7 @@ const Postcard: React.FC<Props> = ({
   const [commentBody, setCommentBody] = useState<string>('');
   const [isShowingComments, setIsShowingComments] = useState<boolean>(false);
 
-  // const [savePost, setSavePost] = useState<boolean>(false);
+  const [savePost, setSavePost] = useState<boolean>(false);
   const history = useHistory();
   const date = moment(post.createdAt).format('lll');
 
@@ -79,6 +77,14 @@ const Postcard: React.FC<Props> = ({
     }
     getAuthor();
   }, [post.id, post.userId]);
+
+
+  useEffect(() => {
+    const result = savedPosts.find((p) => p.id === post.id);
+    if (result) {
+      setSavePost(true);
+    }
+  }, []);
 
   function postComment(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();

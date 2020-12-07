@@ -136,6 +136,7 @@ type State = {
   currChannel: Channel;
   authentication: boolean;
   selected: Release;
+  savedPosts: Post[];
 };
 
 type UserAction = {
@@ -160,16 +161,23 @@ type AuthenticationAction = {
   authenticated: boolean;
 };
 
+type SavedPostsAction = {
+  type: string;
+  savedPosts: Post[]
+};
+
 type OrActionTypes =
   | UserAction
   | isLoadingAction
   | channelAction
+  | SavedPostsAction
   | authenticationAction;
 
 type AllActionTypes = UserAction &
-  isLoadingAction &
-  channelAction &
-  authenticationAction;
+isLoadingAction &
+channelAction &
+SavedPostsAction &
+authenticationAction;
 
 interface SelectAction {
   type: string;

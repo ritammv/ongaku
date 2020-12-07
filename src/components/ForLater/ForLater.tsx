@@ -1,23 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Container, Text } from '@chakra-ui/react';
 import ChannelNavBar from '../Channel/ChannelNavBar/ChannelNavBar';
 import { getForLater, removeSavedPost } from '../../helpers/apiClientServer';
+import * as actions from '../../store/actionCreators';
 import Postcard from '../PostCard/Postcard';
 
 const ForLater: React.FC = () => {
+  const dispatch = useDispatch();
   const user = useSelector<State, User>((state: State) => state.user);
-  const [savedPosts, setSavedPosts] = useState<Post[]>([]);
-  const [savePost, setSavePost] = useState<boolean>(true);
+  const savedPosts = useSelector<State, Post[]>((state: State) => 
+    state.savedPosts);
+  // const [savePost, setSavePost] = useState<boolean>(true);
 
   useEffect(() => {
-    getForLater(user.id).then((posts: Post[]) => setSavedPosts(posts));
-  }, [user.id, savePost]);
+    getForLater(user.id)
+      .then((result) => dispatch(actions.savedPost(result)));
+  }, [user.id, savedPosts]);
 
   function deletePost(postId: string, userId: number) {
-    removeSavedPost(postId, userId).then(() => {
-      setSavedPosts((prev) => prev.filter((p) => p.id !== postId));
-    });
+    removeSavedPost(postId, userId)
+      .then(() => dispatch(actions.savedPost(savedPosts.filter(p =>  
+        p.id !== postId))));
   }
 
   return (
@@ -44,8 +48,7 @@ const ForLater: React.FC = () => {
                   key={savedPost.id}
                   post={savedPost}
                   deletePost={deletePost}
-                  setSavePost={setSavePost}
-                  savePost={savePost}
+                  savedPosts={savedPosts}
                 />
               ))}
         </Container>

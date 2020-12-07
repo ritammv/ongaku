@@ -22,6 +22,7 @@ import {
   removePost,
   subscribeToChannels,
   unsubscribeFromChannel,
+  getForLater
 } from '../../helpers/apiClientServer';
 import * as actions from '../../store/actionCreators';
 import ChannelNavBar from './ChannelNavBar/ChannelNavBar';
@@ -39,7 +40,9 @@ const Channel: React.FC<Props> = ({ name }) => {
   const closeRef = useRef<HTMLButtonElement | null>(null);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [savePost, setSavePost] = useState<boolean>(false);
+  // const [savePost, setSavePost] = useState<boolean>(false);
+  const savedPosts = useSelector<State, Post[]>((state: State) => 
+    state.savedPosts);
   const channel = useSelector<State, Channel>((state) => state.currChannel);
   const [posts, setPosts] = useState<Post[] | []>([]);
 
@@ -56,6 +59,11 @@ const Channel: React.FC<Props> = ({ name }) => {
       history.push('/dashboard');
     }
   }, [channel]);
+
+  useEffect(() => {
+    getForLater(currUser.id)
+      .then((result) => dispatch(actions.savedPost(result)));
+  }, [currUser.id, savedPosts]);
 
   function deletePost(postId: string, userId: number) {
     removePost(postId, userId).then(() => {
@@ -150,8 +158,7 @@ const Channel: React.FC<Props> = ({ name }) => {
                 key={post.id}
                 post={post}
                 deletePost={deletePost}
-                savePost={savePost}
-                setSavePost={setSavePost}
+                savedPosts={savedPosts}
               />
             ))}
         </Container>

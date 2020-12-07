@@ -7,7 +7,8 @@ export const store: Store<
   // eslint-disable-next-line @typescript-eslint/indent
   State,
   // eslint-disable-next-line @typescript-eslint/indent
-  UserAction | IsLoadingAction | ChannelAction | AuthenticationAction
+  UserAction | IsLoadingAction | ChannelAction | 
+  AuthenticationAction | SavedPostsAction
 > & {
   dispatch: DispatchType;
 } = createStore(reducer, applyMiddleware(thunk));

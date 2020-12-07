@@ -55,3 +55,11 @@ export const unsubscribeChannel = (channel: Channel) => {
   };
   return (dispatch: DispatchType) => dispatch(action);
 };
+
+export const savedPost = (savedPosts: Post[]) => {
+  const action: SavedPostsAction = {
+    type: actionTypes.SET_SAVED_POSTS,
+    savedPosts
+  };
+  return (dispatch: DispatchType) => dispatch(action);
+};
