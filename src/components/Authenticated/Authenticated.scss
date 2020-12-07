@@ -26,7 +26,7 @@
   font-size: 1.6rem;
   &:hover {
     background: darken($primary-color, 3%);
-    transform: scale(1.03);
+    // transform: scale(1.03);
   }
 }
 
@@ -45,7 +45,7 @@
   justify-content: center;
   align-items: center;
   z-index: 1;
-  box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.6);
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.4);
   .inner_circle {
     background: $primary-color;
     width: 99%;

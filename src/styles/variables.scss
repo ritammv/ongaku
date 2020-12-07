@@ -1,16 +1,18 @@
-$primary-color: #fefefe;
-$secondary-color: #0f0e0e;
-$accent-one: #e2e4e4;
-$accent-two: #065dc2;
-$accent-three: #113b98;
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;1,200&display=swap');
+
+$primary-color: #ffdbac;
+$secondary-color: #101017;
+$accent-one: #ffff;
+$accent-two: #cad315;
+$accent-three: rgba(26, 77, 128, 1);
 
 @mixin button-default {
-  border-radius: 12px;
+  // border-radius: 5px;
   padding: 2% 5%;
   text-align: center;
   vertical-align: center;
   border: none;
-  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
   &:focus {
     outline: 0;
   }

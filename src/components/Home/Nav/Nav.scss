@@ -5,6 +5,7 @@
   height: 8vh;
   display: flex;
   justify-content: space-around;
+  background-color: $primary-color;
   align-items: center;
   box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.2);
   position: sticky;
@@ -22,6 +23,17 @@
 }
 .nav_login {
   background: $primary-color;
+}
+
+.nav_buttons {
+  margin-top: 0.4rem;
+  text-align: right;
+}
+
+.nav_logo {
+  height: 40px;
+  margin-top: 0.4rem;
+  width: auto;
 }
 
 .nav_channels {

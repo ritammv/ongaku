@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import {
   useDisclosure,
-  Button,
   Container,
   ModalOverlay,
   Modal,
@@ -11,6 +10,7 @@ import {
   ModalBody,
   ModalCloseButton,
   Text,
+  Button,
   AlertDialog,
   AlertDialogHeader,
   AlertDialogContent,
@@ -27,6 +27,8 @@ import {
   getForLater
 } from '../../helpers/apiClientServer';
 import * as actions from '../../store/actionCreators';
+
+import './Channel.scss';
 
 interface Props {
   name: string;

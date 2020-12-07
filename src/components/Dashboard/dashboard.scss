@@ -2,14 +2,15 @@
 
 .container {
   height: 100vh;
-  background-color: $primary-color;
+  background-color: #ffff;
   display: flex;
   flex-direction: column;
 }
 
 .header {
   height: 90px;
-  border-bottom: 2px solid gray;
+  border-bottom: 2px solid $secondary-color;
+  background-color: #fff;
   position: fixed;
   width: 100%;
   text-align: right;
@@ -17,14 +18,18 @@
   flex-direction: row;
   z-index: 3;
   img {
-    width: 4.5rem;
-    height: 4.5rem;
+    height: 3rem;
+    margin: 0.5rem;
+    width: auto;
   }
 }
 
 .channel_title {
+  margin-top: 1.5rem;
   font-size: 1.5rem;
-  margin-top: 15px;
+  font-family: 'Nunito', sans-serif;
+  width: 70%;
+  text-align: center;
 }
 
 .user_info {
@@ -48,10 +53,10 @@
   align-self: flex-end;
   position: absolute;
   bottom: 0;
-  color: lightgray;
+  color: $secondary-color;
 }
 .dashboard_info h3 {
-  color: gray;
+  color: $secondary-color;
 }
 
 .header h1 {
@@ -83,17 +88,24 @@
   font-size: 40px;
 }
 
+.drawer {
+  background-color: $accent-one;
+}
+
 .drawer_channel {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  padding: 10%;
+  padding: 2%;
+  padding-left: 10%;
+  padding-bottom: 5%;
   font-weight: 600;
   font-size: 18px;
 }
 
 .drawer_public {
+  padding-top: 5%;
   padding: 10%;
 }
 
@@ -122,21 +134,21 @@
 
 .channel_item {
   padding: 10px;
-  border-bottom: 0.5px solid gray;
+  border-bottom: 0.5px solid $secondary-color;
   width: 100%;
   text-align: left;
 }
 
 .channel_item.active {
-  color: $accent-three;
+  color: $accent-two;
 }
 
 .search_input {
-  background-color: $accent-one;
-  border-radius: 12px;
-  height: 35px;
+  // background-color: $accent-one;
+  border-radius: 0px;
+  height: 30px;
   width: 261.63px;
-  padding: 5%;
+  padding: 0%;
 }
 
 .MuiAutocomplete-endAdornment {

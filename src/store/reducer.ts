@@ -15,11 +15,11 @@ const initialState: State = {
   currChannel: {
     id: '',
     name: '',
-    ownerId: '',
+    ownerId: 0,
     private: true,
     parentId: null,
     posts: [],
-    subChannel: []
+    subChannel: [],
   },
   isLoading: true,
   authentication: false,

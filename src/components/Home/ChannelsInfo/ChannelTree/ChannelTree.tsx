@@ -4,16 +4,19 @@ import { useIsInScroll } from '../../../../helpers/isInScroll';
 import { headerAnimation, treeAnimation } from '../../../../helpers/animation';
 
 const ChannelTree: React.FC = () => {
-
   const containerRef = useRef<HTMLDivElement | null>(null);
   const containerIsInScroll = useIsInScroll(containerRef);
-  const [infoContainerTimeline, setInfoContainerTimeline]
-    = useState<GSAPTimeline | null>(null);
+  const [
+    infoContainerTimeline,
+    setInfoContainerTimeline,
+  ] = useState<GSAPTimeline | null>(null);
 
   const containerRefHeader = useRef<HTMLDivElement | null>(null);
   const containerHeaderIsInScroll = useIsInScroll(containerRefHeader);
-  const [headerInfoTimeline, setHeaderInfoTimeline]
-    = useState<GSAPTimeline | null>(null);
+  const [
+    headerInfoTimeline,
+    setHeaderInfoTimeline,
+  ] = useState<GSAPTimeline | null>(null);
 
   useEffect(() => {
     if (!infoContainerTimeline) setInfoContainerTimeline(treeAnimation());
@@ -61,10 +64,10 @@ const ChannelTree: React.FC = () => {
         </div>
         <div className="tree_third_two">
           <button type="button" className="tree_leaf">
-            Deep House
+            Breaks
           </button>
           <button type="button" className="tree_leaf">
-            Tech House
+            Acid
           </button>
         </div>
       </div>

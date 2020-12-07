@@ -1,10 +1,15 @@
 @import '../../../styles/variables.scss';
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;1,200&display=swap');
 
+#root {
+  background-color: $primary-color;
+}
 .container_hero {
   @include flex-center;
   justify-self: flex-start;
   flex-direction: column;
-  justify-content: space-evenly;
+  background-color: $primary-color;
+  // justify-content: space-evenly;
   opacity: 0;
   height: 85%;
   position: relative;
@@ -18,7 +23,9 @@
     height: 64%;
     width: 100%;
     .logo_title {
-      font-size: 5rem;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 300;
+      font-size: 4rem;
     }
   }
 
@@ -37,6 +44,8 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    font-style: italic;
+    font-weight: 100;
     width: 70%;
   }
 
@@ -50,18 +59,18 @@
     button {
       @include button-default;
       color: $primary-color;
-      margin: 1vh 0 3vh 0;
+      margin: 4vh 0 0 0;
     }
-    .buttons_channels {
-      width: 40%;
-      font-size: 1.1rem;
-      background: lighten($secondary-color, 20%);
-    }
+    // .buttons_channels {
+    //   width: 40%;
+    //   font-size: 1.1rem;
+    //   background: lighten($secondary-color, 20%);
+    // }
   }
   .container_scrolldown {
     display: flex;
     position: absolute;
-    bottom: 0;
+    bottom: -10px;
     background: transparent;
     .svg-arrow {
       width: 10%;
@@ -88,6 +97,6 @@
 }
 
 .ongaku_image {
-  height: 500px;
+  height: 270px;
   width: auto;
 }

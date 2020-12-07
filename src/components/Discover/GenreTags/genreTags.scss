@@ -2,25 +2,44 @@
 
 .genre_tag_button {
   @include button-default;
-  width: 150px;
-  border-radius: 12px;
-  border: 1px solid gray;
+  width: 120px;
+  border-radius: 0px;
   height: 40px;
-  color: #e2e4e4;
-  background-color: #0f0e0e;
-  font-size: 15px;
+  color: $secondary-color;
+  background-color: $primary-color;
+  font-size: 12px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  box-shadow: none;
+  border: 1px solid $secondary-color;
   z-index: 3;
   &:active {
     transition: 0.3s all;
-    transform: translateY(5px);
+    transform: translateY(3px);
     opacity: 0.8;
   }
-  &:hover {
-    background: gray;
+  &.one {
+    background-color: inherit;
+    color: $secondary-color;
+    font-weight: bold;
+    border: 1px solid $secondary-color;
+    width: 130px;
+    margin-right: 15px;
+  }
+  &.two {
+    background-color: $secondary-color;
+    color: $accent-two;
+    font-weight: bold;
+    border: 1px solid $secondary-color;
+    width: 130px;
   }
 }
 
 .selected_channel {
-  background-color: $accent-three;
+  background-color: $secondary-color;
+  color: $primary-color;
+  box-shadow: none;
+  border: 1px solid $secondary-color;
   transform: scale(1.1);
 }
