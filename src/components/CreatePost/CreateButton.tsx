@@ -24,7 +24,11 @@ const Createbutton: React.FC<Props> = ({ selected }) => {
               type="button"
               className="genre_tag_button one"
               onClick={handleClick}
-              style={{ backgroundColor: 'black', color: 'white' }}
+              style={{
+                backgroundColor: 'black',
+                color: 'white',
+                position: 'fixed',
+              }}
             >
               CREATE
             </button>
@@ -32,7 +36,11 @@ const Createbutton: React.FC<Props> = ({ selected }) => {
         </Link>
       ) : (
         <Flex justifyContent="center">
-          <button className="genre_tag_button one" type="button">
+          <button
+            className="genre_tag_button one"
+            type="button"
+            style={{ position: 'fixed' }}
+          >
             CREATE
           </button>
         </Flex>

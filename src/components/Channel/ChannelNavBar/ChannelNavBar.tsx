@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { IconButton } from '@chakra-ui/react';
 import SideBar from '../../Dashboard/SideBar/SideBar';
-import ongaku from '../../../assets/ongaku-logo-4.svg';
+import ongaku from '../../../assets/ongaku-2-dark.svg';
 import { getChannel } from '../../../helpers/apiClientServer';
 
 interface Props {

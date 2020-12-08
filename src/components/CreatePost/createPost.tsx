@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
-} from '@chakra-ui/react';
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getFromDiscogs } from '../../helpers/apiClientServer';
 import SearchDiscogs from './SearchDiscogs';
@@ -34,49 +28,46 @@ const CreatePost: React.FC = () => {
       `/users/${user.username}/collection`,
       user.token,
       user.tokenSecret
-    )
-      .then((data) =>
-        setCollection(
-          [...data.releases]
-            .map((release) => release.basic_information)
-            .map((release) => ({
-              id: release.id,
-              artists: release.artists,
-              year: release.year,
-              labels: release.labels,
-              title: release.title,
-              genres: release.genres,
-              styles: release.styles,
-              url: release.resource_url,
-              image: release.huge_thumb,
-            }))
-        )
-      );
-
+    ).then((data) =>
+      setCollection(
+        [...data.releases]
+          .map((release) => release.basic_information)
+          .map((release) => ({
+            id: release.id,
+            artists: release.artists,
+            year: release.year,
+            labels: release.labels,
+            title: release.title,
+            genres: release.genres,
+            styles: release.styles,
+            url: release.resource_url,
+            image: release.huge_thumb,
+          }))
+      )
+    );
 
     getFromDiscogs(
       `/users/${user.username}/wants`,
       user.token,
       user.tokenSecret
-    )
-      .then((data) =>
-        setWantList(
-          [...data.wants]
-            .map((want) => want.basic_information)
-            .map((want) => ({
-              id: want.id,
-              artists: want.artists,
-              year: want.year,
-              labels: want.labels,
-              title: want.title,
-              genres: want.genres,
-              styles: want.styles,
-              url: want.resource_url,
-              image: want.cover_image,
-            }))
-        )
-      );
-  
+    ).then((data) =>
+      setWantList(
+        [...data.wants]
+          .map((want) => want.basic_information)
+          .map((want) => ({
+            id: want.id,
+            artists: want.artists,
+            year: want.year,
+            labels: want.labels,
+            title: want.title,
+            genres: want.genres,
+            styles: want.styles,
+            url: want.resource_url,
+            image: want.cover_image,
+          }))
+      )
+    );
+
     setSelected({
       id: 0,
       artists: [],
@@ -110,28 +101,26 @@ const CreatePost: React.FC = () => {
             Wantlist
           </Tab>
         </TabList>
-        
+
         <TabPanels>
           <TabPanel overflowX="scroll" minHeight="90vh" display="flex">
             <SearchDiscogs selected={selected} setSelected={setSelected} />
           </TabPanel>
-          <TabPanel overflowX="scroll">
-  
-            <PanelListItem 
-              data={collection} 
-              selected={selected} 
+          <TabPanel overflowX="scroll" style={{ height: '85vh' }}>
+            <PanelListItem
+              data={collection}
+              selected={selected}
               setSelected={setSelected}
             />
           </TabPanel>
 
-          <TabPanel overflowX="scroll">
-            <PanelListItem 
-              data={wantList} 
-              selected={selected} 
+          <TabPanel overflowX="scroll" style={{ height: '85vh' }}>
+            <PanelListItem
+              data={wantList}
+              selected={selected}
               setSelected={setSelected}
             />
           </TabPanel>
-
         </TabPanels>
       </Tabs>
     </>

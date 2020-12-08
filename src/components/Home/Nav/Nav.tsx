@@ -1,7 +1,7 @@
 import React from 'react';
 import './Nav.scss';
 // import Logo from '../../Logo/Logo';
-import ongaku from '../../../assets/ongaku-logo-4.svg';
+import ongaku from '../../../assets/ongaku-2-dark.svg';
 import { OnClickRoute } from '../../../helpers/onClickRoute';
 import LoginButton from '../LoginButton/LoginButton';
 

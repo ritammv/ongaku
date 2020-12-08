@@ -117,14 +117,20 @@ const SearchDiscogs: React.FC<Props> = ({ selected, setSelected }) => {
             name="year"
             key="year"
           />
-
-          <button
-            type="button"
-            className="genre_tag_button one"
-            onClick={handleSubmit}
-          >
-            SEARCH
-          </button>
+          <div className="buttonSearch" style={{ display: 'flex' }}>
+            <button
+              type="button"
+              className="genre_tag_button two"
+              onClick={handleSubmit}
+              style={{
+                textAlign: 'center',
+                alignSelf: 'center',
+                margin: '1rem auto',
+              }}
+            >
+              SEARCH
+            </button>
+          </div>
         </form>
       ) : (
         <SearchResult

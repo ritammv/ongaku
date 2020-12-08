@@ -2,15 +2,19 @@
 
 .container {
   height: 100vh;
-  background-color: #ffff;
+  background-color: $primary-color;
   display: flex;
   flex-direction: column;
 }
 
+.drawer {
+  background-color: $primary-color;
+}
+
 .header {
   height: 90px;
-  border-bottom: 2px solid $secondary-color;
-  background-color: #fff;
+  border-bottom: 0.5px solid $accent-two;
+  background-color: $primary-color;
   position: fixed;
   width: 100%;
   text-align: right;
@@ -22,14 +26,6 @@
     margin: 0.5rem;
     width: auto;
   }
-}
-
-.channel_title {
-  margin-top: 1.5rem;
-  font-size: 1.5rem;
-  font-family: 'Nunito', sans-serif;
-  width: 70%;
-  text-align: center;
 }
 
 .user_info {
@@ -86,6 +82,7 @@
 .ongaku_text {
   padding: 20px;
   font-size: 40px;
+  color: $accent-one;
 }
 
 .drawer_side_bar {
@@ -136,13 +133,15 @@
 
 .channel_item {
   padding: 10px;
+  border-top: 0.5px solid $secondary-color;
   border-bottom: 0.5px solid $secondary-color;
   width: 100%;
   text-align: left;
 }
 
 .channel_item.active {
-  color: $accent-two;
+  background-color: $secondary-color;
+  color: $primary-color;
 }
 
 .search_input {
@@ -178,4 +177,5 @@
   justify-content: space-around;
   align-self: center;
   margin-bottom: 10px;
+  background-color: $primary-color;
 }

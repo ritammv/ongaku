@@ -7,7 +7,6 @@ import {
   useDisclosure,
   Drawer,
   DrawerBody,
-  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   DrawerCloseButton,
@@ -107,7 +106,7 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
     <div className="drawer">
       <Drawer isOpen={isOpen} placement="left" onClose={onClose} size="full">
         <DrawerOverlay className="drawer">
-          <DrawerContent>
+          <DrawerContent style={{ background: '#2d3848' }}>
             <DrawerCloseButton onClick={() => handleClose()} />
             <DrawerHeader className="welcome_username">
               {' '}
@@ -140,6 +139,7 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                       style={{
                         opacity: '0.6',
                         borderRadius: '0',
+                        backgroundColor: '#607382',
                       }}
                       placeholder="Search Channels..."
                     />
@@ -172,7 +172,7 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                 <ul className="private_channel_list">
                   <button
                     type="button"
-                    className="channel_item"
+                    className=" channel_item"
                     onClick={(e) => navigateToLater(e)}
                   >
                     #For Later

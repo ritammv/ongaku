@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
-import { Button, Flex, SimpleGrid } from '@chakra-ui/react';
+import { SimpleGrid } from '@chakra-ui/react';
 import Tile from './Tile/Tile';
-import Createbutton from './CreateButton';
 
 interface Props {
   search: Release[];
@@ -40,16 +39,24 @@ const SearchResult: React.FC<Props> = ({
         ))}
       </SimpleGrid>
 
-      <Flex justify="center">
+      <div className="button_container_search">
         <button
           type="button"
           className="genre_tag_button one"
           onClick={() => setSearch([])}
+          style={{ position: 'fixed' }}
         >
           {'<'}
         </button>
-        <Createbutton selected={selected} />
-      </Flex>
+        <button
+          type="button"
+          style={{ position: 'fixed', right: '10px' }}
+          className="genre_tag_button one"
+        >
+          {' '}
+          CREATE
+        </button>
+      </div>
     </>
   );
 };

@@ -81,8 +81,6 @@ const Channel: React.FC<Props> = ({ name }) => {
   };
 
   const handleSubscribe = () => {
-    // const result = currUser.channels.filter((chan) => chan.id === channel.id)
-    //   .length;
     if (isSubsribed) {
       unsubscribeFromChannel(currUser.id, channel).then(() => {
         dispatch(actions.unsubscribeChannel(channel));
@@ -147,10 +145,18 @@ const Channel: React.FC<Props> = ({ name }) => {
                 <AlertDialogHeader>
                   Invite your friends to your private channel with this code!
                 </AlertDialogHeader>
-                <textarea value={copyValue}>{channel.id}</textarea>
-                <Button ref={closeRef} onClick={close}>
+                <textarea style={{ textAlign: 'center' }} value={copyValue}>
+                  {channel.id}
+                </textarea>
+                <button
+                  style={{ width: '100%' }}
+                  type="button"
+                  className="genre_tag_button two"
+                  ref={closeRef}
+                  onClick={close}
+                >
                   Copy to clipboard
-                </Button>
+                </button>
               </AlertDialogContent>
             </AlertDialog>
             ;
@@ -163,8 +169,16 @@ const Channel: React.FC<Props> = ({ name }) => {
                 </ModalBody>
               </ModalContent>
             </Modal>
-            {!(posts && posts.length) ? (
-              <Text>Be the first to post</Text>
+            {!posts.length ? (
+              <h1
+                style={{
+                  position: 'relative',
+                  top: '150px',
+                  textAlign: 'center',
+                }}
+              >
+                Be the first to post
+              </h1>
             ) : (
               <Container position="relative" top="130px">
                 {posts

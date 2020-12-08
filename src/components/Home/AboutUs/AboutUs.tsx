@@ -90,8 +90,8 @@ const AboutUs: React.FC = () => {
         <div className="buttons_join_bottom">
           <LoginButton
             text="Login with"
-            width="60%"
-            fontSize="1.2rem"
+            width="80%"
+            fontSize="1.4rem"
             styles={true}
             discogsLogo={1}
           />
