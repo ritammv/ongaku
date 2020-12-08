@@ -7,15 +7,6 @@ export const CheckAuthenticateAndPopulate = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state: State) => state.authentication);
 
-  // useEffect(() => {
-  //   console.log(currUser.id);
-  //   getForLater(currUser.id)
-  //     .then((result) => {
-  //       console.log(result);
-  //       dispatch(actions.savedPost(result));
-  //     });
-  // }, [currUser.id, savedPosts]);
-
   useEffect(() => {
     checkAuthGetUser()
       .then((resp) => {
@@ -23,10 +14,9 @@ export const CheckAuthenticateAndPopulate = () => {
           dispatch(setUser(resp.user));
           dispatch(setAuthentication(resp.success));
         }
-        getForLater(resp.user.id)
-          .then((result) => {
-            result && dispatch(savedPost(result));
-          });
+        getForLater(resp.user.id).then((result) => {
+          result && dispatch(savedPost(result));
+        });
       })
       .catch((err) => console.error(err));
   }, [dispatch]);

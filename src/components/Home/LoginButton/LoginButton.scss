@@ -2,12 +2,14 @@
 .loginbutton {
   @include button-default;
   width: 100%;
-  background: $secondary-color;
+  background: $accent-one;
+  color: white;
   // padding: 2% 3%;
 }
 
 .discogs-logo {
-  background-color: $secondary-color;
+  background-color: $accent-one;
+  color: #ffff;
   height: 30px;
   width: 100%;
 }

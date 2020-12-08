@@ -2,16 +2,19 @@
 
 .container {
   height: 100vh;
-  background-color: #ffff;
+  background-color: $primary-color;
   display: flex;
   flex-direction: column;
 }
 
+.drawer {
+  background-color: $primary-color;
+}
+
 .header {
   height: 90px;
-  border-bottom: 2px solid $secondary-color;
-  background-color: $secondary-color;
-  color: $accent-one;
+  border-bottom: 0.5px solid $accent-two;
+  background-color: $primary-color;
   position: fixed;
   width: 100%;
   text-align: right;
@@ -23,14 +26,6 @@
     margin: 0.5rem;
     width: auto;
   }
-}
-
-.channel_title {
-  margin-top: 1.5rem;
-  font-size: 1.5rem;
-  font-family: 'Nunito', sans-serif;
-  width: 70%;
-  text-align: center;
 }
 
 .user_info {
@@ -87,10 +82,13 @@
 .ongaku_text {
   padding: 20px;
   font-size: 40px;
+  color: $accent-one;
 }
 
-.drawer {
+.drawer_side_bar {
   background-color: $accent-one;
+  display: flex;
+  width: 100vw;
 }
 
 .drawer_channel {
@@ -135,13 +133,15 @@
 
 .channel_item {
   padding: 10px;
+  border-top: 0.5px solid $secondary-color;
   border-bottom: 0.5px solid $secondary-color;
   width: 100%;
   text-align: left;
 }
 
 .channel_item.active {
-  color: $accent-two;
+  background-color: $secondary-color;
+  color: $primary-color;
 }
 
 .search_input {
@@ -165,4 +165,17 @@
 .unsubscribe_channel {
   position: relative;
   right: 7%;
+}
+
+.welcome_username {
+  text-align: center;
+}
+
+.side_bar_drawer_buttons {
+  display: flex;
+  width: 80vw;
+  justify-content: space-around;
+  align-self: center;
+  margin-bottom: 10px;
+  background-color: $primary-color;
 }

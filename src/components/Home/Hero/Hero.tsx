@@ -3,7 +3,7 @@ import './Hero.scss';
 import { useIsInScroll } from '../../../helpers/isInScroll';
 import { heroAnimation } from '../../../helpers/animation';
 // import Logo from '../../Logo/Logo';
-import ongaku from '../../../assets/ongaku-logo.svg';
+import ongaku from '../../../assets/ongaku-dark.svg';
 import DownArrow from '../../../assets/arrow-down.svg';
 import { OnClickRoute } from '../../../helpers/onClickRoute';
 import LoginButton from '../LoginButton/LoginButton';

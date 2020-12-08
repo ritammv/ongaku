@@ -12,8 +12,10 @@ import {
   Text,
   Button,
   AlertDialog,
+  Flex,
   AlertDialogHeader,
   AlertDialogContent,
+  useClipboard,
 } from '@chakra-ui/react';
 import CreatePost from '../CreatePost/createPost';
 import Postcard from '../PostCard/Postcard';
@@ -24,7 +26,6 @@ import {
   removePost,
   subscribeToChannels,
   unsubscribeFromChannel,
-  getForLater,
 } from '../../helpers/apiClientServer';
 import * as actions from '../../store/actionCreators';
 
@@ -39,19 +40,24 @@ const Channel: React.FC<Props> = ({ name }) => {
   const history = useHistory();
   const currUser = useSelector<State, User>((state) => state.user);
   const [open, setOpen] = useState(false);
-
   const closeRef = useRef<HTMLButtonElement | null>(null);
-
   const { isOpen, onOpen, onClose } = useDisclosure();
   const savedPosts = useSelector<State, Post[]>(
     (state: State) => state.savedPosts
   );
   const channel = useSelector<State, Channel>((state) => state.currChannel);
+  const [copyValue, setCopyValue] = useState(`${channel.id}`);
+  const { hasCopied, onCopy } = useClipboard(copyValue);
+
   const isLoading = useSelector<State, boolean>((state) => state.isLoading);
   const [posts, setPosts] = useState<Post[] | []>([]);
+  const [isSubsribed, setIsSubscribed] = useState<Boolean>(
+    !!currUser.channels.filter((chan) => chan.id === channel.id).length
+  );
 
   const close = () => {
     setOpen(false);
+    onCopy();
   };
 
   useEffect(() => {
@@ -66,7 +72,7 @@ const Channel: React.FC<Props> = ({ name }) => {
     } else {
       history.push('/dashboard');
     }
-  }, [channel]);
+  }, [channel, dispatch, history]);
 
   const deletePost = (postId: string, userId: number) => {
     removePost(postId, userId).then(() => {
@@ -75,14 +81,16 @@ const Channel: React.FC<Props> = ({ name }) => {
   };
 
   const handleSubscribe = () => {
-    const result = currUser.channels.filter((chan) => chan.id === channel.id)
-      .length;
-    if (result) {
-      unsubscribeFromChannel(currUser.id, channel);
-      dispatch(actions.unsubscribeChannel(channel));
+    if (isSubsribed) {
+      unsubscribeFromChannel(currUser.id, channel).then(() => {
+        dispatch(actions.unsubscribeChannel(channel));
+        setIsSubscribed((current) => !current);
+      });
     } else {
-      subscribeToChannels(currUser.id, [channel]);
-      dispatch(actions.addChannel(channel));
+      subscribeToChannels(currUser.id, [channel]).then(() => {
+        dispatch(actions.addChannel(channel));
+        setIsSubscribed((current) => !current);
+      });
     }
   };
 
@@ -134,10 +142,18 @@ const Channel: React.FC<Props> = ({ name }) => {
                 <AlertDialogHeader>
                   Invite your friends to your private channel with this code!
                 </AlertDialogHeader>
-                <textarea>{channel.id}</textarea>
-                <Button ref={closeRef} onClick={close}>
+                <textarea style={{ textAlign: 'center' }} value={copyValue}>
+                  {channel.id}
+                </textarea>
+                <button
+                  style={{ width: '100%' }}
+                  type="button"
+                  className="genre_tag_button two"
+                  ref={closeRef}
+                  onClick={close}
+                >
                   Copy to clipboard
-                </Button>
+                </button>
               </AlertDialogContent>
             </AlertDialog>
             ;
@@ -150,10 +166,18 @@ const Channel: React.FC<Props> = ({ name }) => {
                 </ModalBody>
               </ModalContent>
             </Modal>
-            {!(posts && posts.length) ? (
-              <Text>Be the first to post</Text>
+            {!posts.length ? (
+              <h1
+                style={{
+                  position: 'relative',
+                  top: '150px',
+                  textAlign: 'center',
+                }}
+              >
+                Be the first to post
+              </h1>
             ) : (
-              <div className='postcard-container'>
+              <div className="postcard-container">
                 {posts
                   .sort(
                     (

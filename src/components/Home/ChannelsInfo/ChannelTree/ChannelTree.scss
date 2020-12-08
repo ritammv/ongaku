@@ -15,7 +15,7 @@
     align-items: center;
     background: $primary-color;
     .tree_leaf {
-      background: $secondary-color;
+      background: $accent-one;
     }
   }
   .tree_second {
@@ -26,7 +26,7 @@
     align-items: center;
     background: $primary-color;
     .tree_leaf {
-      background: $secondary-color;
+      background: $accent-one;
     }
   }
   .tree_third {
@@ -37,7 +37,7 @@
     align-items: center;
     background: $primary-color;
     .tree_leaf {
-      background: $secondary-color;
+      background: $accent-one;
     }
   }
   .tree_leaf {
@@ -48,7 +48,7 @@
     width: 26vw;
     height: 4vh;
     max-width: 150px;
-    color: $primary-color;
+    color: $secondary-color;
     @include button-default;
     transform: rotate(0deg);
     margin: 0px 3px;

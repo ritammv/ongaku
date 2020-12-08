@@ -1,19 +1,5 @@
 @import '../../styles/variables.scss';
 
-.channel {
-  background-color: $secondary-color !important;
-  overflow-y: scroll;
-  padding: 0;
-  padding-bottom: 10px;
-}
-.postcard-container {
-  position: relative;
-  top: 130px;
-}
-
-.channel_title {
-  justify-self: center;
-}
 .channel_btn {
   width: 40%;
   padding: 10px;
@@ -42,4 +28,12 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.channel_buttons_container {
+  width: 80vw;
+  display: flex;
+  justify-content: space-around;
+  z-index: 2;
+  position: relative;
 }

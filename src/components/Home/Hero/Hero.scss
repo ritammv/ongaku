@@ -58,8 +58,12 @@
     height: 30%;
     button {
       @include button-default;
-      color: $primary-color;
+      color: $secondary-color;
+      background-color: #607382;
       margin: 4vh 0 0 0;
+    }
+    img {
+      background-color: #607382;
     }
     // .buttons_channels {
     //   width: 40%;

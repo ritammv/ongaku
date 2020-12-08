@@ -7,7 +7,6 @@ import {
   useDisclosure,
   Drawer,
   DrawerBody,
-  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   DrawerCloseButton,
@@ -104,14 +103,17 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
   };
 
   return (
-    <div>
+    <div className="drawer">
       <Drawer isOpen={isOpen} placement="left" onClose={onClose} size="full">
         <DrawerOverlay className="drawer">
-          <DrawerContent>
+          <DrawerContent style={{ background: '#2d3848' }}>
             <DrawerCloseButton onClick={() => handleClose()} />
-            <DrawerHeader>Welcome {userDetails.username}</DrawerHeader>
+            <DrawerHeader className="welcome_username">
+              {' '}
+              Welcome <br /> {userDetails.username}
+            </DrawerHeader>
             <DrawerBody>
-              <div className="drawer_channel">Channels</div>
+              {/* <div className="drawer_channel">Channels</div> */}
 
               <form
                 onSubmit={(e) => handleClickAutocomplete(e)}
@@ -137,8 +139,9 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                       style={{
                         opacity: '0.6',
                         borderRadius: '0',
+                        backgroundColor: '#607382',
                       }}
-                      placeholder="Search..."
+                      placeholder="Search Channels..."
                     />
                   )}
                 />
@@ -169,7 +172,7 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                 <ul className="private_channel_list">
                   <button
                     type="button"
-                    className="channel_item"
+                    className=" channel_item"
                     onClick={(e) => navigateToLater(e)}
                   >
                     #For Later
@@ -191,14 +194,14 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                 </ul>
               </div>
             </DrawerBody>
-            <DrawerFooter className="drawer drawer_footer">
+            <div className=" side_bar_drawer_buttons">
               <button
                 id="drawer_button"
                 style={{
                   height: '50px',
                   width: '130px',
                 }}
-                className=" genre_tag_button one"
+                className=" genre_tag_button two"
                 type="button"
                 onClick={() => {
                   setShowModal((state) => !state);
@@ -212,7 +215,7 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                   height: '50px',
                   width: '130px',
                 }}
-                className="genre_tag_button one"
+                className="genre_tag_button two"
                 type="button"
                 onClick={() => {
                   setShowSubscribe((state) => !state);
@@ -220,7 +223,7 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
               >
                 + Join Private Channel
               </button>
-            </DrawerFooter>
+            </div>
           </DrawerContent>
         </DrawerOverlay>
       </Drawer>

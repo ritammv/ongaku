@@ -1,20 +1,20 @@
 import React, { useEffect } from 'react';
-import { Button, Flex, SimpleGrid } from '@chakra-ui/react';
+import { SimpleGrid } from '@chakra-ui/react';
 import Tile from './Tile/Tile';
-import Createbutton from './CreateButton';
-
 
 interface Props {
-  search: Release[],
-  setSearch: Function
-  selected: Release
-  setSelected: Function  
+  search: Release[];
+  setSearch: Function;
+  selected: Release;
+  setSelected: Function;
 }
 
-const SearchResult: React.FC<Props> = 
-({ search, setSearch, selected, setSelected }) => {
-
-
+const SearchResult: React.FC<Props> = ({
+  search,
+  setSearch,
+  selected,
+  setSelected,
+}) => {
   useEffect(() => {
     setSelected({
       id: 0,
@@ -24,45 +24,39 @@ const SearchResult: React.FC<Props> =
     });
   }, [setSelected]);
 
-  const searchColums: number = Math.floor(search.length/3 + 1);
+  const searchColums: number = Math.floor(search.length / 3 + 1);
 
   return (
     <>
-      <SimpleGrid 
-        columns={[searchColums, null, 3]} 
-        spacing='5px'
-      >
-        {search.slice(0, 150).map(result => (
-          <Tile 
+      <SimpleGrid columns={[searchColums, null, 3]} spacing="5px">
+        {search.slice(0, 150).map((result) => (
+          <Tile
             result={result}
             key={result.id}
-            selected={selected} 
+            selected={selected}
             setSelected={setSelected}
           />
         ))}
-
       </SimpleGrid>
 
-      <Flex justify='center'>
-        <Button 
-          border='0.3px solid #d3d3d3' 
-          color='#d3d3d3'
-          fontSize='2rem'
-          borderRadius='12px'
-          padding='2% 5%'
-          fontWeight='lighter'
-          mr={3}
+      <div className="button_container_search">
+        <button
+          type="button"
+          className="genre_tag_button one"
           onClick={() => setSearch([])}
-          position='fixed'
-          left='20px'
-          
+          style={{ position: 'fixed' }}
         >
           {'<'}
-        </Button> 
-        <Createbutton
-          selected={selected}
-        />
-      </Flex>
+        </button>
+        <button
+          type="button"
+          style={{ position: 'fixed', right: '10px' }}
+          className="genre_tag_button one"
+        >
+          {' '}
+          CREATE
+        </button>
+      </div>
     </>
   );
 };

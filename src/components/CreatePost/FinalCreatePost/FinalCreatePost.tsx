@@ -41,8 +41,16 @@ export default function Finalcreatepost() {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    createPost(channel.id, selected, user, postForm, user.token, user.tokenSecret)
-      .then(() => { history.push(`/channels/${channel.name}`); });
+    createPost(
+      channel.id,
+      selected,
+      user,
+      postForm,
+      user.token,
+      user.tokenSecret
+    ).then(() => {
+      history.push(`/channels/${channel.name}`);
+    });
   }
 
   return (
@@ -83,23 +91,14 @@ export default function Finalcreatepost() {
           required
         />
         <Textarea
-          placeholder="Share the love..."
+          placeholder="Message goes here.."
           name="message"
           onChange={(e) => handleChange(e, 'message')}
           required
         />
-        <Button
-          className="button-default"
-          backgroundColor="#0f0e0e"
-          color="white"
-          borderRadius="12px"
-          padding="2% 5%"
-          fontWeight="lighter"
-          mr={3}
-          type="submit"
-        >
+        <button className="genre_tag_button two" type="submit">
           POST
-        </Button>
+        </button>
       </form>
     </div>
   );

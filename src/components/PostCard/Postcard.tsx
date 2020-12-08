@@ -23,7 +23,7 @@ import { addSavedPost, removeSavedPost } from '../../store/actionCreators';
 interface Props {
   post: Post;
   deletePost: (postId: string, commentAuthor: number) => void;
-  savedPosts: Post[]
+  savedPosts: Post[];
 }
 
 const Postcard: React.FC<Props> = ({ post, deletePost, savedPosts }) => {
@@ -52,20 +52,17 @@ const Postcard: React.FC<Props> = ({ post, deletePost, savedPosts }) => {
 
   useEffect(() => {
     function getPost() {
-      apiclient
-        .getPost(post.id)
-        .then((result) => {
-          setPostComments(
-            result.comments.sort(
-              (
-                a: { createdAt: string | number | Date },
-                b: { createdAt: string | number | Date }
-              ) =>
-                new Date(b.createdAt).valueOf() -
-                new Date(a.createdAt).valueOf()
-            )
-          );
-        });
+      apiclient.getPost(post.id).then((result) => {
+        setPostComments(
+          result.comments.sort(
+            (
+              a: { createdAt: string | number | Date },
+              b: { createdAt: string | number | Date }
+            ) =>
+              new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf()
+          )
+        );
+      });
     }
     getPost();
     async function getAuthor() {
@@ -74,7 +71,6 @@ const Postcard: React.FC<Props> = ({ post, deletePost, savedPosts }) => {
     }
     getAuthor();
   }, [post.id, post.userId]);
-
 
   useEffect(() => {
     const result = savedPosts.find((p) => p.id === post.id);
@@ -114,55 +110,56 @@ const Postcard: React.FC<Props> = ({ post, deletePost, savedPosts }) => {
 
   function handleSave() {
     if (!savePost) {
-      apiclient.savePost(user.id, post.id)
-        .then(() => {
-          dispatch(addSavedPost(post));
-          setSavePost((curr) => !curr);
-        });
+      apiclient.savePost(user.id, post.id).then(() => {
+        dispatch(addSavedPost(post));
+        setSavePost((curr) => !curr);
+      });
     } else {
-      apiclient.removeSavedPost(post.id, user.id)
-        .then(() => {
-          dispatch(removeSavedPost(post));
-          setSavePost((curr) => !curr);
-        });
+      apiclient.removeSavedPost(post.id, user.id).then(() => {
+        dispatch(removeSavedPost(post));
+        setSavePost((curr) => !curr);
+      });
     }
   }
 
   return (
-    <div className='postcard'>
+    <div className="postcard">
       <>
         <div className="message_date">{date}</div>
-        <div className='postcard_title_wrapper'>
+        <div className="postcard_title_wrapper">
           <div className="message_title">{post.postTitle}</div>
           <div>
             {user.id === post.userId && (
-            <IconButton
-              backgroundColor='inherit'
-              aria-label="delete post"
-              icon={<TiDelete />}
-              onClick={() => deletePost(post.id, post.userId)}
-            />
+              <IconButton
+                backgroundColor="inherit"
+                aria-label="delete post"
+                icon={<TiDelete />}
+                onClick={() => deletePost(post.id, post.userId)}
+              />
             )}
           </div>
         </div>
         <div className="message_tile">
           <div
             className="tile_image"
-            onClick={() => history.push(`/details/${post.url.split('com/')[1]}`)}
+            onClick={
+              () => history.push(`/details/${post.url.split('com/')[1]}`)
+              // eslint-disable-next-line react/jsx-curly-newline
+            }
             aria-hidden="true"
           >
             <img src={post.thumbnail} alt="release" />
           </div>
           {!savePost ? (
             <IconButton
-              id='tile_button'
+              id="tile_button"
               aria-label="Add to List"
               icon={<HiOutlinePlus />}
               onClick={handleSave}
             />
           ) : (
             <IconButton
-              id='tile_button'
+              id="tile_button"
               aria-label="Add to List"
               icon={<BsFillBookmarksFill />}
               onClick={handleSave}
@@ -176,7 +173,6 @@ const Postcard: React.FC<Props> = ({ post, deletePost, savedPosts }) => {
           {/* </div> */}
         </div>
 
-       
         <div className="message_content">
           {isShowingComments ? (
             <div className="message_body">{post.body}</div>
@@ -192,7 +188,7 @@ const Postcard: React.FC<Props> = ({ post, deletePost, savedPosts }) => {
                 size="sm"
                 aria-label="See comments"
                 icon={<BsChevronDown />}
-                backgroundColor='inherit'
+                backgroundColor="inherit"
                 onClick={handleComments}
               />
               {postComments.length
@@ -224,24 +220,21 @@ const Postcard: React.FC<Props> = ({ post, deletePost, savedPosts }) => {
             </Button>
           </form>
 
-          <div className='comment_wrapper'>
+          <div className="comment_wrapper">
             {postComments && postComments.length ? (
               <>
                 {(postComments as PostComment[]).map((comment) => (
-
                   <CommentCard
                     key={comment.id}
                     comment={comment}
                     deleteComment={deleteComment}
                   />
-               
                 ))}
               </>
             ) : (
               <Text>Be the first to comment</Text>
             )}
           </div>
-
         </>
       ) : null}
     </div>

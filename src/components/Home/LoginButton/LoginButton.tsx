@@ -1,6 +1,6 @@
 import React from 'react';
 import './LoginButton.scss';
-import discogs from '../../../assets/discogs-logo.svg';
+import discogs from '../../../assets/discogs-dark_1.svg';
 import discogs2 from '../../../assets/discogs-2.svg';
 
 interface Props {
@@ -31,7 +31,7 @@ const LoginButton: React.FC<Props> = ({
             <img className="discogs-logo" src={discogs} alt="login_img" />
           )}
           {discogsLogo === 2 && (
-            <img className="discogs-logo2" src={discogs2} alt="login_img" />
+            <img className="discogs-logo2" src={discogs} alt="login_img" />
           )}
         </button>
       </a>
