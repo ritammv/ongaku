@@ -11,6 +11,7 @@ interface Props {
 }
 
 const CommentCard: React.FC<Props> = ({ comment, deleteComment }) => {
+  console.log('COMMENT FOR CARD', comment);
   
   const [author, setAuthor] = useState<User>({
     id: 4920,
@@ -53,7 +54,6 @@ const CommentCard: React.FC<Props> = ({ comment, deleteComment }) => {
         <div className="comment_body">
           {comment.body}
         </div>
-        <div className="comment_body">{comment.body}</div>
       </div>
     </>
   );

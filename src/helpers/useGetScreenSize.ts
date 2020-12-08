@@ -11,10 +11,15 @@ export const useGetScreenSize = (): string  => {
   const [screenSize, setScreenSize] = useState(getSize(window.innerWidth));
   
   useEffect(() => {
-    window.addEventListener('resize', (e) => {
+    const eventListenerFunc = () => {
       const { innerWidth } = window;
       setScreenSize(getSize(innerWidth));
-    });
+    };
+
+    window.addEventListener('resize', eventListenerFunc);
+    return () => { 
+      window.removeEventListener('resize', eventListenerFunc);
+    };
   }, []);
 
   return screenSize;
