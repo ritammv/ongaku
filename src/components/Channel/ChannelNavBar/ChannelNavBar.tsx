@@ -28,7 +28,7 @@ const ChannelNavBar = ({ name }: Props) => {
   return (
     <nav className="header channel_header">
       <img src={ongaku} alt="vinyl_image" />
-      <div className="channel_title">#{name.toUpperCase()}</div>
+      <div className="channel_title">{name && `#${name.toUpperCase()}`}</div>
       <div className="welcome_user">
         <IconButton
           className="button_emoji"
