@@ -32,3 +32,11 @@
   align-items: center;
   flex-direction: column;
 }
+
+.channel_buttons_container {
+  width: 80vw;
+  display: flex;
+  justify-content: space-around;
+  z-index: 2;
+  position: relative;
+}

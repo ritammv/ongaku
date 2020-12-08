@@ -9,7 +9,6 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Button,
   Input,
 } from '@chakra-ui/react';
 import * as actions from '../../../store/actionCreators';
@@ -38,7 +37,6 @@ const SubscribePrivateChannel = ({
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    console.log(name, value);
 
     setOptions((prevState) => ({
       ...prevState,
@@ -74,12 +72,13 @@ const SubscribePrivateChannel = ({
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Copy and paste your unique code here...</ModalHeader>
+          <ModalHeader>Paste your unique code here...</ModalHeader>
           <ModalCloseButton onClick={() => handleClose()} />
           <form onSubmit={handleSubmit}>
             <ModalBody>
               <Input
                 type="text"
+                style={{ border: '1px solid gray' }}
                 className="search_input create_channel_form"
                 placeholder="..."
                 name="id"
@@ -89,7 +88,7 @@ const SubscribePrivateChannel = ({
             </ModalBody>
 
             <ModalFooter>
-              <button className="genre_tag_button one" type="submit">
+              <button className="genre_tag_button two" type="submit">
                 Subscribe
               </button>
             </ModalFooter>

@@ -88,8 +88,10 @@
   font-size: 40px;
 }
 
-.drawer {
+.drawer_side_bar {
   background-color: $accent-one;
+  display: flex;
+  width: 100vw;
 }
 
 .drawer_channel {
@@ -164,4 +166,16 @@
 .unsubscribe_channel {
   position: relative;
   right: 7%;
+}
+
+.welcome_username {
+  text-align: center;
+}
+
+.side_bar_drawer_buttons {
+  display: flex;
+  width: 80vw;
+  justify-content: space-around;
+  align-self: center;
+  margin-bottom: 10px;
 }

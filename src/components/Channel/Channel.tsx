@@ -12,8 +12,10 @@ import {
   Text,
   Button,
   AlertDialog,
+  Flex,
   AlertDialogHeader,
   AlertDialogContent,
+  useClipboard,
 } from '@chakra-ui/react';
 import CreatePost from '../CreatePost/createPost';
 import Postcard from '../PostCard/Postcard';
@@ -24,7 +26,6 @@ import {
   removePost,
   subscribeToChannels,
   unsubscribeFromChannel,
-  getForLater,
 } from '../../helpers/apiClientServer';
 import * as actions from '../../store/actionCreators';
 
@@ -39,19 +40,24 @@ const Channel: React.FC<Props> = ({ name }) => {
   const history = useHistory();
   const currUser = useSelector<State, User>((state) => state.user);
   const [open, setOpen] = useState(false);
-
   const closeRef = useRef<HTMLButtonElement | null>(null);
-
   const { isOpen, onOpen, onClose } = useDisclosure();
   const savedPosts = useSelector<State, Post[]>(
     (state: State) => state.savedPosts
   );
   const channel = useSelector<State, Channel>((state) => state.currChannel);
+  const [copyValue, setCopyValue] = useState(`${channel.id}`);
+  const { hasCopied, onCopy } = useClipboard(copyValue);
+
   const isLoading = useSelector<State, boolean>((state) => state.isLoading);
   const [posts, setPosts] = useState<Post[] | []>([]);
+  const [isSubsribed, setIsSubscribed] = useState<Boolean>(
+    !!currUser.channels.filter((chan) => chan.id === channel.id).length
+  );
 
   const close = () => {
     setOpen(false);
+    onCopy();
   };
 
   useEffect(() => {
@@ -66,7 +72,7 @@ const Channel: React.FC<Props> = ({ name }) => {
     } else {
       history.push('/dashboard');
     }
-  }, [channel]);
+  }, [channel, dispatch, history]);
 
   const deletePost = (postId: string, userId: number) => {
     removePost(postId, userId).then(() => {
@@ -75,55 +81,62 @@ const Channel: React.FC<Props> = ({ name }) => {
   };
 
   const handleSubscribe = () => {
-    const result = currUser.channels.filter((chan) => chan.id === channel.id)
-      .length;
-    if (result) {
-      unsubscribeFromChannel(currUser.id, channel);
-      dispatch(actions.unsubscribeChannel(channel));
+    // const result = currUser.channels.filter((chan) => chan.id === channel.id)
+    //   .length;
+    if (isSubsribed) {
+      unsubscribeFromChannel(currUser.id, channel).then(() => {
+        dispatch(actions.unsubscribeChannel(channel));
+        setIsSubscribed((current) => !current);
+      });
     } else {
-      subscribeToChannels(currUser.id, [channel]);
-      dispatch(actions.addChannel(channel));
+      subscribeToChannels(currUser.id, [channel]).then(() => {
+        dispatch(actions.addChannel(channel));
+        setIsSubscribed((current) => !current);
+      });
     }
   };
 
   return (
     <div className="container">
       <ChannelNavBar name={name} />
-      <Container>
+      <div className="">
         {isLoading ? (
           <Spinner />
         ) : (
           <>
             <Container position="fixed" top="100px">
-              {!channel.private || channel.ownerId !== currUser.id ? (
-                <button
-                  className="genre_tag_button one"
-                  onClick={handleSubscribe}
-                  type="button"
-                >
-                  {currUser.channels.filter((chan) => chan.id === channel.id)
-                    .length
-                    ? 'unsubscribe'
-                    : 'subscribe'}
-                </button>
-              ) : null}
-              {currUser.id === channel.ownerId && channel.private ? (
-                <button
-                  className="genre_tag_button one "
-                  onClick={() => setOpen(true)}
-                  type="button"
-                >
-                  + Invite
-                </button>
-              ) : null}
+              <Flex justify="center">
+                <div className="channel_buttons_container">
+                  {!channel.private || channel.ownerId !== currUser.id ? (
+                    <button
+                      className={`genre_tag_button ${
+                        isSubsribed ? 'two' : 'one'
+                      }`}
+                      onClick={handleSubscribe}
+                      type="button"
+                    >
+                      {isSubsribed ? 'unsubscribe' : 'subscribe'}
+                    </button>
+                  ) : null}
+                  {currUser.id === channel.ownerId && channel.private ? (
+                    <button
+                      className="genre_tag_button two "
+                      onClick={() => setOpen(true)}
+                      type="button"
+                    >
+                      + Invite
+                    </button>
+                  ) : null}
 
-              <button
-                type="button"
-                className="genre_tag_button one"
-                onClick={onOpen}
-              >
-                + Create Post
-              </button>
+                  <button
+                    type="button"
+                    className="genre_tag_button two"
+                    onClick={onOpen}
+                  >
+                    + Create Post
+                  </button>
+                </div>
+              </Flex>
             </Container>
             <AlertDialog
               leastDestructiveRef={closeRef}
@@ -134,7 +147,7 @@ const Channel: React.FC<Props> = ({ name }) => {
                 <AlertDialogHeader>
                   Invite your friends to your private channel with this code!
                 </AlertDialogHeader>
-                <textarea>{channel.id}</textarea>
+                <textarea value={copyValue}>{channel.id}</textarea>
                 <Button ref={closeRef} onClick={close}>
                   Copy to clipboard
                 </Button>
@@ -175,7 +188,7 @@ const Channel: React.FC<Props> = ({ name }) => {
             )}
           </>
         )}
-      </Container>
+      </div>
     </div>
   );
 };

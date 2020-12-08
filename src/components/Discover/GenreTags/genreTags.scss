@@ -25,14 +25,16 @@
     font-weight: bold;
     border: 1px solid $secondary-color;
     width: 130px;
-    margin-right: 15px;
+    margin-right: 7.5px;
   }
+
   &.two {
     background-color: $secondary-color;
-    color: $accent-two;
-    font-weight: bold;
+    color: white;
+    // font-weight: bold;
     border: 1px solid $secondary-color;
     width: 130px;
+    // margin-right: 7.5px;
   }
 }
 

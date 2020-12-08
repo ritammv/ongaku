@@ -38,7 +38,7 @@ const Authenticated: React.FC = () => {
             <img src={ongaku} className="login_logo" alt="ongaku-logo" />
           </div>
         </div>
-        <div className="authenticated_welcome"> Welcome to Ongaku </div>
+        <div className="authenticated_welcome"> Ongaku </div>
       </div>
     </>
   );

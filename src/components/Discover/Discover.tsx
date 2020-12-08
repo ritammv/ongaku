@@ -59,7 +59,13 @@ const Discover: React.FC = () => {
   return (
     <div className="discover_container">
       <div className="discover_header">
-        {user.username ? <h3>Welcome {user.username}</h3> : <h3>Welcome</h3>}
+        {user.username ? (
+          <h3>
+            Welcome <br /> {user.username}
+          </h3>
+        ) : (
+          <h3>Welcome</h3>
+        )}
       </div>
       <div className="discover_title">
         <h4>Discover your channels...</h4>

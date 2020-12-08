@@ -12,7 +12,6 @@ interface Props {
 }
 
 const SearchDiscogs: React.FC<Props> = ({ selected, setSelected }) => {
-
   const dispatch = useDispatch();
   const user = useSelector<State, User>((state) => state.user);
   const [searchResults, setSearchResults] = useState<Release[]>([]);
@@ -31,21 +30,23 @@ const SearchDiscogs: React.FC<Props> = ({ selected, setSelected }) => {
       `/database/search?q=${form.query}&title=${form.title}&artist=${form.artist}&label=${form.label}&year=${form.year}`,
       user.token,
       user.tokenSecret
-    ).then((data) =>
-      setSearchResults(
-        data.results.map((result: SearchResult) => ({
-          id: result.id,
-          artists: result.artist,
-          year: result.year,
-          labels: result.label,
-          title: result.title,
-          genres: result.genre,
-          styles: result.styles,
-          url: result.resource_url,
-          image: result.cover_image,
-        }))
+    )
+      .then((data) =>
+        setSearchResults(
+          data.results.map((result: SearchResult) => ({
+            id: result.id,
+            artists: result.artist,
+            year: result.year,
+            labels: result.label,
+            title: result.title,
+            genres: result.genre,
+            styles: result.styles,
+            url: result.resource_url,
+            image: result.cover_image,
+          }))
+        )
       )
-    ).finally(() => dispatch(actions.setIsLoading(false)));
+      .finally(() => dispatch(actions.setIsLoading(false)));
 
     setForm({
       query: '',
@@ -117,18 +118,13 @@ const SearchDiscogs: React.FC<Props> = ({ selected, setSelected }) => {
             key="year"
           />
 
-          <Button
-            className="button-default"
-            backgroundColor="#0f0e0e"
-            color="white"
-            borderRadius="12px"
-            padding="2% 5%"
-            fontWeight="lighter"
-            mr={3}
+          <button
+            type="button"
+            className="genre_tag_button one"
             onClick={handleSubmit}
           >
             SEARCH
-          </Button>
+          </button>
         </form>
       ) : (
         <SearchResult

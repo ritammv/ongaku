@@ -22,7 +22,7 @@ import { addSavedPost, removeSavedPost } from '../../store/actionCreators';
 interface Props {
   post: Post;
   deletePost: (postId: string, commentAuthor: number) => void;
-  savedPosts: Post[]
+  savedPosts: Post[];
 }
 
 const Postcard: React.FC<Props> = ({ post, deletePost, savedPosts }) => {
@@ -74,7 +74,6 @@ const Postcard: React.FC<Props> = ({ post, deletePost, savedPosts }) => {
     getAuthor();
   }, [post.id, post.userId]);
 
-
   useEffect(() => {
     const result = savedPosts.find((p) => p.id === post.id);
     if (result) {
@@ -113,17 +112,15 @@ const Postcard: React.FC<Props> = ({ post, deletePost, savedPosts }) => {
 
   function handleSave() {
     if (!savePost) {
-      apiclient.savePost(user.id, post.id)
-        .then(() => {
-          dispatch(addSavedPost(post));
-          setSavePost((curr) => !curr);
-        });
+      apiclient.savePost(user.id, post.id).then(() => {
+        dispatch(addSavedPost(post));
+        setSavePost((curr) => !curr);
+      });
     } else {
-      apiclient.removeSavedPost(post.id, user.id)
-        .then(() => {
-          dispatch(removeSavedPost(post));
-          setSavePost((curr) => !curr);
-        });
+      apiclient.removeSavedPost(post.id, user.id).then(() => {
+        dispatch(removeSavedPost(post));
+        setSavePost((curr) => !curr);
+      });
     }
   }
 
@@ -134,14 +131,18 @@ const Postcard: React.FC<Props> = ({ post, deletePost, savedPosts }) => {
       w="100%"
       display="flex"
       flexDir="column"
-      marginY='0.7rem'
+      marginY="0.7rem"
+      zIndex="1"
     >
       <>
         <div className="message_date">{date}</div>
         <div className="message_tile">
           <div
             className="tile_image"
-            onClick={() => history.push(`/details/${post.url.split('com/')[1]}`)}
+            onClick={
+              () => history.push(`/details/${post.url.split('com/')[1]}`)
+              // eslint-disable-next-line react/jsx-curly-newline
+            }
             aria-hidden="true"
           >
             <Image src={post.thumbnail} alt="release" />

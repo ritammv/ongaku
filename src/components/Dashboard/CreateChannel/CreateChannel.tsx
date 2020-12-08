@@ -12,7 +12,6 @@ import {
   DrawerCloseButton,
   Select,
   useToast,
-  Button,
 } from '@chakra-ui/react';
 import './createChannel.scss';
 import * as actions from '../../../store/actionCreators';
@@ -46,7 +45,6 @@ const CreateChannel: React.FC<Props> = ({
     parentId: '',
     isPrivate: false,
   });
-
   const dispatch = useDispatch();
 
   const handleClose = () => {
@@ -67,7 +65,6 @@ const CreateChannel: React.FC<Props> = ({
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (options) {
-      console.log(user.id, options);
       createChannel(user.id, options).then((newChannel) => {
         if (newChannel) {
           dispatch(actions.addChannel(newChannel));
@@ -113,7 +110,9 @@ const CreateChannel: React.FC<Props> = ({
       <Drawer isOpen={isOpen} onClose={onClose} placement="left" size="lg">
         <DrawerOverlay>
           <DrawerContent>
-            <DrawerHeader>Create a channel</DrawerHeader>
+            <DrawerHeader style={{ textAlign: 'center', fontSize: '20px' }}>
+              Create a Channel
+            </DrawerHeader>
             <DrawerCloseButton onClick={() => handleClose()} />
             <form
               onSubmit={(e) => {
@@ -125,6 +124,7 @@ const CreateChannel: React.FC<Props> = ({
                 Channel Title
                 <Input
                   className="search_input create_channel_form"
+                  style={{ border: '1px solid gray' }}
                   id="channel_title"
                   type="text"
                   placeholder="#"
@@ -135,6 +135,7 @@ const CreateChannel: React.FC<Props> = ({
                 />
                 <Select
                   className="create_channel_form"
+                  style={{ border: '1px solid gray' }}
                   name="isPrivate"
                   onChange={handleChange}
                   placeholder="Public"
@@ -144,6 +145,7 @@ const CreateChannel: React.FC<Props> = ({
                 </Select>
                 <Select
                   className="create_channel_form"
+                  style={{ border: '1px solid gray' }}
                   name="parentId"
                   onChange={handleChange}
                   placeholder="Genre"
@@ -159,7 +161,7 @@ const CreateChannel: React.FC<Props> = ({
                 </Select>
               </DrawerBody>
               <DrawerFooter>
-                <button className="genre_tag_button one" type="submit">
+                <button className="genre_tag_button two" type="submit">
                   Create
                 </button>
               </DrawerFooter>
