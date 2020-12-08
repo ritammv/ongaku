@@ -22,9 +22,16 @@
   flex-direction: row;
   z-index: 3;
   img {
-    height: 3rem;
+    height: 4.2rem;
     margin: 0.5rem;
     width: auto;
+  }
+
+  h1 {
+    width: 60%;
+    text-align: center;
+    margin-top: 1rem;
+    font-family: 'Nunito', sans-serif;
   }
 }
 
@@ -105,11 +112,12 @@
 
 .drawer_public {
   padding-top: 5%;
-  padding: 10%;
+  // padding: 10%;
 }
 
 .drawer_private {
-  padding: 10%;
+  // padding: 10%;
+  padding-top: 10%;
 }
 
 .drawer_search {
@@ -133,15 +141,15 @@
 
 .channel_item {
   padding: 10px;
-  border-top: 0.5px solid $secondary-color;
+
   border-bottom: 0.5px solid $secondary-color;
   width: 100%;
   text-align: left;
 }
 
 .channel_item.active {
-  background-color: $secondary-color;
-  color: $primary-color;
+  background-color: $accent-one;
+  color: $secondary-color;
 }
 
 .search_input {
@@ -176,6 +184,6 @@
   width: 80vw;
   justify-content: space-around;
   align-self: center;
-  margin-bottom: 10px;
+  margin-bottom: 2.5rem;
   background-color: $primary-color;
 }

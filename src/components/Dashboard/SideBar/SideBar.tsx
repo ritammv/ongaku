@@ -131,15 +131,19 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                   id="size-small-standard"
                   options={allChannels}
                   getOptionLabel={(option) => option.name}
-                  style={{ width: '100%', border: 'none', padding: '10%' }}
+                  style={{
+                    width: '100%',
+                    border: 'none',
+                    padding: '10%',
+                  }}
                   renderInput={(params) => (
                     <TextField
                       {...params}
                       variant="filled"
                       style={{
-                        opacity: '0.6',
+                        opacity: '0.4',
                         borderRadius: '0',
-                        backgroundColor: '#607382',
+                        backgroundColor: '#ffff',
                       }}
                       placeholder="Search Channels..."
                     />
@@ -170,13 +174,15 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
               <div className="drawer_private">
                 <h3 className="public_title">Private</h3>
                 <ul className="private_channel_list">
-                  <button
-                    type="button"
-                    className=" channel_item"
-                    onClick={(e) => navigateToLater(e)}
-                  >
-                    #For Later
-                  </button>
+                  <div className="channel_list_content">
+                    <button
+                      type="button"
+                      className=" channel_item"
+                      onClick={(e) => navigateToLater(e)}
+                    >
+                      #For Later
+                    </button>
+                  </div>
                   {userDetails.channels &&
                     (userDetails.channels as Channel[]).map(
                       (chan: Channel) =>

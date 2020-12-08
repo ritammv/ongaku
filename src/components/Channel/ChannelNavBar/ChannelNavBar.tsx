@@ -4,6 +4,7 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { IconButton } from '@chakra-ui/react';
 import SideBar from '../../Dashboard/SideBar/SideBar';
 import ongaku from '../../../assets/ongaku-2-dark.svg';
+import chatIcon from '../../../assets/chatNav.svg';
 import { getChannel } from '../../../helpers/apiClientServer';
 
 interface Props {
@@ -28,20 +29,23 @@ const ChannelNavBar = ({ name }: Props) => {
   return (
     <nav className="header channel_header">
       <img src={ongaku} alt="vinyl_image" />
-      <div className="channel_title">{name && `#${name.toUpperCase()}`}</div>
+      <h1 className="channel_title">{name && `#${name}`}</h1>
       <div className="welcome_user">
-        <IconButton
+        <button
           className="button_emoji"
-          aria-label="burger-icon"
-          backgroundColor="inherit"
-          size="lg"
-          icon={<GiHamburgerMenu />}
           type="button"
+          style={{ margin: '1rem 0.5rem' }}
           ref={btnRef}
           onClick={() => {
             setShowSideBar((state) => !state);
           }}
-        />
+        >
+          <img
+            style={{ height: '1.5rem', width: 'auto' }}
+            src={chatIcon}
+            alt="icon"
+          />
+        </button>
       </div>
       {/* <div className="dashboard_info">
         <h3>{users && `${users} Members`}</h3> <h3>{posts.length} Posts</h3>

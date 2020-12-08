@@ -1,12 +1,4 @@
-import {
-  Container,
-  Box,
-  IconButton,
-  Image,
-  Text,
-  Button,
-  Textarea,
-} from '@chakra-ui/react';
+import { Box, IconButton, Text, Button, Textarea } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -14,7 +6,7 @@ import moment from 'moment';
 import { BsFillBookmarksFill, BsChevronDown } from 'react-icons/bs';
 import { HiOutlinePlus } from 'react-icons/hi';
 import { TiDelete } from 'react-icons/ti';
-import { MdDelete } from 'react-icons/md';
+
 import * as apiclient from '../../helpers/apiClientServer';
 import CommentCard from './CommentCard';
 import './Postcard.scss';

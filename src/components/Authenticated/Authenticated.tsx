@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './Authenticated.scss';
 import { useSelector } from 'react-redux';
-import ongaku from '../../assets/ongaku-logo.svg';
+import ongaku from '../../assets/ongaku-dark.svg';
 import { randomCircles, slideInAndUp } from '../../helpers/animation';
 import { OnClickRoute } from '../../helpers/onClickRoute';
 

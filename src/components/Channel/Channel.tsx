@@ -102,10 +102,11 @@ const Channel: React.FC<Props> = ({ name }) => {
           <Spinner />
         ) : (
           <>
-            <Box position="fixed" top="100px">
+            <div className="channel_btn_container">
               {!channel.private || channel.ownerId !== currUser.id ? (
                 <button
                   className="genre_tag_button one"
+                  style={{ backgroundColor: '#607382' }}
                   onClick={handleSubscribe}
                   type="button"
                 >
@@ -118,6 +119,7 @@ const Channel: React.FC<Props> = ({ name }) => {
               {currUser.id === channel.ownerId && channel.private ? (
                 <button
                   className="genre_tag_button one "
+                  style={{ backgroundColor: '#607382' }}
                   onClick={() => setOpen(true)}
                   type="button"
                 >
@@ -128,11 +130,12 @@ const Channel: React.FC<Props> = ({ name }) => {
               <button
                 type="button"
                 className="genre_tag_button one"
+                style={{ backgroundColor: '#607382' }}
                 onClick={onOpen}
               >
                 + Create Post
               </button>
-            </Box>
+            </div>
             <AlertDialog
               leastDestructiveRef={closeRef}
               isOpen={open}
@@ -156,10 +159,10 @@ const Channel: React.FC<Props> = ({ name }) => {
                 </button>
               </AlertDialogContent>
             </AlertDialog>
-            ;
+
             <Modal isOpen={isOpen} onClose={onClose}>
               <ModalOverlay />
-              <ModalContent backgroundColor="#f0f1ef" w="97%">
+              <ModalContent w="97%">
                 <ModalCloseButton />
                 <ModalBody>
                   <CreatePost />
