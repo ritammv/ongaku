@@ -24,7 +24,7 @@ import {
   removePost,
   subscribeToChannels,
   unsubscribeFromChannel,
-  getForLater
+  getForLater,
 } from '../../helpers/apiClientServer';
 import * as actions from '../../store/actionCreators';
 
@@ -43,13 +43,12 @@ const Channel: React.FC<Props> = ({ name }) => {
   const closeRef = useRef<HTMLButtonElement | null>(null);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const savedPosts = useSelector<State, Post[]>((state: State) => 
-    state.savedPosts);
+  const savedPosts = useSelector<State, Post[]>(
+    (state: State) => state.savedPosts
+  );
   const channel = useSelector<State, Channel>((state) => state.currChannel);
   const isLoading = useSelector<State, boolean>((state) => state.isLoading);
   const [posts, setPosts] = useState<Post[] | []>([]);
-
-
 
   const close = () => {
     setOpen(false);
@@ -87,100 +86,95 @@ const Channel: React.FC<Props> = ({ name }) => {
     }
   };
 
- 
   return (
     <div className="container">
       <ChannelNavBar name={name} />
       <Container>
-
-        {
-        isLoading
-          ?
-            <Spinner />
-          :
-            <>
-              <Container
-                position='fixed'
-                top='100px'
-              >
-                <Button
-                  backgroundColor="#065dc2"
-                  className="genre_tag_button channel_btn"
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <>
+            <Container position="fixed" top="100px">
+              {!channel.private || channel.ownerId !== currUser.id ? (
+                <button
+                  className="genre_tag_button one"
                   onClick={handleSubscribe}
+                  type="button"
                 >
-                  {currUser.channels.filter((chan) => 
-                    chan.id === channel.id).length
+                  {currUser.channels.filter((chan) => chan.id === channel.id)
+                    .length
                     ? 'unsubscribe'
                     : 'subscribe'}
-                </Button>
-                <Button
-                  backgroundColor="black"
-                  className="genre_tag_button channel_btn"
+                </button>
+              ) : null}
+              {currUser.id === channel.ownerId && channel.private ? (
+                <button
+                  className="genre_tag_button one "
                   onClick={() => setOpen(true)}
+                  type="button"
                 >
-                  {' '}
                   + Invite
-                </Button>
+                </button>
+              ) : null}
 
-                <Button
-                  backgroundColor="#0f0e0e"
-                  className="genre_tag_button channel_btn"
-                  onClick={onOpen}
-                >
-                  + Create Post
-                </Button>
-              </Container>
-              <AlertDialog
-                leastDestructiveRef={closeRef}
-                isOpen={open}
-                onClose={close}
+              <button
+                type="button"
+                className="genre_tag_button one"
+                onClick={onOpen}
               >
-                <AlertDialogContent>
-                  <AlertDialogHeader>
-                    Invite your friends to your private channel with this code!
-                  </AlertDialogHeader>
-                  <textarea>{channel.id}</textarea>
-                  <Button ref={closeRef} onClick={close}>
-                    Copy to clipboard
-                  </Button>
-                </AlertDialogContent>
-              </AlertDialog>
-              ;
-              <Modal isOpen={isOpen} onClose={onClose}>
-                <ModalOverlay />
-                <ModalContent backgroundColor="#f0f1ef" w="97%">
-                  <ModalCloseButton />
-                  <ModalBody>
-                    <CreatePost  />
-                  </ModalBody>
-                </ModalContent>
-              </Modal>
-              {!(posts && posts.length) 
-                ? 
-                  <Text>Be the first to post</Text>
-                : 
-                  <Container position="relative" top="130px">
-                    {posts
-                      .sort(
-                        (
-                          a: { createdAt: string | number | Date },
-                          b: { createdAt: string | number | Date }
-                        ) =>
-                          new Date(b.createdAt).valueOf() -
-                new Date(a.createdAt).valueOf()
-                      )
-                      .map((post) => (
-                        <Postcard
-                          key={post.id}
-                          post={post}
-                          deletePost={deletePost}
-                          savedPosts={savedPosts}
-                        />
-                      ))}
-                  </Container>}
-            </>
-        }
-        
+                + Create Post
+              </button>
+            </Container>
+            <AlertDialog
+              leastDestructiveRef={closeRef}
+              isOpen={open}
+              onClose={close}
+            >
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  Invite your friends to your private channel with this code!
+                </AlertDialogHeader>
+                <textarea>{channel.id}</textarea>
+                <Button ref={closeRef} onClick={close}>
+                  Copy to clipboard
+                </Button>
+              </AlertDialogContent>
+            </AlertDialog>
+            ;
+            <Modal isOpen={isOpen} onClose={onClose}>
+              <ModalOverlay />
+              <ModalContent backgroundColor="#f0f1ef" w="97%">
+                <ModalCloseButton />
+                <ModalBody>
+                  <CreatePost />
+                </ModalBody>
+              </ModalContent>
+            </Modal>
+            {!(posts && posts.length) ? (
+              <Text>Be the first to post</Text>
+            ) : (
+              <Container position="relative" top="130px">
+                {posts
+                  .sort(
+                    (
+                      a: { createdAt: string | number | Date },
+                      b: { createdAt: string | number | Date }
+                    ) =>
+                      new Date(b.createdAt).valueOf() -
+                      new Date(a.createdAt).valueOf()
+                  )
+                  .map((post) => (
+                    <Postcard
+                      key={post.id}
+                      post={post}
+                      deletePost={deletePost}
+                      savedPosts={savedPosts}
+                    />
+                  ))}
+              </Container>
+            )}
+          </>
+        )}
       </Container>
     </div>
   );
