@@ -10,7 +10,7 @@ import Home from './components/Home/Home';
 import Authenticated from './components/Authenticated/Authenticated';
 import Postcard from './components/PostCard/Postcard';
 import { CheckAuthenticateAndPopulate } from './helpers/checkAuthenticateAndPopulate';
-// import ShowDetails from './components/ShowDetails/ShowDetails';
+import DetailsPage from './components/ShowDetails/DetailsPage';
 
 const App: React.FC = () => {
   CheckAuthenticateAndPopulate();
@@ -26,10 +26,16 @@ const App: React.FC = () => {
       <Route exact path="/later" component={ForLater} />
       <Route
         exact
+        path="/details/:type/:route"
+        render={(routeProps) => (
+          <DetailsPage type={routeProps.match.params.type} route={routeProps.match.params.route} />
+        )}
+      />
+      <Route
+        exact
         path="/channels/:name"
         render={(routeProps) => <Channel name={routeProps.match.params.name} />}
       />
-      {/* <Route exact path="/release" component={ShowDetails} /> */}
     </Switch>
   );
 };
