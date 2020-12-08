@@ -44,7 +44,9 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [allChannels, setAllChannels] = useState<Channel[]>([]);
   const [value, setValue] = useState<Channel | null>(null);
-  const [searchResult, setSearchResult] = useState<string>('Search for something...');
+  const [searchResult, setSearchResult] = useState<string>(
+    'Search for something...'
+  );
 
   useEffect(() => {
     if (userDetails.id) {

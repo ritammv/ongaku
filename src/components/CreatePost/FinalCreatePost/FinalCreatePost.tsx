@@ -41,7 +41,7 @@ export default function Finalcreatepost() {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    createPost(channel.id, selected, user, postForm)
+    createPost(channel.id, selected, user, postForm, user.token, user.tokenSecret)
       .then(() => { history.push(`/channels/${channel.name}`); });
   }
 

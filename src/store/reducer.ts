@@ -1,3 +1,4 @@
+import { removeSavedPost } from '../helpers/apiClientServer';
 import * as actionTypes from './actionTypes';
 
 const initialState: State = {
@@ -68,6 +69,10 @@ const reducer = (
       return { ...state, currChannel: action.channel };
     case actionTypes.SET_SAVED_POSTS:
       return { ...state, savedPosts: action.savedPosts };
+    case actionTypes.ADD_SAVED_POST:
+      return { ...state, savedPosts: [...state.savedPosts, action.post] };
+    case actionTypes.REMOVE_SAVED_POST:
+      return { ...state, savedPosts: state.savedPosts.filter((post) => post.id !== action.post.id) };
     case actionTypes.USER_UNSUBSCRIBE_CHANNEL: {
       const channels = [...state.user.channels].filter(
         (channel) => channel.id !== action.channel.id

@@ -1,17 +1,35 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkAuthGetUser } from './apiClientServer';
-import { setAuthentication, setUser } from '../store/actionCreators';
+import { checkAuthGetUser, getForLater } from './apiClientServer';
+import { savedPost, setAuthentication, setUser } from '../store/actionCreators';
 
 export const CheckAuthenticateAndPopulate = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state: State) => state.authentication);
 
+  // useEffect(() => {
+  //   console.log(currUser.id);
+  //   getForLater(currUser.id)
+  //     .then((result) => {
+  //       console.log(result);
+  //       dispatch(actions.savedPost(result));
+  //     });
+  // }, [currUser.id, savedPosts]);
+
   useEffect(() => {
     checkAuthGetUser()
       .then((resp) => {
-        setUser(resp.user)(dispatch);
-        setAuthentication(resp.success)(dispatch);
+        if (resp.success) {
+          dispatch(setUser(resp.user));
+          dispatch(setAuthentication(resp.success));
+        }
+        getForLater(resp.user.id)
+          .then((result) => { 
+            console.log(result);
+            result && dispatch(savedPost(result)); 
+          } );
+        // setUser(resp.user)(dispatch);
+        // setAuthentication(resp.success)(dispatch);
       })
       .catch((err) => console.error(err));
   }, [dispatch]);

@@ -177,20 +177,27 @@ type SavedPostsAction = {
   savedPosts: Post[]
 };
 
+type SavedPostAction = {
+  type: string;
+  post: Post
+};
+
 type OrActionTypes =
   | UserAction
   | IsLoadingAction
   | ChannelAction
   | SavedPostsAction
   | SelectAction
-  | AuthenticationAction;
+  | AuthenticationAction
+  | SavedPostAction;
 
 type AllActionTypes = UserAction &
 IsLoadingAction &
 ChannelAction &
 SavedPostsAction &
 SelectAction &
-AuthenticationAction;
+AuthenticationAction &
+SavedPostAction;
 
 interface SelectAction {
   type: string;
