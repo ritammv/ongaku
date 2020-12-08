@@ -13,6 +13,7 @@ import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import { BsFillBookmarksFill, BsChevronDown } from 'react-icons/bs';
 import { HiOutlinePlus } from 'react-icons/hi';
+import { TiDelete } from 'react-icons/ti';
 import { MdDelete } from 'react-icons/md';
 import * as apiclient from '../../helpers/apiClientServer';
 import CommentCard from './CommentCard';
@@ -128,66 +129,57 @@ const Postcard: React.FC<Props> = ({ post, deletePost, savedPosts }) => {
   }
 
   return (
-    <Container
-      border="1px solid #d2d2d2"
-      borderRadius="8px"
-      w="100%"
-      display="flex"
-      flexDir="column"
-      marginY='0.7rem'
-    >
+    <div className='postcard'>
       <>
         <div className="message_date">{date}</div>
+        <div className='postcard_title_wrapper'>
+          <div className="message_title">{post.postTitle}</div>
+          <div>
+            {user.id === post.userId && (
+            <IconButton
+              backgroundColor='inherit'
+              aria-label="delete post"
+              icon={<TiDelete />}
+              onClick={() => deletePost(post.id, post.userId)}
+            />
+            )}
+          </div>
+        </div>
         <div className="message_tile">
           <div
             className="tile_image"
             onClick={() => history.push(`/details/${post.url.split('com/')[1]}`)}
             aria-hidden="true"
           >
-            <Image src={post.thumbnail} alt="release" />
+            <img src={post.thumbnail} alt="release" />
           </div>
-          <Box className="tile_info">
-            {post.title && <Box isTruncated>Title: {post.title}</Box>}
-            {post.artist && <Box isTruncated>Artist: {post.artist} </Box>}
-            {post.label && <Box isTruncated>Label: {post.label}</Box>}
-            {post.year && <Box isTruncated>Year: {post.year}</Box>}
-          </Box>
           {!savePost ? (
             <IconButton
+              id='tile_button'
               aria-label="Add to List"
               icon={<HiOutlinePlus />}
-              backgroundColor="inherit"
-              position="relative"
-              top="-20px"
               onClick={handleSave}
             />
           ) : (
             <IconButton
+              id='tile_button'
               aria-label="Add to List"
-              backgroundColor="inherit"
               icon={<BsFillBookmarksFill />}
-              position="relative"
-              top="-20px"
               onClick={handleSave}
             />
           )}
+          {/* <div className="tile_info"> */}
+          {/* {post.title && <Text isTruncated>{post.title}</Text>} */}
+          {/* {post.artist && <Box isTruncated>Artist: {post.artist} </Box>}
+            {post.label && <Box isTruncated>Label: {post.label}</Box>}
+            {post.year && <Box isTruncated>Year: {post.year}</Box>} */}
+          {/* </div> */}
         </div>
 
+       
         <div className="message_content">
-          <div className="postcard_header">
-            <div className="message_title">{post.postTitle}</div>
-            {user.id === post.userId && (
-              <IconButton
-                size="sm"
-                aria-label="delete post"
-                icon={<MdDelete />}
-                backgroundColor="inherit"
-                onClick={() => deletePost(post.id, post.userId)}
-              />
-            )}
-          </div>
           {isShowingComments ? (
-            <Box className="message_body">{post.body}</Box>
+            <div className="message_body">{post.body}</div>
           ) : (
             <Box className="message_body" noOfLines={5}>
               {post.body}
@@ -200,7 +192,7 @@ const Postcard: React.FC<Props> = ({ post, deletePost, savedPosts }) => {
                 size="sm"
                 aria-label="See comments"
                 icon={<BsChevronDown />}
-                backgroundColor="inherit"
+                backgroundColor='inherit'
                 onClick={handleComments}
               />
               {postComments.length
@@ -217,7 +209,7 @@ const Postcard: React.FC<Props> = ({ post, deletePost, savedPosts }) => {
       {isShowingComments ? (
         <>
           <form className="comment_form" onSubmit={postComment}>
-            <Text fontSize="0.8rem" color="#d3d3d3">
+            <Text fontSize="0.9rem" color="rgba(6, 93, 194, 0.6)">
               Comment as{' '}
               <span className="comment_username">{user.username}</span>
             </Text>
@@ -232,22 +224,27 @@ const Postcard: React.FC<Props> = ({ post, deletePost, savedPosts }) => {
             </Button>
           </form>
 
-          {postComments && postComments.length ? (
-            <>
-              {(postComments as PostComment[]).map((comment) => (
-                <CommentCard
-                  key={comment.id}
-                  comment={comment}
-                  deleteComment={deleteComment}
-                />
-              ))}
-            </>
-          ) : (
-            <Text>Be the first to comment</Text>
-          )}
+          <div className='comment_wrapper'>
+            {postComments && postComments.length ? (
+              <>
+                {(postComments as PostComment[]).map((comment) => (
+
+                  <CommentCard
+                    key={comment.id}
+                    comment={comment}
+                    deleteComment={deleteComment}
+                  />
+               
+                ))}
+              </>
+            ) : (
+              <Text>Be the first to comment</Text>
+            )}
+          </div>
+
         </>
       ) : null}
-    </Container>
+    </div>
   );
 };
 

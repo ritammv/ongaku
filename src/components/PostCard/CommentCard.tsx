@@ -55,7 +55,6 @@ const CommentCard: React.FC<Props> = ({ comment, deleteComment }) => {
         <div className="comment_body">
           {comment.body}
         </div>
-        <div className="comment_body">{comment.body}</div>
       </div>
     </>
   );

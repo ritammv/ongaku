@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import {
   useDisclosure,
-  Container,
+  Box,
   ModalOverlay,
   Modal,
   ModalContent,
@@ -87,14 +87,14 @@ const Channel: React.FC<Props> = ({ name }) => {
   };
 
   return (
-    <div className="container">
+    <div className="container channel">
       <ChannelNavBar name={name} />
-      <Container>
+      <div>
         {isLoading ? (
           <Spinner />
         ) : (
           <>
-            <Container position="fixed" top="100px">
+            <Box position="fixed" top="100px">
               {!channel.private || channel.ownerId !== currUser.id ? (
                 <button
                   className="genre_tag_button one"
@@ -124,7 +124,7 @@ const Channel: React.FC<Props> = ({ name }) => {
               >
                 + Create Post
               </button>
-            </Container>
+            </Box>
             <AlertDialog
               leastDestructiveRef={closeRef}
               isOpen={open}
@@ -153,7 +153,7 @@ const Channel: React.FC<Props> = ({ name }) => {
             {!(posts && posts.length) ? (
               <Text>Be the first to post</Text>
             ) : (
-              <Container position="relative" top="130px">
+              <div className='postcard-container'>
                 {posts
                   .sort(
                     (
@@ -171,11 +171,11 @@ const Channel: React.FC<Props> = ({ name }) => {
                       savedPosts={savedPosts}
                     />
                   ))}
-              </Container>
+              </div>
             )}
           </>
         )}
-      </Container>
+      </div>
     </div>
   );
 };

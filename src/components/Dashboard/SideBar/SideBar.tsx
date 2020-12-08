@@ -109,7 +109,7 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
         <DrawerOverlay className="drawer">
           <DrawerContent>
             <DrawerCloseButton onClick={() => handleClose()} />
-            <DrawerHeader>Hello! Welcome {userDetails.username}</DrawerHeader>
+            <DrawerHeader>Welcome {userDetails.username}</DrawerHeader>
             <DrawerBody>
               <div className="drawer_channel">Channels</div>
 

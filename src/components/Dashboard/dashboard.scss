@@ -10,7 +10,8 @@
 .header {
   height: 90px;
   border-bottom: 2px solid $secondary-color;
-  background-color: #fff;
+  background-color: $secondary-color;
+  color: $accent-one;
   position: fixed;
   width: 100%;
   text-align: right;
