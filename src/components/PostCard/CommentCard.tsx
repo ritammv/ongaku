@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
+import { useSelector } from 'react-redux';
 import { IconButton } from '@chakra-ui/react';
 import { MdDelete } from 'react-icons/md';
 import { getUser } from '../../helpers/apiClientServer';
@@ -11,8 +12,8 @@ interface Props {
 }
 
 const CommentCard: React.FC<Props> = ({ comment, deleteComment }) => {
-  console.log('COMMENT FOR CARD', comment);
-  
+
+  const user = useSelector<State, User>((state) => state.user);
   const [author, setAuthor] = useState<User>({
     id: 4920,
     username: 'nijssenmandy89',
@@ -40,7 +41,7 @@ const CommentCard: React.FC<Props> = ({ comment, deleteComment }) => {
           <p>{author.username}</p>
           <p>{moment(comment.createdAt).format('lll')}</p>
           {
-            (author.id === comment.userId) &&        
+            (user && (user.id === comment.userId)) &&        
             <IconButton 
               m='0'
               size='sm' 
