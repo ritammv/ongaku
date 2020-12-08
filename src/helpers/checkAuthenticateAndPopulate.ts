@@ -24,12 +24,9 @@ export const CheckAuthenticateAndPopulate = () => {
           dispatch(setAuthentication(resp.success));
         }
         getForLater(resp.user.id)
-          .then((result) => { 
-            console.log(result);
-            result && dispatch(savedPost(result)); 
-          } );
-        // setUser(resp.user)(dispatch);
-        // setAuthentication(resp.success)(dispatch);
+          .then((result) => {
+            result && dispatch(savedPost(result));
+          });
       })
       .catch((err) => console.error(err));
   }, [dispatch]);

@@ -10,13 +10,18 @@
       box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);
       flex: 1;
       margin: 3px;
-      span {
+      .details_span_title{
         color: rgb(80, 80, 80);
+      }
+      .link_hover {
+        color: $accent-three;
       }
     }
   }
   .details_notes,
   .details_profile {
+    display: flex;
+    flex-direction: column;
     h1 {
       font-size: 1rem;
     }

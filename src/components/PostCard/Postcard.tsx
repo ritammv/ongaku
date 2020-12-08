@@ -54,7 +54,7 @@ const Postcard: React.FC<Props> = ({ post, deletePost, savedPosts }) => {
     function getPost() {
       apiclient
         .getPost(post.id)
-        .then((result) =>
+        .then((result) => {
           setPostComments(
             result.comments.sort(
               (
@@ -64,8 +64,8 @@ const Postcard: React.FC<Props> = ({ post, deletePost, savedPosts }) => {
                 new Date(b.createdAt).valueOf() -
                 new Date(a.createdAt).valueOf()
             )
-          )
-        );
+          );
+        });
     }
     getPost();
     async function getAuthor() {

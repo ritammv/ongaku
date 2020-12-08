@@ -1,5 +1,7 @@
 import { getFromDiscogs } from '../../helpers/apiClientServer';
 
+import Logo from '../../assets/Ongaku.svg';
+
 export class Details {
   'id': string | null;
 
@@ -11,7 +13,7 @@ export class Details {
 
   'country': string | null;
 
-  'year': string | null;
+  'year': number | null;
 
   'user_data': {
     'in_wantlist': boolean | null;
@@ -43,7 +45,7 @@ export class Details {
 
   'styles': string[] | null;
 
-  'num_for_sale': string | null;
+  'num_for_sale': number | null;
 
   'lowest_price': string | null;
 
@@ -57,13 +59,6 @@ export class Details {
   }[] | null;
 
   'notes': string | null;
-
-  'videos': {
-    'uri': string;
-    'title': string;
-    'description': string;
-    'duration': number;
-  }[] | null;
 
   'profile': string;
 
@@ -95,15 +90,21 @@ export class Details {
 
   'moreReleases': string;
 
+  'videos': {
+    description: string;
+    uri: string;
+    title: string;
+  }[] | null;
+
   static async parse(route: string, user: User, type: string) {
     let moreInfo = await getFromDiscogs(`/${route}`, user.token, user.tokenSecret);
     if (type === 'masters' && moreInfo.main_release_url) {
       moreInfo = await getFromDiscogs(`/${moreInfo.main_release_url.split('.com/')[1]}`, user.token, user.tokenSecret);
     }
     let userData = {};
-    if (type === 'releases') {
+    if (type === 'releases' || type === 'masters') {
       const wantlist = await getFromDiscogs(`/users/${user.username}/wants?per_page=100`, user.token, user.tokenSecret);
-      const collection = await getFromDiscogs(`/users/${user.username}/collection/${route}`, user.token, user.tokenSecret);
+      const collection = await getFromDiscogs(`/users/${user.username}/collection/${moreInfo.resource_url.split('.com/')[1]}`, user.token, user.tokenSecret);
       userData = {
         user_data: {
           in_wantlist: !!wantlist.wants.find((release: { id: number}) => release.id === moreInfo.id),
@@ -111,13 +112,14 @@ export class Details {
         }
       };
     }
+    console.log(moreInfo);
     if (type === 'artists' || type === 'labels') {
-      moreInfo.thumb = moreInfo.images[0].uri;
+      moreInfo.thumb = moreInfo.images ?  moreInfo.images[0].uri : Logo;
       const releases = await getFromDiscogs(`/${moreInfo.releases_url.split('.com/')[1]}`, user.token, user.tokenSecret);
       moreInfo.moreReleases = releases.pagination.urls.next;
       moreInfo.releases = releases.releases;
     }
-   
+    if (!moreInfo.thumb) moreInfo.thumb = Logo;
     return Object.assign(new Details(), { ...moreInfo, ...userData });
   }
 }
