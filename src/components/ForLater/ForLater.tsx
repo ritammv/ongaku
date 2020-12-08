@@ -13,11 +13,6 @@ const ForLater: React.FC = () => {
     state.savedPosts);
   // const [savePost, setSavePost] = useState<boolean>(true);
 
-  useEffect(() => {
-    getForLater(user.id)
-      .then((result) => dispatch(actions.savedPost(result)));
-  }, [user.id, savedPosts]);
-
   function deletePost(postId: string, userId: number) {
     removeSavedPost(postId, userId)
       .then(() => dispatch(actions.savedPost(savedPosts.filter(p =>  

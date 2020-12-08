@@ -8,7 +8,7 @@ import {
   Textarea,
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import { BsFillBookmarksFill, BsChevronDown } from 'react-icons/bs';
@@ -17,6 +17,7 @@ import { MdDelete } from 'react-icons/md';
 import * as apiclient from '../../helpers/apiClientServer';
 import CommentCard from './CommentCard';
 import './Postcard.scss';
+import { addSavedPost, removeSavedPost } from '../../store/actionCreators';
 
 interface Props {
   post: Post;
@@ -25,6 +26,7 @@ interface Props {
 }
 
 const Postcard: React.FC<Props> = ({ post, deletePost, savedPosts }) => {
+  const dispatch = useDispatch();
 
   const history = useHistory();
 
@@ -111,11 +113,18 @@ const Postcard: React.FC<Props> = ({ post, deletePost, savedPosts }) => {
 
   function handleSave() {
     if (!savePost) {
-      apiclient.savePost(user.id, post.id);
+      apiclient.savePost(user.id, post.id)
+        .then(() => {
+          dispatch(addSavedPost(post));
+          setSavePost((curr) => !curr);
+        });
     } else {
-      apiclient.removeSavedPost(post.id, user.id);
+      apiclient.removeSavedPost(post.id, user.id)
+        .then(() => {
+          dispatch(removeSavedPost(post));
+          setSavePost((curr) => !curr);
+        });
     }
-    setSavePost(!savePost);
   }
 
   return (

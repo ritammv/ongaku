@@ -63,3 +63,19 @@ export const savedPost = (savedPosts: Post[]) => {
   };
   return (dispatch: DispatchType) => dispatch(action);
 };
+
+export const removeSavedPost = (post: Post) => {
+  const action: SavedPostAction = {
+    type: actionTypes.REMOVE_SAVED_POST,
+    post
+  };
+  return (dispatch: DispatchType) => dispatch(action);
+};
+
+export const addSavedPost = (post: Post) => {
+  const action: SavedPostAction = {
+    type: actionTypes.ADD_SAVED_POST,
+    post
+  };
+  return (dispatch: DispatchType) => dispatch(action);
+};

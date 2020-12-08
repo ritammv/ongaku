@@ -1,42 +1,52 @@
 const BASE_URL = 'http://localhost:3001';
 
-function fetchRequest(path: string, options?: Object) {
-  // const defaultOptions: RequestInit = {
-  //   credentials: 'include',
-  //   headers: {
-  //     Accept: 'application/json',
-  //     'Content-Type': 'application/json',
-  //     'Access-Control-Allow-Credentials': 'true',
-  //   },
-  // };
+const fetchRequest = (path: string, options?: Object) => {
+  const defaultOptions: RequestInit = {
+    credentials: 'include',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true',
+    },
+  };
+  Object.assign(defaultOptions, options || {});
 
-  // Object.assign(defaultOptions, options || {});
+  return fetch(path, defaultOptions)
+    .then((res) => (res.status < 400 ? res : Promise.reject()))
+    .then((res) => (res.status !== 204 ? res.json() : res))
+    .catch((err) => {
+      console.error('error', err);
+    });
+};
 
+const fetchDiscogs = (path: string, options?: Object) => {
   return fetch(path, options)
     .then((res) => (res.status < 400 ? res : Promise.reject()))
     .then((res) => (res.status !== 204 ? res.json() : res))
     .catch((err) => {
       console.error('error', err);
     });
-}
+};
 
-const getChannels = (): Promise<Channel[]> => {
+
+
+export const getChannels = (): Promise<Channel[]> => {
   return fetchRequest(`${BASE_URL}/channels/default`);
 };
 
-const getAllChannels = (): Promise<Channel[]> => {
+export const getAllChannels = (): Promise<Channel[]> => {
   return fetchRequest(`${BASE_URL}/channels/`);
 };
 
-const getPublicChannels = (): Promise<Channel[]> => {
+export const getPublicChannels = (): Promise<Channel[]> => {
   return fetchRequest(`${BASE_URL}/channels/public`);
 };
 
-const getChannel = (channelId: string): Promise<ChannelAndUsers> => {
+export const getChannel = (channelId: string): Promise<ChannelAndUsers> => {
   return fetchRequest(`${BASE_URL}/channels/${channelId}`);
 };
 
-const createChannel = (userId: number, body: Object): Promise<Channel> => {
+export const createChannel = (userId: number, body: Object): Promise<Channel> => {
   return fetchRequest(`${BASE_URL}/channels/users/${userId}`, {
     method: 'POST',
     mode: 'cors',
@@ -47,7 +57,7 @@ const createChannel = (userId: number, body: Object): Promise<Channel> => {
   });
 };
 
-const subscribeToChannels = (
+export const subscribeToChannels = (
   userId: number,
   channels: ChannelForDb[] | { id: string }
 ) => {
@@ -61,7 +71,7 @@ const subscribeToChannels = (
   });
 };
 
-const unsubscribeFromChannel = (userId: number, channel: Channel) => {
+export const unsubscribeFromChannel = (userId: number, channel: Channel) => {
   return fetchRequest(`${BASE_URL}/users/${userId}/channels`, {
     method: 'DELETE',
     mode: 'cors',
@@ -72,8 +82,8 @@ const unsubscribeFromChannel = (userId: number, channel: Channel) => {
   });
 };
 
-const getFromDiscogs = (url: string, token: string, tokenSecret: string) => {
-  return fetchRequest(`${BASE_URL}/discogs/get`, {
+export const getFromDiscogs = (url: string, token: string, tokenSecret: string) => {
+  return fetchDiscogs(`${BASE_URL}/discogs/get`, {
     method: 'POST',
     mode: 'cors',
     headers: {
@@ -83,14 +93,14 @@ const getFromDiscogs = (url: string, token: string, tokenSecret: string) => {
   });
 };
 
-const postToDiscogs = (
+export const postToDiscogs = (
   url: string,
   token: string,
   tokenSecret: string,
   postBody: string,
   postContentType: string
 ) => {
-  return fetchRequest(`${BASE_URL}/discogs/post`, {
+  return fetchDiscogs(`${BASE_URL}/discogs/post`, {
     method: 'POST',
     mode: 'cors',
     headers: {
@@ -106,14 +116,14 @@ const postToDiscogs = (
   });
 };
 
-const putToDiscogs = (
+export const putToDiscogs = (
   url: string,
   token: string,
   tokenSecret: string,
   postBody: string,
   postContentType: string
 ) => {
-  return fetchRequest(`${BASE_URL}/discogs/put`, {
+  return fetchDiscogs(`${BASE_URL}/discogs/put`, {
     method: 'POST',
     mode: 'cors',
     headers: {
@@ -128,8 +138,8 @@ const putToDiscogs = (
     }),
   });
 };
-const deleteFromDiscogs = (url: string, token: string, tokenSecret: string) => {
-  return fetchRequest(`${BASE_URL}/discogs/delete`, {
+export const deleteFromDiscogs = (url: string, token: string, tokenSecret: string) => {
+  return fetchDiscogs(`${BASE_URL}/discogs/delete`, {
     method: 'POST',
     mode: 'cors',
     headers: {
@@ -139,7 +149,7 @@ const deleteFromDiscogs = (url: string, token: string, tokenSecret: string) => {
   });
 };
 
-const savePost = (userId: number, postId: string) => {
+export const savePost = (userId: number, postId: string) => {
   return fetchRequest(`${BASE_URL}/users/${userId}/savedPosts`, {
     method: 'POST',
     mode: 'cors',
@@ -150,7 +160,7 @@ const savePost = (userId: number, postId: string) => {
   });
 };
 
-const removeSavedPost = (postId: string, userId: number) => {
+export const removeSavedPost = (postId: string, userId: number) => {
   console.log('delete', postId);
   return fetchRequest(`${BASE_URL}/users/${userId}/savedPosts`, {
     method: 'DELETE',
@@ -162,11 +172,11 @@ const removeSavedPost = (postId: string, userId: number) => {
   });
 };
 
-const getUser = (userId: number) => {
+export const getUser = (userId: number) => {
   return fetchRequest(`${BASE_URL}/users/${userId}/`);
 };
 
-const checkAuthGetUser = () => {
+export const checkAuthGetUser = () => {
   return fetchRequest(`${BASE_URL}/auth/login/check`, {
     method: 'GET',
     credentials: 'include',
@@ -178,47 +188,48 @@ const checkAuthGetUser = () => {
   });
 };
 
-const getPost = (postId: string) => {
+export const getPost = (postId: string) => {
   return fetchRequest(`${BASE_URL}/posts/${postId}/`);
 };
 
-const getForLater = (userId: number) => {
+export const getForLater = (userId: number) => {
   return fetchRequest(`${BASE_URL}/users/${userId}/savedPosts`);
 };
 
-const createPost = (
+export const createPost = (
   channelId: string,
   release: Release,
   user: User,
-  postForm: FinalPost
+  postForm: FinalPost,
+  token: string,
+  tokenSecret: string
 ) => {
-  return fetchRequest(release.url).then((moreInfo) => {
-    const dbPost = {
-      userId: user.id,
-      channelId,
-      url: moreInfo.resource_url,
-      postTitle: postForm.message_title,
-      title: moreInfo.title ? moreInfo.title : null,
-      artist: moreInfo.artists ? moreInfo.artists[0].name : null,
-      year: moreInfo.year ? moreInfo.year : null,
-      label: release.labels ? release.labels[0].name : null,
-      body: postForm.message_body,
-      thumbnail: release.image ? release.image : null,
-      // masterUrl: moreInfo.master_url
-    };
-    console.log(dbPost);
-    return fetchRequest(`${BASE_URL}/posts/${channelId}`, {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(dbPost),
+  console.log(release);
+  return getFromDiscogs(release.url.split('.com')[1], token, tokenSecret)
+    .then((result) => {
+      const dbPost = {
+        userId: user.id,
+        channelId,
+        url: release.url,
+        postTitle: postForm.message_title,
+        title: result.title ? result.title : null,
+        artist: result.artists ? result.artists[0].name : null,
+        label: release.labels ? release.labels[0].name : null,
+        body: postForm.message_body,
+        thumbnail: release.image ? release.image : result.images[0].url,
+      };
+      return fetchRequest(`${BASE_URL}/posts/${channelId}`, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dbPost),
+      });
     });
-  });
 };
 
-const removePost = (postId: string, userId: number) => {
+export const removePost = (postId: string, userId: number) => {
   return fetchRequest(`${BASE_URL}/posts/${postId}`, {
     method: 'DELETE',
     mode: 'cors',
@@ -232,7 +243,7 @@ const removePost = (postId: string, userId: number) => {
   });
 };
 
-const createComment = (postId: string, userId: number, body: string) => {
+export const createComment = (postId: string, userId: number, body: string) => {
   const dbComment = {
     postId,
     userId,
@@ -248,7 +259,7 @@ const createComment = (postId: string, userId: number, body: string) => {
   });
 };
 
-const removeComment = (postId: string, commentId: string, userId: number) => {
+export const removeComment = (postId: string, commentId: string, userId: number) => {
   return fetchRequest(`${BASE_URL}/posts/${postId}/comment/${commentId}`, {
     method: 'DELETE',
     mode: 'cors',
@@ -257,28 +268,4 @@ const removeComment = (postId: string, commentId: string, userId: number) => {
     },
     body: JSON.stringify({ userId }),
   });
-};
-
-export {
-  getChannels,
-  getChannel,
-  createChannel,
-  subscribeToChannels,
-  getPublicChannels,
-  unsubscribeFromChannel,
-  getFromDiscogs,
-  postToDiscogs,
-  putToDiscogs,
-  deleteFromDiscogs,
-  removeComment,
-  createComment,
-  removePost,
-  createPost,
-  checkAuthGetUser,
-  getUser,
-  removeSavedPost,
-  getPost,
-  savePost,
-  getAllChannels,
-  getForLater,
 };

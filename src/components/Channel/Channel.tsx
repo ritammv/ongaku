@@ -69,11 +69,6 @@ const Channel: React.FC<Props> = ({ name }) => {
     }
   }, [channel]);
 
-  useEffect(() => {
-    getForLater(currUser.id)
-      .then((result) => dispatch(actions.savedPost(result)));
-  }, [currUser.id, savedPosts]);
-
   const deletePost = (postId: string, userId: number) => {
     removePost(postId, userId).then(() => {
       setPosts((prev) => prev.filter((p) => p.id !== postId));
