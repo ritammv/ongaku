@@ -131,27 +131,64 @@ const Postcard: React.FC<Props> = ({ post, deletePost, savedPosts }) => {
   return (
     <div className='postcard'>
       <>
-        <div className="message_date">{date}</div>
-        <div className='postcard_title_wrapper'>
-          <div className="message_title">{post.postTitle}</div>
-          <div>
-            {user.id === post.userId && (
-            <IconButton
-              backgroundColor='inherit'
-              aria-label="delete post"
-              icon={<TiDelete />}
-              onClick={() => deletePost(post.id, post.userId)}
-            />
+
+        <div className="postcard_info">
+
+          <div className="postcard_left">
+
+            <div
+              className="tile_image"
+              onClick={() => history.push(`/details/${post.url.split('com/')[1]}`)}
+              aria-hidden="true"
+            >
+              <img src={post.thumbnail} alt="release" />
+            </div>
+            {!savePost ? (
+              <IconButton
+                id='tile_button'
+                aria-label="Add to List"
+                icon={<HiOutlinePlus />}
+                onClick={handleSave}
+              />
+            ) : (
+              <IconButton
+                id='tile_button'
+                aria-label="Add to List"
+                icon={<BsFillBookmarksFill />}
+                onClick={handleSave}
+              />
             )}
+
+          </div>
+          <div className="postcard_rigth">
+
+
+
+            <div className='postcard_title_wrapper'>
+              <div className="message_date">{date}</div>
+              {/* <div>
+                {user.id === post.userId && (
+                  <IconButton
+                    backgroundColor='inherit'
+                    aria-label="delete post"
+                    icon={<TiDelete />}
+                    onClick={() => deletePost(post.id, post.userId)}
+                  />
+                )}
+              </div> */}
+            </div>
+            <div className="message_title">{post.postTitle}</div>
+
           </div>
         </div>
-        <div className="message_tile">
+      
+        {/* <div className="message_tile">
           <div
             className="tile_image"
             onClick={() => history.push(`/details/${post.url.split('com/')[1]}`)}
             aria-hidden="true"
-          >
-            <img src={post.thumbnail} alt="release" />
+          > */}
+        {/* <img src={post.thumbnail} alt="release" />
           </div>
           {!savePost ? (
             <IconButton
@@ -169,19 +206,19 @@ const Postcard: React.FC<Props> = ({ post, deletePost, savedPosts }) => {
             />
           )}
           {/* <div className="tile_info"> */}
-          {/* {post.title && <Text isTruncated>{post.title}</Text>} */}
-          {/* {post.artist && <Box isTruncated>Artist: {post.artist} </Box>}
+        {/* {post.title && <Text isTruncated>{post.title}</Text>} */}
+        {/* {post.artist && <Box isTruncated>Artist: {post.artist} </Box>}
             {post.label && <Box isTruncated>Label: {post.label}</Box>}
             {post.year && <Box isTruncated>Year: {post.year}</Box>} */}
-          {/* </div> */}
-        </div>
+        {/* </div> */}
+      
 
        
         <div className="message_content">
           {isShowingComments ? (
             <div className="message_body">{post.body}</div>
           ) : (
-            <Box className="message_body" noOfLines={5}>
+            <Box className="message_body" noOfLines={7}>
               {post.body}
             </Box>
           )}
@@ -207,7 +244,7 @@ const Postcard: React.FC<Props> = ({ post, deletePost, savedPosts }) => {
       </>
 
       {isShowingComments ? (
-        <>
+        <div className='comment_form_and_text'>
           <form className="comment_form" onSubmit={postComment}>
             <Text fontSize="0.9rem" color="rgba(6, 93, 194, 0.6)">
               Comment as{' '}
@@ -242,7 +279,7 @@ const Postcard: React.FC<Props> = ({ post, deletePost, savedPosts }) => {
             )}
           </div>
 
-        </>
+        </div>
       ) : null}
     </div>
   );

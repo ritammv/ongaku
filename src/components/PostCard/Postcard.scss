@@ -10,14 +10,18 @@
 }
 
 .postcard_title_wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  // display: flex;
+  // justify-content: space-between;
+  // align-items: center;
   // svg {
   //   height: 35px;
   //   background-color: inherit;
   //   color: $secondary-color;
   // }
+  width: 200px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
 }
 
 .message_tile {
@@ -29,23 +33,22 @@
 
 .tile_image {
   img {
-    width: 360px;
     height: 100%;
-    width: 360px;
+    width: 100px;
     padding: 0 !important;
   }
 }
 
 #tile_button {
-  background-color: $accent-one;
-  color: $accent-three;
+  background-color: $accent-three;
+  color: $accent-one;
   width: 40px;
   border-radius: 50%;
   height: 40px;
   position: relative;
-  left: 300px;
-  top: -330px;
-  // z-index: 2;
+  left: 310px;
+  top: -100px;
+  z-index: 2;
 }
 
 .tile_info {
@@ -60,6 +63,7 @@
   width: 70%;
   font-size: 1.3rem;
   margin-bottom: 5px;
+  width: 200px;
 }
 
 .message_channel {
@@ -94,9 +98,9 @@ img .vinyl_channel {
   font-style: italic;
 }
 
-.comment_wrapper {
-  background-color: #f5f5f5;
-}
+// .comment_wrapper {
+//   background-color: #f5f5f5;
+// }
 
 .comment_form {
   margin: 1rem 0;
@@ -123,4 +127,20 @@ img .vinyl_channel {
     color: rgba(6, 93, 194, 0.6);
     margin-bottom: 5px;
   }
+}
+
+.postcard_info {
+  display: flex;
+  align-items: flex-start;
+  height: 125px;
+}
+
+.postcard_rigth {
+  margin-left: 15px;
+}
+
+.comment_form_and_text {
+  background-color: #f5f5f5;
+  padding: 5px;
+  border-radius: 5px;
 }

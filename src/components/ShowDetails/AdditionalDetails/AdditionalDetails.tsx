@@ -60,7 +60,7 @@ const AdditionalDetails: React.FC<Props> = ({ data }) => {
   return (
     <>
       <div className="container_details">
-        {data.country && data.year > 0 && 
+        {data.country && data.year && data.year > 0 && 
         <div className="details_country_year detail_item">
           <h1><span className="details_span_title">Country</span>: {data.country}</h1>
           <h1><span className="details_span_title">Year</span>: {data.year}</h1>
