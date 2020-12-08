@@ -53,7 +53,7 @@ const ForLater: React.FC = () => {
               ))}
         </Container>
       )}
-      ;
+      
     </div>
   );
 };

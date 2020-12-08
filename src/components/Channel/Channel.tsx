@@ -101,7 +101,7 @@ const Channel: React.FC<Props> = ({ name }) => {
             <Spinner />
           :
             <>
-              <Container display="flex" justifyContent="center">
+              <Container display="flex" justifyContent="center" position='fixed' top='90px'>
                 <Container className="channel_btn_container">
                   {!channel.private || channel.ownerId !== currUser.id ? (
                     <button
@@ -148,7 +148,7 @@ const Channel: React.FC<Props> = ({ name }) => {
                     </Button>
                   </AlertDialogContent>
                 </AlertDialog>
-                ;
+                
                 <Modal isOpen={isOpen} onClose={onClose}>
                   <ModalOverlay />
                   <ModalContent backgroundColor="#f0f1ef" w="97%">
@@ -170,7 +170,7 @@ const Channel: React.FC<Props> = ({ name }) => {
                     </Text>
                   </div>
                 ) : (
-                  <Container position="relative" top="20px">
+                  <Container>
                     {posts
                       .sort(
                         (
