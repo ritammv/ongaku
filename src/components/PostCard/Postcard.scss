@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
 @import '../../styles/variables.scss';
 
 .postcard {
@@ -42,12 +44,12 @@
 #tile_button {
   background-color: $accent-three;
   color: $accent-one;
-  width: 40px;
+  width: 25px;
   border-radius: 50%;
   height: 40px;
   position: relative;
   left: 310px;
-  top: -100px;
+  top: -95px;
   z-index: 2;
 }
 
@@ -61,8 +63,9 @@
 .message_title {
   font-weight: 600;
   width: 70%;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   margin-bottom: 5px;
+  margin-top: 25px;
   width: 200px;
 }
 
@@ -77,9 +80,9 @@ img .vinyl_channel {
 }
 
 .message_body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Roboto', sans-serif;
   text-align: justify;
-  font-size: 14px;
+  font-size: 16px;
   margin-bottom: 10px;
 }
 
@@ -112,11 +115,11 @@ img .vinyl_channel {
 }
 
 .comment_body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Roboto', sans-serif;
   padding: 5px;
   margin-bottom: 10px;
   text-align: justify;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .comment_header {
