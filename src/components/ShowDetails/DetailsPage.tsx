@@ -6,6 +6,7 @@ import { Details } from './getDetails';
 import Header from './Header/Header';
 import DetailsThumbnail from './DetailsThumbnail/DetailsThumbnail';
 import AdditionalDetails from './AdditionalDetails/AdditionalDetails';
+import ChannelNav from '../Channel/ChannelNavBar/ChannelNavBar';
 
 interface Props {
   type: string;
@@ -30,9 +31,8 @@ const DetailsPage: React.FC<Props> = ({ type, route }) => {
     <>
       { data ?
         <>
-          <div className="show-details_header">
-            <Header data={data} />
-          </div>
+          <ChannelNav name={data.title ? data.title : data.name} />
+          <div className="show-details_header" />
           <div className="body_container_details">
             <DetailsThumbnail data={data} />
           </div>

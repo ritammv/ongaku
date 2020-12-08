@@ -42,6 +42,23 @@ interface ReleaseDetails {
   thumb: string;
 }
 
+interface ReleaseDetail {
+  id: string;
+  title: string;
+  type: string;
+  stats: {
+    community: {
+      in_wantlist: number;
+      in_collection: number;
+    }
+    user: {
+      in_wantlist: string;
+      in_collection: number;
+    }
+  }
+  resource_url: string;
+}
+
 interface SearchResult {
   id: number;
   artist: { name: string };

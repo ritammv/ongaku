@@ -52,22 +52,5 @@
       }
     }
   }
-  .detail_video_container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-bottom: 10%;
-    height: 30vh;
-    .video_frame {
-      height: 20%;
-    }
-    .video_frame {
-      height: 80%;
-      iframe {
-        height: 100%;
-      }
-    }
-  }
 }
 

@@ -3,12 +3,14 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable no-param-reassign */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './AdditionalDetails.scss';
 import { useSelector } from 'react-redux';
 import { Details } from '../getDetails';
 import { OnClickRoute } from '../../../helpers/onClickRoute';
 import { getFromDiscogs } from '../../../helpers/apiClientServer';
+import RenderList from './RenderList/RenderList';
+import ShowVideo from './ShowVideo/ShowVideo';
 
 interface Props {
   data: Details;
@@ -19,7 +21,8 @@ const AdditionalDetails: React.FC<Props> = ({ data }) => {
   const [showTracks, setShowTracks] = useState<boolean>(false);
   const [showRelease, setShowRelease] = useState<boolean>(false);
   const [showExtra, setShowExtra] = useState<boolean>(false);
-  const [list, setList] = useState<boolean>(false);
+  const [moreReleases, setMoreReleases] = useState<string | boolean>(false);
+  const [list, setList] = useState<ReleaseDetail[] | null>(null);
   const navigate = OnClickRoute();
 
   const navigateAway = (url: string) => {
@@ -32,12 +35,19 @@ const AdditionalDetails: React.FC<Props> = ({ data }) => {
     if (data.moreReleases) {
       getFromDiscogs(`/${data.moreReleases.split('com/')[1]}`, user.token, user.tokenSecret)
         .then((results) => {
-          data.releases = [...data.releases, ...results.releases];
-          data.moreReleases = results.pagination.urls.next ? results.pagination.urls.next : false;
-          console.log(data.releases);
+          setList((curr) => {
+            if (curr) return [...curr, ...results.releases];
+            return curr;
+          });
+          setMoreReleases(results.pagination.urls.next ? results.pagination.urls.next : false);
         });
     }
   };
+
+  useEffect(() => {
+    if (data.releases) setList(data.releases);
+    if (data.moreReleases) setMoreReleases(data.moreReleases);
+  }, []);
 
   const mapAndFormat = (array: any[], iteratee: string) => {
     return array.map((el: any, i) => (
@@ -50,7 +60,7 @@ const AdditionalDetails: React.FC<Props> = ({ data }) => {
   return (
     <>
       <div className="container_details">
-        {data.country && data.year || data.year === 0  && 
+        {data.country && data.year > 0 && 
         <div className="details_country_year detail_item">
           <h1><span className="details_span_title">Country</span>: {data.country}</h1>
           <h1><span className="details_span_title">Year</span>: {data.year}</h1>
@@ -67,7 +77,7 @@ const AdditionalDetails: React.FC<Props> = ({ data }) => {
           <h1><span className="details_span_title">Average</span>: {data.community.rating.average}</h1>
           <h1><span className="details_span_title">Votes</span>: {data.community.rating.count}</h1>
         </div>}
-        {data.num_for_sale || data.num_for_sale === 0 && data.lowest_price &&
+        {data.num_for_sale && data.num_for_sale > 0 && data.lowest_price &&
         <div className="details_for_sale detail_item">
           <h1><span className="details_span_title">For Sale</span>: {data.num_for_sale}</h1>
           <h1><span className="details_span_title">Lowest</span>: {data.lowest_price}$</h1>
@@ -136,32 +146,11 @@ const AdditionalDetails: React.FC<Props> = ({ data }) => {
         <div className="details_releases">
           <div className="releases_header" onClick={() => setShowRelease(curr => !curr)}>See Releases <span>{'>'}</span></div>
           { showRelease && 
-            data.releases.map((release, i) => (
-              <div className="releases_release" key={release.id}>
-                <div className="release_name" onClick={() => navigateAway(release.resource_url)}>
-                  {release.title}
-                </div>
-              </div>))}
-          {showRelease && data.moreReleases && 
-            <div className="releases_fetch_more" onClick={fetchMore}>
-              See More <span>{'>'}</span>
-            </div>}
+            <RenderList data={list} navigateAway={navigateAway} fetchMore={fetchMore} moreReleases={moreReleases} />}
         </div>}
         {data.videos && 
         <>
-          <div className="detail_video_container detail_item">
-            <div className="video_title">
-              <h1>{data.videos && data.videos[0].title}</h1>
-            </div>
-            <div className="video_frame">
-              <iframe
-                src={data.videos[0].uri.replace('watch?v=', 'embed/')}
-                frameBorder='0'
-                allow='autoplay; encrypted-media'
-                title='video'
-              />
-            </div>
-          </div>
+          <ShowVideo data={data.videos} />
         </>}
       </div>
     </>

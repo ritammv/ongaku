@@ -1,0 +1,20 @@
+.detail_video_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 10%;
+  height: 30vh;
+  .video_title {
+    max-height: 20%;
+    h1 {
+      font-size: 0.8rem;
+    }
+  }
+  .video_frame {
+    height: 80%;
+    iframe {
+      height: 100%;
+    }
+  }
+}
