@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import TextField from '@material-ui/core/TextField';
+import { InputBase } from '@material-ui/core/';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import {
   useDisclosure,
@@ -131,12 +131,13 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
                   getOptionLabel={(option) => option.name}
                   style={{ width: '100%', border: 'none', padding: '10%' }}
                   renderInput={(params) => (
-                    <TextField
+                    <InputBase
                       {...params}
-                      variant="filled"
+                      // variant="filled"
                       style={{
                         opacity: '0.6',
                         borderRadius: '0',
+                        backgroundColor: '#d3d3d3'
                       }}
                       placeholder="Search..."
                     />
