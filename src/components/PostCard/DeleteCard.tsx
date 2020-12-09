@@ -25,6 +25,7 @@ const DeleteCard: React.FC<Props> = ({ deletePost, post }) => {
         aria-label="delete post"
         icon={<HiDotsVertical />}
         backgroundColor="inherit"
+        color="#607382"
         onClick={() => setIsOpen(true)}
       />
 
@@ -35,7 +36,7 @@ const DeleteCard: React.FC<Props> = ({ deletePost, post }) => {
       >
         <AlertDialogOverlay>
           <AlertDialogContent backgroundColor="#2d3848">
-            <AlertDialogHeader color="#ffff" fontSize="lg" fontWeight="bold">
+            <AlertDialogHeader color="#607382" fontSize="lg" fontWeight="bold">
               Are you sure?
             </AlertDialogHeader>
             <AlertDialogFooter>

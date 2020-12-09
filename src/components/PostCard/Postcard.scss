@@ -1,32 +1,24 @@
-// @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap');
 @import '../../styles/variables.scss';
 
 .postcard {
   width: 100%;
-  border-radius: 2px;
-
+  border-radius: 5px;
   background-color: darken($secondary-color, 5%);
-  margin-bottom: 1rem;
+  margin-bottom: 0.7rem;
   padding: 8px;
-  color: black;
   position: relative;
 }
 
 .postcard_title_wrapper {
-  // display: flex;
-  // justify-content: space-between;
-  // align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   // svg {
   //   height: 35px;
   //   background-color: inherit;
   //   color: $secondary-color;
   // }
-  width: 200px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
 }
 
 .message_tile {
@@ -38,22 +30,23 @@
 
 .tile_image {
   img {
+    width: 360px;
     height: 100%;
-    width: 100px;
+    width: 360px;
     padding: 0 !important;
   }
 }
 
 #tile_button {
-  background-color: inherit;
-  color: $primary-color;
-  width: 20px;
+  background-color: $accent-one;
+  color: $secondary-color;
+  width: 40px;
   border-radius: 50%;
   height: 40px;
   position: absolute;
-  right: 10px;
-  top: 10px;
-  z-index: 2;
+  right: 20px;
+  top: 100px;
+  // z-index: 2;
 }
 
 .tile_info {
@@ -66,10 +59,9 @@
 .message_title {
   font-weight: 600;
   width: 70%;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   margin-bottom: 5px;
-  margin-top: 25px;
-  width: 200px;
+  color: black;
 }
 
 .message_channel {
@@ -83,10 +75,12 @@ img .vinyl_channel {
 }
 
 .message_body {
-  font-family: 'Roboto', sans-serif;
+  padding: 20px 10px;
+  font-family: 'Montserrat', sans-serif;
   text-align: justify;
   font-size: 16px;
   margin-bottom: 10px;
+  color: black;
 }
 
 .message_stats {
@@ -95,6 +89,7 @@ img .vinyl_channel {
   align-items: center;
   margin-bottom: 10px;
   font-size: 12px;
+  color: black;
 }
 
 .message_date {
@@ -104,12 +99,16 @@ img .vinyl_channel {
   font-style: italic;
 }
 
-// .comment_wrapper {
-//   background-color: #f5f5f5;
-// }
+.comment_wrapper {
+}
 
 .comment_form {
   margin: 1rem 0;
+}
+.comment_container {
+  background-color: darken($secondary-color, 10%);
+  border: 0.5px solid $accent-one;
+  padding: 4%;
 }
 
 .comment_username {
@@ -118,11 +117,12 @@ img .vinyl_channel {
 }
 
 .comment_body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   padding: 5px;
   margin-bottom: 10px;
   text-align: justify;
-  font-size: 13px;
+  font-size: 14px;
+  color: black;
 }
 
 .comment_header {
@@ -133,25 +133,4 @@ img .vinyl_channel {
     color: $accent-one;
     margin-bottom: 5px;
   }
-}
-
-.postcard_info {
-  display: flex;
-  align-items: flex-start;
-  height: 125px;
-}
-
-.postcard_rigth {
-  margin-left: 15px;
-}
-
-.comment_form_and_text {
-  background-color: darken($secondary-color, 10%);
-  padding: 5px;
-  border-radius: 5px;
-  border: 0.5px solid gray;
-}
-
-.MuiFilledInput-root {
-  padding-top: 0px !important;
 }
