@@ -53,7 +53,13 @@ const SubscribePrivateChannel = ({
     e.preventDefault();
     if (options) {
       subscribeToChannels(user.id, options).then((newChannel) => {
-        if (newChannel) dispatch(actions.addChannel(newChannel));
+        console.log(newChannel);
+
+        if (newChannel) {
+          dispatch(actions.addChannel(newChannel));
+          dispatch(actions.addCurrChannel(newChannel));
+        }
+        dispatch(actions.setIsLoading(true));
         navigate(`channels/${newChannel.name}`);
         onClose();
         closePrivateChannels();

@@ -26,6 +26,7 @@
     border: 1px solid $secondary-color;
     width: 130px;
     margin-right: 7.5px;
+    z-index: 3;
   }
 
   &.two {
@@ -34,6 +35,7 @@
     // font-weight: bold;
     border: 1px solid $accent-one;
     width: 130px;
+    z-index: 3;
     // margin-right: 7.5px;
   }
 }

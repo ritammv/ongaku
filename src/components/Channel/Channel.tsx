@@ -65,6 +65,8 @@ const Channel: React.FC<Props> = ({ name }) => {
       setTimeout(() => {
         getChannel(channel.id)
           .then((result: ChannelAndUsers) => {
+            console.log(result);
+
             setPosts(result.channel.posts);
           })
           .finally(() => dispatch(actions.setIsLoading(false)));
