@@ -53,6 +53,7 @@ const AdditionalDetails: React.FC<Props> = ({ data }) => {
   }, []);
 
   const mapAndFormat = (array: any[], iteratee: string) => {
+    console.log(array);
     return array.map((el: any, i) => (
       <span className="link_hover" key={el[iteratee]} onClick={() => navigateAway(el.resource_url)}>
         {i === array.length - 1 ? ` ${el[iteratee]}` : ` ${el[iteratee]},`}

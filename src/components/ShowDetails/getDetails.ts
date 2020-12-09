@@ -100,6 +100,7 @@ export class Details {
     let moreInfo = await getFromDiscogs(`/${route}`, user.token, user.tokenSecret);
     if (type === 'masters' && moreInfo.main_release_url) {
       moreInfo = await getFromDiscogs(`/${moreInfo.main_release_url.split('.com/')[1]}`, user.token, user.tokenSecret);
+      console.log('INFO FROM MAIN_RELEASe_URL', moreInfo);
     }
     let userData = {};
     if (type === 'releases' || type === 'masters') {
@@ -112,7 +113,6 @@ export class Details {
         }
       };
     }
-    console.log(moreInfo);
     if (type === 'artists' || type === 'labels') {
       moreInfo.thumb = moreInfo.images ?  moreInfo.images[0].uri : Logo;
       const releases = await getFromDiscogs(`/${moreInfo.releases_url.split('.com/')[1]}`, user.token, user.tokenSecret);
