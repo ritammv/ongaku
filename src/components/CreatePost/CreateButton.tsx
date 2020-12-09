@@ -6,9 +6,10 @@ import { setSelected } from '../../store/actionCreators';
 
 interface Props {
   selected: Release;
+  position?: boolean;
 }
 
-const Createbutton: React.FC<Props> = ({ selected }) => {
+const Createbutton: React.FC<Props> = ({ selected, position }) => {
   const dispatch = useDispatch();
 
   function handleClick() {
@@ -22,12 +23,14 @@ const Createbutton: React.FC<Props> = ({ selected }) => {
           <Flex justifyContent="center">
             <button
               type="button"
-              className="genre_tag_button one"
+              className="genre_tag_button two"
               onClick={handleClick}
               style={{
-                backgroundColor: 'black',
-                color: 'white',
+                backgroundColor: '#607382;',
+                color: '#ffff',
                 position: 'fixed',
+                right: position ? '25px' : '',
+                marginTop: position ? '' : '15px',
               }}
             >
               CREATE
@@ -39,7 +42,11 @@ const Createbutton: React.FC<Props> = ({ selected }) => {
           <button
             className="genre_tag_button one"
             type="button"
-            style={{ position: 'fixed' }}
+            style={{
+              position: 'fixed',
+              right: position ? '25px' : '',
+              marginTop: position ? '' : '15px',
+            }}
           >
             CREATE
           </button>

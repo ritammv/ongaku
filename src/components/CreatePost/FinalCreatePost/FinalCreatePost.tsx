@@ -4,7 +4,7 @@ import { Box, Button, Input, Textarea } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
 import { createPost } from '../../../helpers/apiClientServer';
 import './FinalCreatePost.scss';
-import vinyl from '../../../assets/vinyl.jpg';
+import vinyl from '../../../assets/ongaku-bg.svg';
 
 export default function Finalcreatepost() {
   const history = useHistory();
@@ -57,7 +57,11 @@ export default function Finalcreatepost() {
     <div className="FinalPostWrapper">
       <div className="FinalPost_Title">
         Review your post
-        <Button className="FinalPost_close" onClick={() => history.goBack()}>
+        <Button
+          className="FinalPost_close"
+          onClick={() => history.goBack()}
+          style={{ backgroundColor: 'inherit' }}
+        >
           X
         </Button>
       </div>
@@ -85,13 +89,13 @@ export default function Finalcreatepost() {
       <form onSubmit={(e) => handleSubmit(e)} className="FinalPost_message">
         <Input
           variant="flushed"
-          placeholder="Title"
+          placeholder="Give your post a title"
           onChange={(e) => handleChange(e, 'title')}
           name="title"
           required
         />
         <Textarea
-          placeholder="Message goes here.."
+          placeholder="Message goes here"
           name="message"
           onChange={(e) => handleChange(e, 'message')}
           required

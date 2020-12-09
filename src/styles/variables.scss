@@ -5,6 +5,7 @@ $secondary-color: #ffff;
 $accent-one: #607382;
 $accent-two: #ffff;
 $accent-three: #c3cb52;
+$accent-four: darken($primary-color, 10%);
 
 @mixin button-default {
   // border-radius: 5px;
@@ -12,7 +13,7 @@ $accent-three: #c3cb52;
   text-align: center;
   vertical-align: center;
   border: none;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  // box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
   &:focus {
     outline: 0;
   }

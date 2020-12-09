@@ -12,8 +12,11 @@ interface Props {
 const Tile: React.FC<Props> = ({ result, selected, setSelected }) => {
   return (
     <Box
-      w="150px"
-      h="170px"
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      w="175px"
+      h="175px"
       m="7px"
       p="7px"
       borderWidth="1px"
@@ -21,18 +24,44 @@ const Tile: React.FC<Props> = ({ result, selected, setSelected }) => {
       onClick={() => {
         setSelected(result);
       }}
-      className={result.id === selected.id ? 'activeCard' : undefined}
+      className={result.id === selected.id ? 'activeCard' : 'text'}
     >
       {result.image ? (
-        <Image src={result.image} alt="release" h="120px" w="150px" />
+        <Image
+          src={result.image}
+          alt="release"
+          h="125px"
+          w="125px"
+          alignSelf="center"
+        />
       ) : (
-        <Image src={vinyl} alt="release" h="120px" w="150px" />
+        <Image
+          src={vinyl}
+          alt="release"
+          h="125px"
+          w="125px"
+          alignSelf="center"
+        />
       )}
 
-      <Box isTruncated fontSize="12px">
-        <Text isTruncated>Title: {result.title}</Text>
+      <Box
+        isTruncated
+        fontSize="12px"
+        className={result.id === selected.id ? 'activeCard' : 'text'}
+      >
+        <Text
+          className={result.id === selected.id ? 'activeCard' : 'text'}
+          isTruncated
+        >
+          Title: {result.title}
+        </Text>
         {result.artists && result.artists.length && (
-          <Text isTruncated>Artist: {result.artists[0].name}</Text>
+          <Text
+            className={result.id === selected.id ? 'activeCard' : 'text'}
+            isTruncated
+          >
+            Artist: {result.artists[0].name}
+          </Text>
         )}
       </Box>
     </Box>

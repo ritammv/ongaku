@@ -85,7 +85,7 @@ const AboutUs: React.FC = () => {
         >
           <span>ありがとう</span>
           <span>Arigatō </span>
-          Rizumu, Carles, Laundry, Mandji, Ji
+          Team Ongaku
         </div>
         <div className="buttons_join_bottom">
           <LoginButton

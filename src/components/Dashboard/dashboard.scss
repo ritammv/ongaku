@@ -187,3 +187,19 @@
   margin-bottom: 2.5rem;
   background-color: $primary-color;
 }
+
+.MuiInputBase-root {
+  padding: 0 !important;
+  background-color: $accent-one !important;
+  border-radius: 0 !important ;
+  width: 100% !important;
+}
+
+.MuiInputBase-input {
+  color: $secondary-color !important;
+  margin-left: 1rem !important;
+}
+
+.MuiAutocomplete-root {
+  padding: 2.5rem 0 !important;
+}
