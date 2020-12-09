@@ -8,6 +8,7 @@ import DetailsThumbnail from './DetailsThumbnail/DetailsThumbnail';
 import AdditionalDetails from './AdditionalDetails/AdditionalDetails';
 import ChannelNav from '../Channel/ChannelNavBar/ChannelNavBar';
 import { setIsLoading } from '../../store/actionCreators';
+import Spinner from '../Spinner/Spinner';
 
 interface Props {
   type: string;
@@ -42,7 +43,9 @@ const DetailsPage: React.FC<Props> = ({ type, route }) => {
           <AdditionalDetails data={data} />
         </>
       ) : (
-        <h1>Loading...</h1>
+        <div className="spinner_release_details">
+          <Spinner />
+        </div>
       )}
     </>
   );

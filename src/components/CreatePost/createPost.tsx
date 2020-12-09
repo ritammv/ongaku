@@ -91,13 +91,25 @@ const CreatePost: React.FC = () => {
           color="#d3d3d3"
           maxWidth="90vw"
         >
-          <Tab key="1" _focus={{ outline: 0, textDecoration: 'none' }}>
+          <Tab
+            key="1"
+            _focus={{ outline: 0, textDecoration: 'none' }}
+            _selected={{ color: '#c3cb52' }}
+          >
             Search
           </Tab>
-          <Tab key="2" _focus={{ outline: 0, textDecoration: 'none' }}>
+          <Tab
+            key="2"
+            _focus={{ outline: 0, textDecoration: 'none' }}
+            _selected={{ color: '#c3cb52' }}
+          >
             Collection
           </Tab>
-          <Tab key="3" _focus={{ outline: 0, textDecoration: 'none' }}>
+          <Tab
+            key="3"
+            _focus={{ outline: 0, textDecoration: 'none' }}
+            _selected={{ color: '#c3cb52' }}
+          >
             Wantlist
           </Tab>
         </TabList>
