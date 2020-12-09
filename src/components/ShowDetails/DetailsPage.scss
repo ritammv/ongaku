@@ -1,10 +1,11 @@
+@import '../../styles/variables.scss';
+
 .body_container_details {
   width: 100vw;
   height: 40vh;
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 .show-details_header {
   width: 100vw;
@@ -14,4 +15,9 @@
 .show-details_header {
   width: 100vw;
   height: 8vh;
+}
+
+.spinner_release_details {
+  background-color: $primary-color;
+  height: 100vh;
 }

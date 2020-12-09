@@ -141,11 +141,24 @@ const Channel: React.FC<Props> = ({ name }) => {
               isOpen={open}
               onClose={close}
             >
-              <AlertDialogContent>
+              <AlertDialogContent
+                style={{
+                  backgroundColor: '#2d3848',
+                  color: '#ffff',
+                  marginTop: '100px',
+                }}
+              >
                 <AlertDialogHeader>
                   Invite your friends to your private channel with this code!
                 </AlertDialogHeader>
-                <textarea style={{ textAlign: 'center' }} value={copyValue}>
+                <textarea
+                  style={{
+                    textAlign: 'center',
+                    backgroundColor: '#2d3848',
+                    color: '#ffff',
+                  }}
+                  value={copyValue}
+                >
                   {channel.id}
                 </textarea>
                 <button
@@ -173,7 +186,7 @@ const Channel: React.FC<Props> = ({ name }) => {
               <h1
                 style={{
                   position: 'relative',
-                  top: '150px',
+                  top: '180px',
                   textAlign: 'center',
                 }}
               >

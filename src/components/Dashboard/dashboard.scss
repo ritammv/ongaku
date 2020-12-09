@@ -8,6 +8,10 @@
   color: $secondary-color;
 }
 
+.container_for_later {
+  min-height: 100vh;
+}
+
 .drawer {
   background-color: $primary-color;
   color: $secondary-color;
@@ -18,6 +22,7 @@
   border-bottom: 0.5px solid $accent-two;
   background-color: $primary-color;
   position: fixed;
+  color: $secondary-color;
   width: 100%;
   text-align: right;
   display: flex;
@@ -198,7 +203,7 @@
 }
 
 .MuiInputBase-input {
-  color: $secondary-color !important;
+  color: white !important;
   margin-left: 1rem !important;
 }
 

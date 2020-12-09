@@ -239,6 +239,7 @@ const AdditionalDetails: React.FC<Props> = ({ data }) => {
             <ShowVideo data={data.videos} />
           </>
         )}
+        <div className="padding_bottom" />
       </div>
     </>
   );

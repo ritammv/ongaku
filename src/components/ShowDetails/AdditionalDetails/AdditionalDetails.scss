@@ -1,17 +1,23 @@
 @import '../../../styles/variables.scss';
 .container_details {
-  width: 80%;
+  width: 90%;
   margin: auto;
+  min-height: 100vh;
+  border: 0.5px solid $secondary-color;
 
   .detail_item {
     display: flex;
     justify-content: space-between;
     font-family: 'Nunito', sans-serif;
+    background-color: $accent-four;
+    color: $secondary-color;
+
     h1 {
       font-size: 1.3rem;
-      border-bottom: 0.2px solid $secondary-color;
+      // border-bottom: 0.2px solid $secondary-color;
       padding: 0.5rem;
       flex: 1;
+      color: $accent-one;
       margin: 3px;
       .details_span_title {
         color: $secondary-color;
@@ -28,7 +34,7 @@
     h1 {
       font-size: 1rem;
     }
-    margin-bottom: 5%;
+    padding-bottom: 5%;
   }
   .details_tracklist {
     .tracklist_header {
@@ -36,6 +42,8 @@
       box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);
       display: flex;
       justify-content: space-between;
+      background-color: $accent-four;
+      color: $secondary-color;
       span {
         color: grey;
         background: transparent;
@@ -44,15 +52,31 @@
     }
     .tracklist_track {
       display: flex;
-      margin: 1%;
-      box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);
+      padding: 2%;
+      color: $secondary-color;
+      background-color: $accent-four;
+
       .track_title {
         flex: 1;
         font-size: 1.1rem;
       }
       .track_duration {
-        color: rgb(80, 80, 80);
+        color: $accent-one;
       }
     }
   }
+}
+
+.padding_bottom {
+  height: 10vw;
+  border-bottom: 0.5px solid $secondary-color;
+  background-color: $accent-four;
+}
+
+.details_notes:last-child {
+  margin-bottom: 0;
+}
+
+.details_releases {
+  color: $secondary-color;
 }

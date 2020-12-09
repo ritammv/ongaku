@@ -21,14 +21,21 @@ const ForLater: React.FC = () => {
   }
 
   return (
-    <div className="container" style={{ marginBottom: '150px' }}>
+    <div
+      className="container container_for_later"
+      style={{ marginBottom: '150px' }}
+    >
       <ChannelNavBar name="forLater" />
       {!(savedPosts && savedPosts.length) ? (
         <Container position="relative" top="100px">
           <Text>This is your personal space to save posts for later</Text>
         </Container>
       ) : (
-        <Container position="relative" top="80px">
+        <Container
+          position="relative"
+          top="120px"
+          style={{ backgroundColor: '#2d3848' }}
+        >
           {savedPosts &&
             savedPosts
               .sort(
