@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkAuthGetUser, getForLater } from './apiClientServer';
 import { savedPost, setAuthentication, setUser } from '../store/actionCreators';
@@ -6,15 +6,7 @@ import { savedPost, setAuthentication, setUser } from '../store/actionCreators';
 export const CheckAuthenticateAndPopulate = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state: State) => state.authentication);
-
-  // useEffect(() => {
-  //   console.log(currUser.id);
-  //   getForLater(currUser.id)
-  //     .then((result) => {
-  //       console.log(result);
-  //       dispatch(actions.savedPost(result));
-  //     });
-  // }, [currUser.id, savedPosts]);
+  const [isChecking, setIsChecking] = useState(true);
 
   useEffect(() => {
     checkAuthGetUser()
@@ -23,6 +15,7 @@ export const CheckAuthenticateAndPopulate = () => {
           dispatch(setUser(resp.user));
           dispatch(setAuthentication(resp.success));
         }
+        setIsChecking(false);
         getForLater(resp.user.id)
           .then((result) => {
             result && dispatch(savedPost(result));
@@ -31,5 +24,5 @@ export const CheckAuthenticateAndPopulate = () => {
       .catch((err) => console.error(err));
   }, [dispatch]);
 
-  return isAuthenticated;
+  return [isChecking, isAuthenticated];
 };

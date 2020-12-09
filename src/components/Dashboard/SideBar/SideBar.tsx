@@ -65,6 +65,7 @@ const SideBar: React.FC<Props> = ({ showSideBar, setShowSideBar }) => {
   const changePage = (e: Event, newChannel: Channel) => {
     onClose();
     dispatch(actions.addCurrChannel(newChannel));
+    dispatch(actions.setIsLoading(true));
     history.push(`/channels/${newChannel.name}`);
   };
 

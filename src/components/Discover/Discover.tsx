@@ -9,8 +9,10 @@ import {
   subscribeToChannels,
 } from '../../helpers/apiClientServer';
 import { addChannel } from '../../store/actionCreators';
+import { OnClickRoute } from '../../helpers/onClickRoute';
 
 const Discover: React.FC = () => {
+  const navigate = OnClickRoute();
   const dispatch = useDispatch();
   const [defaultChannels, setDefaultChannels] = useState<Channel[] | null>(
     null
@@ -35,6 +37,7 @@ const Discover: React.FC = () => {
   };
 
   useEffect(() => {
+    if (user.channels.length > 0) navigate('dashboard');
     getChannels()
       .then((channelsReq) => {
         setDefaultChannels(channelsReq);

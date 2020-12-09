@@ -24,7 +24,6 @@ import {
   removePost,
   subscribeToChannels,
   unsubscribeFromChannel,
-  getForLater,
 } from '../../helpers/apiClientServer';
 import * as actions from '../../store/actionCreators';
 
@@ -66,7 +65,7 @@ const Channel: React.FC<Props> = ({ name }) => {
     } else {
       history.push('/dashboard');
     }
-  }, [channel]);
+  }, [channel, dispatch, history]);
 
   const deletePost = (postId: string, userId: number) => {
     removePost(postId, userId).then(() => {

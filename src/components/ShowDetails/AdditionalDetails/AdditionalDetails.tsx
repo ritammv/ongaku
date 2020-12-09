@@ -5,12 +5,13 @@
 /* eslint-disable no-param-reassign */
 import React, { useEffect, useState } from 'react';
 import './AdditionalDetails.scss';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Details } from '../getDetails';
 import { OnClickRoute } from '../../../helpers/onClickRoute';
 import { getFromDiscogs } from '../../../helpers/apiClientServer';
 import RenderList from './RenderList/RenderList';
 import ShowVideo from './ShowVideo/ShowVideo';
+import { setIsLoading } from '../../../store/actionCreators';
 
 interface Props {
   data: Details;
@@ -18,6 +19,7 @@ interface Props {
 
 const AdditionalDetails: React.FC<Props> = ({ data }) => {
   const user = useSelector((state: State) => state.user);
+  const dispatch = useDispatch();
   const [showTracks, setShowTracks] = useState<boolean>(false);
   const [showRelease, setShowRelease] = useState<boolean>(false);
   const [showExtra, setShowExtra] = useState<boolean>(false);
@@ -28,6 +30,7 @@ const AdditionalDetails: React.FC<Props> = ({ data }) => {
   const navigateAway = (url: string) => {
     setShowTracks(false);
     setShowRelease(false);
+    dispatch(setIsLoading(true));
     navigate(`${`details/${url.split('.com/')[1]}`}`);
   };
 
@@ -60,7 +63,7 @@ const AdditionalDetails: React.FC<Props> = ({ data }) => {
   return (
     <>
       <div className="container_details">
-        {data.country && data.year > 0 && 
+        {data.country && data.year && data.year > 0 && 
         <div className="details_country_year detail_item">
           <h1><span className="details_span_title">Country</span>: {data.country}</h1>
           <h1><span className="details_span_title">Year</span>: {data.year}</h1>

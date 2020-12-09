@@ -11,31 +11,35 @@ import Authenticated from './components/Authenticated/Authenticated';
 import Postcard from './components/PostCard/Postcard';
 import { CheckAuthenticateAndPopulate } from './helpers/checkAuthenticateAndPopulate';
 import DetailsPage from './components/ShowDetails/DetailsPage';
+import D3 from './components/D3/D3';
 
 const App: React.FC = () => {
-  CheckAuthenticateAndPopulate();
-
+  const [isChecking, isAuthenticated] = CheckAuthenticateAndPopulate();
   return (
     <Switch>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/authenticated" component={Authenticated} />
-      <Route exact path="/discover" component={Discover} />
-      <Route exact path="/dashboard" component={Dashboard} />
-      <Route exact path="/post" component={Postcard} />
-      <Route exact path="/create" component={Finalcreatepost} />
-      <Route exact path="/later" component={ForLater} />
-      <Route
-        exact
-        path="/details/:type/:route"
-        render={(routeProps) => (
-          <DetailsPage type={routeProps.match.params.type} route={routeProps.match.params.route} />
-        )}
-      />
-      <Route
-        exact
-        path="/channels/:name"
-        render={(routeProps) => <Channel name={routeProps.match.params.name} />}
-      />
+      {!isChecking && 
+      <>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/authenticated" component={Authenticated} />
+        <Route exact path="/discover" component={Discover} />
+        <Route exact path="/dashboard" component={Dashboard} />
+        <Route exact path="/post" component={Postcard} />
+        <Route exact path="/create" component={Finalcreatepost} />
+        <Route exact path="/later" component={ForLater} />
+        <Route exact path="/d3" component={D3} />
+        <Route
+          exact
+          path="/details/:type/:route"
+          render={(routeProps) => (
+            <DetailsPage type={routeProps.match.params.type} route={routeProps.match.params.route} />
+          )}
+        />
+        <Route
+          exact
+          path="/channels/:name"
+          render={(routeProps) => <Channel name={routeProps.match.params.name} />}
+        />
+      </>}
     </Switch>
   );
 };

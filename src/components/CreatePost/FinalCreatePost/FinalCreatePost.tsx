@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Box, Button, Input, Textarea } from '@chakra-ui/react';
 import { useHistory } from 'react-router-dom';
 import { createPost } from '../../../helpers/apiClientServer';
 import './FinalCreatePost.scss';
 import vinyl from '../../../assets/vinyl.jpg';
+import { setIsLoading } from '../../../store/actionCreators';
 
 export default function Finalcreatepost() {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const selected = useSelector<State, Release>(
     (state: State) => state.selected
@@ -41,6 +43,7 @@ export default function Finalcreatepost() {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    dispatch(setIsLoading(true));
     createPost(channel.id, selected, user, postForm, user.token, user.tokenSecret)
       .then(() => { history.push(`/channels/${channel.name}`); });
   }
