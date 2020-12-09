@@ -106,7 +106,9 @@ const Channel: React.FC<Props> = ({ name }) => {
               {!channel.private || channel.ownerId !== currUser.id ? (
                 <button
                   className="genre_tag_button one"
-                  style={{ backgroundColor: '#607382' }}
+                  style={{
+                    backgroundColor: isSubsribed ? '#607382' : 'inherit',
+                  }}
                   onClick={handleSubscribe}
                   type="button"
                 >
@@ -204,12 +206,13 @@ const Channel: React.FC<Props> = ({ name }) => {
                       new Date(a.createdAt).valueOf()
                   )
                   .map((post) => (
-                    <Postcard
-                      key={post.id}
-                      post={post}
-                      deletePost={deletePost}
-                      savedPosts={savedPosts}
-                    />
+                    <div key={post.id} className="postcard_inner_container">
+                      <Postcard
+                        post={post}
+                        deletePost={deletePost}
+                        savedPosts={savedPosts}
+                      />
+                    </div>
                   ))}
               </div>
             )}

@@ -43,6 +43,11 @@
 .postcard-container {
   margin-top: 180px;
   background: $primary-color;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
 }
 
 .postcard:last-child {
@@ -51,4 +56,9 @@
 
 .container .channel {
   background-color: $primary-color;
+}
+
+.postcard_inner_container {
+  width: 90%;
+  margin-bottom: 5%;
 }

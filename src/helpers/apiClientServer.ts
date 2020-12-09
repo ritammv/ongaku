@@ -28,8 +28,6 @@ const fetchDiscogs = (path: string, options?: Object) => {
     });
 };
 
-
-
 export const getChannels = (): Promise<Channel[]> => {
   return fetchRequest(`${BASE_URL}/channels/default`);
 };
@@ -46,7 +44,10 @@ export const getChannel = (channelId: string): Promise<ChannelAndUsers> => {
   return fetchRequest(`${BASE_URL}/channels/${channelId}`);
 };
 
-export const createChannel = (userId: number, body: Object): Promise<Channel> => {
+export const createChannel = (
+  userId: number,
+  body: Object
+): Promise<Channel> => {
   return fetchRequest(`${BASE_URL}/channels/users/${userId}`, {
     method: 'POST',
     mode: 'cors',
@@ -82,7 +83,11 @@ export const unsubscribeFromChannel = (userId: number, channel: Channel) => {
   });
 };
 
-export const getFromDiscogs = (url: string, token: string, tokenSecret: string) => {
+export const getFromDiscogs = (
+  url: string,
+  token: string,
+  tokenSecret: string
+) => {
   return fetchDiscogs(`${BASE_URL}/discogs/get`, {
     method: 'POST',
     mode: 'cors',
@@ -138,7 +143,11 @@ export const putToDiscogs = (
     }),
   });
 };
-export const deleteFromDiscogs = (url: string, token: string, tokenSecret: string) => {
+export const deleteFromDiscogs = (
+  url: string,
+  token: string,
+  tokenSecret: string
+) => {
   return fetchDiscogs(`${BASE_URL}/discogs/delete`, {
     method: 'POST',
     mode: 'cors',
@@ -205,8 +214,8 @@ export const createPost = (
   tokenSecret: string
 ) => {
   console.log(release);
-  return getFromDiscogs(release.url.split('.com')[1], token, tokenSecret)
-    .then((result) => {
+  return getFromDiscogs(release.url.split('.com')[1], token, tokenSecret).then(
+    (result) => {
       const dbPost = {
         userId: user.id,
         channelId,
@@ -226,7 +235,8 @@ export const createPost = (
         },
         body: JSON.stringify(dbPost),
       });
-    });
+    }
+  );
 };
 
 export const removePost = (postId: string, userId: number) => {
@@ -259,7 +269,11 @@ export const createComment = (postId: string, userId: number, body: string) => {
   });
 };
 
-export const removeComment = (postId: string, commentId: string, userId: number) => {
+export const removeComment = (
+  postId: string,
+  commentId: string,
+  userId: number
+) => {
   return fetchRequest(`${BASE_URL}/posts/${postId}/comment/${commentId}`, {
     method: 'DELETE',
     mode: 'cors',

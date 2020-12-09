@@ -6,10 +6,12 @@
 .postcard {
   width: 100%;
   border-radius: 2px;
-  background-color: darken($secondary-color, 10%);
+
+  background-color: darken($secondary-color, 5%);
   margin-bottom: 1rem;
   padding: 8px;
   color: black;
+  position: relative;
 }
 
 .postcard_title_wrapper {
@@ -43,14 +45,14 @@
 }
 
 #tile_button {
-  background-color: $accent-one;
-  color: $secondary-color;
-  width: 25px;
+  background-color: inherit;
+  color: $primary-color;
+  width: 20px;
   border-radius: 50%;
   height: 40px;
-  position: relative;
-  left: 310px;
-  top: -95px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
   z-index: 2;
 }
 
@@ -144,9 +146,10 @@ img .vinyl_channel {
 }
 
 .comment_form_and_text {
-  background-color: #f5f5f5;
+  background-color: darken($secondary-color, 10%);
   padding: 5px;
   border-radius: 5px;
+  border: 0.5px solid gray;
 }
 
 .MuiFilledInput-root {

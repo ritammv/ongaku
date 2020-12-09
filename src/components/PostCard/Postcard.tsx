@@ -206,7 +206,7 @@ const Postcard: React.FC<Props> = ({ post, deletePost, savedPosts }) => {
               value={commentBody}
               placeholder="Share your thoughts"
             />
-            <button className="genre_tag_button two" type="button">
+            <button className="genre_tag_button two" type="submit">
               Comment
             </button>
           </form>
