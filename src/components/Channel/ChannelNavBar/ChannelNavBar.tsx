@@ -5,6 +5,7 @@ import { IconButton } from '@chakra-ui/react';
 import SideBar from '../../Dashboard/SideBar/SideBar';
 import ongaku from '../../../assets/ongaku-logo-4.svg';
 import { getChannel } from '../../../helpers/apiClientServer';
+import ColorMode from '../../ColorMode/ColorMode';
 
 interface Props {
   name: string;

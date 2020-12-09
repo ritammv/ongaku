@@ -1,0 +1,10 @@
+@import '../../styles/variables.scss';
+
+.light-mode {
+  background-color: $primary-color;
+  color: $secondary-color;
+  &.genre_tag_button {
+    background-color: $secondary-color;
+    color: $primary-color;
+  }
+}
