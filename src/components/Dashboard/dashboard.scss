@@ -5,10 +5,12 @@
   background-color: $primary-color;
   display: flex;
   flex-direction: column;
+  color: $secondary-color;
 }
 
 .drawer {
   background-color: $primary-color;
+  color: $secondary-color;
 }
 
 .header {

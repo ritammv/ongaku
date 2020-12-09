@@ -9,18 +9,19 @@ import Postcard from '../PostCard/Postcard';
 const ForLater: React.FC = () => {
   const dispatch = useDispatch();
   const user = useSelector<State, User>((state: State) => state.user);
-  const savedPosts = useSelector<State, Post[]>((state: State) => 
-    state.savedPosts);
+  const savedPosts = useSelector<State, Post[]>(
+    (state: State) => state.savedPosts
+  );
   // const [savePost, setSavePost] = useState<boolean>(true);
 
   function deletePost(postId: string, userId: number) {
-    removeSavedPost(postId, userId)
-      .then(() => dispatch(actions.savedPost(savedPosts.filter(p =>  
-        p.id !== postId))));
+    removeSavedPost(postId, userId).then(() =>
+      dispatch(actions.savedPost(savedPosts.filter((p) => p.id !== postId)))
+    );
   }
 
   return (
-    <div className="container">
+    <div className="container" style={{ marginBottom: '150px' }}>
       <ChannelNavBar name="forLater" />
       {!(savedPosts && savedPosts.length) ? (
         <Container position="relative" top="100px">

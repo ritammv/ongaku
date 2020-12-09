@@ -162,8 +162,8 @@ const Channel: React.FC<Props> = ({ name }) => {
 
             <Modal isOpen={isOpen} onClose={onClose}>
               <ModalOverlay />
-              <ModalContent w="97%">
-                <ModalCloseButton />
+              <ModalContent w="100%" backgroundColor="#2d3848">
+                <ModalCloseButton color="#ffff" />
                 <ModalBody>
                   <CreatePost />
                 </ModalBody>

@@ -8,6 +8,7 @@
   flex-wrap: nowrap;
   justify-content: space-evenly;
   align-items: center;
+  color: $secondary-color;
 }
 
 .genre_container {
@@ -31,5 +32,5 @@
 .discover_title {
   font-size: 19px;
   font-style: italic;
-  color: black;
+  color: #ffff;
 }

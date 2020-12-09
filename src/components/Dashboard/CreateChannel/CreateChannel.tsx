@@ -109,7 +109,7 @@ const CreateChannel: React.FC<Props> = ({
     <div className="create_channel">
       <Drawer isOpen={isOpen} onClose={onClose} placement="left" size="lg">
         <DrawerOverlay>
-          <DrawerContent style={{ backgroundColor: '#2d3848' }}>
+          <DrawerContent style={{ backgroundColor: '#2d3848', color: '#ffff' }}>
             <DrawerHeader style={{ textAlign: 'center', fontSize: '20px' }}>
               Create a Channel
             </DrawerHeader>

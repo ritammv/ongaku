@@ -83,7 +83,7 @@ const CreatePost: React.FC = () => {
 
   return (
     <>
-      <Tabs>
+      <Tabs backgroundColor="#2d3848">
         <TabList
           display="flex"
           justifyContent="space-between"

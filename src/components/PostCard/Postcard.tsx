@@ -1,12 +1,19 @@
-import { Box, IconButton, Text, Button, Textarea } from '@chakra-ui/react';
+import {
+  Container,
+  Box,
+  IconButton,
+  Image,
+  Text,
+  Button,
+  Textarea,
+} from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import { BsFillBookmarksFill, BsChevronDown } from 'react-icons/bs';
-import { HiOutlinePlus } from 'react-icons/hi';
-import { TiDelete } from 'react-icons/ti';
-
+import { HiOutlinePlus, HiDotsVertical } from 'react-icons/hi';
+import DeleteCard from './DeleteCard';
 import * as apiclient from '../../helpers/apiClientServer';
 import CommentCard from './CommentCard';
 import './Postcard.scss';
@@ -117,59 +124,48 @@ const Postcard: React.FC<Props> = ({ post, deletePost, savedPosts }) => {
   return (
     <div className="postcard">
       <>
-        <div className="message_date">{date}</div>
-        <div className="postcard_title_wrapper">
-          <div className="message_title">{post.postTitle}</div>
-          <div>
-            {user.id === post.userId && (
+        <div className="postcard_info">
+          <div className="postcard_left">
+            <div
+              className="tile_image"
+              onClick={
+                () => history.push(`/details/${post.url.split('com/')[1]}`)
+                // eslint-disable-next-line react/jsx-curly-newline
+              }
+              aria-hidden="true"
+            >
+              <img src={post.thumbnail} alt="release" />
+            </div>
+            {!savePost ? (
               <IconButton
-                backgroundColor="inherit"
-                aria-label="delete post"
-                icon={<TiDelete />}
-                onClick={() => deletePost(post.id, post.userId)}
+                id="tile_button"
+                aria-label="Add to List"
+                icon={<HiOutlinePlus />}
+                onClick={handleSave}
+              />
+            ) : (
+              <IconButton
+                id="tile_button"
+                aria-label="Add to List"
+                icon={<BsFillBookmarksFill />}
+                onClick={handleSave}
               />
             )}
           </div>
-        </div>
-        <div className="message_tile">
-          <div
-            className="tile_image"
-            onClick={
-              () => history.push(`/details/${post.url.split('com/')[1]}`)
-              // eslint-disable-next-line react/jsx-curly-newline
-            }
-            aria-hidden="true"
-          >
-            <img src={post.thumbnail} alt="release" />
+          <div className="postcard_rigth">
+            <div className="postcard_title_wrapper">
+              <div className="message_date">{date}</div>
+            </div>
+
+            <div className="message_title">{post.postTitle}</div>
           </div>
-          {!savePost ? (
-            <IconButton
-              id="tile_button"
-              aria-label="Add to List"
-              icon={<HiOutlinePlus />}
-              onClick={handleSave}
-            />
-          ) : (
-            <IconButton
-              id="tile_button"
-              aria-label="Add to List"
-              icon={<BsFillBookmarksFill />}
-              onClick={handleSave}
-            />
-          )}
-          {/* <div className="tile_info"> */}
-          {/* {post.title && <Text isTruncated>{post.title}</Text>} */}
-          {/* {post.artist && <Box isTruncated>Artist: {post.artist} </Box>}
-            {post.label && <Box isTruncated>Label: {post.label}</Box>}
-            {post.year && <Box isTruncated>Year: {post.year}</Box>} */}
-          {/* </div> */}
         </div>
 
         <div className="message_content">
           {isShowingComments ? (
             <div className="message_body">{post.body}</div>
           ) : (
-            <Box className="message_body" noOfLines={5}>
+            <Box className="message_body" noOfLines={7}>
               {post.body}
             </Box>
           )}
@@ -189,15 +185,18 @@ const Postcard: React.FC<Props> = ({ post, deletePost, savedPosts }) => {
             </div>
             <div className="stats_author">
               Posted by <b>{author.username}</b>
+              {user.id === post.userId && (
+                <DeleteCard deletePost={deletePost} post={post} />
+              )}
             </div>
           </div>
         </div>
       </>
 
       {isShowingComments ? (
-        <>
+        <div className="comment_form_and_text">
           <form className="comment_form" onSubmit={postComment}>
-            <Text fontSize="0.9rem" color="rgba(6, 93, 194, 0.6)">
+            <Text fontSize="0.9rem" color="#607382">
               Comment as{' '}
               <span className="comment_username">{user.username}</span>
             </Text>
@@ -207,9 +206,9 @@ const Postcard: React.FC<Props> = ({ post, deletePost, savedPosts }) => {
               value={commentBody}
               placeholder="Share your thoughts"
             />
-            <Button type="submit" size="xs">
+            <button className="genre_tag_button two" type="button">
               Comment
-            </Button>
+            </button>
           </form>
 
           <div className="comment_wrapper">
@@ -224,10 +223,10 @@ const Postcard: React.FC<Props> = ({ post, deletePost, savedPosts }) => {
                 ))}
               </>
             ) : (
-              <Text>Be the first to comment</Text>
+              <Text />
             )}
           </div>
-        </>
+        </div>
       ) : null}
     </div>
   );

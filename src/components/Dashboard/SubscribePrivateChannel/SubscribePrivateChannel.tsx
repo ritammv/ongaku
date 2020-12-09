@@ -71,7 +71,7 @@ const SubscribePrivateChannel = ({
     <div className="subscribe_channel">
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent style={{ backgroundColor: '#2d3848', color: '#ffff' }}>
           <ModalHeader>Paste your unique code here...</ModalHeader>
           <ModalCloseButton onClick={() => handleClose()} />
           <form onSubmit={handleSubmit}>

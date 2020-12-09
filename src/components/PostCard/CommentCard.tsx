@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
-import { IconButton } from '@chakra-ui/react';
-import { MdDelete } from 'react-icons/md';
 import { getUser } from '../../helpers/apiClientServer';
+
 import './Postcard.scss';
+import DeleteCard from './DeleteCard';
 
 interface Props {
   comment: PostComment;
@@ -12,7 +12,6 @@ interface Props {
 }
 
 const CommentCard: React.FC<Props> = ({ comment, deleteComment }) => {
-
   const user = useSelector<State, User>((state) => state.user);
   const [author, setAuthor] = useState<User>({
     id: 4920,
@@ -40,21 +39,11 @@ const CommentCard: React.FC<Props> = ({ comment, deleteComment }) => {
         <div className="comment_header">
           <p>{author.username}</p>
           <p>{moment(comment.createdAt).format('lll')}</p>
-          {
-            (user && (user.id === comment.userId)) &&        
-            <IconButton 
-              m='0'
-              size='sm' 
-              aria-label="Search database" 
-              icon={<MdDelete />}
-              backgroundColor='inherit'
-              onClick={() => deleteComment(comment.id, comment.userId)}
-            />
-          }
-        </div> 
-        <div className="comment_body">
-          {comment.body}
+          {user && user.id === comment.userId && (
+            <DeleteCard post={comment} deletePost={deleteComment} />
+          )}
         </div>
+        <div className="comment_body">{comment.body}</div>
       </div>
     </>
   );
