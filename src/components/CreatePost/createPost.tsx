@@ -8,17 +8,6 @@ import PanelListItem from './PanelListItem';
 const CreatePost: React.FC = () => {
   const [collection, setCollection] = useState<Release[]>([]);
   const [wantList, setWantList] = useState<Release[]>([]);
-  const [selected, setSelected] = useState<Release>({
-    id: 0,
-    artists: [],
-    year: 0,
-    labels: [],
-    title: '',
-    genres: [],
-    styles: [],
-    url: '',
-    image: '',
-  });
 
   const dispatch = useDispatch();
   const user = useSelector<State, User>((state) => state.user);
@@ -68,17 +57,6 @@ const CreatePost: React.FC = () => {
       )
     );
 
-    setSelected({
-      id: 0,
-      artists: [],
-      year: 0,
-      labels: [],
-      title: '',
-      genres: [],
-      styles: [],
-      url: '',
-      image: '',
-    });
   }, [dispatch, user.username, user.token, user.tokenSecret]);
 
   return (
@@ -115,24 +93,19 @@ const CreatePost: React.FC = () => {
         </TabList>
 
         <TabPanels>
+          
           <TabPanel overflowX="scroll" minHeight="90vh" display="flex">
-            <SearchDiscogs selected={selected} setSelected={setSelected} />
-          </TabPanel>
-          <TabPanel overflowX="scroll" style={{ height: '85vh' }}>
-            <PanelListItem
-              data={collection}
-              selected={selected}
-              setSelected={setSelected}
-            />
+            <SearchDiscogs />
           </TabPanel>
 
           <TabPanel overflowX="scroll" style={{ height: '85vh' }}>
-            <PanelListItem
-              data={wantList}
-              selected={selected}
-              setSelected={setSelected}
-            />
+            <PanelListItem data={collection} />
           </TabPanel>
+
+          <TabPanel overflowX="scroll" style={{ height: '85vh' }}>
+            <PanelListItem data={wantList} />
+          </TabPanel>
+
         </TabPanels>
       </Tabs>
     </>

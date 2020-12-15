@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { GiHamburgerMenu } from 'react-icons/gi';
-import { IconButton } from '@chakra-ui/react';
 import SideBar from '../../Dashboard/SideBar/SideBar';
 import ongaku from '../../../assets/ongaku-2-dark.svg';
 import chatIcon from '../../../assets/chatNav.svg';
@@ -21,7 +19,6 @@ const ChannelNavBar = ({ name }: Props) => {
     if (channel.id) {
       getChannel(channel.id).then((result: ChannelAndUsers) => {
         setUsers(result.users);
-        // onClose();
       });
     }
   }, [channel]);
@@ -47,9 +44,6 @@ const ChannelNavBar = ({ name }: Props) => {
           />
         </button>
       </div>
-      {/* <div className="dashboard_info">
-        <h3>{users && `${users} Members`}</h3> <h3>{posts.length} Posts</h3>
-      </div> */}
       <SideBar setShowSideBar={setShowSideBar} showSideBar={showSideBar} />
     </nav>
   );

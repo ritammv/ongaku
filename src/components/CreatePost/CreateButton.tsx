@@ -1,20 +1,15 @@
 import { Flex } from '@chakra-ui/react';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setSelected } from '../../store/actionCreators';
+import { useSelector } from 'react-redux';
 
 interface Props {
-  selected: Release;
   position?: boolean;
 }
 
-const Createbutton: React.FC<Props> = ({ selected, position }) => {
-  const dispatch = useDispatch();
+const Createbutton: React.FC<Props> = ({ position }) => {
 
-  function handleClick() {
-    dispatch(setSelected(selected));
-  }
+  const selected = useSelector<State, Release>((state) => state.selected);
 
   return (
     <>
@@ -24,7 +19,6 @@ const Createbutton: React.FC<Props> = ({ selected, position }) => {
             <button
               type="button"
               className="genre_tag_button two"
-              onClick={handleClick}
               style={{
                 backgroundColor: '#607382;',
                 color: '#ffff',

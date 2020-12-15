@@ -53,7 +53,6 @@ const SubscribePrivateChannel = ({
     e.preventDefault();
     if (options) {
       subscribeToChannels(user.id, options).then((newChannel) => {
-        console.log(newChannel);
 
         if (newChannel) {
           dispatch(actions.addChannel(newChannel));

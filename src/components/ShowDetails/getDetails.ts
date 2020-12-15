@@ -139,7 +139,7 @@ export class Details {
         },
       };
     }
-    console.log(moreInfo);
+
     if (type === 'artists' || type === 'labels') {
       moreInfo.thumb = moreInfo.images ? moreInfo.images[0].uri : Logo;
       const releases = await getFromDiscogs(

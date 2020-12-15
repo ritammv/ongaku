@@ -1,29 +1,42 @@
 import React, { useEffect } from 'react';
 import { SimpleGrid } from '@chakra-ui/react';
+import { useDispatch } from 'react-redux';
 import Tile from './Tile/Tile';
 import CreateButton from './CreateButton';
+import * as actions from '../../store/actionCreators';
 
 interface Props {
   search: Release[];
   setSearch: Function;
-  selected: Release;
-  setSelected: Function;
 }
 
-const SearchResult: React.FC<Props> = ({
-  search,
-  setSearch,
-  selected,
-  setSelected,
-}) => {
+const initialStateSelected: Release = {
+  id: 1,
+  artists: [
+    {
+      name: '',
+    },
+  ],
+  year: 2014,
+  labels: [
+    {
+      name: '',
+    },
+  ],
+  title: '',
+  genres: [''],
+  styles: [],
+  url: '',
+  image: '',
+};
+
+const SearchResult: React.FC<Props> = ({ search, setSearch }) => {
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    setSelected({
-      id: 0,
-      title: '',
-      artist: '',
-      cover_image: '',
-    });
-  }, [setSelected]);
+    dispatch(actions.setSelected(initialStateSelected));
+  }, []);
 
   const searchColums: number = Math.floor(search.length / 3 + 1);
 
@@ -34,16 +47,11 @@ const SearchResult: React.FC<Props> = ({
           <Tile
             result={result}
             key={result.id}
-            selected={selected}
-            setSelected={setSelected}
           />
         ))}
       </SimpleGrid>
 
-      <div
-        className="button_container_search"
-        // style={{ display: 'flex', justifyContent: 'center' }}
-      >
+      <div className="button_container_search">
         <button
           type="button"
           className="genre_tag_button one"
@@ -52,7 +60,7 @@ const SearchResult: React.FC<Props> = ({
         >
           {'<'}
         </button>
-        <CreateButton position={true} selected={selected}>
+        <CreateButton position={true}>
           {' '}
           CREATE
         </CreateButton>

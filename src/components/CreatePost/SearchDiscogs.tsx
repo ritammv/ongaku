@@ -1,29 +1,24 @@
 import React, { useState } from 'react';
-import { Input, Stack, Button } from '@chakra-ui/react';
+import { Input, Stack } from '@chakra-ui/react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getFromDiscogs } from '../../helpers/apiClientServer';
 import SearchResult from './SearchResult';
 import * as actions from '../../store/actionCreators';
 
-// eslint-disable-next-line max-len
-interface Props {
-  selected: Release;
-  setSelected: Function;
-}
+const initialForm = {
+  query: '',
+  artist: '',
+  title: '',
+  label: '',
+  year: '',
+};
 
-const SearchDiscogs: React.FC<Props> = ({ selected, setSelected }) => {
+const SearchDiscogs: React.FC = () => {
+
   const dispatch = useDispatch();
   const user = useSelector<State, User>((state) => state.user);
   const [searchResults, setSearchResults] = useState<Release[]>([]);
-  const isLoading = useSelector<State, boolean>((state) => state.isLoading);
-
-  const [form, setForm] = useState<CreatePostForm>({
-    query: '',
-    artist: '',
-    title: '',
-    label: '',
-    year: '',
-  });
+  const [form, setForm] = useState<CreatePostForm>(initialForm);
 
   function handleSubmit() {
     getFromDiscogs(
@@ -48,23 +43,13 @@ const SearchDiscogs: React.FC<Props> = ({ selected, setSelected }) => {
       )
       .finally(() => dispatch(actions.setIsLoading(false)));
 
-    setForm({
-      query: '',
-      artist: '',
-      title: '',
-      label: '',
-      year: '',
-    });
+    setForm(initialForm);
   }
 
   function handleChange(e: React.FormEvent<HTMLInputElement>, name: string) {
     const target = e.target as HTMLTextAreaElement;
     const newForm: CreatePostForm = { ...form };
-    if (name === 'query') newForm.query = target.value;
-    if (name === 'artist') newForm.artist = target.value;
-    if (name === 'title') newForm.title = target.value;
-    if (name === 'label') newForm.label = target.value;
-    if (name === 'year') newForm.year = target.value;
+    newForm[name] = target.value;
     setForm(newForm);
   }
 
@@ -136,8 +121,6 @@ const SearchDiscogs: React.FC<Props> = ({ selected, setSelected }) => {
         <SearchResult
           search={searchResults}
           setSearch={setSearchResults}
-          selected={selected}
-          setSelected={setSelected}
         />
       )}
     </Stack>

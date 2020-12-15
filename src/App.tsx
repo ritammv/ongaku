@@ -34,7 +34,7 @@ const App: React.FC = () => {
       <Route
         exact
         path="/channels/:name"
-        render={(routeProps) => <Channel name={routeProps.match.params.name} />}
+        component={Channel}
       />
     </Switch>
   );

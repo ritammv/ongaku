@@ -72,11 +72,11 @@ interface SearchResult {
 }
 
 interface CreatePostForm {
-  query: string;
-  artist: string;
-  title: string;
-  label: string;
-  year: string;
+  [query:string]: string;
+  [artist:string]: string;
+  [title:string]: string;
+  [label:string]: string;
+  [year:string]: string;
 }
 
 interface FinalPost {
@@ -143,20 +143,6 @@ interface User {
   updatedAt: string;
   posts: Posts[] | [];
 }
-
-// type UserAction = {
-//   type: string;
-//   user: User;
-//   id: string
-//   discogsId: number
-//   username: string
-//   avatarUrl: string
-//   wantsUrl: string
-//   collectionUrl: string
-//   posts: Post[]
-//   channels: Channel[]
-//   comments: Comment[]
-// }
 
 type State = {
   user: User;

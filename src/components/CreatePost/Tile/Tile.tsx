@@ -1,15 +1,19 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Box, Image, Text } from '@chakra-ui/react';
+import * as actions from '../../../store/actionCreators';
 import './tile.scss';
 import vinyl from '../../../assets/ongaku-bg.svg';
 
 interface Props {
   result: Release;
-  selected: Release;
-  setSelected: Function;
 }
 
-const Tile: React.FC<Props> = ({ result, selected, setSelected }) => {
+const Tile: React.FC<Props> = ({ result }) => {
+
+  const dispatch = useDispatch();
+  const selected = useSelector<State, Release>((state) => state.selected);
+
   return (
     <Box
       display="flex"
@@ -22,7 +26,7 @@ const Tile: React.FC<Props> = ({ result, selected, setSelected }) => {
       borderWidth="1px"
       overflow="hidden"
       onClick={() => {
-        setSelected(result);
+        dispatch(actions.setSelected(result));
       }}
       className={result.id === selected.id ? 'activeCard' : 'text'}
     >

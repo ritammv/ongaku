@@ -14,15 +14,15 @@ interface Props {
 const CommentCard: React.FC<Props> = ({ comment, deleteComment }) => {
   const user = useSelector<State, User>((state) => state.user);
   const [author, setAuthor] = useState<User>({
-    id: 4920,
-    username: 'nijssenmandy89',
-    resourceUrl: 'http: hello',
+    id: 1,
+    username: '',
+    resourceUrl: '',
     token: '',
     tokenSecret: '',
     posts: [],
     channels: [],
-    createdAt: '42',
-    updatedAt: '3829',
+    createdAt: '',
+    updatedAt: '',
   });
 
   useEffect(() => {

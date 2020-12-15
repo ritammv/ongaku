@@ -170,7 +170,6 @@ export const savePost = (userId: number, postId: string) => {
 };
 
 export const removeSavedPost = (postId: string, userId: number) => {
-  console.log('delete', postId);
   return fetchRequest(`${BASE_URL}/users/${userId}/savedPosts`, {
     method: 'DELETE',
     mode: 'cors',
@@ -213,7 +212,6 @@ export const createPost = (
   token: string,
   tokenSecret: string
 ) => {
-  console.log(release);
   return getFromDiscogs(release.url.split('.com')[1], token, tokenSecret).then(
     (result) => {
       const dbPost = {

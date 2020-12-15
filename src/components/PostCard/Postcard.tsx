@@ -41,9 +41,9 @@ const Postcard: React.FC<Props> = ({ post, deletePost, savedPosts }) => {
   const [savePost, setSavePost] = useState<boolean>(false);
   const date = moment(post.createdAt).format('lll');
   const [author, setAuthor] = useState<User>({
-    id: 59215829,
-    username: 'Otoko',
-    resourceUrl: 'http:hello',
+    id: 123,
+    username: '',
+    resourceUrl: '',
     token: '',
     tokenSecret: '',
     createdAt: '',
@@ -53,28 +53,25 @@ const Postcard: React.FC<Props> = ({ post, deletePost, savedPosts }) => {
   });
 
   useEffect(() => {
-    function getPost() {
-      apiclient
-        .getPost(post.id)
-        .then((result) =>
-          setPostComments(
-            result.comments.sort(
-              (
-                a: { createdAt: string | number | Date },
-                b: { createdAt: string | number | Date }
-              ) =>
-                new Date(b.createdAt).valueOf() -
+    apiclient
+      .getPost(post.id)
+      .then((result) =>
+        setPostComments(
+          result.comments.sort(
+            (
+              a: { createdAt: string | number | Date },
+              b: { createdAt: string | number | Date }
+            ) =>
+              new Date(b.createdAt).valueOf() -
                 new Date(a.createdAt).valueOf()
-            )
           )
-        );
-    }
-    getPost();
-    async function getAuthor() {
-      const result = apiclient.getUser(post.userId);
-      setAuthor(await result);
-    }
-    getAuthor();
+        )
+      );
+
+    apiclient
+      .getUser(post.userId)
+      .then((result) => setAuthor(result));
+
   }, [post.id, post.userId]);
 
   useEffect(() => {

@@ -29,7 +29,6 @@ const DetailsThumbnail: React.FC<Props> = ({ data }) => {
         '',
         ''
       ).then((respFromWant) => {
-        console.log(respFromWant);
         data.user_data.in_wantlist = true;
         setIsWaitingWants(false);
       });
@@ -40,7 +39,6 @@ const DetailsThumbnail: React.FC<Props> = ({ data }) => {
         user.token,
         user.tokenSecret
       ).then((respFromWantDelete) => {
-        console.log(respFromWantDelete);
         data.user_data.in_wantlist = false;
         setIsWaitingWants(false);
       });
@@ -53,7 +51,6 @@ const DetailsThumbnail: React.FC<Props> = ({ data }) => {
         '',
         ''
       ).then((respData) => {
-        console.log(respData);
         data.user_data.in_collection = true;
         setIsWaitingCollection(false);
       });
@@ -64,13 +61,11 @@ const DetailsThumbnail: React.FC<Props> = ({ data }) => {
         user.token,
         user.tokenSecret
       ).then((folder) => {
-        console.log(folder);
         deleteFromDiscogs(
           `/users/${user.username}/collection/folders/${folder.releases[0].folder_id}/releases/${data.id}/instances/${folder.releases[0].instance_id}`,
           user.token,
           user.tokenSecret
         ).then((respFromDel) => {
-          console.log(respFromDel);
           data.user_data.in_collection = false;
           setIsWaitingCollection(false);
         });
